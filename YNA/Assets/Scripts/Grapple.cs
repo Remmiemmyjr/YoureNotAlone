@@ -10,7 +10,7 @@ public class Grapple : MonoBehaviour
 
     public float maxLimit = 5f;
     public float minLimit = 0.75f;
-
+    public float damp = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -30,19 +30,16 @@ public class Grapple : MonoBehaviour
     {
         EnableRope();
 
-        float currDist = (transform.position - partner.transform.position).magnitude;
-
-        if(currDist < minLimit)
+        if (line.enabled)
         {
-            target.distance = minLimit;
-        }
-        else if(currDist < maxLimit)
-        {
-            target.distance = currDist;
-        }
-        else
-        {
-            target.distance = maxLimit;
+            if (Input.GetKey(KeyCode.Z))
+            {
+                ReelIn();
+            }
+            else
+            {
+                Pull();
+            }
         }
     }
 
@@ -58,5 +55,32 @@ public class Grapple : MonoBehaviour
             target.enabled = !target.enabled;
             line.enabled = !line.enabled;
         }
+    }
+
+    void Pull()
+    {
+        float currDist = (transform.position - partner.transform.position).magnitude;
+        target.dampingRatio = damp;
+        target.frequency = 1f;
+
+        if (currDist < minLimit)
+        {
+            target.distance = minLimit;
+        }
+        else if (currDist < maxLimit)
+        {
+            target.distance = currDist;
+        }
+        else
+        {
+            target.distance = maxLimit;
+        }
+    }
+
+    void ReelIn()
+    {
+        target.distance = 0;
+        //target.dampingRatio = 0.15f;
+        target.frequency = 2f;
     }
 }
