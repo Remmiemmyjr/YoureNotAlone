@@ -9,16 +9,22 @@ public class PlayerController : MonoBehaviour
         Topdown,
         Platformer
     }
-
     public ControllerType ct;
 
     Rigidbody2D rb;
 
+    Vector2 dir;
+
+    public Transform groundObject;
+
+    public LayerMask layer;
+
     public float speed = 7f;
     public float jumpHeight = 20f;
-    private bool onGround = true; 
+    public float numJumps = 1;
+    
+    bool onGround; 
 
-    Vector2 dir;
 
     void Start()
     {
@@ -39,6 +45,7 @@ public class PlayerController : MonoBehaviour
         else 
         {
             PlatformerMovement();
+            Debug.Log(numJumps);
         }
     }
 
@@ -47,27 +54,32 @@ public class PlayerController : MonoBehaviour
         dir.Normalize();
         rb.velocity = new Vector2(dir.x * speed, dir.y * speed);
         rb.gravityScale = 0;
-
     }
 
     void PlatformerMovement()
     {
+        onGround = Physics2D.OverlapCircle(groundObject.position, 0.1f, layer);
+
+        //if(onGround)
+        //{
+        //    numJumps = 1;
+        //}
+
         rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
         rb.gravityScale = 5;
 
         // Preventing double jumps 
-        if (onGround)
+        if (Input.GetKeyDown(KeyCode.Space) && onGround)
         {
-          if (Input.GetKeyDown(KeyCode.Space))
-          {
-                rb.velocity = Vector2.up * jumpHeight;
-                onGround = false;
-          }
+            //--numJumps;
+            rb.velocity = Vector2.up * jumpHeight;
         }
 
-        if( (rb.velocity.y) == 0.0f )
-        {
-             onGround = true;
-        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(groundObject.position, 0.1f);
     }
 }
