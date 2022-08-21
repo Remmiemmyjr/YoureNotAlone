@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 7f;
     public float jumpHeight = 20f;
+    private bool onGround = true; 
 
     Vector2 dir;
 
@@ -54,9 +55,19 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
         rb.gravityScale = 5;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Preventing double jumps 
+        if (onGround)
         {
-            rb.velocity = Vector2.up * jumpHeight;
+          if (Input.GetKeyDown(KeyCode.Space))
+          {
+                rb.velocity = Vector2.up * jumpHeight;
+                onGround = false;
+          }
+        }
+
+        if( (rb.velocity.y) == 0.0f )
+        {
+             onGround = true;
         }
     }
 }
