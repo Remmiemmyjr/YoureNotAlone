@@ -9,10 +9,8 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
-        if(options != null)
-        {
-            options.SetActive(false);
-        }
+        options.SetActive(false);
+        menu.SetActive(true);
     }
 
     public void StartButton()
@@ -23,6 +21,7 @@ public class MenuManager : MonoBehaviour
     public void SettingsButton()
     {
         options.SetActive(true);
+        menu.SetActive(false);
     }
 
     public void QuitButton()

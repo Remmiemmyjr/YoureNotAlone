@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask layer;
 
     public float speed = 7f;
-    public float jumpHeight = 20f;
+    public float jumpHeight = 16.5f;
     
     [HideInInspector]
     public bool onGround; 
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
 
         // Jump Code
-        onGround = Physics2D.OverlapCircle(groundObject.position, 0.1f, layer);
+        onGround = Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
 
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && onGround)
         {
@@ -52,6 +52,6 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(groundObject.position, 0.1f);
+        Gizmos.DrawWireSphere(groundObject.position, 0.2f);
     }
 }

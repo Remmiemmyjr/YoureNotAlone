@@ -8,42 +8,57 @@ public class LevelProgression : MonoBehaviour
     GameObject Player;
     GameObject Partner;
 
+    public GameObject instructions;
+    public GameObject displayMessage;
+
     public string nextLevel;
     public bool requiresPartner;
 
     bool pressed = false;
+    
+
 
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         Partner = GameObject.FindGameObjectWithTag("Partner");
+
+        instructions.SetActive(false);
+        displayMessage.SetActive(false);
+
+        if(requiresPartner == false)
+        {
+            displayMessage = null;
+        }
     }
 
-    // Update is called once per frame
+
+    
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             pressed = true;
         }
-        if (Input.GetKeyUp(KeyCode.C))
+        if (Input.GetKeyUp(KeyCode.Return))
         {
             pressed = false;
         }
     }
 
+
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log(Player.GetComponent<Grapple>().isTethered);
+        instructions.SetActive(true);
 
         if (pressed)
         {
-            Debug.Log("boop");
             if (requiresPartner == true)
             {
                 if (Player.GetComponent<Grapple>().isTethered == false)
                 {
-                    Debug.Log("You cannot proceed without your partner");
+                    StartCoroutine(DisplayMessage());
                 }
                 else
                 {
@@ -55,5 +70,19 @@ public class LevelProgression : MonoBehaviour
                 SceneManager.LoadScene(nextLevel);
             }
         }
+    }
+
+    IEnumerator DisplayMessage()
+    {
+        Debug.Log("You cannot proceed without your partner");
+        displayMessage.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        displayMessage.SetActive(false);
+    }
+
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        instructions.SetActive(false);
     }
 }
