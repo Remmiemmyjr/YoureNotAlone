@@ -8,6 +8,8 @@ public class Grapple : MonoBehaviour
     LineRenderer line;
     SpringJoint2D target;
 
+    Vector3 newZPos;
+
     public float maxLimit = 1.5f;
     public float minLimit = 1f;
     public float breakingPoint = 4f;
@@ -55,6 +57,8 @@ public class Grapple : MonoBehaviour
                 Pull();
             }
         }
+
+        newZPos = new Vector3(transform.position.x, transform.position.y, 0);
     }
 
 
@@ -66,9 +70,11 @@ public class Grapple : MonoBehaviour
 
         target.connectedAnchor = transform.position;
 
-
         if (Input.GetKeyDown(KeyCode.X))
         {
+            line.transform.position = newZPos;
+            
+
             if (currDist <= (maxLimit + 1) && !target.enabled)
             {
                 target.enabled = true;
