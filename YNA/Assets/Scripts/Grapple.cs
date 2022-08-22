@@ -19,6 +19,9 @@ public class Grapple : MonoBehaviour
 
     float currDist;
 
+    [HideInInspector]
+    public bool isTethered;
+
 
     void Start()
     {
@@ -79,11 +82,13 @@ public class Grapple : MonoBehaviour
             {
                 target.enabled = true;
                 line.enabled = true;
+                isTethered = true;
             } 
             else
             {
                 target.enabled = false;
                 line.enabled = false;
+                isTethered = false;
             }
         }
     }

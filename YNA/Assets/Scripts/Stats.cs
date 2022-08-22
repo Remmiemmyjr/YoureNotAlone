@@ -15,10 +15,16 @@ public class Stats : MonoBehaviour
     {
         newZPos = new Vector3(transform.position.x, transform.position.y, -1);
         transform.position = newZPos;
+
+        //this.GetComponent<Rigidbody2D>().sl = 0.0f;
     }
 
     void Update()
     {
         //Debug.Log("Status: " + this.gameObject.name + "is hidden: " + isHidden);
+        if (this.GetComponent<Rigidbody2D>().IsSleeping())
+        {
+            this.GetComponent<Rigidbody2D>().WakeUp();
+        }
     }
 }
