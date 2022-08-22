@@ -12,7 +12,8 @@ public class Grapple : MonoBehaviour
     public float minLimit = 0.75f;
     public float damp = 0.5f;
 
-    // Start is called before the first frame update
+
+
     void Start()
     {
         partner = GameObject.FindGameObjectWithTag("Partner");
@@ -25,7 +26,8 @@ public class Grapple : MonoBehaviour
         line.enabled = false;
     }
 
-    // Update is called once per frame
+
+
     void Update()
     {
         EnableRope();
@@ -43,6 +45,8 @@ public class Grapple : MonoBehaviour
         }
     }
 
+
+
     void EnableRope()
     {
         line.SetPosition(0, transform.position);
@@ -56,6 +60,8 @@ public class Grapple : MonoBehaviour
             line.enabled = !line.enabled;
         }
     }
+
+
 
     void Pull()
     {
@@ -76,6 +82,8 @@ public class Grapple : MonoBehaviour
             target.distance = maxLimit;
         }
     }
+
+
 
     void ReelIn()
     {
