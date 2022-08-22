@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 7f;
     public float jumpHeight = 20f;
     
-    bool onGround; 
+    [HideInInspector]
+    public bool onGround; 
 
 
     void Start()
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
         // Jump Code
         onGround = Physics2D.OverlapCircle(groundObject.position, 0.1f, layer);
 
-        if (Input.GetKeyDown(KeyCode.Space) && onGround)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && onGround)
         {
             rb.velocity = Vector2.up * jumpHeight;
         }
