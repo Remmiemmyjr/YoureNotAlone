@@ -34,13 +34,15 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        gameObject.GetComponent<SpriteRenderer>().color = Color.green;
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+    //}
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+
         timeToReturn = false;
         if (door.GetComponent<Transform>().position.y < ogPosDoor.y + door.GetComponent<Transform>().localScale.y)
         {

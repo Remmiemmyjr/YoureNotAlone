@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Stats : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class Stats : MonoBehaviour
         if (this.GetComponent<Rigidbody2D>().IsSleeping())
         {
             this.GetComponent<Rigidbody2D>().WakeUp();
+        }
+
+        if(isDead)
+        {
+            SceneManager.LoadScene("GameOver");
         }
     }
 }
