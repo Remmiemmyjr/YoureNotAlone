@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 783348941237856848}
   - component: {fileID: 783348941237856861}
   - component: {fileID: 783348941237856860}
+  - component: {fileID: 1486077855547860604}
   - component: {fileID: 783348941237856862}
   - component: {fileID: 783348941237856850}
   - component: {fileID: 783348941237856857}
@@ -128,6 +129,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!70 &1486077855547860604
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783348941237856849}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: cc7d0a2df7b9b4e49be3667ed93b750d, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.015, y: 0.95}
+  m_Direction: 1
 --- !u!120 &783348941237856862
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -264,6 +281,7 @@ MonoBehaviour:
   pullSpeed: 1
   reelSpeed: 2
   airReelSpeed: 1.15
+  isTethered: 0
 --- !u!114 &783348941237856856
 MonoBehaviour:
   m_ObjectHideFlags: 0
