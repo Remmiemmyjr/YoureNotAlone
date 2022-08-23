@@ -27,6 +27,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         PlatformerMovement();
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
 
