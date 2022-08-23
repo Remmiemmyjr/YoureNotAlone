@@ -10,17 +10,20 @@ public class Grapple : MonoBehaviour
 
     Vector3 newZPos;
 
-    public float maxLimit = 1.5f;
-    public float minLimit = 1f;
+    public float maxLimit = 0.95f;
+    public float minLimit = 0.75f;
     public float breakingPoint = 7f;
     public float pullSpeed = 1f;
     public float reelSpeed = 2f;
     public float airReelSpeed = 1.15f;
 
     float currDist;
+    float currLength;
 
     [HideInInspector]
     public bool isTethered;
+
+    bool isExtending;
 
 
     void Start()
@@ -32,6 +35,8 @@ public class Grapple : MonoBehaviour
 
         target.enabled = false;
         line.enabled = false;
+        isExtending = false;
+        currLength = maxLimit;
     }
 
 
@@ -42,12 +47,11 @@ public class Grapple : MonoBehaviour
 
         currDist = (transform.position - partner.transform.position).magnitude;
 
-        if(currDist > breakingPoint)
+        if (currDist > breakingPoint)
         {
             line.enabled = false;
             target.enabled = false;
         }
-
 
         if (line.enabled)
         {
@@ -62,6 +66,17 @@ public class Grapple : MonoBehaviour
         }
 
         newZPos = new Vector3(transform.position.x, transform.position.y, 0);
+
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Extend();
+            isExtending = true;
+        }
+        else
+        {
+            isExtending = false;
+        }
     }
 
 
@@ -106,17 +121,20 @@ public class Grapple : MonoBehaviour
     {
         target.frequency = pullSpeed;
 
-        if (currDist < minLimit)
+        if (isExtending == false)
         {
-            target.distance = minLimit;
-        }
-        else if (currDist < maxLimit)
-        {
-            target.distance = currDist;
-        }
-        else
-        {
-            target.distance = maxLimit;
+            if (currDist < minLimit)
+            {
+                target.distance = minLimit;
+            }                 //max
+            else if (currDist < currLength)
+            {
+                target.distance = currDist;
+            }
+            else
+            {                   //max
+                target.distance = currLength;
+            }
         }
     }
 
@@ -125,6 +143,7 @@ public class Grapple : MonoBehaviour
     void ReelIn()
     {
         target.distance = 0;
+        currLength = maxLimit;
         if(!gameObject.GetComponent<PlayerController>().onGround)
         {
             target.frequency = airReelSpeed;
@@ -133,5 +152,13 @@ public class Grapple : MonoBehaviour
         {
             target.frequency = reelSpeed;
         }
+    }
+
+
+
+    void Extend()
+    {
+        Debug.Log("extending");
+        target.distance += 0.005f;
     }
 }
