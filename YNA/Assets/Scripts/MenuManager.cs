@@ -28,4 +28,14 @@ public class MenuManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void RestartButton()
+    {
+        SceneManager.LoadScene(Stats.currLevel);
+    }
+
+    public void MenuButton()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }

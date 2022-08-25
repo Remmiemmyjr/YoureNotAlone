@@ -9,6 +9,8 @@ public class Stats : MonoBehaviour
     public bool isHidden;
     [HideInInspector]
     public bool isDead;
+    [HideInInspector]
+    public static string currLevel;
 
     Vector3 newZPos;
 
@@ -30,6 +32,8 @@ public class Stats : MonoBehaviour
 
         if(isDead)
         {
+            currLevel = SceneManager.GetActiveScene().name;
+
             SceneManager.LoadScene("GameOver");
         }
     }

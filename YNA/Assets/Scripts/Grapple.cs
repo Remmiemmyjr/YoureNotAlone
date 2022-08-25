@@ -159,6 +159,6 @@ public class Grapple : MonoBehaviour
     void Extend()
     {
         Debug.Log("extending");
-        target.distance += 0.0095f;
+        target.distance += 0.00125f;
     }
 }
