@@ -8,7 +8,7 @@ public class ActivateEyes : MonoBehaviour
     GameObject Partner;
 
     bool timeToHide = false;
-    bool canActivate = true;
+    public bool canActivate = true;
 
     public float min = 5f;
     public float max = 10f;
