@@ -40,7 +40,7 @@ public class ActivateEyes : MonoBehaviour
                 timeToHide = false;
                 currTime -= Time.deltaTime;
             }
-            if (currTime <= 3 && currTime > 0)
+            if (currTime <= 3.5f && currTime > 0)
             {
                 //get rid of l8r
                 gameObject.GetComponent<Camera>().backgroundColor = Color.gray;
@@ -59,6 +59,11 @@ public class ActivateEyes : MonoBehaviour
                 KillCheck();
             }
 
+        }
+
+        else 
+        {
+            currTime = maxTime;
         }
     }
 
@@ -81,7 +86,7 @@ public class ActivateEyes : MonoBehaviour
 
     IEnumerator LookAround()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
         SelectNewTime();
     }
 }
