@@ -19,6 +19,7 @@ public class PressurePlate : MonoBehaviour
         ogPosDoor = door.GetComponent<Transform>().position;
     }
 
+
     private void Update()
     {
         if(timeToReturn)
@@ -34,10 +35,6 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    gameObject.GetComponent<SpriteRenderer>().color = Color.green;
-    //}
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -50,6 +47,7 @@ public class PressurePlate : MonoBehaviour
         }
 
     }
+
 
     private void OnCollisionExit2D(Collision2D collision)
     {

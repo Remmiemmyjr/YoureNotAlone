@@ -17,7 +17,6 @@ public class LevelProgression : MonoBehaviour
     bool pressed = false;
     
 
-
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -32,7 +31,6 @@ public class LevelProgression : MonoBehaviour
         }
     }
 
-
     
     void Update()
     {
@@ -45,7 +43,6 @@ public class LevelProgression : MonoBehaviour
             pressed = false;
         }
     }
-
 
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -71,6 +68,7 @@ public class LevelProgression : MonoBehaviour
             }
         }
     }
+
 
     IEnumerator DisplayMessage()
     {
