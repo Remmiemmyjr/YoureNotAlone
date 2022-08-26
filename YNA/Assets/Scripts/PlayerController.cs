@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 7f;
     public float jumpHeight = 16.5f;
+    [SerializeField]
+    public float groundedRemember = 0.3f;
+    [SerializeField]
+    public float jumpTimer = 0.1f;
+
     
     [HideInInspector]
     public bool onGround; 
@@ -38,18 +43,27 @@ public class PlayerController : MonoBehaviour
 
     void PlatformerMovement()
     {
+        groundedRemember = 0.3f;
+
         // Movement Code
         dir.x = Input.GetAxisRaw("Horizontal");
 
         rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
 
+        groundedRemember -= Time.deltaTime;
         // Jump Code
         onGround = Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
 
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && onGround)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && (onGround || groundedRemember > 0f) && jumpTimer < 0)
         {
             rb.velocity = Vector2.up * jumpHeight;
+            jumpTimer = 0.1f;
         }
+        if(onGround)
+        {
+            jumpTimer -= Time.deltaTime;
+        }
+
     }
 
 
