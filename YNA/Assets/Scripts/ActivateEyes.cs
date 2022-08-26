@@ -86,7 +86,7 @@ public class ActivateEyes : MonoBehaviour
 
     IEnumerator LookAround()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3.5f);
         SelectNewTime();
     }
 }

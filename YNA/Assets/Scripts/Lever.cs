@@ -8,8 +8,6 @@ using UnityEngine;
 //assign the main camera to the script(its kinda hacky but it works for now)
 public class Lever : MonoBehaviour
 {
-
-
     //var for showing lever state
     bool leverState = false;
 
