@@ -41,5 +41,10 @@ public class AnimationManager : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
+
+        if(currChar == Character.Player)
+        {
+
+        }
     }
 }
