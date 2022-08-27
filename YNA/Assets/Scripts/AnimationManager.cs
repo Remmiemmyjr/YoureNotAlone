@@ -13,6 +13,8 @@ public class AnimationManager : MonoBehaviour
 
     Animator anim;
 
+    float velX;
+    float velY;
 
     void Start()
     {
@@ -31,31 +33,63 @@ public class AnimationManager : MonoBehaviour
 
     void Update()
     {
-        Flip();
+        velX = gameObject.GetComponent<Rigidbody2D>().velocity.x;
+        velY = gameObject.GetComponent<Rigidbody2D>().velocity.y;
+        
+        CheckFlip();
+        CheckJump();
+        CheckFall();
+        CheckWalk();
+        CheckIdle();
+
     }
 
 
-    void Flip()
+    void CheckFlip()
     {
-        if (gameObject.GetComponent<Rigidbody2D>().velocity.x > 0.1)
+        if (velX >= 0.2)
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
-        if (gameObject.GetComponent<Rigidbody2D>().velocity.x < -0.1)
+        if (velX <= -0.2)
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
+    
 
-        switch(currChar)
+    }
+
+    void CheckWalk()
+    {
+        if((velX > 0.4 || velX < -0.4) && velY < 0.5 && velY > -0.5)
         {
-            case Character.Partner:
-                PlayerWalk();
-                break;
+            anim.Play(currChar + "_Walk");
+        }
+
+    }
+
+    void CheckJump()
+    {
+        if(velY > 0.5)
+        {
+            anim.Play(currChar + "_Jump");
         }
     }
 
-    void PlayerWalk()
+    void CheckFall()
     {
-        anim.SetFloat("speedX", Mathf.Abs(PlayerController.dir.x));
+        if(velY < -0.5  )
+        {
+            anim.Play(currChar + "_Fall");
+        }
     }
+
+    void CheckIdle()
+    {
+        if(velX == 0 && velY == 0)
+        {
+            anim.Play(currChar + "_Idle");
+        }
+    }
+
 }
