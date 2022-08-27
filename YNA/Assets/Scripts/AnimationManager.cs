@@ -9,11 +9,15 @@ public class AnimationManager : MonoBehaviour
         Player, Partner
     }
 
-    Character currChar;
+    public Character currChar;
+
+    Animator anim;
 
 
     void Start()
     {
+        anim = GetComponent<Animator>();
+
         if(gameObject.tag == "Player")
         {
             currChar = Character.Player;
@@ -42,9 +46,16 @@ public class AnimationManager : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
 
-        if(currChar == Character.Player)
+        switch(currChar)
         {
-
+            case Character.Partner:
+                PlayerWalk();
+                break;
         }
+    }
+
+    void PlayerWalk()
+    {
+        anim.SetFloat("speedX", Mathf.Abs(PlayerController.dir.x));
     }
 }

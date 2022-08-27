@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
-    Vector2 dir;
+    [HideInInspector]
+    public static Vector2 dir;
 
     public Transform groundObject;
     public LayerMask layer;
