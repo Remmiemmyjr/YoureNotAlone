@@ -7,7 +7,17 @@ public class ActivateEyes : MonoBehaviour
     GameObject Player;
     GameObject Partner;
 
+    public GameObject[] Eyes;
+    public Sprite closed;
+    public Sprite halfway;
+    public Sprite open;
+
+    Animator eyeAnim;
+    SpriteRenderer eyeRenderer;
+
+
     bool timeToHide = false;
+    [HideInInspector]
     public bool canActivate = true;
 
     public float min = 5f;
@@ -18,8 +28,15 @@ public class ActivateEyes : MonoBehaviour
 
     void Start()
     {
-        //get rid of l8r
-        gameObject.GetComponent<Camera>().backgroundColor = Color.cyan;
+        for(int i = 0; i < Eyes.Length; i++)
+        {
+            eyeRenderer = Eyes[i].GetComponent<SpriteRenderer>();
+            eyeRenderer.sprite = closed;
+
+            eyeAnim = Eyes[i].GetComponent<Animator>();
+            eyeAnim.Play("EyeballClosed");
+            eyeAnim.SetBool("isOpen", timeToHide);
+        }
 
         Player = GameObject.FindGameObjectWithTag("Player");
         Partner = GameObject.FindGameObjectWithTag("Partner");
@@ -30,29 +47,53 @@ public class ActivateEyes : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(currTime);
-
         if (canActivate)
         {
             if (currTime >= 0)
             {
-                gameObject.GetComponent<Camera>().backgroundColor = Color.cyan;
                 timeToHide = false;
+
+                for (int i = 0; i < Eyes.Length; i++)
+                {
+                    eyeRenderer = Eyes[i].GetComponent<SpriteRenderer>();
+                    eyeRenderer.sprite = closed;
+
+                    eyeAnim = Eyes[i].GetComponent<Animator>();
+                    eyeAnim.SetBool("isOpen", timeToHide);
+                    eyeAnim.Play("EyeballClosed");
+                }
+
                 currTime -= Time.deltaTime;
             }
+
             if (currTime <= 3.5f && currTime > 0)
             {
-                //get rid of l8r
-                gameObject.GetComponent<Camera>().backgroundColor = Color.gray;
-                //Debug.Log("Get ready...");
-            }
-            if (currTime <= 0)
-            {
-                gameObject.GetComponent<Camera>().backgroundColor = Color.black;
-                timeToHide = true;
-                StartCoroutine(LookAround());
+                for (int i = 0; i < Eyes.Length; i++)
+                {
+                    eyeRenderer = Eyes[i].GetComponent<SpriteRenderer>();
+                    eyeRenderer.sprite = halfway;
+
+                    eyeAnim = Eyes[i].GetComponent<Animator>();
+                    eyeAnim.Play("EyeballHalfway");
+                }
             }
 
+            if (currTime <= 0)
+            {
+                timeToHide = true;
+
+                for (int i = 0; i < Eyes.Length; i++)
+                {
+                    eyeRenderer = Eyes[i].GetComponent<SpriteRenderer>();
+                    eyeRenderer.sprite = open;
+
+                    eyeAnim = Eyes[i].GetComponent<Animator>();
+                    eyeAnim.SetBool("isOpen", timeToHide);
+                    eyeAnim.Play("EyeballOpen");
+                }
+
+                StartCoroutine(LookAround());
+            }
 
             if (timeToHide)
             {
