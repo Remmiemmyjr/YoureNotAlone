@@ -11,8 +11,9 @@ public class Lever : MonoBehaviour
     //var for showing lever state
     bool leverState = false;
 
-    public GameObject cam;
-    public float returnTime = 3f;
+    public GameObject torch;
+    public GameObject eyeManager;
+    public float returnTime = 5f;
     float startTime = 0f;
     // vars for testing
 
@@ -35,7 +36,8 @@ public class Lever : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().color = ogColor;
                 gameObject.GetComponent<SpriteRenderer>().flipY = false;
                 //turn eyes back on
-                cam.GetComponent<ActivateEyes>().canActivate = true;
+                torch.SetActive(true);
+                eyeManager.GetComponent<ActivateEyes>().canActivate = true;
 
             }
         }
@@ -53,6 +55,7 @@ public class Lever : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
             
             //set eyes to off
-            cam.GetComponent<ActivateEyes>().canActivate = false;
+            torch.SetActive(false);
+            eyeManager.GetComponent<ActivateEyes>().canActivate = false;
     }
 }
