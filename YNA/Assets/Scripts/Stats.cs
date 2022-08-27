@@ -32,9 +32,9 @@ public class Stats : MonoBehaviour
 
         if(isDead)
         {
-            currLevel = SceneManager.GetActiveScene().name;
-
-            SceneManager.LoadScene("GameOver");
+            //currLevel = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadScene("GameOver");
         }
     }
 }
