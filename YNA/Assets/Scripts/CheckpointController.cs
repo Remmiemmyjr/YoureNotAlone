@@ -15,6 +15,7 @@ public class CheckpointController : MonoBehaviour
     {
         //look for initial Spawn
         lastCheckpointPos = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+        lastCheckpointPos.x -= 1;
 
         if (instance == null)
         {
