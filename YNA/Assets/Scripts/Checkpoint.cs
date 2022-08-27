@@ -21,6 +21,10 @@ public class Checkpoint : MonoBehaviour
         if(other.CompareTag("Player") || other.CompareTag("Partner"))
         {
             cc.lastCheckpointPos = transform.position;
+            if(other.CompareTag("Partner"))
+            {
+                cc.lastCheckpointPos.x -= 20;
+            }
         }
     }
 }
