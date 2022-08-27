@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class ObstacleKill : MonoBehaviour
 {
-    public string levelName;
+
+    // public string levelName;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -20,6 +22,7 @@ public class ObstacleKill : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SceneManager.LoadScene(levelName);
+        //could change back to using levelname if needed
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

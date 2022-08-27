@@ -21,10 +21,22 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool onGround; 
 
+    private CheckpointController cc;
+    private GameObject Player;
+    private GameObject Partner;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        //get the CC to get access to the last checkpoint
+        cc = GameObject.FindGameObjectWithTag("CC").GetComponent<CheckpointController>();
+        //get the players game objects
+        Player = GameObject.FindGameObjectWithTag("Player");
+        Partner = GameObject.FindGameObjectWithTag("Partner");
+
+        //set pos to last checkpoint
+        Player.transform.position = cc.lastCheckpointPos;
+        Partner.transform.position = cc.lastCheckpointPos;
     }
 
 
