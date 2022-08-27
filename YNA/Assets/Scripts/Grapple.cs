@@ -33,9 +33,11 @@ public class Grapple : MonoBehaviour
         partner = GameObject.FindGameObjectWithTag("Partner");
 
         line = GetComponent<LineRenderer>();
-        target = partner.GetComponent<SpringJoint2D>();
-
-        target.enabled = false;
+        target = partner?.GetComponent<SpringJoint2D>();
+        if (target != null)
+        {
+            target.enabled = false;
+        }
         line.enabled = false;
         isExtending = false;
         currLength = maxLimit;
@@ -45,6 +47,10 @@ public class Grapple : MonoBehaviour
 
     void Update()
     {
+        if(partner == null)
+        {
+            return;
+        }
         EnableRope();
 
         currDist = (transform.position - partner.transform.position).magnitude;

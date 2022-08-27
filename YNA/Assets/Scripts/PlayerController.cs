@@ -11,11 +11,11 @@ public class PlayerController : MonoBehaviour
     public LayerMask layer;
 
     public float speed = 7f;
-    public float jumpHeight = 16.5f;
+    public float jumpHeight = 16f;
     [SerializeField]
     public float groundedRemember = 0.0f;
     [SerializeField]
-    public float jumpTimer = 0.1f;
+    public float jumpTimer = 0.05f;
 
     
     [HideInInspector]
@@ -48,8 +48,12 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
 
-        groundedRemember -= Time.deltaTime;
+        Debug.Log(rb.velocity);
+
+
         // Jump Code
+        groundedRemember -= Time.deltaTime;
+
         onGround = Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
 
         bool isSpace   = Input.GetKeyDown(KeyCode.Space);
@@ -57,9 +61,8 @@ public class PlayerController : MonoBehaviour
 
         if (( isSpace || isUpArrow) && (onGround || groundedRemember > 0f) && jumpTimer < 0)
         {
-            Debug.Log("**************** Jump *****************");
             rb.velocity = Vector2.up * jumpHeight;
-            jumpTimer = 0.1f;
+            jumpTimer = 0.05f;
         }
         if(onGround)
         {
@@ -67,6 +70,7 @@ public class PlayerController : MonoBehaviour
             jumpTimer -= Time.deltaTime;
         }
 
+        //Debug.Log("**************** Jump *****************");
         //if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && (onGround || groundedRemember > 0f) && jumpTimer < 0)
         //if (isSpace || isUpArrow)
         //    Debug.Log($"Space:{isSpace}, UpArrow:{isUpArrow}, Ground:{onGround}, Remember:{groundedRemember}, JumpTimer:{jumpTimer}, Velocity:{rb.velocity}");

@@ -20,15 +20,11 @@ public class LevelProgression : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
-        Partner = GameObject.FindGameObjectWithTag("Partner");
+        if(requiresPartner)
+            Partner = GameObject.FindGameObjectWithTag("Partner");
 
         instructions.SetActive(false);
-        displayMessage.SetActive(false);
-
-        if(requiresPartner == false)
-        {
-            displayMessage = null;
-        }
+        displayMessage?.SetActive(false);
     }
 
     
@@ -73,9 +69,9 @@ public class LevelProgression : MonoBehaviour
     IEnumerator DisplayMessage()
     {
         Debug.Log("You cannot proceed without your partner");
-        displayMessage.SetActive(true);
+        displayMessage?.SetActive(true);
         yield return new WaitForSeconds(2f);
-        displayMessage.SetActive(false);
+        displayMessage?.SetActive(false);
     }
 
 
