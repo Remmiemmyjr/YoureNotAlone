@@ -30,7 +30,7 @@ public class ActivateEyes : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(currTime);
+        //Debug.Log(currTime);
 
         if (canActivate)
         {
@@ -44,7 +44,7 @@ public class ActivateEyes : MonoBehaviour
             {
                 //get rid of l8r
                 gameObject.GetComponent<Camera>().backgroundColor = Color.gray;
-                Debug.Log("Get ready...");
+                //Debug.Log("Get ready...");
             }
             if (currTime <= 0)
             {

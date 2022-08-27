@@ -26,7 +26,7 @@ public class PressurePlate : MonoBehaviour
         {
             if(door.GetComponent<Transform>().position.y > ogPosDoor.y)
             {
-                door.GetComponent<Transform>().Translate(0, -0.05f, 0);
+                door.GetComponent<Transform>().Translate(0, -6f * Time.deltaTime, 0);
             }
             else
             {
@@ -43,7 +43,7 @@ public class PressurePlate : MonoBehaviour
         timeToReturn = false;
         if (door.GetComponent<Transform>().position.y < ogPosDoor.y + door.GetComponent<Transform>().localScale.y)
         {
-            door.GetComponent<Transform>().Translate(0, 0.1f, 0);
+            door.GetComponent<Transform>().Translate(0, 6f * Time.deltaTime, 0);
         }
 
     }

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8844401884999109806}
   - component: {fileID: 8844401884999109801}
   - component: {fileID: 2857267791298168663}
+  - component: {fileID: -1641885040801107529}
   m_Layer: 6
   m_Name: Partner
   m_TagString: Partner
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -923043008, guid: 1acd33ab04021424e9e9efac893f68da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -189,3 +190,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 856292c9d52fa704f864f60151eeccb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &-1641885040801107529
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8844401884999109795}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 406ebb1337ba6d1498a11beaf3c3089b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
