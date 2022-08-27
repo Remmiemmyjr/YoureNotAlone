@@ -9,11 +9,12 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     private CheckpointController cc;
-
+    public Sprite CheckOn;
     void Start()
     {
         //grab the controller
         cc = GameObject.FindGameObjectWithTag("CC").GetComponent<CheckpointController>();
+
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -23,8 +24,9 @@ public class Checkpoint : MonoBehaviour
             cc.lastCheckpointPos = transform.position;
             if(other.CompareTag("Partner"))
             {
-                cc.lastCheckpointPos.x -= 20;
+                cc.lastCheckpointPos.x -= 1;
             }
+            GetComponent<SpriteRenderer>().sprite = CheckOn;
         }
     }
 }
