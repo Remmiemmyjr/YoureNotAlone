@@ -16,8 +16,8 @@ public class Grapple : MonoBehaviour
     public float minLimit = 0.75f;
     public float breakingPoint = 7f;
     public float pullSpeed = 1f;
-    public float reelSpeed = 2f;
-    public float airReelSpeed = 1.15f;
+    public float reelSpeed = 1.75f;
+    public float airReelSpeed = 1f;
 
     float currDist;
     float currLength;
