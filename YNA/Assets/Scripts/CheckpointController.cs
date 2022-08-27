@@ -8,9 +8,11 @@ public class CheckpointController : MonoBehaviour
     private static CheckpointController instance;
 
     public Vector2 lastCheckpointPos;
-    
     void Awake()
     {
+
+        lastCheckpointPos = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+
         if (instance == null)
         {
             instance = this;
