@@ -37,6 +37,7 @@ public class ActivateEyes : MonoBehaviour
     float timeInSight;
 
     // Audio variables:
+    public AudioSource goodmorning;
     public AudioSource iamawake;
     public AudioSource iamwatching;
     public AudioSource ifoundyou;
@@ -100,6 +101,17 @@ public class ActivateEyes : MonoBehaviour
             // Halfway
             if (currTime <= 3.5f && currTime > 0)
             {
+                // If we just entered this state...
+                if(currTime > 3.4f)
+                {
+                    // Set the iamwatching mixer group level to 1.
+                    AudioMixer mg = iamwatching.outputAudioMixerGroup.audioMixer;
+                    mg.SetFloat(iamwatchingMGEP, 0.0f);
+
+                    // Play goodmorning
+                    goodmorning.Play();
+                }
+
                 for (int i = 0; i < Eyes.Length; i++)
                 {
                     eyeRenderer = Eyes[i].GetComponent<SpriteRenderer>();
@@ -125,6 +137,9 @@ public class ActivateEyes : MonoBehaviour
                 {
                     // Reset timeInSight timer to the gracePeriod.
                     timeInSight = gracePeriod;
+
+                    // Play iamawake.
+                    iamawake.Play();
 
                     // Play both sounds.
                     iamwatching.Play();
@@ -178,6 +193,9 @@ public class ActivateEyes : MonoBehaviour
             // If they've just been spotted...
             if(!playerSpotted)
             {
+                // Play ifoundyou
+                ifoundyou.Play();
+
                 // Set the iamwatching mixer group level to 0.
                 AudioMixer iamwatchingMG = iamwatching.outputAudioMixerGroup.audioMixer;
                 iamwatchingMG.SetFloat(iamwatchingMGEP, -80.0f);
