@@ -61,7 +61,7 @@ public class AnimationManager : MonoBehaviour
 
     void CheckWalk()
     {
-        if((velX > 0.4 || velX < -0.4) && velY < 0.5 && velY > -0.5)
+        if((velX > 1 || velX < -1) && velY < 1 && velY > -1)
         {
             anim.Play(currChar + "_Walk");
         }
@@ -70,7 +70,7 @@ public class AnimationManager : MonoBehaviour
 
     void CheckJump()
     {
-        if(velY > 0.5)
+        if(velY > 1 && velY != 0)
         {
             anim.Play(currChar + "_Jump");
         }
@@ -78,7 +78,7 @@ public class AnimationManager : MonoBehaviour
 
     void CheckFall()
     {
-        if(velY < -0.5  )
+        if(velY < -1 && velY != 0)
         {
             anim.Play(currChar + "_Fall");
         }
