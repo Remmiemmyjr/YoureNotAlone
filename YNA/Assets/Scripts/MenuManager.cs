@@ -24,6 +24,12 @@ public class MenuManager : MonoBehaviour
         menu.SetActive(false);
     }
 
+    public void ReturnMenu()
+    {
+        options.SetActive(false);
+        menu.SetActive(true);
+    }
+
     public void QuitButton()
     {
         Application.Quit();
