@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour
 
     
     [HideInInspector]
-    public bool onGround; 
+    public bool onGround;
+    public bool dontSpawnPartner;
 
     private CheckpointController cc;
     private GameObject Player;
@@ -41,7 +42,8 @@ public class PlayerController : MonoBehaviour
 
         //set pos to last checkpoint
         Player.transform.position = CheckpointController.lastCheckpointPos;
-        Partner.transform.position = CheckpointController.lastCheckpointPos - partnerOffset;
+        if(!dontSpawnPartner)
+            Partner.transform.position = CheckpointController.lastCheckpointPos - partnerOffset;
     }
 
 

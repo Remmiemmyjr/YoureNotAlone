@@ -32,26 +32,19 @@ public class LevelProgression : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            pressed = true;
-        }
-        if (Input.GetKeyUp(KeyCode.Return))
-        {
-            pressed = false;
-        }
-    }
-
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        instructions.SetActive(true);
-
-        if (pressed)
-        {
-            if (requiresPartner == true)
+            if (atExit)
             {
-                if (Player.GetComponent<Grapple>().isTethered == false)
+                if (requiresPartner == true)
                 {
-                    StartCoroutine(DisplayMessage());
+                    if (Player.GetComponent<Grapple>().isTethered == false)
+                    {
+                        StartCoroutine(DisplayMessage());
+                    }
+                    else
+                    {
+                        CheckpointController.ResetLevel();
+                        SceneManager.LoadScene(nextLevel);
+                    }
                 }
                 else
                 {
@@ -59,12 +52,21 @@ public class LevelProgression : MonoBehaviour
                     SceneManager.LoadScene(nextLevel);
                 }
             }
-            else
-            {
-                CheckpointController.ResetLevel();
-                SceneManager.LoadScene(nextLevel);
-            }
         }
+        if (Input.GetKeyUp(KeyCode.Return))
+        {
+            pressed = false;
+        }
+
+
+    }
+
+   
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        //instructions.SetActive(true);
+
+
     }
 
 
@@ -76,9 +78,18 @@ public class LevelProgression : MonoBehaviour
         displayMessage?.SetActive(false);
     }
 
+    bool atExit = false;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        instructions.SetActive(true);
+        atExit = true;
+    }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        atExit = false;
         instructions.SetActive(false);
+
     }
 }
