@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-3384266090314528475
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 556c754ba9438074ca2fd156e41a4afc
+  m_EffectName: Attenuation
+  m_MixLevel: bee0e5d58454a154d8c4f15136c86d55
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &-1851957207744366660
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: ffa7a1a8f9221b24187f2b7f3f80998d
+  m_EffectName: Attenuation
+  m_MixLevel: 6bdcf05e37a00404083cf9d048c4ff90
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-1519297860924075613
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -34,10 +62,16 @@ AudioMixerController:
     name: MasterVolume
   - guid: 285070b58d7a1184fa559a79a564b36e
     name: MusicVolume
+  - guid: 3a2cdc501a65e184bb9180460a6dbcc5
+    name: iamwatchingVolume
+  - guid: e19afed4281c9d64e971606f5990364e
+    name: iseeyouVolume
   m_AudioMixerGroupViews:
   - guids:
     - c82e213e7e68f9e4189368199462961a
     - cb2953f339cbb314dbc7064cf6f5b4ad
+    - c7dbc4b9eca2c044dbec378cb5d45a21
+    - dab44e215b0abb54a9143ef80db0cd2a
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -52,6 +86,8 @@ AudioMixerGroupController:
   m_GroupID: c82e213e7e68f9e4189368199462961a
   m_Children:
   - {fileID: 4368215399571266805}
+  - {fileID: 1667407813481224535}
+  - {fileID: 1469821282900596656}
   m_Volume: 6186416300855864b9414335414416d7
   m_Pitch: 0c7f3fc396835204dbd14c934f51eeb9
   m_Send: 00000000000000000000000000000000
@@ -87,6 +123,44 @@ AudioMixerSnapshotController:
   m_FloatValues:
     285070b58d7a1184fa559a79a564b36e: -80
   m_TransitionOverrides: {}
+--- !u!243 &1469821282900596656
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: iseeyou
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: c7dbc4b9eca2c044dbec378cb5d45a21
+  m_Children: []
+  m_Volume: e19afed4281c9d64e971606f5990364e
+  m_Pitch: 67dd6fea09da4504e87339f37b2dfbdc
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -3384266090314528475}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &1667407813481224535
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: iamwatching
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: dab44e215b0abb54a9143ef80db0cd2a
+  m_Children: []
+  m_Volume: 3a2cdc501a65e184bb9180460a6dbcc5
+  m_Pitch: c62d8f6fd6b375141a83fb9b5162a684
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -1851957207744366660}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &4368215399571266805
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
