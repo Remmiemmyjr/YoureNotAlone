@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 //HOW TO ADD LEVER TO SCENE
 //create 2d object, add polygon collider, turn on isTrigger
@@ -12,7 +12,7 @@ public class Lever : MonoBehaviour
     //var for showing lever state
     bool leverState = false;
 
-    public GameObject torch;
+    public UnityEngine.Rendering.Universal.Light2D torch;
     public GameObject eyeManager;
     public float returnTime = 5f;
     float startTime = 0f;
@@ -38,7 +38,7 @@ public class Lever : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().color = ogColor;
                 gameObject.GetComponent<SpriteRenderer>().flipY = false;
                 //turn eyes back on
-                torch.GetComponent<Light>().intensity = 1;
+                torch.intensity = 1;
                 eyeManager.GetComponent<ActivateEyes>().canActivate = true;
 
             }
@@ -57,7 +57,7 @@ public class Lever : MonoBehaviour
             //gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
             
             //set eyes to off
-            //torch.intensity = 0;
+            torch.intensity = 0;
             eyeManager.GetComponent<ActivateEyes>().canActivate = false;
     }
 }
