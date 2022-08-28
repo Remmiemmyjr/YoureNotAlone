@@ -55,11 +55,13 @@ public class LevelProgression : MonoBehaviour
                 }
                 else
                 {
+                    CheckpointController.ResetLevel();
                     SceneManager.LoadScene(nextLevel);
                 }
             }
             else
             {
+                CheckpointController.ResetLevel();
                 SceneManager.LoadScene(nextLevel);
             }
         }

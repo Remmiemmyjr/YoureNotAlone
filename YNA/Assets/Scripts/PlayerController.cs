@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     [HideInInspector]
     public static Vector2 dir;
+    [HideInInspector]
+    public Vector2 partnerOffset;
 
     public Transform groundObject;
     public LayerMask layer;
@@ -30,14 +32,16 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         //get the CC to get access to the last checkpoint
-        cc = GameObject.FindGameObjectWithTag("CC").GetComponent<CheckpointController>();
+        //cc = GameObject.FindGameObjectWithTag("CC").GetComponent<CheckpointController>();
         //get the players game objects
         Player = GameObject.FindGameObjectWithTag("Player");
         Partner = GameObject.FindGameObjectWithTag("Partner");
 
+        partnerOffset = new Vector2(-1, 0);
+
         //set pos to last checkpoint
-        Player.transform.position = cc.lastCheckpointPos;
-        Partner.transform.position = cc.lastCheckpointPos;
+        Player.transform.position = CheckpointController.lastCheckpointPos;
+        Partner.transform.position = CheckpointController.lastCheckpointPos - partnerOffset;
     }
 
 
