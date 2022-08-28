@@ -89,8 +89,8 @@ public class Grapple : MonoBehaviour
 
     void EnableRope()
     {
-        playerLinePos = new Vector2(transform.position.x, transform.position.y - 0.25f);
-        partnerLinePos = new Vector2(partner.transform.position.x, partner.transform.position.y - 0.25f);
+        playerLinePos = new Vector2(transform.position.x, transform.position.y - 0.235f);
+        partnerLinePos = new Vector2(partner.transform.position.x, partner.transform.position.y - 0.235f);
 
         line.SetPosition(0, playerLinePos);
         line.SetPosition(1, partnerLinePos);

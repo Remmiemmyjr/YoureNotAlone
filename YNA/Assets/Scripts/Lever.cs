@@ -36,7 +36,7 @@ public class Lever : MonoBehaviour
             {
                 leverState = false;
                 gameObject.GetComponent<SpriteRenderer>().color = ogColor;
-                gameObject.GetComponent<SpriteRenderer>().flipY = false;
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
                 //turn eyes back on
                 torch.intensity = 1;
                 eyeManager.GetComponent<ActivateEyes>().canActivate = true;

@@ -211,8 +211,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.9607844, g: 0.5568628, b: 0.32156864, a: 1}
-      key1: {r: 0.9607844, g: 0.5568628, b: 0.32156864, a: 1}
+      key0: {r: 0.745283, g: 0.40865377, b: 0.21444462, a: 1}
+      key1: {r: 0.745283, g: 0.40865377, b: 0.21444462, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893d97259ce06974e92a3473b7bba687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  partnerOffset: {x: 0, y: 0}
   groundObject: {fileID: 783348942485166081}
   layer:
     serializedVersion: 2
@@ -267,6 +268,7 @@ MonoBehaviour:
   groundedRemember: 0.3
   jumpTimer: 0.05
   onGround: 0
+  dontSpawnPartner: 0
 --- !u!114 &783348941237856857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,7 +285,7 @@ MonoBehaviour:
   minLimit: 1
   breakingPoint: 8
   pullSpeed: 1
-  reelSpeed: 1.75
+  reelSpeed: 1.55
   airReelSpeed: 1
   isTethered: 0
 --- !u!114 &783348941237856856
