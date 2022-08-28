@@ -225,6 +225,11 @@ public class ActivateEyes : MonoBehaviour
     IEnumerator LookAround()
     {
         yield return new WaitForSeconds(3.5f);
+        // Wait for player to hide or die before closing the eyes
+        while(playerSpotted)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
         SelectNewTime();
     }
 }
