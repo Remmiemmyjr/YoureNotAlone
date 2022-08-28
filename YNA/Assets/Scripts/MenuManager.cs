@@ -15,7 +15,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartButton()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("LevelOne");
     }
 
     public void SettingsButton()
