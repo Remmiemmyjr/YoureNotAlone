@@ -1,15 +1,34 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: Parallax.cs
+// Author/s: Cameron Myers
+//
+// Desc: Background parallaxing effect
+//
+// Notes:
+//  + Fix pls :) <3
+//
+// Last Edit: 5/4/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     private float length, startpos;
     private float camPos;
     public GameObject cam;
-    public float parallaxEffect; 
+    public float parallaxEffect;
+    // *********************************************************************
 
-    // Start is called before the first frame update
+
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         camPos = cam.transform.position.x;
@@ -17,7 +36,9 @@ public class Parallax : MonoBehaviour
         length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
-    // Update is called once per frame
+
+    ////////////////////////////////////////////////////////////////////////
+    // UPDATE ==============================================================
     void FixedUpdate()
     {
         float temp = (cam.transform.position.x * (1 - parallaxEffect));

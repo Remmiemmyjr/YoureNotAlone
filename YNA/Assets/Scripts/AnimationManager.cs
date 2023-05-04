@@ -1,9 +1,22 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: AnimationManager.cs
+// Author/s: Cameron Myers
+//
+// Desc: State machine for actors animations
+//
+// Last Edit: 5/4/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimationManager : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     public enum Character
     {
         Player, Partner
@@ -15,7 +28,11 @@ public class AnimationManager : MonoBehaviour
 
     float velX;
     float velY;
+    // *********************************************************************
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -31,6 +48,8 @@ public class AnimationManager : MonoBehaviour
     }
 
 
+    ////////////////////////////////////////////////////////////////////////
+    // UPDATE ==============================================================
     void Update()
     {
         velX = gameObject.GetComponent<Rigidbody2D>().velocity.x;
@@ -41,10 +60,11 @@ public class AnimationManager : MonoBehaviour
         CheckFall();
         CheckWalk();
         CheckIdle();
-
     }
 
 
+    ////////////////////////////////////////////////////////////////////////
+    // CHECK FLIP ==========================================================
     void CheckFlip()
     {
         if (velX >= 0.2)
@@ -59,6 +79,8 @@ public class AnimationManager : MonoBehaviour
 
     }
 
+    ////////////////////////////////////////////////////////////////////////
+    // CHECK WALK ==========================================================
     void CheckWalk()
     {
         if((velX > 1 || velX < -1) && velY < 1 && velY > -1)
@@ -68,6 +90,8 @@ public class AnimationManager : MonoBehaviour
 
     }
 
+    ////////////////////////////////////////////////////////////////////////
+    // CHECK JUMP ==========================================================
     void CheckJump()
     {
         if(velY > 1 && velY != 0)
@@ -76,6 +100,9 @@ public class AnimationManager : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // CHECK FALL ==========================================================
     void CheckFall()
     {
         if(velY < -1 && velY != 0)
@@ -84,6 +111,9 @@ public class AnimationManager : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // CHECK IDLE ==========================================================
     void CheckIdle()
     {
         if(velX == 0 && velY == 0)

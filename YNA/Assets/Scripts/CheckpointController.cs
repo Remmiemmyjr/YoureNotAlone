@@ -1,3 +1,17 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: CheckpointController.cs
+// Author/s: Cameron Myers
+//
+// Desc: Set the new checkpoint position
+//
+// Notes:
+//  + Needs modified to enable from partner bunny
+//
+// Last Edit: 5/3/2023
+//
+//*************************************************
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,12 +22,16 @@ using UnityEngine;
 //No need to set a pos in the inspector, itll look for an object tagged "Respawm"
 public class CheckpointController : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     private static bool levelRestart = true;
 
-    private static CheckpointController instance;
-
     public static Vector2 lastCheckpointPos;
+    // *********************************************************************
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
     void Awake()
     {
         if(levelRestart)
@@ -23,23 +41,11 @@ public class CheckpointController : MonoBehaviour
         }
 
         levelRestart = false;
-        
-        //lastCheckpointPos.x -= 1;
-
-        instance = this;
-
-
-        //if (instance == null)
-        //{
-        //    instance = this;
-        //    DontDestroyOnLoad(instance);
-        //}
-        //else
-        //{
-        //    Destroy(gameObject);
-        //}
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
     internal static void ResetLevel()
     {
         levelRestart = true;

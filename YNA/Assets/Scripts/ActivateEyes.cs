@@ -1,3 +1,18 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: ActivateEyes.cs
+// Author/s: Emmy Berg
+//           K Preston
+//
+// Desc: Controls the Eyes three states
+//
+// Notes:
+//  + Holy shit we need more helper functions lol
+//
+// Last Edit: 5/3/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +20,8 @@ using UnityEngine.Audio;
 
 public class ActivateEyes : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     GameObject Player;
     GameObject Partner;
 
@@ -16,25 +33,18 @@ public class ActivateEyes : MonoBehaviour
     Animator eyeAnim;
     SpriteRenderer eyeRenderer;
 
-
     bool timeToHide = false;
-    [HideInInspector]
-    public bool canActivate = true;
+    [HideInInspector] public bool canActivate = true;
 
     public float min = 5f;
     public float max = 10f;
-
-    // The amount of time the player can be seen by the eyes before dying.
     public float gracePeriod;
+    float timeInSight;
 
     float maxTime;
     float currTime;
 
     bool playerSpotted = false;
-
-    // The amount of time the player has been in sight of the eyes.
-    // This currently resets each time the eyes reopen.
-    float timeInSight;
 
     // Audio variables:
     public AudioSource goodmorning;
@@ -45,7 +55,11 @@ public class ActivateEyes : MonoBehaviour
 
     public string iamwatchingMGEP;
     public string iseeyouMGEP;
+    // *********************************************************************
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         for(int i = 0; i < Eyes.Length; i++)
@@ -62,9 +76,11 @@ public class ActivateEyes : MonoBehaviour
         Partner = GameObject.FindGameObjectWithTag("Partner");
 
         SelectNewTime();
-
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // UPDATE ==============================================================
     void Update()
     {
         if (canActivate)
@@ -175,7 +191,6 @@ public class ActivateEyes : MonoBehaviour
             {
                 playerSpotted = KillCheck();
             }
-
         }
 
         else 
@@ -184,6 +199,9 @@ public class ActivateEyes : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // KILL CHECK ==========================================================
     // Returns true if the player or partner are visible.
     bool KillCheck()
     {
@@ -233,17 +251,24 @@ public class ActivateEyes : MonoBehaviour
         return false;
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // SELECT NEW TIME =====================================================
+    // Pick a new random sleep time-period
     void SelectNewTime()
     {
         maxTime = Random.Range(min, max);
         currTime = maxTime;
-        Debug.Log("new max time: " + maxTime);
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // SELECT NEW TIME =====================================================
+    // Pick a new random sleep time-period
     IEnumerator LookAround()
     {
         yield return new WaitForSeconds(3.5f);
-        // Wait for player to hide or die before closing the eyes
+
         while(playerSpotted)
         {
             yield return new WaitForSeconds(0.5f);

@@ -1,14 +1,26 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: Grapple.cs
+// Author/s: Emmy Berg
+//
+// Desc: Rope controls & actions for player
+//
+// Last Edit: 5/4/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Grapple : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     GameObject partner;
     LineRenderer line;
     SpringJoint2D target;
 
-    //Vector3 newZPos;
     Vector2 playerLinePos;
     Vector2 partnerLinePos;
 
@@ -26,8 +38,11 @@ public class Grapple : MonoBehaviour
     public bool isTethered;
 
     bool isExtending;
+    // *********************************************************************
 
 
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         partner = GameObject.FindGameObjectWithTag("Partner");
@@ -44,7 +59,8 @@ public class Grapple : MonoBehaviour
     }
 
 
-
+    ////////////////////////////////////////////////////////////////////////
+    // UPDATE ==============================================================
     void Update()
     {
         if(partner == null)
@@ -79,14 +95,11 @@ public class Grapple : MonoBehaviour
             Extend();
             isExtending = true;
         }
-        //else
-        //{
-        //    isExtending = false;
-        //}
     }
 
 
-
+    ////////////////////////////////////////////////////////////////////////
+    // ENABLE ROPE =========================================================
     void EnableRope()
     {
         playerLinePos = new Vector2(transform.position.x, transform.position.y - 0.235f);
@@ -115,7 +128,8 @@ public class Grapple : MonoBehaviour
     }
 
 
-
+    ////////////////////////////////////////////////////////////////////////
+    // PULL ================================================================
     void Pull()
     {
         target.frequency = pullSpeed;
@@ -125,20 +139,21 @@ public class Grapple : MonoBehaviour
             if (currDist < minLimit)
             {
                 target.distance = minLimit;
-            }                 //max
+            }  
             else if (currDist < currLength)
             {
                 target.distance = currDist;
             }
             else
-            {                   //max
+            {
                 target.distance = currLength;
             }
         }
     }
 
 
-
+    ////////////////////////////////////////////////////////////////////////
+    // REEL IN =============================================================
     void ReelIn()
     {
         isExtending = false;
@@ -156,7 +171,8 @@ public class Grapple : MonoBehaviour
     }
 
 
-
+    ////////////////////////////////////////////////////////////////////////
+    // EXTEND ==============================================================
     void Extend()
     {
         Debug.Log("extending");

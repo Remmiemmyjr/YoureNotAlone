@@ -1,19 +1,30 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: PlayAudio.cs
+// Author/s: K Preston
+//
+// Desc: Audio manager
+//
+// Last Edit: 5/4/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayAudio : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     public AudioSource audioSource;
     public AudioClip[] audioClipArray;
     AudioClip lastClip;
+    // *********************************************************************
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
+    ////////////////////////////////////////////////////////////////////////
+    // GET RANDOM CLIP =====================================================
     public AudioClip GetRandomClip()
     {
         AudioClip clipToPlay = audioClipArray[Random.Range(0, audioClipArray.Length)];

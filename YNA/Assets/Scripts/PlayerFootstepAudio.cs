@@ -1,9 +1,25 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: PlayerFootstepAudio.cs
+// Author/s: K Preston
+//
+// Desc: Manages player footstep sfx
+//
+// Notes:
+//  + Add footsteps to partner
+//
+// Last Edit: 5/4/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFootstepAudio : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     public GameObject player;
     public PlayerController _moveScript;
     public AnimationManager _animationManager;
@@ -11,15 +27,20 @@ public class PlayerFootstepAudio : MonoBehaviour
     public float playInterval;
     private AudioSource source;
     public float resetTime;
+    // *********************************************************************
 
-    // Start is called before the first frame update
+
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         source = GetComponent<AudioSource>();
         resetTime = playInterval;
     }
 
-    // Update is called once per frame
+
+    ////////////////////////////////////////////////////////////////////////
+    // UPDATE ==============================================================
     void Update()
     {
         // TODO: If the player is not walking, reset the sound timer. 
@@ -32,10 +53,8 @@ public class PlayerFootstepAudio : MonoBehaviour
             if (resetTime <= 0)
             {
                 source.PlayOneShot(randClip.GetRandomClip());
-                //source.Play();
                 resetTime = playInterval;
             }
         }
-        
     }
 }

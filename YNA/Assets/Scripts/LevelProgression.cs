@@ -1,3 +1,14 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: LevelProgression.cs
+// Author/s: Emmy Berg
+//
+// Desc: Sets next level when entering door
+//
+// Last Edit: 5/4/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,29 +16,33 @@ using UnityEngine.SceneManagement;
 
 public class LevelProgression : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     GameObject Player;
-    GameObject Partner;
 
     public GameObject instructions;
     public GameObject displayMessage;
 
     public string nextLevel;
+
     public bool requiresPartner;
+    bool atExit = false;
+    // *********************************************************************
 
-    bool pressed = false;
-    
 
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
-        if(requiresPartner)
-            Partner = GameObject.FindGameObjectWithTag("Partner");
 
         instructions.SetActive(false);
         displayMessage?.SetActive(false);
     }
 
-    
+
+    ////////////////////////////////////////////////////////////////////////
+    // UPDATE ==============================================================
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
@@ -53,23 +68,12 @@ public class LevelProgression : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKeyUp(KeyCode.Return))
-        {
-            pressed = false;
-        }
-
-
-    }
-
-   
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        //instructions.SetActive(true);
-
 
     }
 
 
+    ////////////////////////////////////////////////////////////////////////
+    // DISPLAY MESSAGE =====================================================
     IEnumerator DisplayMessage()
     {
         Debug.Log("You cannot proceed without your partner");
@@ -78,18 +82,21 @@ public class LevelProgression : MonoBehaviour
         displayMessage?.SetActive(false);
     }
 
-    bool atExit = false;
 
+    ////////////////////////////////////////////////////////////////////////
+    // TRIGGER ENTER =======================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
         instructions.SetActive(true);
         atExit = true;
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // TRIGGER EXIT ========================================================
     private void OnTriggerExit2D(Collider2D collision)
     {
-        atExit = false;
         instructions.SetActive(false);
-
+        atExit = false;
     }
 }

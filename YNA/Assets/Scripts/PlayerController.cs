@@ -1,10 +1,31 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: PlayerController.cs
+// Author/s: Emmy Berg
+//           Cameron Myers
+//
+// Desc: Manage player actions
+//
+// Notes:
+//  + Fix constant jump timer decreasing bug
+//
+// Last Edit: 5/4/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
+    private GameObject Player;
+    private GameObject Partner;
+
     Rigidbody2D rb;
+
     [HideInInspector]
     public static Vector2 dir;
     [HideInInspector]
@@ -19,22 +40,19 @@ public class PlayerController : MonoBehaviour
     public float groundedRemember = 0.0f;
     [SerializeField]
     public float jumpTimer = 0.05f;
-
     
     [HideInInspector]
     public bool onGround;
     public bool dontSpawnPartner;
+    // *********************************************************************
 
-    private CheckpointController cc;
-    private GameObject Player;
-    private GameObject Partner;
 
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //get the CC to get access to the last checkpoint
-        //cc = GameObject.FindGameObjectWithTag("CC").GetComponent<CheckpointController>();
-        //get the players game objects
+
         Player = GameObject.FindGameObjectWithTag("Player");
         Partner = GameObject.FindGameObjectWithTag("Partner");
 
@@ -42,37 +60,31 @@ public class PlayerController : MonoBehaviour
 
         //set pos to last checkpoint
         Player.transform.position = CheckpointController.lastCheckpointPos;
-        if(!dontSpawnPartner)
-            Partner.transform.position = CheckpointController.lastCheckpointPos - partnerOffset;
-    }
-
-
-
-    void Update()
-    {
-        PlatformerMovement();
-
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (!dontSpawnPartner)
         {
-            Application.Quit();
+            Partner.transform.position = CheckpointController.lastCheckpointPos - partnerOffset;
         }
     }
 
 
+    ////////////////////////////////////////////////////////////////////////
+    // UPDATE ==============================================================
+    void Update()
+    {
+        PlatformerMovement();
+    }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // PLATFORMER MOVEMENT =================================================
     void PlatformerMovement()
     {
-        // Movement Code
+        // Movement Code ---
         dir.x = Input.GetAxisRaw("Horizontal");
-
         rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
 
-        Debug.Log(rb.velocity);
-
-
-        // Jump Code
+        // Jump Code ---
         groundedRemember -= Time.deltaTime;
-
         onGround = Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
 
         bool isSpace   = Input.GetKeyDown(KeyCode.Space);
@@ -88,18 +100,5 @@ public class PlayerController : MonoBehaviour
             groundedRemember = 0.3f;
             jumpTimer -= Time.deltaTime;
         }
-
-        //Debug.Log("**************** Jump *****************");
-        //if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && (onGround || groundedRemember > 0f) && jumpTimer < 0)
-        //if (isSpace || isUpArrow)
-        //    Debug.Log($"Space:{isSpace}, UpArrow:{isUpArrow}, Ground:{onGround}, Remember:{groundedRemember}, JumpTimer:{jumpTimer}, Velocity:{rb.velocity}");
     }
-
-
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(groundObject.position, 0.2f);
-    //}
 }
