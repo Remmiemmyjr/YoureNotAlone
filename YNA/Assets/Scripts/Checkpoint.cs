@@ -10,10 +10,15 @@ public class Checkpoint : MonoBehaviour
 {
     //private CheckpointController cc;
     public Sprite CheckOn;
+
+    ParticleSystem EmberPlayer;
+
     void Start()
     {
         //grab the controller
         //cc = GameObject.FindGameObjectWithTag("CC").GetComponent<CheckpointController>();
+
+        EmberPlayer = GetComponent<ParticleSystem>();
 
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -24,6 +29,8 @@ public class Checkpoint : MonoBehaviour
             CheckpointController.lastCheckpointPos = transform.position;
 
             GetComponent<SpriteRenderer>().sprite = CheckOn;
+
+            EmberPlayer.Play();
         }
     }
 }
