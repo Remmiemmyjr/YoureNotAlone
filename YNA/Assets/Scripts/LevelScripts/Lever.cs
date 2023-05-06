@@ -22,60 +22,60 @@ public class Lever : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
-    public GameObject eyeManager;
+    //public GameObject eyeManager;
 
-    public UnityEngine.Rendering.Universal.Light2D torch;
+    //public UnityEngine.Rendering.Universal.Light2D torch;
 
-    bool leverState = false;
+    //bool leverState = false;
 
-    [SerializeField] float returnTime = 5f;
-    float startTime = 0f;
+    //[SerializeField] float returnTime = 5f;
+    //float startTime = 0f;
 
-    // optional test variable
-    Color ogColor;
-    // *********************************************************************
+    //// optional test variable
+    //Color ogColor;
+    //// *********************************************************************
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // START ===============================================================
-    void Start()
-    {
-        ogColor = gameObject.GetComponent<SpriteRenderer>().color;
+    //////////////////////////////////////////////////////////////////////////
+    //// START ===============================================================
+    //void Start()
+    //{
+    //    ogColor = gameObject.GetComponent<SpriteRenderer>().color;
         
-    }
+    //}
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // UPDATE ==============================================================
-    void Update()
-    {
-        if (!leverState) startTime = Time.fixedTime;
-        {
-            if(Time.fixedTime > startTime + returnTime)
-            {
-                leverState = false;
-                gameObject.GetComponent<SpriteRenderer>().color = ogColor;
-                gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                //turn eyes back on
-                torch.intensity = 1;
-                eyeManager.GetComponent<ActivateEyes>().canActivate = true;
+    //////////////////////////////////////////////////////////////////////////
+    //// UPDATE ==============================================================
+    //void Update()
+    //{
+    //    if (!leverState) startTime = Time.fixedTime;
+    //    {
+    //        if(Time.fixedTime > startTime + returnTime)
+    //        {
+    //            leverState = false;
+    //            gameObject.GetComponent<SpriteRenderer>().color = ogColor;
+    //            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+    //            //turn eyes back on
+    //            torch.intensity = 1;
+    //            eyeManager.GetComponent<ActivateEyes>().canActivate = true;
 
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // TRIGGER ENTER =======================================================
-    private void OnTriggerEnter2D()
-    {
-        //set lever state
-        leverState = true;
+    //////////////////////////////////////////////////////////////////////////
+    //// TRIGGER ENTER =======================================================
+    //private void OnTriggerEnter2D()
+    //{
+    //    //set lever state
+    //    leverState = true;
 
-        gameObject.GetComponent<SpriteRenderer>().flipX = true;
+    //    gameObject.GetComponent<SpriteRenderer>().flipX = true;
         
-        //set eyes to off
-        torch.intensity = 0;
-        eyeManager.GetComponent<ActivateEyes>().canActivate = false;
-    }
+    //    //set eyes to off
+    //    torch.intensity = 0;
+    //    eyeManager.GetComponent<ActivateEyes>().canActivate = false;
+    //}
 }
