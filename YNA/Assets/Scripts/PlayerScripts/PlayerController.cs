@@ -26,6 +26,19 @@ public class PlayerController : MonoBehaviour
     private GameObject Partner;
 
     Rigidbody2D rb;
+    public enum PlayerStates
+    {
+        cInvalid = -1,
+        cIdle = 0,
+        cJump,
+        cWalk,
+        cFall,
+        cHiding,
+        cSeen,
+        cDead
+    }
+
+    private PlayerStates state;
 
     [HideInInspector]
     public static Vector2 dir;
@@ -72,6 +85,57 @@ public class PlayerController : MonoBehaviour
     // UPDATE ==============================================================
     void Update()
     {
+
+        //player state machine
+
+        switch (state)
+        {
+            // The player is idle
+            case PlayerStates.cIdle:
+            {
+                do_idle();
+                break;
+            }
+            //the player is walking
+            case PlayerStates.cWalk:
+            {
+                do_walk();
+                break;
+            }
+            //the player is in an upward motion
+            case PlayerStates.cJump:
+            {
+                do_jump();
+                break;
+            }
+            //the player is moving downward
+            case PlayerStates.cFall:
+            {
+                do_fall();
+                break;
+            }
+            //the player is hiding behind an object
+            case PlayerStates.cHiding:
+            {
+                do_hide();
+                break;
+            }
+            //the player has been spotted
+            case PlayerStates.cSeen:
+            {
+                do_seen();
+                break;
+            }
+            //the player is dead
+            case PlayerStates.cDead:
+            {
+                do_dead();
+                break;
+            }
+        }
+
+
+
         // constantly update the velocities movement
         rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
     }
@@ -101,6 +165,61 @@ public class PlayerController : MonoBehaviour
     public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
+    }
+
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // ACTION FUNCTIONS ============================================================
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS IDLING =========================================================
+    private void do_idle()
+    {
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS WALKING =========================================================
+    private void do_walk()
+    {
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS JUMPING =========================================================
+    private void do_jump()
+    {
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS FALLING =========================================================
+    private void do_fall()
+    {
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS HIDING =========================================================
+    private void do_hide()
+    {
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS SEEN =========================================================
+    private void do_seen()
+    {
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS DEAD =========================================================
+    private void do_dead()
+    {
+
     }
 }
 
