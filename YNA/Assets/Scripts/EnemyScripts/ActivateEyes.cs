@@ -202,7 +202,7 @@ public class ActivateEyes : MonoBehaviour
         for (int i = 0; i < Eyes.Length; i++)
         {
             profile = Eyes[i].GetComponent<EyeProfile>();
-            profile.SetStatusWaking();
+            profile.SetStatusActive();
         }
 
         StartCoroutine(LookAround());

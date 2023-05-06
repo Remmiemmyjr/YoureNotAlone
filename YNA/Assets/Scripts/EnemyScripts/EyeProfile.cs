@@ -25,10 +25,6 @@ public class EyeProfile : MonoBehaviour
     Animator eyeAnim;
     SpriteRenderer eyeRenderer;
 
-    public Sprite closed;
-    public Sprite halfway;
-    public Sprite open;
-
     void Start()
     {
         manager = GameObject.FindGameObjectWithTag("EyeManager").GetComponent<ActivateEyes>();
@@ -39,20 +35,20 @@ public class EyeProfile : MonoBehaviour
 
     public void SetStatusSleeping()
     {
-        eyeRenderer.sprite = closed;
-        eyeAnim.Play("Closed");
+        eyeRenderer.sprite = manager.closed;
+        eyeAnim.Play("EyeballClosed");
         eyeAnim.SetBool("isOpen", manager.timeToHide);
     }
 
     public void SetStatusWaking()
     {
-        eyeRenderer.sprite = halfway;
+        eyeRenderer.sprite = manager.halfway;
         eyeAnim.Play("EyeballHalfway");
     }
 
     public void SetStatusActive()
     {
-        eyeRenderer.sprite = open;
+        eyeRenderer.sprite = manager.open;
         eyeAnim.Play("EyeballOpen");
         eyeAnim.SetBool("isOpen", manager.timeToHide);
     }
