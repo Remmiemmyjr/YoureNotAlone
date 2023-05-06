@@ -17,6 +17,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+
 public enum EyeStates
 {
     SLEEPING,
@@ -62,21 +63,23 @@ public class ActivateEyes : MonoBehaviour
     public string iseeyouMGEP;
     // *********************************************************************
 
-
+    private bool started = false;
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
     void Start()
     {
-        for(int i = 0; i < Eyes.Length; i++)
-        {
-            profile = Eyes[i].GetComponent<EyeProfile>();
-            profile.SetStatusSleeping();
-        }
+        started = true;
 
         Player = GameObject.FindGameObjectWithTag("Player");
         Partner = GameObject.FindGameObjectWithTag("Partner");
 
         SelectNewTime();
+
+        for (int i = 0; i < Eyes.Length; i++)
+        {
+            profile = Eyes[i].GetComponent<EyeProfile>();
+            profile.SetStatusSleeping();
+        }
     }
 
 
@@ -84,6 +87,11 @@ public class ActivateEyes : MonoBehaviour
     // UPDATE ==============================================================
     void Update()
     {
+        if(!started)
+        {
+            Start();
+        }
+
         // Closed
         if (currTime >= 0)
         {
