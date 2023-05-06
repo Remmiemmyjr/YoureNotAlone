@@ -63,16 +63,20 @@ public class ActivateEyes : MonoBehaviour
     public string iseeyouMGEP;
     // *********************************************************************
 
-    private bool started = false;
+
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
+    void Awake()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player");
+        Partner = GameObject.FindGameObjectWithTag("Partner");
+    }
+
+
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
     void Start()
     {
-        started = true;
-
-        Player = GameObject.FindGameObjectWithTag("Player");
-        Partner = GameObject.FindGameObjectWithTag("Partner");
-
         SelectNewTime();
 
         for (int i = 0; i < Eyes.Length; i++)
@@ -87,11 +91,6 @@ public class ActivateEyes : MonoBehaviour
     // UPDATE ==============================================================
     void Update()
     {
-        if(!started)
-        {
-            Start();
-        }
-
         // Closed
         if (currTime >= 0)
         {
