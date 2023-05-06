@@ -1,8 +1,8 @@
 {
-    "name": "Input",
+    "name": "Player",
     "maps": [
         {
-            "name": "Player",
+            "name": "Gameplay",
             "id": "b02638ef-3ad2-4a26-bd8b-40af236d2e55",
             "actions": [
                 {
@@ -66,7 +66,7 @@
                     "id": "6be1bac3-937a-4dde-a8c9-1171d76d229a",
                     "path": "<Gamepad>/leftStick/x",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "AxisDeadzone",
                     "groups": "",
                     "action": "Move",
                     "isComposite": false,
@@ -196,7 +196,7 @@
                 {
                     "name": "",
                     "id": "35c01d80-6603-4b30-8c02-cef40455564f",
-                    "path": "",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -217,6 +217,17 @@
                 },
                 {
                     "name": "",
+                    "id": "7fb32c7b-73ac-4ce2-b2c4-6ab6bd1c0c41",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pull",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "55909a09-ddc6-4494-be8b-0d2445d4511b",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
@@ -228,8 +239,30 @@
                 },
                 {
                     "name": "",
+                    "id": "7ae03d51-3046-4953-ae0e-3913671dfb8b",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Extend",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "03db5324-1740-4a28-82bc-edfe97076362",
                     "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "926439b8-a5a7-41e5-b2fa-e7db86ed9f74",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

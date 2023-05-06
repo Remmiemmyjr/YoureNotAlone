@@ -46,7 +46,7 @@ public class PlayerFootstepAudio : MonoBehaviour
         // TODO: If the player is not walking, reset the sound timer. 
 
         if ((Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D) |
-            Input.GetKey(KeyCode.LeftArrow) | Input.GetKey(KeyCode.RightArrow)) & _moveScript.onGround)
+            Input.GetKey(KeyCode.LeftArrow) | Input.GetKey(KeyCode.RightArrow)) & _moveScript.IsGrounded())
         {
             resetTime -= Time.deltaTime;
 

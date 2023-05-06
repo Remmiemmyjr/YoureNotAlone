@@ -1,19 +1,9 @@
-//*************************************************
-// Project: We're Tethered Together
-// File: Grapple.cs
-// Author/s: Emmy Berg
-//
-// Desc: Rope controls & actions for player
-//
-// Last Edit: 5/4/2023
-//
-//*************************************************
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Grapple : MonoBehaviour
+public class NewGrapple : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
@@ -38,6 +28,7 @@ public class Grapple : MonoBehaviour
     public bool isTethered;
 
     bool isExtending;
+    bool isReeling;
     // *********************************************************************
 
 
@@ -49,11 +40,14 @@ public class Grapple : MonoBehaviour
 
         line = GetComponent<LineRenderer>();
         target = partner?.GetComponent<SpringJoint2D>();
+
         if (target != null)
         {
             target.enabled = false;
+
         }
         line.enabled = false;
+
         isExtending = false;
         currLength = maxLimit;
     }
@@ -63,11 +57,12 @@ public class Grapple : MonoBehaviour
     // UPDATE ==============================================================
     void Update()
     {
-        if(partner == null)
+        if (partner == null)
         {
             return;
         }
-        EnableRope();
+
+        SetRope();
 
         currDist = (transform.position - partner.transform.position).magnitude;
 
@@ -77,30 +72,21 @@ public class Grapple : MonoBehaviour
             target.enabled = false;
         }
 
-        if (line.enabled)
+        if (line.enabled && !isReeling)
         {
-            if (Input.GetKey(KeyCode.Z))
-            {
-                ReelIn();
-            }
-            else
-            {
-                Pull();
-            }
+            Pull();
         }
 
-
-        if (Input.GetKey(KeyCode.LeftShift))
+        if(isExtending)
         {
-            Extend();
-            isExtending = true;
+            target.distance += 0.02f;
         }
     }
 
 
     ////////////////////////////////////////////////////////////////////////
-    // ENABLE ROPE =========================================================
-    void EnableRope()
+    // SET ROPE ============================================================
+    void SetRope()
     {
         playerLinePos = new Vector2(transform.position.x, transform.position.y - 0.235f);
         partnerLinePos = new Vector2(partner.transform.position.x, partner.transform.position.y - 0.235f);
@@ -109,15 +95,19 @@ public class Grapple : MonoBehaviour
         line.SetPosition(1, partnerLinePos);
 
         target.connectedAnchor = transform.position;
+    }
 
-        if (Input.GetKeyDown(KeyCode.X))
+
+    public void EnableRope(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
         {
             if (currDist <= (maxLimit + 1) && !target.enabled)
             {
                 target.enabled = true;
                 line.enabled = true;
                 isTethered = true;
-            } 
+            }
             else
             {
                 target.enabled = false;
@@ -139,7 +129,7 @@ public class Grapple : MonoBehaviour
             if (currDist < minLimit)
             {
                 target.distance = minLimit;
-            }  
+            }
             else if (currDist < currLength)
             {
                 target.distance = currDist;
@@ -154,28 +144,43 @@ public class Grapple : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // REEL IN =============================================================
-    void ReelIn()
+    public void ReelIn(InputAction.CallbackContext ctx)
     {
-        isExtending = false;
-        target.distance = 0;
-        currLength = maxLimit;
-        maxLimit = 0.95f;
-        if(!gameObject.GetComponent<PlayerController>().IsGrounded())
+        if (ctx.performed)
         {
-            target.frequency = airReelSpeed;
+            isExtending = false;
+            target.distance = 0;
+            currLength = maxLimit;
+            maxLimit = 0.95f;
+            if (gameObject.GetComponent<NewBehaviourScript>().IsGrounded() == false)
+            {
+                target.frequency = airReelSpeed;
+            }
+            else
+            {
+                target.frequency = reelSpeed;
+            }
+
+            isReeling = true;
         }
         else
         {
-            target.frequency = reelSpeed;
+            isReeling = false;
         }
     }
 
 
     ////////////////////////////////////////////////////////////////////////
     // EXTEND ==============================================================
-    void Extend()
+    public void Extend(InputAction.CallbackContext ctx)
     {
-        Debug.Log("extending");
-        target.distance += 0.02f;
+        if (ctx.performed)
+        {
+            isExtending = true;
+        }
+        else
+        {
+            isExtending = false;
+        }
     }
 }
