@@ -13,6 +13,9 @@ public class PressurePlate : MonoBehaviour
 
     public GameObject door;
 
+    [SerializeField]
+    private bool isHorizontal = false;
+
 
     void Start()
     {
@@ -25,9 +28,13 @@ public class PressurePlate : MonoBehaviour
     {
         if(timeToReturn)
         {
-            if(door.GetComponent<Transform>().position.y > ogPosDoor.y)
+            if(!isHorizontal && door.GetComponent<Transform>().position.y > ogPosDoor.y)
             {
                 door.GetComponent<Transform>().Translate(0, -7f * Time.deltaTime, 0);
+            }
+            else if(isHorizontal && door.GetComponent<Transform>().position.x > ogPosDoor.x)
+            {
+                door.GetComponent<Transform>().Translate(0, 7f * Time.deltaTime, 0);
             }
             else
             {
@@ -57,9 +64,13 @@ public class PressurePlate : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0.35f, 0.51f, 0.39f);
 
         timeToReturn = false;
-        if (door.GetComponent<Transform>().position.y < ogPosDoor.y + door.GetComponent<Transform>().localScale.y + 2)
+        if (!isHorizontal && door.GetComponent<Transform>().position.y < ogPosDoor.y + ((door.GetComponent<Transform>().localScale.y * 2.0f) - (door.GetComponent<Transform>().localScale.y * 0.2f)))
         {
             door.GetComponent<Transform>().Translate(0, 7f * Time.deltaTime, 0);
+        }
+        else if (isHorizontal && door.GetComponent<Transform>().position.x < ogPosDoor.x + ((door.GetComponent<Transform>().localScale.y * 2.0f) - (door.GetComponent<Transform>().localScale.y * 0.2f)))
+        {
+            door.GetComponent<Transform>().Translate(0, -7f * Time.deltaTime, 0);
         }
 
     }

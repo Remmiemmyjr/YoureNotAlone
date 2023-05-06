@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //README
@@ -14,6 +15,9 @@ public class Checkpoint : MonoBehaviour
     // Fancy little effects
     private ParticleSystem EmberPlayer;
     private UnityEngine.Rendering.Universal.Light2D CheckpointLight;
+
+    [SerializeField]
+    private float lightGrowRate = 1.0f;
 
     // Boolean to keep track of reached or not
     private bool checkReached = false;
@@ -32,7 +36,7 @@ public class Checkpoint : MonoBehaviour
         // If the checkpoint has been activated and the light is less than intended, grow it
         if (checkReached && CheckpointLight.pointLightOuterRadius < 3)
         {
-            CheckpointLight.pointLightOuterRadius += Time.deltaTime;
+            CheckpointLight.pointLightOuterRadius += lightGrowRate * Time.deltaTime;
         }
     }
 
