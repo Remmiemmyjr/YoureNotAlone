@@ -18,23 +18,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
+public enum EyeStates
+{
+    SLEEPING,
+    WAKING,
+    ACTIVE
+}
+
 public class ActivateEyes : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
+    EyeStates status;
+    
     GameObject Player;
     GameObject Partner;
+    EyeProfile profile;
 
     public GameObject[] Eyes;
     public Sprite closed;
     public Sprite halfway;
     public Sprite open;
 
-    Animator eyeAnim;
-    SpriteRenderer eyeRenderer;
-
-    bool timeToHide = false;
-    [HideInInspector] public bool canActivate = true;
+    public bool timeToHide = false;
 
     public float min = 5f;
     public float max = 10f;
@@ -59,23 +65,25 @@ public class ActivateEyes : MonoBehaviour
 
 
     ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
+    void Awake()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player");
+        Partner = GameObject.FindGameObjectWithTag("Partner");
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
     void Start()
     {
-        for(int i = 0; i < Eyes.Length; i++)
-        {
-            eyeRenderer = Eyes[i].GetComponent<SpriteRenderer>();
-            eyeRenderer.sprite = closed;
-
-            eyeAnim = Eyes[i].GetComponent<Animator>();
-            eyeAnim.Play("EyeballClosed");
-            eyeAnim.SetBool("isOpen", timeToHide);
-        }
-
-        Player = GameObject.FindGameObjectWithTag("Player");
-        Partner = GameObject.FindGameObjectWithTag("Partner");
-
         SelectNewTime();
+
+        for (int i = 0; i < Eyes.Length; i++)
+        {
+            profile = Eyes[i].GetComponent<EyeProfile>();
+            profile.SetStatusSleeping();
+        }
     }
 
 
@@ -83,126 +91,134 @@ public class ActivateEyes : MonoBehaviour
     // UPDATE ==============================================================
     void Update()
     {
-        if (canActivate)
+        // Closed
+        if (currTime >= 0)
         {
-            // Closed
-            if (currTime >= 0)
-            {
-                // If the eyes just closed...
-                if(timeToHide)
-                {
-                    // Stop sounds.
-                    iamwatching.Stop();
-                    iseeyou.Stop();
-
-                    // Restart level music.
-                    GameObject.Find("MusicController").GetComponent<AudioSource>().Play();
-                }
-
-                timeToHide = false;
-
-                for (int i = 0; i < Eyes.Length; i++)
-                {
-                    eyeRenderer = Eyes[i].GetComponent<SpriteRenderer>();
-                    eyeRenderer.sprite = closed;
-
-                    eyeAnim = Eyes[i].GetComponent<Animator>();
-                    eyeAnim.SetBool("isOpen", timeToHide);
-                    eyeAnim.Play("EyeballClosed");
-                }
-
-                currTime -= Time.deltaTime;
-            }
-
-            // Halfway
-            if (currTime <= 3.5f && currTime > 0)
-            {
-                // If we just entered this state...
-                if(currTime > 3.4f)
-                {
-                    // Set the iamwatching mixer group level to 1.
-                    AudioMixer mg = iamwatching.outputAudioMixerGroup.audioMixer;
-                    mg.SetFloat(iamwatchingMGEP, 0.0f);
-
-                    // Play goodmorning
-                    goodmorning.Play();
-                }
-
-                for (int i = 0; i < Eyes.Length; i++)
-                {
-                    eyeRenderer = Eyes[i].GetComponent<SpriteRenderer>();
-                    eyeRenderer.sprite = halfway;
-
-                    eyeAnim = Eyes[i].GetComponent<Animator>();
-                    eyeAnim.Play("EyeballHalfway");
-                }
-
-                // Set the iamwatching mixer group level to 1.
-                AudioMixer iamwatchingMG = iamwatching.outputAudioMixerGroup.audioMixer;
-                iamwatchingMG.SetFloat(iamwatchingMGEP, 0.0f);
-                // Set the iseeyou mixer group level to 0.
-                AudioMixer iseeyouMG = iseeyou.outputAudioMixerGroup.audioMixer;
-                iseeyouMG.SetFloat(iseeyouMGEP, -80.0f);
-            }
-
-            // Open
-            if (currTime <= 0)
-            {
-                // If the eyes just opened...
-                if(!timeToHide)
-                {
-                    // Reset timeInSight timer to the gracePeriod.
-                    timeInSight = gracePeriod;
-
-                    // Play iamawake.
-                    iamawake.Play();
-
-                    // Play both sounds.
-                    iamwatching.Play();
-                    iseeyou.Play();
-                    // Stop the level music.
-                    GameObject.Find("MusicController").GetComponent<AudioSource>().Stop();
-
-                    // Set the iamwatching mixer group level to 1.
-                    AudioMixer iamwatchingMG = iamwatching.outputAudioMixerGroup.audioMixer;
-                    iamwatchingMG.SetFloat(iamwatchingMGEP, 0.0f);
-                    // Set the iseeyou mixer group level to 0.
-                    AudioMixer iseeyouMG = iseeyou.outputAudioMixerGroup.audioMixer;
-                    iseeyouMG.SetFloat(iseeyouMGEP, -80.0f);
-                }
-
-                timeToHide = true;
-
-                for (int i = 0; i < Eyes.Length; i++)
-                {
-                    eyeRenderer = Eyes[i].GetComponent<SpriteRenderer>();
-                    eyeRenderer.sprite = open;
-
-                    eyeAnim = Eyes[i].GetComponent<Animator>();
-                    eyeAnim.SetBool("isOpen", timeToHide);
-                    eyeAnim.Play("EyeballOpen");
-                }
-
-                StartCoroutine(LookAround());
-            }
-
-            // KillCheck if the eyes are open.
-            if (timeToHide)
-            {
-                playerSpotted = KillCheck();
-            }
+            status = EyeStates.SLEEPING;
+            Sleep();
         }
 
-        else 
+        // Halfway
+        if (currTime <= 3.5f && currTime > 0)
         {
-            currTime = maxTime;
+            status = EyeStates.WAKING;
+            BeginWake();
+        }
+
+        // Open
+        if (currTime <= 0)
+        {
+            status = EyeStates.ACTIVE;
+            Activate();
+        }
+
+        // KillCheck if the eyes are open.
+        if (timeToHide)
+        {
+            playerSpotted = KillCheck();
         }
     }
 
 
     ////////////////////////////////////////////////////////////////////////
+    // SLEEP ===============================================================
+    void Sleep()
+    {
+        // If the eyes just closed...
+        if (timeToHide)
+        {
+            // Stop sounds.
+            iamwatching.Stop();
+            iseeyou.Stop();
+
+            // Restart level music.
+            GameObject.Find("MusicController").GetComponent<AudioSource>().Play();
+        }
+
+        timeToHide = false;
+
+        for (int i = 0; i < Eyes.Length; i++)
+        {
+            profile = Eyes[i].GetComponent<EyeProfile>();
+            profile.SetStatusSleeping();
+        }
+
+        currTime -= Time.deltaTime;
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // BEGIN WAKE ==========================================================
+    void BeginWake()
+    {
+        // If we just entered this state...
+        if (currTime > 3.4f)
+        {
+            // Set the iamwatching mixer group level to 1.
+            AudioMixer mg = iamwatching.outputAudioMixerGroup.audioMixer;
+            mg.SetFloat(iamwatchingMGEP, 0.0f);
+
+            // Play goodmorning
+            goodmorning.Play();
+        }
+
+        for (int i = 0; i < Eyes.Length; i++)
+        {
+            profile = Eyes[i].GetComponent<EyeProfile>();
+            profile.SetStatusWaking();
+        }
+
+        // Set the iamwatching mixer group level to 1.
+        AudioMixer iamwatchingMG = iamwatching.outputAudioMixerGroup.audioMixer;
+        iamwatchingMG.SetFloat(iamwatchingMGEP, 0.0f);
+        // Set the iseeyou mixer group level to 0.
+        AudioMixer iseeyouMG = iseeyou.outputAudioMixerGroup.audioMixer;
+        iseeyouMG.SetFloat(iseeyouMGEP, -80.0f);
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // ACTIVATE ============================================================
+    void Activate()
+    {
+        // If the eyes just opened...
+        if (!timeToHide)
+        {
+            // Reset timeInSight timer to the gracePeriod.
+            timeInSight = gracePeriod;
+
+            // Play iamawake.
+            iamawake.Play();
+
+            // Play both sounds.
+            iamwatching.Play();
+            iseeyou.Play();
+            // Stop the level music.
+            GameObject.Find("MusicController").GetComponent<AudioSource>().Stop();
+
+            // Set the iamwatching mixer group level to 1.
+            AudioMixer iamwatchingMG = iamwatching.outputAudioMixerGroup.audioMixer;
+            iamwatchingMG.SetFloat(iamwatchingMGEP, 0.0f);
+            // Set the iseeyou mixer group level to 0.
+            AudioMixer iseeyouMG = iseeyou.outputAudioMixerGroup.audioMixer;
+            iseeyouMG.SetFloat(iseeyouMGEP, -80.0f);
+        }
+
+        timeToHide = true;
+
+        for (int i = 0; i < Eyes.Length; i++)
+        {
+            profile = Eyes[i].GetComponent<EyeProfile>();
+            profile.SetStatusActive();
+        }
+
+        StartCoroutine(LookAround());
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
     // KILL CHECK ==========================================================
-    // Returns true if the player or partner are visible.
+    // Returns true if the player or partner is visible.
     bool KillCheck()
     {
         // If the player or partner are visible...
@@ -271,7 +287,7 @@ public class ActivateEyes : MonoBehaviour
 
         while(playerSpotted)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1.5f);
         }
         SelectNewTime();
     }

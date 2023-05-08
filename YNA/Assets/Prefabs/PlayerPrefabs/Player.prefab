@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 4448976923580171169}
   - component: {fileID: 7382746697358521978}
   - component: {fileID: 1471629793268592041}
+  - component: {fileID: 436255601252183364}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -261,17 +262,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893d97259ce06974e92a3473b7bba687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partnerOffset: {x: 0, y: 0}
+  dir: {x: 0, y: 0}
   groundObject: {fileID: 783348942485166081}
   layer:
     serializedVersion: 2
     m_Bits: 8
   speed: 7
   jumpHeight: 16
-  groundedRemember: 0.3
-  jumpTimer: 0.05
-  onGround: 0
-  dontSpawnPartner: 0
+  smoothDamp: 5
+  smoothRange: 0.05
 --- !u!114 &783348941237856857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,6 +351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 783348941237856849}
   _moveScript: {fileID: 783348941237856850}
+  _animationManager: {fileID: 0}
   randClip: {fileID: 7382746697358521978}
   playInterval: 0.3
   resetTime: 0
@@ -469,6 +469,120 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &436255601252183364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783348941237856849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 1da487ca7f855634aabe8593fcb92363, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 783348941237856850}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Movement
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 217b65e5-f5f4-48fc-9b41-9e0abaf48bfe
+    m_ActionName: Gameplay/Move[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 783348941237856850}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3a99ccda-4940-4a67-a3a8-b6711dc4def9
+    m_ActionName: Gameplay/Jump[/Keyboard/space,/Keyboard/upArrow,/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 783348941237856857}
+        m_TargetAssemblyTypeName: Grapple, Assembly-CSharp
+        m_MethodName: EnableRope
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 66b3e494-8dee-49a2-95bf-5112bb966753
+    m_ActionName: Gameplay/Tether[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 783348941237856857}
+        m_TargetAssemblyTypeName: Grapple, Assembly-CSharp
+        m_MethodName: ReelIn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 04efdc5e-14ca-471b-b7e7-aa8d11d90082
+    m_ActionName: Gameplay/Pull[/Keyboard/z]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 783348941237856857}
+        m_TargetAssemblyTypeName: Grapple, Assembly-CSharp
+        m_MethodName: Extend
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 089fcf38-be24-429a-aaeb-847d2a639fdc
+    m_ActionName: Gameplay/Extend[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e53cc3a9-cbf0-4867-8e8f-6e552b9ba4d8
+    m_ActionName: Gameplay/Pause[/Keyboard/escape]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &783348942485166086
 GameObject:
   m_ObjectHideFlags: 0
