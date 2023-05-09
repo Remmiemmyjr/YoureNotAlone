@@ -15,6 +15,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -37,7 +38,8 @@ public class PlayerController : MonoBehaviour
         cDead
     }
 
-    private PlayerStates state;
+    private PlayerStates state_curr;
+    private PlayerStates state_next;
 
     [HideInInspector]
     public Vector2 dir;
@@ -81,10 +83,10 @@ public class PlayerController : MonoBehaviour
     // FIXED UPDATE ========================================================
     void FixedUpdate()
     {
-
+        state_curr = state_next;
         //player state machine
 
-        switch (state)
+        switch (state_curr)
         {
             // The player is idle
             case PlayerStates.cIdle:
@@ -155,7 +157,7 @@ public class PlayerController : MonoBehaviour
         dir.x = ctx.ReadValue<float>();
         Debug.Log(dir.x);
         //set the state machine to walk
-        state = PlayerStates.cWalk;
+        state_next = PlayerStates.cWalk;
 
     }
 
@@ -169,7 +171,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector2.up * jumpHeight;
 
             //set the state machine to jump
-            state = PlayerStates.cJump;
+            state_next = PlayerStates.cJump;
         }
 
 
@@ -204,7 +206,7 @@ public class PlayerController : MonoBehaviour
         //if not walking anymore
         if (dir.x == 0.0f)
         {
-            state = PlayerStates.cIdle;
+            state_next = PlayerStates.cIdle;
             return;
         }
         //set walking animation
@@ -228,7 +230,7 @@ public class PlayerController : MonoBehaviour
         //if y velocity is downward set state to falling and not grounded
         else
         {
-            state = PlayerStates.cFall;
+            state_next = PlayerStates.cFall;
         }
 
 
@@ -245,9 +247,13 @@ public class PlayerController : MonoBehaviour
             player_falling.Invoke();
 
         }
+        else if (dir.x == 0.0f)
+        {
+            state_next = PlayerStates.cIdle;
+        }
         else
         {
-            state = PlayerStates.cIdle;
+            state_next = PlayerStates.cWalk;
         }
 
 
