@@ -83,11 +83,11 @@ public class AnimationManager : MonoBehaviour
     // CHECK FLIP ==========================================================
     void SetFlip()
     {
-        if (velX >= 0.2)
+        if (velX >= 0.05f)
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
-        if (velX <= -0.2)
+        if (velX <= -0.05f)
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
