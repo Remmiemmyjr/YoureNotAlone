@@ -9,9 +9,13 @@
 //
 //*************************************************
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AnimationManager : MonoBehaviour
 {
@@ -22,12 +26,29 @@ public class AnimationManager : MonoBehaviour
         Player, Partner
     }
 
-    public Character currChar;
+    private Character currChar;
 
-    Animator anim;
+    public enum AnimationStates
+    {
+        cInvalid = -1,
+        cIdle = 0,
+        cJump,
+        cWalk,
+        cFall,
+        cHiding,
+        cSeen,
+        cDead
+    }
+
+    
+    private Animator animator;
 
     float velX;
     float velY;
+
+
+
+
     // *********************************************************************
 
 
@@ -35,7 +56,7 @@ public class AnimationManager : MonoBehaviour
     // START ===============================================================
     void Start()
     {
-        anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
         if(gameObject.tag == "Player")
         {
@@ -54,18 +75,13 @@ public class AnimationManager : MonoBehaviour
     {
         velX = gameObject.GetComponent<Rigidbody2D>().velocity.x;
         velY = gameObject.GetComponent<Rigidbody2D>().velocity.y;
-        
-        CheckFlip();
-        CheckJump();
-        CheckFall();
-        CheckWalk();
-        CheckIdle();
+
     }
 
 
     ////////////////////////////////////////////////////////////////////////
     // CHECK FLIP ==========================================================
-    void CheckFlip()
+    void SetFlip()
     {
         if (velX >= 0.2)
         {
@@ -81,45 +97,59 @@ public class AnimationManager : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // CHECK WALK ==========================================================
-    void CheckWalk()
+    
+    public void SetStateWalk()
     {
-        if((velX > 1 || velX < -1) && velY < 1 && velY > -1)
-        {
-            anim.Play(currChar + "_Walk");
-        }
+        SetFlip();
+        animator.Play(currChar + "_Walk");
 
     }
 
     ////////////////////////////////////////////////////////////////////////
     // CHECK JUMP ==========================================================
-    void CheckJump()
+    public void SetStateJump()
     {
-        if(velY > 1 && velY != 0)
-        {
-            anim.Play(currChar + "_Jump");
-        }
+        animator.Play(currChar + "_Jump");
     }
 
 
     ////////////////////////////////////////////////////////////////////////
     // CHECK FALL ==========================================================
-    void CheckFall()
+    public void SetStateFall()
     {
-        if(velY < -1 && velY != 0)
-        {
-            anim.Play(currChar + "_Fall");
-        }
+        animator.Play(currChar + "_Fall");
     }
 
 
     ////////////////////////////////////////////////////////////////////////
     // CHECK IDLE ==========================================================
-    void CheckIdle()
+    public void SetStateIdle()
     {
-        if(velX == 0 && velY == 0)
-        {
-            anim.Play(currChar + "_Idle");
-        }
+        animator.Play(currChar + "_Idle");
     }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // SET STATE HIDE ======================================================
+    public void SetStateHide()
+    {
+
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // SET STATE SEEN ======================================================
+    public void SetStateSeen()
+    {
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // SET STATE DEAD =======================================================
+    public void SetStateDead()
+    {
+
+    }
+
 
 }

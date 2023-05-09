@@ -15,7 +15,9 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -47,6 +49,23 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight = 16f;
     public float smoothDamp = 5f;
     public float smoothRange = 0.05f;
+
+
+    [SerializeField]
+    public UnityEvent player_idle;
+    [SerializeField]  
+    public UnityEvent player_walk;
+    [SerializeField]  
+    public UnityEvent player_jump;
+    [SerializeField]  
+    public UnityEvent player_falling;
+    [SerializeField]  
+    public UnityEvent player_hide;
+    [SerializeField]  
+    public UnityEvent player_dead;
+    [SerializeField]  
+    public UnityEvent player_seen;
+
     // *********************************************************************
 
 
@@ -111,56 +130,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // constantly update the velocities movement
-        rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
 
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////
-    // MOVEMENT ============================================================
-    public void Movement(InputAction.CallbackContext ctx)
-    {
-        dir.x = ctx.ReadValue<float>();
-        Debug.Log(dir.x);
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////
-    // JUMP ================================================================
-    public void Jump(InputAction.CallbackContext ctx)
-    {
-        if (ctx.performed && IsGrounded())
-        {
-            rb.velocity = Vector2.up * jumpHeight;
-        }
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////
-    // IS GROUNDED =========================================================
-    public bool IsGrounded()
-    {
-        return Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
-    }
-
-
-
-    ////////////////////////////////////////////////////////////////////////
-    // ACTION FUNCTIONS ============================================================
-
-
-    ////////////////////////////////////////////////////////////////////////
-    // IS IDLING =========================================================
-    private void do_idle()
-    {
-
-    }
-
-    ////////////////////////////////////////////////////////////////////////
-    // IS WALKING =========================================================
-    private void do_walk()
-    {
+        //movement stuff
         if (Mathf.Abs(dir.x) > 0.65)
         {
             rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
@@ -176,17 +147,109 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // MOVEMENT ============================================================
+    public void Movement(InputAction.CallbackContext ctx)
+    {
+        dir.x = ctx.ReadValue<float>();
+        Debug.Log(dir.x);
+        //set the state machine to walk
+        state = PlayerStates.cWalk;
+
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // JUMP ================================================================
+    public void Jump(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed && IsGrounded())
+        {
+            rb.velocity = Vector2.up * jumpHeight;
+
+            //set the state machine to jump
+            state = PlayerStates.cJump;
+        }
+
+
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS GROUNDED =========================================================
+    public bool IsGrounded()
+    {
+        return Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
+    }
+
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // STATE MACHINE ACTIONS ============================================================
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS IDLING =========================================================
+    private void do_idle()
+    {
+        //set animation state to idle
+        player_idle.Invoke();
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS WALKING =========================================================
+    private void do_walk()
+    {
+        //if not walking anymore
+        if (dir.x == 0.0f)
+        {
+            state = PlayerStates.cIdle;
+            return;
+        }
+        //set walking animation
+        player_walk.Invoke();
+
+        //call wwise walking event
+     
+
+    }
+
     ////////////////////////////////////////////////////////////////////////
     // IS JUMPING =========================================================
     private void do_jump()
     {
+        //set jump animation based on y velocity
+        if (rb.velocity.y >= 0.0f)
+        {
+            player_jump.Invoke();
 
+        }
+        //if y velocity is downward set state to falling and not grounded
+        else
+        {
+            state = PlayerStates.cFall;
+        }
+
+
+        //if just jumped post jump wwise event
     }
 
     ////////////////////////////////////////////////////////////////////////
     // IS FALLING =========================================================
     private void do_fall()
     {
+        if (!IsGrounded())
+        {
+            //set animation state to falling
+            player_falling.Invoke();
+
+        }
+        else
+        {
+            state = PlayerStates.cIdle;
+        }
+
 
     }
 
@@ -194,14 +257,18 @@ public class PlayerController : MonoBehaviour
     // IS HIDING =========================================================
     private void do_hide()
     {
+        player_hide.Invoke();
 
+        //set animation state to hiding
     }
 
     ////////////////////////////////////////////////////////////////////////
     // IS SEEN =========================================================
     private void do_seen()
     {
+        player_seen.Invoke();
 
+        //set animation state to seen
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -209,6 +276,10 @@ public class PlayerController : MonoBehaviour
     private void do_dead()
     {
 
+        //set dead animation state
+        player_dead.Invoke();
+
+        //trigger game over events
     }
 }
 
