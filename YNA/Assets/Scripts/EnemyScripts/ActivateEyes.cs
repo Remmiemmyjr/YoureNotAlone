@@ -29,7 +29,8 @@ public class ActivateEyes : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
-    EyeStates status;
+    [HideInInspector]
+    public EyeStates status;
     
     GameObject Player;
     GameObject Partner;
@@ -44,6 +45,7 @@ public class ActivateEyes : MonoBehaviour
 
     public float min = 5f;
     public float max = 10f;
+    public float wakingTime = 3.5f;
     public float gracePeriod;
     float timeInSight;
 
@@ -99,7 +101,7 @@ public class ActivateEyes : MonoBehaviour
         }
 
         // Halfway
-        if (currTime <= 3.5f && currTime > 0)
+        if (currTime <= wakingTime && currTime > 0)
         {
             status = EyeStates.WAKING;
             BeginWake();
