@@ -28,25 +28,7 @@ public class AnimationManager : MonoBehaviour
 
     private Character currChar;
 
-    public enum AnimationStates
-    {
-        cInvalid = -1,
-        cIdle = 0,
-        cJump,
-        cWalk,
-        cFall,
-        cHiding,
-        cSeen,
-        cDead
-    }
-
-    
     private Animator animator;
-
-    float velX;
-    float velY;
-
-
 
 
     // *********************************************************************
@@ -73,8 +55,6 @@ public class AnimationManager : MonoBehaviour
     // UPDATE ==============================================================
     void Update()
     {
-        velX = gameObject.GetComponent<Rigidbody2D>().velocity.x;
-        velY = gameObject.GetComponent<Rigidbody2D>().velocity.y;
 
     }
 
@@ -83,10 +63,14 @@ public class AnimationManager : MonoBehaviour
     // CHECK FLIP ==========================================================
     void SetFlip()
     {
+        float velX = gameObject.GetComponent<Rigidbody2D>().velocity.x;
+
+        //check if moving left
         if (velX >= 0.05f)
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
+        //check if moving right
         if (velX <= -0.05f)
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
@@ -96,17 +80,17 @@ public class AnimationManager : MonoBehaviour
     }
 
     ////////////////////////////////////////////////////////////////////////
-    // CHECK WALK ==========================================================
-    
+    // SET STATE WALK ==========================================================
     public void SetStateWalk()
     {
+        //flip to face the correct direction
         SetFlip();
         animator.Play(currChar + "_Walk");
 
     }
 
     ////////////////////////////////////////////////////////////////////////
-    // CHECK JUMP ==========================================================
+    // SET STATE JUMP ==========================================================
     public void SetStateJump()
     {
         animator.Play(currChar + "_Jump");
@@ -114,7 +98,7 @@ public class AnimationManager : MonoBehaviour
 
 
     ////////////////////////////////////////////////////////////////////////
-    // CHECK FALL ==========================================================
+    // SET STATE FALL ==========================================================
     public void SetStateFall()
     {
         animator.Play(currChar + "_Fall");
@@ -133,6 +117,7 @@ public class AnimationManager : MonoBehaviour
     // SET STATE HIDE ======================================================
     public void SetStateHide()
     {
+        animator.Play(currChar + "_Hide");
 
     }
 
@@ -141,6 +126,7 @@ public class AnimationManager : MonoBehaviour
     // SET STATE SEEN ======================================================
     public void SetStateSeen()
     {
+        animator.Play(currChar + "_Seen");
 
     }
 
@@ -148,6 +134,7 @@ public class AnimationManager : MonoBehaviour
     // SET STATE DEAD =======================================================
     public void SetStateDead()
     {
+        animator.Play(currChar + "_Dead");
 
     }
 

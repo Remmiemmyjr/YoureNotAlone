@@ -1,32 +1,14 @@
-//*************************************************
-// Project: We're Tethered Together
-// File: PlayerController.cs
-// Author/s: Emmy Berg
-//           Cameron Myers
-//
-// Desc: Manage player actions
-//
-// Notes:
-//  + Fix constant jump timer decreasing bug
-//
-// Last Edit: 5/4/2023
-//
-//*************************************************
-
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PartnerController : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
     Rigidbody2D rb;
-    public enum PlayerStates
+    public enum PartnerStates
     {
         cInvalid = -1,
         cIdle = 0,
@@ -38,8 +20,8 @@ public class PlayerController : MonoBehaviour
         cDead
     }
 
-    private PlayerStates state_curr;
-    private PlayerStates state_next;
+    private PartnerStates state_curr;
+    private PartnerStates state_next;
 
     [HideInInspector]
     public Vector2 dir;
@@ -47,26 +29,20 @@ public class PlayerController : MonoBehaviour
     public Transform groundObject;
     public LayerMask layer;
 
-    public float speed = 7f;
-    public float jumpHeight = 16f;
-    public float smoothDamp = 5f;
-    public float smoothRange = 0.05f;
-
-
     [SerializeField]
-    private UnityEvent player_idle;
+    private UnityEvent partner_idle;
     [SerializeField]
-    private UnityEvent player_walk;
+    private UnityEvent partner_walk;
     [SerializeField]
-    private UnityEvent player_jump;
+    private UnityEvent partner_jump;
     [SerializeField]
-    private UnityEvent player_falling;
+    private UnityEvent partner_falling;
     [SerializeField]
-    private UnityEvent player_hide;
+    private UnityEvent partner_hide;
     [SerializeField]
-    private UnityEvent player_dead;
+    private UnityEvent partner_dead;
     [SerializeField]
-    private UnityEvent player_seen;
+    private UnityEvent partner_seen;
 
     // *********************************************************************
 
@@ -81,101 +57,67 @@ public class PlayerController : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // FIXED UPDATE ========================================================
-    void FixedUpdate()
+    void Update()
     {
-        state_curr = state_next;
-        //player state machine
+        //TODO:
+        //check for what state to be in
 
+
+        //set state
+
+        state_curr = state_next;
+        //partner state machine
+
+        //do actions
         switch (state_curr)
         {
-            // The player is idle
-            case PlayerStates.cIdle:
-            {
-                do_idle();
-                break;
-            }
-            //the player is walking
-            case PlayerStates.cWalk:
-            {
-                do_walk();
-                break;
-            }
-            //the player is in an upward motion
-            case PlayerStates.cJump:
-            {
-                do_jump();
-                break;
-            }
-            //the player is moving downward
-            case PlayerStates.cFall:
-            {
-                do_fall();
-                break;
-            }
-            //the player is hiding behind an object
-            case PlayerStates.cHiding:
-            {
-                do_hide();
-                break;
-            }
-            //the player has been spotted
-            case PlayerStates.cSeen:
-            {
-                do_seen();
-                break;
-            }
-            //the player is dead
-            case PlayerStates.cDead:
-            {
-                do_dead();
-                break;
-            }
+            // The partner is idle
+            case PartnerStates.cIdle:
+                {
+                    do_idle();
+                    break;
+                }
+            //the partner is walking
+            case PartnerStates.cWalk:
+                {
+                    do_walk();
+                    break;
+                }
+            //the partner is in an upward motion
+            case PartnerStates.cJump:
+                {
+                    do_jump();
+                    break;
+                }
+            //the partner is moving downward
+            case PartnerStates.cFall:
+                {
+                    do_fall();
+                    break;
+                }
+            //the partner is hiding behind an object
+            case PartnerStates.cHiding:
+                {
+                    do_hide();
+                    break;
+                }
+            //the partner has been spotted
+            case PartnerStates.cSeen:
+                {
+                    do_seen();
+                    break;
+                }
+            //the partner is dead
+            case PartnerStates.cDead:
+                {
+                    do_dead();
+                    break;
+                }
         }
-
-
-        //movement stuff
-        if (Mathf.Abs(dir.x) > 0.65)
-        {
-            rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
-        }
-        else
-        {
-            rb.AddForce(new Vector2(-(rb.velocity.x * smoothDamp), 0));
-
-            if (Mathf.Abs(rb.velocity.x) <= smoothRange)
-            {
-                rb.velocity = new Vector2(0, rb.velocity.y);
-            }
-        }
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////
-    // MOVEMENT ============================================================
-    public void Movement(InputAction.CallbackContext ctx)
-    {
-        dir.x = ctx.ReadValue<float>();
-        Debug.Log(dir.x);
-        //set the state machine to walk
-        state_next = PlayerStates.cWalk;
 
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // JUMP ================================================================
-    public void Jump(InputAction.CallbackContext ctx)
-    {
-        if (ctx.performed && IsGrounded())
-        {
-            rb.velocity = Vector2.up * jumpHeight;
-
-            //set the state machine to jump
-            state_next = PlayerStates.cJump;
-        }
-
-
-    }
 
 
     ////////////////////////////////////////////////////////////////////////
@@ -185,6 +127,12 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
     }
 
+    ////////////////////////////////////////////////////////////////////////
+    // IS FALLING =========================================================
+    public bool IsFalling()
+    {
+        return Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
+    }
 
 
     ////////////////////////////////////////////////////////////////////////
@@ -196,7 +144,7 @@ public class PlayerController : MonoBehaviour
     private void do_idle()
     {
         //set animation state to idle
-        player_idle.Invoke();
+        partner_idle.Invoke();
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -206,14 +154,14 @@ public class PlayerController : MonoBehaviour
         //if not walking anymore
         if (dir.x == 0.0f)
         {
-            state_next = PlayerStates.cIdle;
+            state_next = PartnerStates.cIdle;
             return;
         }
         //set walking animation
-        player_walk.Invoke();
+        partner_walk.Invoke();
 
         //call wwise walking event
-     
+
 
     }
 
@@ -224,13 +172,13 @@ public class PlayerController : MonoBehaviour
         //set jump animation based on y velocity
         if (rb.velocity.y >= 0.0f)
         {
-            player_jump.Invoke();
+            partner_jump.Invoke();
 
         }
         //if y velocity is downward set state to falling and not grounded
         else
         {
-            state_next = PlayerStates.cFall;
+            state_next = PartnerStates.cFall;
         }
 
 
@@ -244,16 +192,16 @@ public class PlayerController : MonoBehaviour
         if (!IsGrounded())
         {
             //set animation state to falling
-            player_falling.Invoke();
+            partner_falling.Invoke();
 
         }
         else if (dir.x == 0.0f)
         {
-            state_next = PlayerStates.cIdle;
+            state_next = PartnerStates.cIdle;
         }
         else
         {
-            state_next = PlayerStates.cWalk;
+            state_next = PartnerStates.cWalk;
         }
 
 
@@ -263,7 +211,7 @@ public class PlayerController : MonoBehaviour
     // IS HIDING =========================================================
     private void do_hide()
     {
-        player_hide.Invoke();
+        partner_hide.Invoke();
 
         //set animation state to hiding
     }
@@ -272,7 +220,7 @@ public class PlayerController : MonoBehaviour
     // IS SEEN =========================================================
     private void do_seen()
     {
-        player_seen.Invoke();
+        partner_seen.Invoke();
 
         //set animation state to seen
     }
@@ -283,7 +231,7 @@ public class PlayerController : MonoBehaviour
     {
 
         //set dead animation state
-        player_dead.Invoke();
+        partner_dead.Invoke();
 
         //trigger game over events
     }

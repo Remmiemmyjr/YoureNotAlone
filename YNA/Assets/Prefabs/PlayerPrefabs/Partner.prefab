@@ -159,6 +159,7 @@ GameObject:
   - component: {fileID: 8844401884999109801}
   - component: {fileID: 2857267791298168663}
   - component: {fileID: -1641885040801107529}
+  - component: {fileID: 6548898410357679300}
   m_Layer: 6
   m_Name: Partner
   m_TagString: Partner
@@ -334,7 +335,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 856292c9d52fa704f864f60151eeccb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currChar: 0
 --- !u!95 &-1641885040801107529
 Animator:
   serializedVersion: 4
@@ -355,3 +355,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6548898410357679300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8844401884999109795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83448ee91cca42e46bceca7f86c8c388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

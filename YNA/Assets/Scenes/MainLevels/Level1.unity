@@ -10023,13 +10023,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 783348941237856850, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
+      propertyPath: player_walk.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 783348941237856850, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
       propertyPath: player_idle.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 758062717}
     - target: {fileID: 783348941237856850, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
       propertyPath: player_walk.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 758062717}
+      objectReference: {fileID: 0}
     - target: {fileID: 783348941237856850, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
       propertyPath: player_idle.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -10039,12 +10043,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 783348941237856850, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
+      propertyPath: player_walk.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 783348941237856850, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
       propertyPath: player_idle.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetStateIdle
       objectReference: {fileID: 0}
     - target: {fileID: 783348941237856850, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
       propertyPath: player_walk.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetStateWalk
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 783348941237856850, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
       propertyPath: player_idle.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -10055,12 +10063,16 @@ PrefabInstance:
       value: AnimationManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 783348941237856850, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
+      propertyPath: player_walk.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: AnimationManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 783348941237856850, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
       propertyPath: player_idle.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 783348941237856850, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
       propertyPath: player_walk.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 783348941237856851, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
       propertyPath: m_RootOrder
