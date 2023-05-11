@@ -8655,6 +8655,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6548898410357679300, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
+      propertyPath: groundObject
+      value: 
+      objectReference: {fileID: 1743029171}
+    - target: {fileID: 6548898410357679300, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
+      propertyPath: layer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8844401884999109795, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
       propertyPath: m_Name
       value: Partner
@@ -9204,6 +9212,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!4 &1743029171 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 783348942485166081, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
+  m_PrefabInstance: {fileID: 2030767262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1767239973
 GameObject:
   m_ObjectHideFlags: 0

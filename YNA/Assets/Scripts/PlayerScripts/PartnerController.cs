@@ -23,8 +23,6 @@ public class PartnerController : MonoBehaviour
     private PartnerStates state_curr;
     private PartnerStates state_next;
 
-    [HideInInspector]
-    public Vector2 dir;
 
     public Transform groundObject;
     public LayerMask layer;
@@ -44,6 +42,11 @@ public class PartnerController : MonoBehaviour
     [SerializeField]
     private UnityEvent partner_seen;
 
+
+    //partner data
+
+    private Vector2 velocity;
+
     // *********************************************************************
 
 
@@ -59,9 +62,15 @@ public class PartnerController : MonoBehaviour
     // FIXED UPDATE ========================================================
     void Update()
     {
+        velocity = rb.velocity;
+
         //TODO:
         //check for what state to be in
-
+        CheckFlip();
+        CheckWalk();
+        CheckJump();
+        CheckFall();
+        CheckIdle();
 
         //set state
 
@@ -136,6 +145,69 @@ public class PartnerController : MonoBehaviour
 
 
     ////////////////////////////////////////////////////////////////////////
+    // CHECK FLIP ==========================================================
+    void CheckFlip()
+    {
+        if (velocity.x >= 0.05f)
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        }
+        if (velocity.x <= -0.05f)
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // CHECK WALK ==========================================================
+    void CheckWalk()
+    {
+        if ((velocity.x > 0.2f || velocity.x < -0.2f) && velocity.y < 0.2f && velocity.y > -0.2f)
+        {
+            state_next = PartnerStates.cWalk;
+        }
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // CHECK JUMP ==========================================================
+    void CheckJump()
+    {
+        if (velocity.y > 0.2f && velocity.y != 0.0f)
+        {
+            state_next = PartnerStates.cJump;
+
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // CHECK FALL ==========================================================
+    void CheckFall()
+    {
+        if (velocity.y < -0.2f && velocity.y != 0.0f)
+        {
+            state_next = PartnerStates.cFall;
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // CHECK IDLE ==========================================================
+    void CheckIdle()
+    {
+        if (velocity.x == 0.0f && velocity.y == 0.0f)
+        {
+            state_next = PartnerStates.cIdle;
+        }
+    }
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////
     // STATE MACHINE ACTIONS ============================================================
 
 
@@ -152,7 +224,7 @@ public class PartnerController : MonoBehaviour
     private void do_walk()
     {
         //if not walking anymore
-        if (dir.x == 0.0f)
+        if ((velocity.x < 0.5f && velocity.x > -0.5f) && velocity.y < 0.5f && velocity.y > -0.5f)
         {
             state_next = PartnerStates.cIdle;
             return;
@@ -194,10 +266,6 @@ public class PartnerController : MonoBehaviour
             //set animation state to falling
             partner_falling.Invoke();
 
-        }
-        else if (dir.x == 0.0f)
-        {
-            state_next = PartnerStates.cIdle;
         }
         else
         {

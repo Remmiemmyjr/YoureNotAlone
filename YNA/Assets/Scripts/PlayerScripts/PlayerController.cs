@@ -247,10 +247,6 @@ public class PlayerController : MonoBehaviour
             player_falling.Invoke();
 
         }
-        else if (dir.x == 0.0f)
-        {
-            state_next = PlayerStates.cIdle;
-        }
         else
         {
             state_next = PlayerStates.cWalk;
