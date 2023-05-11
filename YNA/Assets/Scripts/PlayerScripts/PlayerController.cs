@@ -67,7 +67,6 @@ public class PlayerController : MonoBehaviour
     public UnityEvent player_dead;
     [SerializeField]  
     public UnityEvent player_seen;
-
     // *********************************************************************
 
 

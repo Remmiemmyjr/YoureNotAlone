@@ -4,12 +4,9 @@
 // Author/s: Emmy Berg
 //           K Preston
 //
-// Desc: Controls the Eyes three states
+// Desc: Controls the Eyes states
 //
-// Notes:
-//  + Holy shit we need more helper functions lol
-//
-// Last Edit: 5/3/2023
+// Last Edit: 5/11/2023
 //
 //*************************************************
 

@@ -1,3 +1,15 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: EyeEffects.cs
+// Author/s: Emmy Berg
+//
+// Desc: Controls post processing / special effects
+//       for the eye states
+//
+// Last Edit: 5/11/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,17 +18,11 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using Cinemachine;
 
-enum VFX
-{
-    Bloom,
-    Vignette,
-    ChromaticAberration,
-    FilmGrain,
-    LiftGammaGain
-}
 
 public class EyeEffects : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     ActivateEyes eyeController;
     CinemachineImpulseSource impulse;
 
@@ -53,10 +59,11 @@ public class EyeEffects : MonoBehaviour
     float grainGoalVal = 0.875f;
     [SerializeField]
     float gammaGoalVal = 0.975f;
+    // *********************************************************************
 
-    delegate void effect(float x);
 
-
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
     void Awake()
     {
         impulse = GetComponent<CinemachineImpulseSource>();
@@ -78,12 +85,17 @@ public class EyeEffects : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         SleepFX();
     }
 
 
+    ////////////////////////////////////////////////////////////////////////
+    // UPDATE ==============================================================
     void Update()
     {
         switch(eyeController.status)
@@ -108,6 +120,10 @@ public class EyeEffects : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // SLEEP FX ============================================================
+    // Special effects for when eye is in "sleeping state"
     void SleepFX()
     {
         bloom.dirtIntensity.Override(bloomStartVal);
@@ -121,13 +137,21 @@ public class EyeEffects : MonoBehaviour
         canShake = true;
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // GO TO SLEEP FX ======================================================
+    // Special effects for when eye transitions back to sleep from active
     void GoToSleepFX()
     {
-        StartCoroutine(NewLerp(bloom.dirtIntensity, bloomGoalVal, bloomStartVal, 0.25f));
-        StartCoroutine(NewLerp(chromatic.intensity, chromaticGoalVal, chromaticStartVal, 0.25f));
-        StartCoroutine(NewLerp(vignette.intensity, vignetteGoalVal, vignetteStartVal, 0.025f));
-        StartCoroutine(NewLerp(liftGammaGain.lift, gammaGoalVal, 0, 0.25f));
-        StartCoroutine(NewLerp(liftGammaGain.gain, gammaGoalVal, 0, 0.25f));
+        if (inState == false)
+        {
+            inState = true;
+            StartCoroutine(Lerp(bloom.dirtIntensity, bloomGoalVal, bloomStartVal, 0.25f));
+            StartCoroutine(Lerp(chromatic.intensity, chromaticGoalVal, chromaticStartVal, 0.25f));
+            StartCoroutine(Lerp(vignette.intensity, vignetteGoalVal, vignetteStartVal, 0.025f));
+            StartCoroutine(Lerp(liftGammaGain.lift, gammaGoalVal, 0, 0.25f));
+            StartCoroutine(Lerp(liftGammaGain.gain, gammaGoalVal, 0, 0.25f));
+        }
 
         if (canShake == false)
         {
@@ -136,39 +160,48 @@ public class EyeEffects : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // WAKING FX ===========================================================
+    // Special effects for when eye is beginning to wake
     void WakingFX()
     {
         if (inState == false)
         {
             inState = true;
-            //StartCoroutine(Lerp(VFX.ChromaticAberration, chromaticStartVal, chromaticGoalVal, eyeController.wakingTime, 1000));
-            //StartCoroutine(Lerp(VFX.Vignette, vignetteStartVal, vignetteGoalVal, eyeController.wakingTime, 7500));
-            //StartCoroutine(Lerp(VFX.Bloom, bloomStartVal, bloomGoalVal, eyeController.wakingTime, 5000));
-            //StartCoroutine(Lerp(VFX.LiftGammaGain, 0, gammaGoalVal, eyeController.wakingTime, 5000));
 
-            StartCoroutine(NewLerp(chromatic.intensity, chromaticStartVal, chromaticGoalVal, eyeController.wakingTime));
-            StartCoroutine(NewLerp(vignette.intensity, vignetteStartVal, vignetteGoalVal, eyeController.wakingTime));
-            StartCoroutine(NewLerp(bloom.dirtIntensity, bloomStartVal, bloomGoalVal, eyeController.wakingTime));
-            StartCoroutine(NewLerp(liftGammaGain.lift, 0, gammaGoalVal, eyeController.wakingTime));
-            StartCoroutine(NewLerp(liftGammaGain.gain, 0, gammaGoalVal, eyeController.wakingTime));
+            StartCoroutine(Lerp(chromatic.intensity, chromaticStartVal, chromaticGoalVal, eyeController.wakingTime));
+            StartCoroutine(Lerp(vignette.intensity, vignetteStartVal, vignetteGoalVal, eyeController.wakingTime));
+            StartCoroutine(Lerp(bloom.dirtIntensity, bloomStartVal, bloomGoalVal, eyeController.wakingTime));
+            StartCoroutine(Lerp(liftGammaGain.lift, 0, gammaGoalVal, eyeController.wakingTime));
+            StartCoroutine(Lerp(liftGammaGain.gain, 0, gammaGoalVal, eyeController.wakingTime));
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // ACTIVE FX ===========================================================
+    // Special effects for when eye is currently active
     void ActiveFX()
     {
         StopAllCoroutines();
+        inState = false;
         if(canShake)
         {
             canShake = false;
             CameraShake.manager.Shake(impulse);
         }    
-        // put in newlerp
+        // TODO: put in lerp function
         chromatic.intensity.Override(0.85f);
         bloom.dirtIntensity.Override(bloomGoalVal);
         vignette.intensity.Override(vignetteGoalVal);
         goToSleep = true;
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // SEEN FX =============================================================
+    // Special effects for when eye has seen player
     void SeenFX()
     {
         CameraShake.manager.Shake(impulse);
@@ -177,44 +210,13 @@ public class EyeEffects : MonoBehaviour
         bloom.dirtIntensity.Override(bloomGoalVal + 8.5f);
     }
 
-    //IEnumerator Lerp(VFX type, float start, float end, float time, float multiplier)
-    //{
-    //    float timeElapsed = 0;
 
-    //    while(timeElapsed < time)
-    //    {
-    //        float valueToLerp = Mathf.Lerp(start, end, timeElapsed / time);
-
-    //        switch(type)
-    //        {
-    //            case VFX.Bloom:
-    //                bloom.dirtIntensity.Override(valueToLerp * 2f);
-    //                break;
-    //            case VFX.Vignette:
-    //                vignette.intensity.Override(valueToLerp * 1.05f);
-    //                break;
-    //            case VFX.ChromaticAberration:
-    //                chromatic.intensity.Override(valueToLerp);
-    //                break;
-    //            case VFX.FilmGrain:
-    //                filmGrain.intensity.Override(valueToLerp);
-    //                break;
-    //            case VFX.LiftGammaGain:
-    //                liftGammaGain.lift.Override(new Vector4(0, 0, 0, -valueToLerp * 0.025f));
-    //                liftGammaGain.gain.Override(new Vector4(0, 0, 0, -valueToLerp * 0.025f));
-    //                Debug.Log(valueToLerp);
-    //                break;
-    //        }
-
-    //        timeElapsed += Time.deltaTime;
-
-    //        yield return new WaitForSeconds(time/multiplier);
-    //    }
-
-    //    //valueToLerp = end;
-    //}
-
-    IEnumerator NewLerp(object param, float start, float end, float time)
+    ////////////////////////////////////////////////////////////////////////
+    // LERP ================================================================
+    // Interpolates [param] from [start] to [end] val, within the duration
+    // of [time] seconds.
+    // [param] should either be a float or vec4 parameter
+    IEnumerator Lerp(object param, float start, float end, float time)
     {
         float timeElapsed = 0;
         float timeDelta = time/200;
@@ -238,7 +240,5 @@ public class EyeEffects : MonoBehaviour
 
             yield return new WaitForSeconds(timeDelta);
         }
-
-        //valueToLerp = end;
     }
 }

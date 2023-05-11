@@ -1,3 +1,14 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: CameraShake.cs
+// Author/s: Emmy Berg
+//
+// Desc: Manager for camera shake impulse
+//
+// Last Edit: 5/11/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -5,10 +16,15 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     public static CameraShake manager;
+    // *********************************************************************
 
-    // Start is called before the first frame update
-    void Start()
+
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
+    void Awake()
     {
         if(manager == null)
         {
@@ -16,7 +32,10 @@ public class CameraShake : MonoBehaviour
         }   
     }
 
-    // Update is called once per frame
+
+    ////////////////////////////////////////////////////////////////////////
+    // SHAKE ===============================================================
+    // Perform the *shake*
     public void Shake(CinemachineImpulseSource source)
     {
         source.GenerateImpulseWithForce(0.1f);
