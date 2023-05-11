@@ -32,6 +32,8 @@ public class ActivateEyes : MonoBehaviour
     // VARIABLES ===========================================================
     [HideInInspector]
     public EyeStates status;
+    [HideInInspector]
+    public EyeStates prevStatus;
     
     GameObject Player;
     GameObject Partner;
@@ -46,12 +48,15 @@ public class ActivateEyes : MonoBehaviour
 
     public float min = 5f;
     public float max = 10f;
+    public float minSeek = 4f;
+    public float maxSeek = 6.5f;
     public float wakingTime = 3.5f;
     public float gracePeriod;
+    
     float timeInSight;
-
     float maxTime;
     float currTime;
+    float seekTime;
 
     bool playerSpotted = false;
 
@@ -105,6 +110,7 @@ public class ActivateEyes : MonoBehaviour
         if (currTime <= wakingTime && currTime > 0)
         {
             BeginWake();
+            prevStatus = status;
             status = EyeStates.WAKING;
         }
 
@@ -112,6 +118,7 @@ public class ActivateEyes : MonoBehaviour
         if (currTime <= 0)
         {
             Activate();
+            prevStatus = status;
             status = EyeStates.ACTIVE;
         }
 
@@ -215,6 +222,7 @@ public class ActivateEyes : MonoBehaviour
             profile.SetStatusActive();
         }
 
+        prevStatus = status;
         StartCoroutine(LookAround());
     }
 
@@ -277,22 +285,24 @@ public class ActivateEyes : MonoBehaviour
     // Pick a new random sleep time-period
     void SelectNewTime()
     {
+        seekTime = Random.Range(minSeek, maxSeek);
         maxTime = Random.Range(min, max);
         currTime = maxTime;
     }
 
 
     ////////////////////////////////////////////////////////////////////////
-    // SELECT NEW TIME =====================================================
-    // Pick a new random sleep time-period
+    // LOOK AROUND =========================================================
+    // Loop for specified time duration
     IEnumerator LookAround()
     {
-        yield return new WaitForSeconds(3.5f);
-
-        while(playerSpotted)
+        while (playerSpotted)
         {
             yield return new WaitForSeconds(1.5f);
         }
+
+        yield return new WaitForSeconds(seekTime);
+
         SelectNewTime();
     }
 }
