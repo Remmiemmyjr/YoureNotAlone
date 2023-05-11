@@ -15,7 +15,10 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -23,6 +26,20 @@ public class PlayerController : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
     Rigidbody2D rb;
+    public enum PlayerStates
+    {
+        cInvalid = -1,
+        cIdle = 0,
+        cJump,
+        cWalk,
+        cFall,
+        cHiding,
+        cSeen,
+        cDead
+    }
+
+    private PlayerStates state_curr;
+    private PlayerStates state_next;
 
     [HideInInspector]
     public Vector2 dir;
@@ -34,6 +51,23 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight = 16f;
     public float smoothDamp = 5f;
     public float smoothRange = 0.05f;
+
+
+    [SerializeField]
+    public UnityEvent player_idle;
+    [SerializeField]  
+    public UnityEvent player_walk;
+    [SerializeField]  
+    public UnityEvent player_jump;
+    [SerializeField]  
+    public UnityEvent player_falling;
+    [SerializeField]  
+    public UnityEvent player_hide;
+    [SerializeField]  
+    public UnityEvent player_dead;
+    [SerializeField]  
+    public UnityEvent player_seen;
+
     // *********************************************************************
 
 
@@ -49,6 +83,57 @@ public class PlayerController : MonoBehaviour
     // FIXED UPDATE ========================================================
     void FixedUpdate()
     {
+        state_curr = state_next;
+        //player state machine
+
+        switch (state_curr)
+        {
+            // The player is idle
+            case PlayerStates.cIdle:
+            {
+                do_idle();
+                break;
+            }
+            //the player is walking
+            case PlayerStates.cWalk:
+            {
+                do_walk();
+                break;
+            }
+            //the player is in an upward motion
+            case PlayerStates.cJump:
+            {
+                do_jump();
+                break;
+            }
+            //the player is moving downward
+            case PlayerStates.cFall:
+            {
+                do_fall();
+                break;
+            }
+            //the player is hiding behind an object
+            case PlayerStates.cHiding:
+            {
+                do_hide();
+                break;
+            }
+            //the player has been spotted
+            case PlayerStates.cSeen:
+            {
+                do_seen();
+                break;
+            }
+            //the player is dead
+            case PlayerStates.cDead:
+            {
+                do_dead();
+                break;
+            }
+        }
+
+
+        //movement stuff
         if (Mathf.Abs(dir.x) > 0.65)
         {
             rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
@@ -71,6 +156,9 @@ public class PlayerController : MonoBehaviour
     {
         dir.x = ctx.ReadValue<float>();
         Debug.Log(dir.x);
+        //set the state machine to walk
+        state_next = PlayerStates.cWalk;
+
     }
 
 
@@ -81,7 +169,12 @@ public class PlayerController : MonoBehaviour
         if (ctx.performed && IsGrounded())
         {
             rb.velocity = Vector2.up * jumpHeight;
+
+            //set the state machine to jump
+            state_next = PlayerStates.cJump;
         }
+
+
     }
 
 
@@ -90,6 +183,109 @@ public class PlayerController : MonoBehaviour
     public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
+    }
+
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // STATE MACHINE ACTIONS ============================================================
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS IDLING =========================================================
+    private void do_idle()
+    {
+        //set animation state to idle
+        player_idle.Invoke();
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS WALKING =========================================================
+    private void do_walk()
+    {
+        //if not walking anymore
+        if (dir.x == 0.0f)
+        {
+            state_next = PlayerStates.cIdle;
+            return;
+        }
+        //set walking animation
+        player_walk.Invoke();
+
+        //call wwise walking event
+     
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS JUMPING =========================================================
+    private void do_jump()
+    {
+        //set jump animation based on y velocity
+        if (rb.velocity.y >= 0.0f)
+        {
+            player_jump.Invoke();
+
+        }
+        //if y velocity is downward set state to falling and not grounded
+        else
+        {
+            state_next = PlayerStates.cFall;
+        }
+
+
+        //if just jumped post jump wwise event
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS FALLING =========================================================
+    private void do_fall()
+    {
+        if (!IsGrounded())
+        {
+            //set animation state to falling
+            player_falling.Invoke();
+
+        }
+        //else if (dir.x == 0.0f)
+        //{
+        //    state_next = PlayerStates.cIdle;
+        //}
+        else
+        {
+            state_next = PlayerStates.cWalk;
+        }
+
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS HIDING =========================================================
+    private void do_hide()
+    {
+        player_hide.Invoke();
+
+        //set animation state to hiding
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS SEEN =========================================================
+    private void do_seen()
+    {
+        player_seen.Invoke();
+
+        //set animation state to seen
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS DEAD =========================================================
+    private void do_dead()
+    {
+
+        //set dead animation state
+        player_dead.Invoke();
+
+        //trigger game over events
     }
 }
 

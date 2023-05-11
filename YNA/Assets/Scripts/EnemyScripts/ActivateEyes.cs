@@ -22,7 +22,8 @@ public enum EyeStates
 {
     SLEEPING,
     WAKING,
-    ACTIVE
+    ACTIVE,
+    SEEN
 }
 
 public class ActivateEyes : MonoBehaviour
@@ -96,22 +97,22 @@ public class ActivateEyes : MonoBehaviour
         // Closed
         if (currTime >= 0)
         {
-            status = EyeStates.SLEEPING;
             Sleep();
+            status = EyeStates.SLEEPING;
         }
 
         // Halfway
         if (currTime <= wakingTime && currTime > 0)
         {
-            status = EyeStates.WAKING;
             BeginWake();
+            status = EyeStates.WAKING;
         }
 
         // Open
         if (currTime <= 0)
         {
-            status = EyeStates.ACTIVE;
             Activate();
+            status = EyeStates.ACTIVE;
         }
 
         // KillCheck if the eyes are open.
@@ -226,8 +227,9 @@ public class ActivateEyes : MonoBehaviour
         // If the player or partner are visible...
         if (Player.GetComponent<Stats>().isHidden == false || Partner.GetComponent<Stats>().isHidden == false)
         {
+            status = EyeStates.SEEN;
             // If they've just been spotted...
-            if(!playerSpotted)
+            if (!playerSpotted)
             {
                 // Play ifoundyou
                 ifoundyou.Play();
