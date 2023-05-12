@@ -52,13 +52,13 @@ public class EyeEffects : MonoBehaviour
     [SerializeField]
     float bloomGoalVal = 5.3f;
     [SerializeField]
-    float vignetteGoalVal = 0.6f;
+    float vignetteGoalVal = 0.675f;
     [SerializeField]
     float chromaticGoalVal = 0.55f;
     [SerializeField]
     float grainGoalVal = 0.875f;
     [SerializeField]
-    float gammaGoalVal = 0.975f;
+    float gammaGoalVal = 0.025f;
     // *********************************************************************
 
 
