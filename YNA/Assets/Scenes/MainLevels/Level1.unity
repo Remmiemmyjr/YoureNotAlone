@@ -9272,7 +9272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1767239973}
   m_LocalRotation: {x: -9.494824e-16, y: -0.0000000234804, z: -2.2294227e-23, w: 1}
-  m_LocalPosition: {x: 0.7325897, y: -1.0844936, z: -10}
+  m_LocalPosition: {x: 2.48007, y: -1.0904036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9393,7 +9393,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.77707, y: 1}
+    m_SensorSize: {x: 2.1265702, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -10039,8 +10039,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4448976923580171169, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
+      propertyPath: playInterval
+      value: 0.2915
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448976923580171169, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
+      propertyPath: _animationManager
+      value: 
+      objectReference: {fileID: 2030767263}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
+--- !u!114 &2030767263 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4514524465222421462, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
+  m_PrefabInstance: {fileID: 2030767262}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 856292c9d52fa704f864f60151eeccb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2112021891
 GameObject:
   m_ObjectHideFlags: 0
