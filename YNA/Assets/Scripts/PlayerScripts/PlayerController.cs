@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
     public float smoothDamp = 5f;
     public float smoothRange = 0.05f;
 
-
     [SerializeField]
     private UnityEvent player_idle;
     [SerializeField]
@@ -67,7 +66,6 @@ public class PlayerController : MonoBehaviour
     private UnityEvent player_seen;
     [SerializeField]
     private UnityEvent player_dead;
-
 
     // *********************************************************************
 
@@ -84,7 +82,6 @@ public class PlayerController : MonoBehaviour
     // FIXED UPDATE ========================================================
     void FixedUpdate()
     {
-
         state_curr = state_next;
         //player state machine
 
@@ -187,8 +184,6 @@ public class PlayerController : MonoBehaviour
     {
         return Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
     }
-
-
 
     ////////////////////////////////////////////////////////////////////////
     // STATE MACHINE ACTIONS ============================================================

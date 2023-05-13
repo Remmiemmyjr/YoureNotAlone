@@ -4,12 +4,9 @@
 // Author/s: Emmy Berg
 //           K Preston
 //
-// Desc: Controls the Eyes three states
+// Desc: Controls the Eyes states
 //
-// Notes:
-//  + Holy shit we need more helper functions lol
-//
-// Last Edit: 5/3/2023
+// Last Edit: 5/11/2023
 //
 //*************************************************
 
@@ -22,14 +19,18 @@ public enum EyeStates
 {
     SLEEPING,
     WAKING,
-    ACTIVE
+    ACTIVE,
+    SEEN
 }
 
 public class ActivateEyes : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
-    EyeStates status;
+    [HideInInspector]
+    public EyeStates status;
+    [HideInInspector]
+    public EyeStates prevStatus;
     
     GameObject Player;
     GameObject Partner;
@@ -44,11 +45,15 @@ public class ActivateEyes : MonoBehaviour
 
     public float min = 5f;
     public float max = 10f;
+    public float minSeek = 4f;
+    public float maxSeek = 6.5f;
+    public float wakingTime = 3.5f;
     public float gracePeriod;
+    
     float timeInSight;
-
     float maxTime;
     float currTime;
+    float seekTime;
 
     bool playerSpotted = false;
 
@@ -86,7 +91,6 @@ public class ActivateEyes : MonoBehaviour
         }
     }
 
-
     ////////////////////////////////////////////////////////////////////////
     // UPDATE ==============================================================
     void Update()
@@ -94,24 +98,25 @@ public class ActivateEyes : MonoBehaviour
         // Closed
         if (currTime >= 0)
         {
-            status = EyeStates.SLEEPING;
             Sleep();
+            status = EyeStates.SLEEPING;
         }
 
         // Halfway
-        if (currTime <= 3.5f && currTime > 0)
+        if (currTime <= wakingTime && currTime > 0)
         {
-            status = EyeStates.WAKING;
             BeginWake();
+            prevStatus = status;
+            status = EyeStates.WAKING;
         }
 
         // Open
         if (currTime <= 0)
         {
-            status = EyeStates.ACTIVE;
             Activate();
+            prevStatus = status;
+            status = EyeStates.ACTIVE;
         }
-
         // KillCheck if the eyes are open.
         if (timeToHide)
         {
@@ -212,6 +217,7 @@ public class ActivateEyes : MonoBehaviour
             profile.SetStatusActive();
         }
 
+        prevStatus = status;
         StartCoroutine(LookAround());
     }
 
@@ -224,8 +230,9 @@ public class ActivateEyes : MonoBehaviour
         // If the player or partner are visible...
         if (Player.GetComponent<Stats>().isHidden == false || Partner.GetComponent<Stats>().isHidden == false)
         {
+            status = EyeStates.SEEN;
             // If they've just been spotted...
-            if(!playerSpotted)
+            if (!playerSpotted)
             {
                 // Play ifoundyou
                 ifoundyou.Play();
@@ -273,22 +280,24 @@ public class ActivateEyes : MonoBehaviour
     // Pick a new random sleep time-period
     void SelectNewTime()
     {
+        seekTime = Random.Range(minSeek, maxSeek);
         maxTime = Random.Range(min, max);
         currTime = maxTime;
     }
 
 
     ////////////////////////////////////////////////////////////////////////
-    // SELECT NEW TIME =====================================================
-    // Pick a new random sleep time-period
+    // LOOK AROUND =========================================================
+    // Loop for specified time duration
     IEnumerator LookAround()
     {
-        yield return new WaitForSeconds(3.5f);
-
-        while(playerSpotted)
+        while (playerSpotted)
         {
             yield return new WaitForSeconds(1.5f);
         }
+
+        yield return new WaitForSeconds(seekTime);
+
         SelectNewTime();
     }
 }
