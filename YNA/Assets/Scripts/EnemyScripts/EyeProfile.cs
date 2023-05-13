@@ -27,8 +27,9 @@ public class EyeProfile : MonoBehaviour
 
     void Awake()
     {
-        manager = GameObject.FindGameObjectWithTag("EyeManager")?.GetComponent<ActivateEyes>();
 
+        manager = GameObject.FindGameObjectWithTag("EyeManager")?.GetComponent<ActivateEyes>();
+        
         eyeAnim = GetComponent<Animator>();
         eyeRenderer = GetComponent<SpriteRenderer>();
     }

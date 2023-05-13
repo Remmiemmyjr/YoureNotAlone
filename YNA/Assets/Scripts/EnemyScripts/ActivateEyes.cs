@@ -91,7 +91,6 @@ public class ActivateEyes : MonoBehaviour
         }
     }
 
-
     ////////////////////////////////////////////////////////////////////////
     // UPDATE ==============================================================
     void Update()
@@ -118,7 +117,6 @@ public class ActivateEyes : MonoBehaviour
             prevStatus = status;
             status = EyeStates.ACTIVE;
         }
-
         // KillCheck if the eyes are open.
         if (timeToHide)
         {
