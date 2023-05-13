@@ -72,9 +72,9 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Wwise
-*.cache
-*.akd
-*.prof
-*.wsettings
-*.validationcache
-*.wem
+WWiseProject/.cache/
+WWiseProject/*.prof
+WwiseProject/*_WwiseProject.*.validationcache
+WwiseProject/*_WwiseProject.*.wsettings
+WwiseProject/**/*.akd
+Assets/Wwise/Editor/ProjectData/AkWwiseProjectData.asset*
