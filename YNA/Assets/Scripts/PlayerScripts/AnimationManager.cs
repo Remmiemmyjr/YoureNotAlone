@@ -9,9 +9,13 @@
 //
 //*************************************************
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AnimationManager : MonoBehaviour
 {
@@ -22,12 +26,11 @@ public class AnimationManager : MonoBehaviour
         Player, Partner
     }
 
-    public Character currChar;
+    private Character currChar;
 
-    Animator anim;
+    private Animator animator;
 
-    float velX;
-    float velY;
+
     // *********************************************************************
 
 
@@ -35,7 +38,7 @@ public class AnimationManager : MonoBehaviour
     // START ===============================================================
     void Start()
     {
-        anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
         if(gameObject.tag == "Player")
         {
@@ -52,26 +55,23 @@ public class AnimationManager : MonoBehaviour
     // UPDATE ==============================================================
     void Update()
     {
-        velX = gameObject.GetComponent<Rigidbody2D>().velocity.x;
-        velY = gameObject.GetComponent<Rigidbody2D>().velocity.y;
-        
-        CheckFlip();
-        CheckJump();
-        CheckFall();
-        CheckWalk();
-        CheckIdle();
+
     }
 
 
     ////////////////////////////////////////////////////////////////////////
     // CHECK FLIP ==========================================================
-    void CheckFlip()
+    void SetFlip()
     {
-        if (velX >= 0.2)
+        float velX = gameObject.GetComponent<Rigidbody2D>().velocity.x;
+
+        //check if moving left
+        if (velX >= 0.05f)
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
-        if (velX <= -0.2)
+        //check if moving right
+        if (velX <= -0.05f)
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
@@ -80,46 +80,63 @@ public class AnimationManager : MonoBehaviour
     }
 
     ////////////////////////////////////////////////////////////////////////
-    // CHECK WALK ==========================================================
-    void CheckWalk()
+    // SET STATE WALK ==========================================================
+    public void SetStateWalk()
     {
-        if((velX > 1 || velX < -1) && velY < 1 && velY > -1)
-        {
-            anim.Play(currChar + "_Walk");
-        }
+        //flip to face the correct direction
+        SetFlip();
+        animator.Play(currChar + "_Walk");
 
     }
 
     ////////////////////////////////////////////////////////////////////////
-    // CHECK JUMP ==========================================================
-    void CheckJump()
+    // SET STATE JUMP ==========================================================
+    public void SetStateJump()
     {
-        if(velY > 1 && velY != 0)
-        {
-            anim.Play(currChar + "_Jump");
-        }
+        animator.Play(currChar + "_Jump");
     }
 
 
     ////////////////////////////////////////////////////////////////////////
-    // CHECK FALL ==========================================================
-    void CheckFall()
+    // SET STATE FALL ==========================================================
+    public void SetStateFall()
     {
-        if(velY < -1 && velY != 0)
-        {
-            anim.Play(currChar + "_Fall");
-        }
+        animator.Play(currChar + "_Fall");
     }
 
 
     ////////////////////////////////////////////////////////////////////////
     // CHECK IDLE ==========================================================
-    void CheckIdle()
+    public void SetStateIdle()
     {
-        if(velX == 0 && velY == 0)
-        {
-            anim.Play(currChar + "_Idle");
-        }
+        animator.Play(currChar + "_Idle");
     }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // SET STATE HIDE ======================================================
+    public void SetStateHide()
+    {
+        animator.Play(currChar + "_Hide");
+
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // SET STATE SEEN ======================================================
+    public void SetStateSeen()
+    {
+        animator.Play(currChar + "_Seen");
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // SET STATE DEAD =======================================================
+    public void SetStateDead()
+    {
+        animator.Play(currChar + "_Dead");
+
+    }
+
 
 }
