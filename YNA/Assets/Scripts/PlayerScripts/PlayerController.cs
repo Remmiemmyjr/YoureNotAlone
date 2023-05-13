@@ -64,9 +64,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private UnityEvent player_hide;
     [SerializeField]
-    private UnityEvent player_dead;
-    [SerializeField]
     private UnityEvent player_seen;
+    [SerializeField]
+    private UnityEvent player_dead;
+
 
     // *********************************************************************
 
@@ -83,6 +84,7 @@ public class PlayerController : MonoBehaviour
     // FIXED UPDATE ========================================================
     void FixedUpdate()
     {
+
         state_curr = state_next;
         //player state machine
 
@@ -132,6 +134,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        CheckHide();
 
         //movement stuff
         if (Mathf.Abs(dir.x) > 0.65)
@@ -195,7 +198,12 @@ public class PlayerController : MonoBehaviour
     // IS IDLING =========================================================
     private void do_idle()
     {
-        //set animation state to idle
+        //will take care of state change
+        //also checks for vertical movement
+        if(check_velocity_y())
+        {
+            return;
+        }
         player_idle.Invoke();
     }
 
@@ -209,11 +217,13 @@ public class PlayerController : MonoBehaviour
             state_next = PlayerStates.cIdle;
             return;
         }
+        //will take care of state change
+        else if(check_velocity_y())
+        {
+            return;
+        }
         //set walking animation
         player_walk.Invoke();
-
-        //call wwise walking event
-     
 
     }
 
@@ -221,20 +231,10 @@ public class PlayerController : MonoBehaviour
     // IS JUMPING =========================================================
     private void do_jump()
     {
-        //set jump animation based on y velocity
-        if (rb.velocity.y >= 0.0f)
-        {
-            player_jump.Invoke();
+        //checks for vertical movement
+        check_velocity_y();
+        player_jump.Invoke();
 
-        }
-        //if y velocity is downward set state to falling and not grounded
-        else
-        {
-            state_next = PlayerStates.cFall;
-        }
-
-
-        //if just jumped post jump wwise event
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -252,7 +252,6 @@ public class PlayerController : MonoBehaviour
             state_next = PlayerStates.cWalk;
         }
 
-
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -261,7 +260,6 @@ public class PlayerController : MonoBehaviour
     {
         player_hide.Invoke();
 
-        //set animation state to hiding
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -269,18 +267,48 @@ public class PlayerController : MonoBehaviour
     private void do_seen()
     {
         player_seen.Invoke();
-
-        //set animation state to seen
     }
 
     ////////////////////////////////////////////////////////////////////////
     // IS DEAD =========================================================
     private void do_dead()
     {
-
-        //set dead animation state
         player_dead.Invoke();
 
-        //trigger game over events
     }
+
+    ////////////////////////////////////////////////////////////////////////
+    // IS DEAD =========================================================
+    /// <summary>
+    /// Checks if the player is moving up or down for state machine
+    /// </summary>
+    private bool check_velocity_y()
+    {
+        //check for falling
+        if(rb.velocity.y <= -0.02f)
+        {
+            state_next = PlayerStates.cFall;
+            return true;
+        }
+        //check jumping
+        else if(rb.velocity.y >= 0.02f)
+        {
+            state_next = PlayerStates.cJump;
+            return true;
+        }
+
+        return false;
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // CHECK HIDING =========================================================
+    void CheckHide()
+    {
+        if(gameObject.GetComponent<Stats>().isHidden == true)
+        {
+            state_next = PlayerStates.cHiding;
+        }
+
+    }
+
 }

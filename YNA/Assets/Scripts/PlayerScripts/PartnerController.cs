@@ -38,9 +38,9 @@ public class PartnerController : MonoBehaviour
     [SerializeField]
     private UnityEvent partner_hide;
     [SerializeField]
-    private UnityEvent partner_dead;
-    [SerializeField]
     private UnityEvent partner_seen;
+    [SerializeField]
+    private UnityEvent partner_dead;
 
 
     //partner data
@@ -70,7 +70,10 @@ public class PartnerController : MonoBehaviour
         CheckWalk();
         CheckJump();
         CheckFall();
+        CheckHide();
+        CheckSeen();
         CheckIdle();
+
 
         //set state
 
@@ -204,8 +207,28 @@ public class PartnerController : MonoBehaviour
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////
+    // CHECK HIDING =========================================================
+    void CheckHide()
+    {
+        if(gameObject.GetComponent<Stats>().isHidden == true)
+        {
+            state_next = PartnerStates.cHiding;
+        }
 
+    }
 
+    ////////////////////////////////////////////////////////////////////////
+    // CHECK SEEN =========================================================
+    void CheckSeen()
+    {
+        //change to seen check
+        if(gameObject.GetComponent<Stats>().isHidden == true)
+        {
+            state_next = PartnerStates.cHiding;
+        }
+
+    }
 
     ////////////////////////////////////////////////////////////////////////
     // STATE MACHINE ACTIONS ============================================================
@@ -303,4 +326,8 @@ public class PartnerController : MonoBehaviour
 
         //trigger game over events
     }
+
+    ////////////////////////////////////////////////////////////////////////
+    // CHECK HIDING =========================================================
+
 }
