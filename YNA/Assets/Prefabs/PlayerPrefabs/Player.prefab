@@ -86,7 +86,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1424639959, guid: a1ea9aabee4ff8340bc96ba93d57a67d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -271,6 +271,27 @@ MonoBehaviour:
   jumpHeight: 16
   smoothDamp: 5
   smoothRange: 0.05
+  player_idle:
+    m_PersistentCalls:
+      m_Calls: []
+  player_walk:
+    m_PersistentCalls:
+      m_Calls: []
+  player_jump:
+    m_PersistentCalls:
+      m_Calls: []
+  player_falling:
+    m_PersistentCalls:
+      m_Calls: []
+  player_hide:
+    m_PersistentCalls:
+      m_Calls: []
+  player_dead:
+    m_PersistentCalls:
+      m_Calls: []
+  player_seen:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &783348941237856857
 MonoBehaviour:
   m_ObjectHideFlags: 0
