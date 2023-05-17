@@ -14,6 +14,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Events;
 
 public enum EyeStates
 {
@@ -66,6 +67,9 @@ public class ActivateEyes : MonoBehaviour
 
     public string iamwatchingMGEP;
     public string iseeyouMGEP;
+
+    [SerializeField]
+    private UnityEvent testEvent;
     // *********************************************************************
 
 

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4357795605739810259}
   - component: {fileID: 5952708553636578492}
+  - component: {fileID: 8765239232310585519}
   - component: {fileID: 1044109434280299743}
   - component: {fileID: 352032475920484813}
   - component: {fileID: 8369172747770462897}
@@ -49,6 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2fb6be96c16c34fae31a150789ccc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
+  prevStatus: 0
   Eyes:
   - {fileID: 0}
   - {fileID: 0}
@@ -59,6 +62,9 @@ MonoBehaviour:
   timeToHide: 0
   min: 8
   max: 20
+  minSeek: 4
+  maxSeek: 6.5
+  wakingTime: 3.5
   gracePeriod: 1.5
   goodmorning: {fileID: 1044109434280299743}
   iamawake: {fileID: 352032475920484813}
@@ -67,6 +73,23 @@ MonoBehaviour:
   iseeyou: {fileID: 598970802078917156}
   iamwatchingMGEP: iamwatchingVolume
   iseeyouMGEP: iseeyouVolume
+  testEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8765239232310585519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3316598071222053609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testnubmb: 0
+  EffectsList: 01000000
 --- !u!82 &1044109434280299743
 AudioSource:
   m_ObjectHideFlags: 0

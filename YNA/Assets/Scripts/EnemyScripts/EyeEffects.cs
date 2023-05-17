@@ -26,6 +26,7 @@ public class EyeEffects : MonoBehaviour
     ActivateEyes eyeController;
     CinemachineImpulseSource impulse;
 
+
     Volume globalVolume;
     VolumeProfile volProf;
     Bloom bloom;
@@ -59,6 +60,8 @@ public class EyeEffects : MonoBehaviour
     float grainGoalVal = 0.875f;
     [SerializeField]
     float gammaGoalVal = 0.025f;
+
+
     // *********************************************************************
 
 
