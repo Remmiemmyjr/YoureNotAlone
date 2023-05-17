@@ -9,18 +9,21 @@ using UnityEngine.Events;
 
 public class CameraFX : MonoBehaviour
 {
-
-
-    public int testnubmb = 0;
-
     public enum FX
     {
         ChromaticAbberation,
-        Vignette
+        Vignette,
+        Bloom,
+        FilmGrain,
     }
+    private bool vignette_toggle = false;
 
-    [SerializeField]
-    public List<FX> EffectsList = new List<FX>();
+    //vignette vars
+    float vignette_start_val = 0.0f;
+    float vignette_goal_val = 0.0f;
+
+    float vignette_lerp_time = 0.0f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +34,7 @@ public class CameraFX : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(vignette_toggle);
     }
 
     public void test()

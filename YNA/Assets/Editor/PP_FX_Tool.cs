@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
+using UnityEditor.UIElements;
 
 [CustomEditor(typeof(CameraFX))]
 public class PP_FX_Tool : Editor
@@ -21,6 +22,9 @@ public class PP_FX_Tool : Editor
 
         VisualTreeAsset visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/PP_FX_Tool.uxml");
         visualTree.CloneTree(PP_FX_Inspector);
+
+        VisualElement inspectorFoldout = PP_FX_Inspector.Q("Default_Inspector");
+        InspectorElement.FillDefaultInspector(inspectorFoldout, serializedObject, this);
 
         /*//checks if list is empty
         if (myBehavior.EffectsList.Count != 0)
