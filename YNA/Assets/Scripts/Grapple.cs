@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Grapple : MonoBehaviour
 {
     GameObject partner;
     LineRenderer line;
     SpringJoint2D target;
+
+    GameObject topSolidMap;
 
     //Vector3 newZPos;
     Vector2 playerLinePos;
@@ -31,6 +34,7 @@ public class Grapple : MonoBehaviour
     void Start()
     {
         partner = GameObject.FindGameObjectWithTag("Partner");
+        topSolidMap = GameObject.FindGameObjectWithTag("TopSolidMap");
 
         line = GetComponent<LineRenderer>();
         target = partner?.GetComponent<SpringJoint2D>();
@@ -153,6 +157,9 @@ public class Grapple : MonoBehaviour
         {
             target.frequency = reelSpeed;
         }
+
+        // Logic for topsolid and partner
+        topSolidMap.GetComponent<PlatformEffector2D>().colliderMask |= (1 << partner.layer);
     }
 
 
@@ -161,5 +168,8 @@ public class Grapple : MonoBehaviour
     {
         Debug.Log("extending");
         target.distance += 0.02f;
+
+        // Logic for topsolid and partner
+        topSolidMap.GetComponent<PlatformEffector2D>().colliderMask &= ~(1 << partner.layer);
     }
 }
