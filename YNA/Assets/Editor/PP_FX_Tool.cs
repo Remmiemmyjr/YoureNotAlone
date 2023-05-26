@@ -9,15 +9,9 @@ using UnityEditor.UIElements;
 [CustomEditor(typeof(CameraFX))]
 public class PP_FX_Tool : Editor
 {
-
-    private bool VignetteDrawerPos = false;
     public override VisualElement CreateInspectorGUI()
     {
         VisualElement PP_FX_Inspector = new VisualElement();
-
-
-
-        CameraFX myBehavior = target as CameraFX;
 
 
         VisualTreeAsset visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/PP_FX_Tool.uxml");
@@ -26,30 +20,27 @@ public class PP_FX_Tool : Editor
         VisualElement inspectorFoldout = PP_FX_Inspector.Q("Default_Inspector");
         InspectorElement.FillDefaultInspector(inspectorFoldout, serializedObject, this);
 
-        /*//checks if list is empty
-        if (myBehavior.EffectsList.Count != 0)
+        /*
+        vignette_groupbox = PP_FX_Inspector.Q("vignette_parameters").Q("unity-content").Q("vignette_groupbox");
+
+        if (myBehavior.GetVignetteToggle() == true)
         {
 
-            //Show Effect values
-            //have each effect section be collapsable
-
-
-            if (myBehavior.EffectsList.Contains(CameraFX.FX.Vignette))
-            {
-                VignetteDrawerPos = EditorGUI.BeginFoldoutHeaderGroup(new Rect(10.0f, 100.0f, 200.0f, 100.0f), VignetteDrawerPos, "Vignette Properties");
-
-                if (VignetteDrawerPos)
-                {
-                    myBehavior.testnubmb = EditorGUILayout.IntField("Damage to Enemy", myBehavior.testnubmb);
-                }
-
-                EditorGUILayout.EndFoldoutHeaderGroup();
-
-            }
-        }*/
-
-
+            vignette_groupbox.visible = true;
+        }
+        else
+        {
+            vignette_groupbox.visible = false;
+        }
+        */
 
         return PP_FX_Inspector;
     }
+
+    public override void OnInspectorGUI()
+    {
+        CameraFX myBehaviour = target as CameraFX;
+
+    }
 }
+

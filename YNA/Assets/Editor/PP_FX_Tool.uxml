@@ -1,23 +1,24 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <Style src="project://database/Assets/Editor/FX_Fields.uss?fileID=7433441132597879392&amp;guid=2bb11a954b5208b40b98611ed9bdfa16&amp;type=3#FX_Fields" />
-    <ui:Foldout text="Base Inspector" name="Default_Inspector" />
-    <ui:Foldout text="Vignette Parameters" name="vignette_Parameters">
+    <ui:Foldout text="Base Inspector" name="Default_Inspector" style="display: none;" />
+    <ui:TextField picking-mode="Ignore" label="Name/Comment" text="Put Use/Comments Here" name="fx_header" multiline="true" tooltip="Just for keeping track of stuff" />
+    <ui:Foldout text="Vignette Parameters" name="vignette_parameters">
         <ui:Toggle label="Enable Vignette" name="vignette_Toggle" binding-path="vignette_toggle" />
-        <ui:GroupBox style="height: 77px; background-color: rgb(75, 75, 75); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px;">
+        <ui:GroupBox name="vignette_groupbox" style="height: 77px; background-color: rgb(75, 75, 75); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px;">
             <uie:FloatField label="Start Value" value="0" name="vignette_start_val" binding-path="vignette_start_val" class="Start_Value" style="min-width: auto; max-width: 70%;" />
             <uie:FloatField label="End Value" value="0" name="vignette_goal_val" binding-path="vignette_goal_val" style="max-width: 70%; height: 18px;" />
             <uie:FloatField label="Transition Time" value="0" name="vignette_lerp_time" binding-path="vignette_lerp_time" style="max-width: 70%;" />
         </ui:GroupBox>
     </ui:Foldout>
-    <ui:Foldout text="Bloom Parameters" name="bloom_Parameters">
+    <ui:Foldout text="Bloom Parameters" name="bloom_parameters">
         <ui:Toggle label="Enable Bloom" name="bloom_Toggle" binding-path="bloom_toggle" />
-        <ui:GroupBox style="height: 77px; background-color: rgb(75, 75, 75); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px;">
+        <ui:GroupBox style="height: 77px; background-color: rgb(75, 75, 75); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; display: flex; visibility: visible; overflow: visible; opacity: 1;">
             <uie:FloatField label="Start Value" value="0" name="chromab_start_val" binding-path="chromab_start_val" style="min-width: auto; max-width: 70%; height: 17px;" />
             <uie:FloatField label="End Value" value="0" name="chromab_goal_val" binding-path="chromab_goal_val" style="max-width: 70%;" />
             <uie:FloatField label="Transition Time" value="0" name="chromab_lerp_time" binding-path="chromab_lerp_time" style="max-width: 70%;" />
         </ui:GroupBox>
     </ui:Foldout>
-    <ui:Foldout text="Chromatic Abberation Parameters" name="chromab_Parameters">
+    <ui:Foldout text="Chromatic Abberation Parameters" name="chromab_parameters">
         <ui:Toggle label="Enable Chromatic Abberation" name="chromab_Toggle" binding-path="chromab_toggle" />
         <ui:GroupBox style="height: 77px; background-color: rgb(75, 75, 75); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px;">
             <uie:FloatField label="Start Value" value="0" name="chromab_start_val" binding-path="chromab_start_val" style="min-width: auto; max-width: 70%; height: 17px;" />
@@ -25,7 +26,7 @@
             <uie:FloatField label="Transition Time" value="0" name="chromab_lerp_time" binding-path="chromab_lerp_time" style="max-width: 70%;" />
         </ui:GroupBox>
     </ui:Foldout>
-    <ui:Foldout text="Film Grain Parameters" name="flmgrn_Parameters">
+    <ui:Foldout text="Film Grain Parameters" name="flmgrn_parameters">
         <ui:Toggle label="Enable Film Grain" name="flmgrn_Toggle" binding-path="flmgrn_toggle" />
         <ui:GroupBox style="height: 77px; background-color: rgb(75, 75, 75); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px;">
             <uie:FloatField label="Start Value" value="0" name="flmgrn_start_val" binding-path="flmgrn_start_val" style="min-width: auto; max-width: 70%; height: 17px;" />

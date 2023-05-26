@@ -235,7 +235,6 @@ public class EyeEffects : MonoBehaviour
                     break;
                 case Vector4Parameter v4p:
                     v4p.Override(new Vector4(0, 0, 0, -valueToLerp));
-                    Debug.Log(valueToLerp);
                     break;
             }
 

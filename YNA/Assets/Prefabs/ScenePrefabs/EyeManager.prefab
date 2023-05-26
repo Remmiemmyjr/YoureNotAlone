@@ -10,12 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4357795605739810259}
   - component: {fileID: 5952708553636578492}
-  - component: {fileID: 8765239232310585519}
   - component: {fileID: 1044109434280299743}
   - component: {fileID: 352032475920484813}
   - component: {fileID: 8369172747770462897}
   - component: {fileID: 4486913307123828661}
   - component: {fileID: 598970802078917156}
+  - component: {fileID: 11810131208851981}
+  - component: {fileID: 2548714324689700366}
+  - component: {fileID: 3233259910302734354}
   m_Layer: 0
   m_Name: EyeManager
   m_TagString: EyeManager
@@ -73,23 +75,36 @@ MonoBehaviour:
   iseeyou: {fileID: 598970802078917156}
   iamwatchingMGEP: iamwatchingVolume
   iseeyouMGEP: iseeyouVolume
-  testEvent:
+  wakeEvent:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &8765239232310585519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3316598071222053609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testnubmb: 0
-  EffectsList: 01000000
+      m_Calls:
+      - m_Target: {fileID: 2548714324689700366}
+        m_TargetAssemblyTypeName: CameraFX, Assembly-CSharp
+        m_MethodName: test
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  sleepEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3233259910302734354}
+        m_TargetAssemblyTypeName: CameraFX, Assembly-CSharp
+        m_MethodName: test
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!82 &1044109434280299743
 AudioSource:
   m_ObjectHideFlags: 0
@@ -570,3 +585,74 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &11810131208851981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3316598071222053609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1051f9473835def4694fc018380784e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FX_List:
+  - {fileID: 2548714324689700366}
+  - {fileID: 3233259910302734354}
+--- !u!114 &2548714324689700366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3316598071222053609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vignette_toggle: 1
+  vignette_start_val: 0
+  vignette_goal_val: 0
+  vignette_lerp_time: 0
+  bloom_toggle: 0
+  bloom_start_val: 0
+  bloom_goal_val: 0
+  bloom_lerp_time: 0
+  chromab_toggle: 0
+  chromab_start_val: 0
+  chromab_goal_val: 0
+  chromab_lerp_time: 0
+  flmgrn_toggle: 0
+  flmgrn_start_val: 0
+  flmgrn_goal_val: 0
+  flmgrn_lerp_time: 0
+--- !u!114 &3233259910302734354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3316598071222053609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vignette_toggle: 0
+  vignette_start_val: 0
+  vignette_goal_val: 0
+  vignette_lerp_time: 0
+  bloom_toggle: 1
+  bloom_start_val: 0
+  bloom_goal_val: 0
+  bloom_lerp_time: 0
+  chromab_toggle: 0
+  chromab_start_val: 0
+  chromab_goal_val: 0
+  chromab_lerp_time: 0
+  flmgrn_toggle: 0
+  flmgrn_start_val: 0
+  flmgrn_goal_val: 0
+  flmgrn_lerp_time: 0
