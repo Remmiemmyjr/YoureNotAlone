@@ -30,7 +30,7 @@ public class PostProcessingManager : MonoBehaviour
         //if the parameter is equal to a key
         if (FX_List.TryGetValue(eEvent, out fx))
         {
-            fx.test(fx);
+            fx.Activate();
         }
         //print an error message
         else
@@ -39,5 +39,7 @@ public class PostProcessingManager : MonoBehaviour
         }
         
     }
+
+
 
 }

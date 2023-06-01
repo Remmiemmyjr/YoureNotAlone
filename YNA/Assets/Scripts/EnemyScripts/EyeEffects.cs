@@ -222,7 +222,7 @@ public class EyeEffects : MonoBehaviour
     IEnumerator Lerp(object param, float start, float end, float time)
     {
         float timeElapsed = 0;
-        float timeDelta = time/200;
+        float timeDelta = time / 200;
 
         while (timeElapsed <= time)
         {
