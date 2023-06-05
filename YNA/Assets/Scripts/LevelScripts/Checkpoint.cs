@@ -42,8 +42,8 @@ public class Checkpoint : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //check for checkpoint reached
-        if(other.CompareTag("Player"))
+        //check for checkpoint reached by partner
+        if(other.CompareTag("Partner"))
         {
             CheckpointController.lastCheckpointPos = transform.position;
 
