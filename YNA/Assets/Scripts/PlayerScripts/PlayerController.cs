@@ -16,6 +16,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -178,6 +179,16 @@ public class PlayerController : MonoBehaviour
         }
 
 
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // RESET =============================================================
+    public void Reset(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            GetComponent<Stats>().isDead = true;
+        }
     }
 
 

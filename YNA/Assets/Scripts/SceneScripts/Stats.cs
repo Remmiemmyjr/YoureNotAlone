@@ -29,7 +29,7 @@ public class Stats : MonoBehaviour
     [HideInInspector]
     public static string currLevel;
 
-    Vector3 newZPos;
+     //Vector3 newZPos;
     // *********************************************************************
 
 
@@ -38,8 +38,8 @@ public class Stats : MonoBehaviour
     void Start()
     {
         // Officially set whatever this is supposed to be in the inspector/prefab
-        newZPos = new Vector3(transform.position.x, transform.position.y, -1);
-        transform.position = newZPos;
+         //newZPos = new Vector3(transform.position.x, transform.position.y, -1);
+         //transform.position = newZPos;
     }
 
 
