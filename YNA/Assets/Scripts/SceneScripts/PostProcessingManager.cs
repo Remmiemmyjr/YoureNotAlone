@@ -4,11 +4,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 public class PostProcessingManager : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject GlobalVolume;
 
     public SerializableDictionaryBase<string, CameraFX> FX_List;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +45,9 @@ public class PostProcessingManager : MonoBehaviour
         
     }
 
-
+    public Volume GetGlobalVolume()
+    {
+        return GlobalVolume.GetComponent<Volume>();
+    }
 
 }

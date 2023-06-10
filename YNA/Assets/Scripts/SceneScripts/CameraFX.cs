@@ -21,6 +21,9 @@ public class CameraFX : MonoBehaviour
         Bloom,
         FilmGrain,
     }
+
+
+
     Volume globalVolume;
     VolumeProfile volProf;
     Bloom bloom;
@@ -59,6 +62,20 @@ public class CameraFX : MonoBehaviour
     public float flmgrn_goal_val = 0.0f;
     public float flmgrn_lerp_time = 0.0f;
 
+    //MOVE TO PP MANAGER
+    void Awake()
+    {
+        globalVolume = gameObject.GetComponent<PostProcessingManager>().GetGlobalVolume();
+        volProf = globalVolume.profile;
+
+        volProf.TryGet<Bloom>(out bloom);
+        volProf.TryGet<Vignette>(out vignette);
+        volProf.TryGet<ChromaticAberration>(out chromatic);
+        volProf.TryGet<FilmGrain>(out filmGrain);
+        volProf.TryGet<LiftGammaGain>(out liftGammaGain);
+
+        liftGammaGain.gamma.overrideState = false;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -82,6 +99,7 @@ public class CameraFX : MonoBehaviour
         //each if is for activation
         if (vignette_toggle)
         {
+         
             StartCoroutine(Lerp(vignette.intensity, vignette_start_val, vignette_goal_val, vignette_lerp_time));
 
         }

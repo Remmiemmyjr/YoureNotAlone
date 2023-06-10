@@ -5690,6 +5690,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: GlobalVolume
+      value: 
+      objectReference: {fileID: 1424909462}
+    - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: FX_List.isExpanded
       value: 1
       objectReference: {fileID: 0}
@@ -5776,6 +5780,26 @@ PrefabInstance:
     - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: FX_List.reorderableList.showDefaultBackground
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: chromab_toggle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: vignette_toggle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: chromab_goal_val
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: chromab_lerp_time
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: chromab_toggle
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3316598071222053609, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: m_Name
@@ -8129,7 +8153,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1373399005
 GameObject:
@@ -8276,7 +8300,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1424909464}
   - component: {fileID: 1424909463}
-  - component: {fileID: 1424909465}
   - component: {fileID: 1424909466}
   m_Layer: 0
   m_Name: Global Volume
@@ -8315,30 +8338,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1424909465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1424909462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b79616d4106544b42aaa8d4f722facf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bloomStartVal: 0
-  vignetteStartVal: 0.4
-  chromaticStartVal: 0
-  grainStartVal: 0
-  gammaStartVal: 0
-  bloomGoalVal: 5.3
-  vignetteGoalVal: 0.675
-  chromaticGoalVal: 0.55
-  grainGoalVal: 0.875
-  gammaGoalVal: 0.025
 --- !u!114 &1424909466
 MonoBehaviour:
   m_ObjectHideFlags: 0
