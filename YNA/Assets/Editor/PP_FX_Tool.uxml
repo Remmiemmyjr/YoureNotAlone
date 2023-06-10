@@ -35,12 +35,24 @@
         </ui:GroupBox>
     </ui:Foldout>
     <ui:Foldout text="Other Effects" name="other_settings" style="align-items: stretch;">
-        <ui:Foldout text="Other Settings will go here" name="other_Parameters">
-            <ui:Toggle label="Enable Film Grain" name="flmgrn_Toggle" binding-path="flmgrn_toggle" />
+        <ui:Foldout text="Lift Gamma Gain Parameters" name="lgg_parameters">
+            <ui:Toggle label="Enable Lift" name="lift_Toggle" binding-path="lift_toggle" />
             <ui:GroupBox style="height: 77px; background-color: rgb(75, 75, 75); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px;">
-                <uie:FloatField label="Start Value" value="0" name="flmgrn_start_val" binding-path="flmgrn_start_val" style="min-width: auto; max-width: 70%; height: 17px;" />
-                <uie:FloatField label="End Value" value="0" name="flmgrn_goal_val" binding-path="flmgrn_goal_val" style="max-width: 70%;" />
-                <uie:FloatField label="Transition Time" value="0" name="flmgrn_lerp_time" binding-path="flmgrn_lerp_time" style="max-width: 70%;" />
+                <uie:FloatField label="Start Value" value="0" name="lift_start_val" binding-path="lift_start_val" style="min-width: auto; max-width: 70%; height: 17px;" />
+                <uie:FloatField label="End Value" value="0" name="lift_goal_val" binding-path="lift_goal_val" style="max-width: 70%;" />
+                <uie:FloatField label="Transition Time" value="0" name="lift_lerp_time" binding-path="lift_lerp_time" style="max-width: 70%;" />
+            </ui:GroupBox>
+            <ui:Toggle label="Enable Gamma" name="gamma_Toggle" binding-path="gamma_toggle" />
+            <ui:GroupBox style="height: 77px; background-color: rgb(75, 75, 75); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px;">
+                <uie:FloatField label="Start Value" value="0" name="gamma_start_val" binding-path="gamma_start_val" style="min-width: auto; max-width: 70%; height: 17px;" />
+                <uie:FloatField label="End Value" value="0" name="gamma_goal_val" binding-path="gamma_goal_val" style="max-width: 70%;" />
+                <uie:FloatField label="Transition Time" value="0" name="gamma_lerp_time" binding-path="gamma_lerp_time" style="max-width: 70%;" />
+            </ui:GroupBox>
+            <ui:Toggle label="Enable Gain" name="gain_Toggle" binding-path="gain_toggle" />
+            <ui:GroupBox style="height: 77px; background-color: rgb(75, 75, 75); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px;">
+                <uie:FloatField label="Start Value" value="0" name="gain_start_val" binding-path="gain_start_val" style="min-width: auto; max-width: 70%; height: 17px;" />
+                <uie:FloatField label="End Value" value="0" name="gain_goal_val" binding-path="gain_goal_val" style="max-width: 70%;" />
+                <uie:FloatField label="Transition Time" value="0" name="gain_lerp_time" binding-path="gain_lerp_time" style="max-width: 70%;" />
             </ui:GroupBox>
         </ui:Foldout>
     </ui:Foldout>
