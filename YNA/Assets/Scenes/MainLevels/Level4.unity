@@ -5699,11 +5699,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: FX_List._keys.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: FX_List._values.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: FX_List._keys.Array.data[0]
@@ -5714,8 +5714,16 @@ PrefabInstance:
       value: Sleep
       objectReference: {fileID: 0}
     - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: FX_List._keys.Array.data[2]
+      value: Activate
+      objectReference: {fileID: 0}
+    - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: FX_List._keys.Array.data[3]
+      value: Spotted
+      objectReference: {fileID: 0}
+    - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: FX_List._keyValues.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: FX_List._values.Array.data[0]
@@ -5725,6 +5733,14 @@ PrefabInstance:
       propertyPath: FX_List._values.Array.data[1]
       value: 
       objectReference: {fileID: 341647421}
+    - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: FX_List._values.Array.data[2]
+      value: 
+      objectReference: {fileID: 743020682}
+    - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: FX_List._values.Array.data[3]
+      value: 
+      objectReference: {fileID: 743020681}
     - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: FX_List.reorderableList.canAdd
       value: 1
@@ -5736,6 +5752,14 @@ PrefabInstance:
     - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: FX_List._keyValues.Array.data[1]
       value: Sleep
+      objectReference: {fileID: 0}
+    - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: FX_List._keyValues.Array.data[2]
+      value: Activate
+      objectReference: {fileID: 0}
+    - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: FX_List._keyValues.Array.data[3]
+      value: Spotted
       objectReference: {fileID: 0}
     - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: FX_List.reorderableList.canRemove
@@ -5782,44 +5806,88 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: comment
+      value: wake fx
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: gain_toggle
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: lift_toggle
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: bloom_toggle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: gamma_toggle
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: gain_goal_val
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: lift_goal_val
-      value: 0.5
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: bloom_goal_val
+      value: 5.3
       objectReference: {fileID: 0}
     - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: chromab_toggle
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: gain_lerp_time
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: lift_lerp_time
-      value: 0.5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: lift_start_val
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: bloom_lerp_time
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: vignette_toggle
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: chromab_goal_val
-      value: 0.5
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: chromab_lerp_time
-      value: 0.5
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: vignette_goal_val
+      value: 0.675
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: vignette_lerp_time
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: vignette_start_val
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: comment
+      value: sleep fx
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: gain_toggle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: lift_toggle
@@ -5827,15 +5895,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: lift_goal_val
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
-      propertyPath: chromab_toggle
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: chromab_toggle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: gain_lerp_time
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: gain_start_val
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: lift_lerp_time
-      value: 0.5
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: lift_start_val
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: bloom_lerp_time
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: bloom_start_val
+      value: 5.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: vignette_toggle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: chromab_lerp_time
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: chromab_start_val
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: vignette_goal_val
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: vignette_lerp_time
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: vignette_start_val
+      value: 0.675
       objectReference: {fileID: 0}
     - target: {fileID: 3316598071222053609, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: m_Name
@@ -5938,6 +6050,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: spottedEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: activateEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: wakeEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 5
       objectReference: {fileID: 0}
@@ -5958,6 +6078,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 341647423}
     - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: spottedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: activateEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: spottedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 341647423}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: activateEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 341647423}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: sleepEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -5967,6 +6103,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: sleepEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InvokeCameraFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: spottedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: activateEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: spottedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InvokeCameraFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: activateEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: InvokeCameraFX
       objectReference: {fileID: 0}
     - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
@@ -5982,12 +6134,36 @@ PrefabInstance:
       value: PostProcessingManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: spottedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PostProcessingManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: activateEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PostProcessingManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: wakeEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Wake
       objectReference: {fileID: 0}
     - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: sleepEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Sleep
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: spottedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Spotted
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: activateEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Activate
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: spottedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952708553636578492, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: activateEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
@@ -6716,7 +6892,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441790537}
   m_LocalRotation: {x: -9.494824e-16, y: -0.0000000234804, z: -2.2294227e-23, w: 1}
-  m_LocalPosition: {x: 0.76513004, y: -1.2552004, z: -10}
+  m_LocalPosition: {x: -0.33654404, y: -1.2514749, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7508,6 +7684,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1876662491307241604, guid: ef6f6a3b3207bb444be7f3d3f601d0c1, type: 3}
   m_PrefabInstance: {fileID: 683948128}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &743020681 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7059970352525603907, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+  m_PrefabInstance: {fileID: 341647419}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &743020682 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8929831236405593091, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+  m_PrefabInstance: {fileID: 341647419}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &838271251
 GameObject:
   m_ObjectHideFlags: 0
@@ -7858,7 +8056,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7836938, y: 1}
+    m_SensorSize: {x: 1.5633562, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

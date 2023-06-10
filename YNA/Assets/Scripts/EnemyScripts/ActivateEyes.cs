@@ -73,8 +73,10 @@ public class ActivateEyes : MonoBehaviour
     private UnityEvent wakeEvent;
     [SerializeField]
     private UnityEvent sleepEvent;
-    //[SerializeField]
-    //private UnityEvent<CameraFX> sleepEvent;
+    [SerializeField]
+    private UnityEvent activateEvent;
+    [SerializeField]
+    private UnityEvent spottedEvent;
     // *********************************************************************
 
 
@@ -181,6 +183,7 @@ public class ActivateEyes : MonoBehaviour
 
             // Play goodmorning
             goodmorning.Play();
+            wakeEvent.Invoke();
 
 
         }
@@ -213,8 +216,7 @@ public class ActivateEyes : MonoBehaviour
 
             // Play iamawake.
             iamawake.Play();
-            wakeEvent.Invoke();
-
+            activateEvent.Invoke();
 
             // Play both sounds.
             iamwatching.Play();
@@ -257,7 +259,7 @@ public class ActivateEyes : MonoBehaviour
             {
                 // Play ifoundyou
                 ifoundyou.Play();
-
+                spottedEvent.Invoke();
                 // Set the iamwatching mixer group level to 0.
                 AudioMixer iamwatchingMG = iamwatching.outputAudioMixerGroup.audioMixer;
                 iamwatchingMG.SetFloat(iamwatchingMGEP, -80.0f);
