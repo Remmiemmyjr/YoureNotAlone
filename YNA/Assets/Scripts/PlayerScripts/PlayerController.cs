@@ -53,6 +53,9 @@ public class PlayerController : MonoBehaviour
     public float smoothDamp = 5f;
     public float smoothRange = 0.05f;
 
+    private bool isPaused = false;
+    GameObject pauseUI;
+
     [SerializeField]
     private UnityEvent player_idle;
     [SerializeField]
@@ -76,6 +79,14 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        pauseUI = GameObject.FindWithTag("Pause");
+
+        if (pauseUI)
+        {
+            // Hide Pause UI
+            pauseUI.SetActive(false);
+        }
     }
 
 
@@ -188,6 +199,44 @@ public class PlayerController : MonoBehaviour
         if (ctx.performed)
         {
             GetComponent<Stats>().isDead = true;
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // PAUSE =============================================================
+    public void Pause(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            // Paused -> Unpaused
+            if(isPaused)
+            {
+                isPaused = false;
+
+                if (pauseUI)
+                {
+                    // Hide Pause UI
+                    pauseUI.SetActive(false);
+                }
+
+                // Reset timescale
+                Time.timeScale = 1;
+            }
+            // Unpaused -> Paused
+            else
+            {
+                isPaused = true;
+
+                if (pauseUI)
+                {
+                    // Show Pause UI
+                    pauseUI.SetActive(true);
+                }
+
+                // Set paused timescale
+                Time.timeScale = 0;
+            }
         }
     }
 
