@@ -29,8 +29,6 @@ public class AnimationManager : MonoBehaviour
     private Character currChar;
 
     private Animator animator;
-
-
     // *********************************************************************
 
 

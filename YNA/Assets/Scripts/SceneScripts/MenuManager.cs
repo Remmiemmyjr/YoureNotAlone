@@ -71,10 +71,10 @@ public class MenuManager : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // RESTART BUTTON ======================================================
-    public void RestartButton()
-    {
-        SceneManager.LoadScene(Stats.currLevel);
-    }
+    //public void RestartButton()
+    //{
+    //    SceneManager.LoadScene(Stats.currLevel);
+    //}
 
 
     ////////////////////////////////////////////////////////////////////////

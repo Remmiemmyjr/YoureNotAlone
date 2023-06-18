@@ -44,7 +44,6 @@ public class PartnerController : MonoBehaviour
 
 
     //partner data
-
     private Vector2 velocity;
 
     // *********************************************************************
@@ -76,10 +75,9 @@ public class PartnerController : MonoBehaviour
 
 
         //set state
-
         state_curr = state_next;
-        //partner state machine
 
+        //partner state machine
         //do actions
         switch (state_curr)
         {
@@ -130,22 +128,12 @@ public class PartnerController : MonoBehaviour
     }
 
 
-
-
     ////////////////////////////////////////////////////////////////////////
     // IS GROUNDED =========================================================
     public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
     }
-
-    ////////////////////////////////////////////////////////////////////////
-    // IS FALLING =========================================================
-    public bool IsFalling()
-    {
-        return Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
-    }
-
 
     ////////////////////////////////////////////////////////////////////////
     // CHECK FLIP ==========================================================
@@ -159,8 +147,6 @@ public class PartnerController : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
-
-
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -171,7 +157,6 @@ public class PartnerController : MonoBehaviour
         {
             state_next = PartnerStates.cWalk;
         }
-
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -185,17 +170,15 @@ public class PartnerController : MonoBehaviour
         }
     }
 
-
     ////////////////////////////////////////////////////////////////////////
     // CHECK FALL ==========================================================
     void CheckFall()
     {
-        if (velocity.y < -0.2f && velocity.y != 0.0f)
+        if (velocity.y < -0.2f && velocity.y != 0.0f && !IsGrounded())
         {
             state_next = PartnerStates.cFall;
         }
     }
-
 
     ////////////////////////////////////////////////////////////////////////
     // CHECK IDLE ==========================================================
@@ -215,7 +198,6 @@ public class PartnerController : MonoBehaviour
         {
             state_next = PartnerStates.cHiding;
         }
-
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -227,12 +209,12 @@ public class PartnerController : MonoBehaviour
         {
             state_next = PartnerStates.cHiding;
         }
-
     }
 
-    ////////////////////////////////////////////////////////////////////////
-    // STATE MACHINE ACTIONS ============================================================
 
+    //***********************************************************************************
+    // STATE MACHINE ACTIONS ============================================================
+    //***********************************************************************************
 
     ////////////////////////////////////////////////////////////////////////
     // IS IDLING =========================================================
@@ -252,12 +234,9 @@ public class PartnerController : MonoBehaviour
             state_next = PartnerStates.cIdle;
             return;
         }
+
         //set walking animation
         partner_walk.Invoke();
-
-        //call wwise walking event
-
-
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -275,9 +254,6 @@ public class PartnerController : MonoBehaviour
         {
             state_next = PartnerStates.cFall;
         }
-
-
-        //if just jumped post jump wwise event
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -294,8 +270,6 @@ public class PartnerController : MonoBehaviour
         {
             state_next = PartnerStates.cWalk;
         }
-
-
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -320,14 +294,9 @@ public class PartnerController : MonoBehaviour
     // IS DEAD =========================================================
     private void do_dead()
     {
-
         //set dead animation state
         partner_dead.Invoke();
 
         //trigger game over events
     }
-
-    ////////////////////////////////////////////////////////////////////////
-    // CHECK HIDING =========================================================
-
 }

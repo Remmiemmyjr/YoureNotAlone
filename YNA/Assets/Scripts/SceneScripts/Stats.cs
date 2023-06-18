@@ -25,11 +25,6 @@ public class Stats : MonoBehaviour
     public bool isHidden;
     [HideInInspector]
     public bool isDead;
-
-    [HideInInspector]
-    public static string currLevel;
-
-     //Vector3 newZPos;
     // *********************************************************************
 
 
@@ -37,9 +32,7 @@ public class Stats : MonoBehaviour
     // START ===============================================================
     void Start()
     {
-        // Officially set whatever this is supposed to be in the inspector/prefab
-         //newZPos = new Vector3(transform.position.x, transform.position.y, -1);
-         //transform.position = newZPos;
+
     }
 
 

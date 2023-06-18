@@ -58,10 +58,15 @@ public class Grapple : MonoBehaviour
 
         if (target != null)
         {
-            target.enabled = false;
-
+            target.enabled = true;
+            line.enabled = true;
+            isTethered = true;
         }
-        line.enabled = false;
+        else
+        {
+            line.enabled = false;
+        }
+   
 
         isExtending = false;
         currLength = maxLimit;

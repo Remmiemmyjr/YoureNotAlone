@@ -22,7 +22,6 @@ public class PlayerFootstepAudio : MonoBehaviour
     // VARIABLES ===========================================================
     public GameObject player;
     public PlayerController _moveScript;
-    public AnimationManager _animationManager;
     public PlayAudio randClip;
     public float playInterval;
     private AudioSource source;
