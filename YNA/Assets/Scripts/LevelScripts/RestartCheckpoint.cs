@@ -17,7 +17,10 @@ public class RestartCheckpoint : MonoBehaviour
     {
         checkpointPos = CheckpointController.lastCheckpointPos;
         SetPos(player, new Vector3(0, 0, 0));
-        SetPos(partner, new Vector3(-0.5f, 0, 0));
+        
+        // Make sure there is a partner in this level
+        if (partner)
+            SetPos(partner, new Vector3(-0.5f, 0, 0));
     }
 
     public void SetPos(GameObject entity, Vector3 offset)

@@ -19,6 +19,9 @@ public class Checkpoint : MonoBehaviour
     [SerializeField]
     private float lightGrowRate = 1.0f;
 
+    [SerializeField]
+    private bool isSpawn = false;
+
     // Boolean to keep track of reached or not
     private bool checkReached = false;
 
@@ -29,6 +32,25 @@ public class Checkpoint : MonoBehaviour
 
         EmberPlayer = GetComponent<ParticleSystem>();
         CheckpointLight = GetComponent<UnityEngine.Rendering.Universal.Light2D>();
+
+        // Activate spawn lights on scene start
+        if (isSpawn)
+        {
+            GetComponent<SpriteRenderer>().sprite = CheckOn;
+
+            // Make sure extra items exist
+            if (EmberPlayer && CheckpointLight && !checkReached)
+            {
+                // Play Particles
+                EmberPlayer.Play();
+
+                // Enable the light
+                CheckpointLight.enabled = true;
+
+                // Update value
+                checkReached = true;
+            }
+        }
     }
 
     void Update()
