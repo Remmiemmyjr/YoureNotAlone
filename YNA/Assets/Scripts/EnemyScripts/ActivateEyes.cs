@@ -12,8 +12,10 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Events;
 
 public enum EyeStates
 {
@@ -66,7 +68,19 @@ public class ActivateEyes : MonoBehaviour
 
     public string iamwatchingMGEP;
     public string iseeyouMGEP;
+
+    [SerializeField]
+    private UnityEvent wakeEvent;
+    [SerializeField]
+    private UnityEvent sleepEvent;
+    [SerializeField]
+    private UnityEvent activateEvent;
+    [SerializeField]
+    private UnityEvent spottedEvent;
     // *********************************************************************
+
+
+
 
 
     ////////////////////////////////////////////////////////////////////////
@@ -137,6 +151,10 @@ public class ActivateEyes : MonoBehaviour
             iamwatching.Stop();
             iseeyou.Stop();
 
+            sleepEvent.Invoke();
+
+
+
             // Restart level music.
             GameObject.Find("MusicController").GetComponent<AudioSource>().Play();
         }
@@ -166,6 +184,9 @@ public class ActivateEyes : MonoBehaviour
 
             // Play goodmorning
             goodmorning.Play();
+            wakeEvent.Invoke();
+
+
         }
 
         for (int i = 0; i < Eyes.Length; i++)
@@ -173,13 +194,14 @@ public class ActivateEyes : MonoBehaviour
             profile = Eyes[i].GetComponent<EyeProfile>();
             profile.SetStatusWaking();
         }
-
         // Set the iamwatching mixer group level to 1.
         AudioMixer iamwatchingMG = iamwatching.outputAudioMixerGroup.audioMixer;
         iamwatchingMG.SetFloat(iamwatchingMGEP, 0.0f);
         // Set the iseeyou mixer group level to 0.
         AudioMixer iseeyouMG = iseeyou.outputAudioMixerGroup.audioMixer;
         iseeyouMG.SetFloat(iseeyouMGEP, -80.0f);
+
+
     }
 
 
@@ -195,6 +217,7 @@ public class ActivateEyes : MonoBehaviour
 
             // Play iamawake.
             iamawake.Play();
+            activateEvent.Invoke();
 
             // Play both sounds.
             iamwatching.Play();
@@ -237,7 +260,7 @@ public class ActivateEyes : MonoBehaviour
             {
                 // Play ifoundyou
                 ifoundyou.Play();
-
+                spottedEvent.Invoke();
                 // Set the iamwatching mixer group level to 0.
                 AudioMixer iamwatchingMG = iamwatching.outputAudioMixerGroup.audioMixer;
                 iamwatchingMG.SetFloat(iamwatchingMGEP, -80.0f);

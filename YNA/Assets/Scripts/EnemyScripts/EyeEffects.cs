@@ -26,6 +26,7 @@ public class EyeEffects : MonoBehaviour
     ActivateEyes eyeController;
     CinemachineImpulseSource impulse;
 
+
     Volume globalVolume;
     VolumeProfile volProf;
     Bloom bloom;
@@ -59,6 +60,8 @@ public class EyeEffects : MonoBehaviour
     float grainGoalVal = 0.875f;
     [SerializeField]
     float gammaGoalVal = 0.025f;
+
+
     // *********************************************************************
 
 
@@ -219,7 +222,7 @@ public class EyeEffects : MonoBehaviour
     IEnumerator Lerp(object param, float start, float end, float time)
     {
         float timeElapsed = 0;
-        float timeDelta = time/200;
+        float timeDelta = time / 200;
 
         while (timeElapsed <= time)
         {
@@ -232,7 +235,6 @@ public class EyeEffects : MonoBehaviour
                     break;
                 case Vector4Parameter v4p:
                     v4p.Override(new Vector4(0, 0, 0, -valueToLerp));
-                    Debug.Log(valueToLerp);
                     break;
             }
 

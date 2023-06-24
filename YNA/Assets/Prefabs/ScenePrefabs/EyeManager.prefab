@@ -15,6 +15,11 @@ GameObject:
   - component: {fileID: 8369172747770462897}
   - component: {fileID: 4486913307123828661}
   - component: {fileID: 598970802078917156}
+  - component: {fileID: 11810131208851981}
+  - component: {fileID: 2548714324689700366}
+  - component: {fileID: 3233259910302734354}
+  - component: {fileID: 8929831236405593091}
+  - component: {fileID: 7059970352525603907}
   m_Layer: 0
   m_Name: EyeManager
   m_TagString: EyeManager
@@ -49,6 +54,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2fb6be96c16c34fae31a150789ccc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
+  prevStatus: 0
   Eyes:
   - {fileID: 0}
   - {fileID: 0}
@@ -59,6 +66,9 @@ MonoBehaviour:
   timeToHide: 0
   min: 8
   max: 20
+  minSeek: 4
+  maxSeek: 6.5
+  wakingTime: 3.5
   gracePeriod: 1.5
   goodmorning: {fileID: 1044109434280299743}
   iamawake: {fileID: 352032475920484813}
@@ -67,6 +77,66 @@ MonoBehaviour:
   iseeyou: {fileID: 598970802078917156}
   iamwatchingMGEP: iamwatchingVolume
   iseeyouMGEP: iseeyouVolume
+  wakeEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11810131208851981}
+        m_TargetAssemblyTypeName: PostProcessingManager, Assembly-CSharp
+        m_MethodName: InvokeCameraFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Wake
+          m_BoolArgument: 0
+        m_CallState: 2
+  sleepEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11810131208851981}
+        m_TargetAssemblyTypeName: PostProcessingManager, Assembly-CSharp
+        m_MethodName: InvokeCameraFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Sleep
+          m_BoolArgument: 0
+        m_CallState: 2
+  activateEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11810131208851981}
+        m_TargetAssemblyTypeName: PostProcessingManager, Assembly-CSharp
+        m_MethodName: InvokeCameraFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Activate
+          m_BoolArgument: 0
+        m_CallState: 2
+  spottedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11810131208851981}
+        m_TargetAssemblyTypeName: PostProcessingManager, Assembly-CSharp
+        m_MethodName: InvokeCameraFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Spotted
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!82 &1044109434280299743
 AudioSource:
   m_ObjectHideFlags: 0
@@ -547,3 +617,246 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &11810131208851981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3316598071222053609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1051f9473835def4694fc018380784e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalVolume: {fileID: 0}
+  FX_List:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues:
+    - Wake
+    - Sleep
+    - Activate
+    - Spotted
+    _keys:
+    - Wake
+    - Sleep
+    - Activate
+    - Spotted
+    _values:
+    - {fileID: 2548714324689700366}
+    - {fileID: 3233259910302734354}
+    - {fileID: 8929831236405593091}
+    - {fileID: 7059970352525603907}
+--- !u!114 &2548714324689700366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3316598071222053609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comment: wake fx
+  vignette_toggle: 1
+  vignette_instant: 0
+  vignette_start_val: 0.4
+  vignette_goal_val: 0.675
+  vignette_lerp_time: 3.5
+  bloom_toggle: 1
+  bloom_instant: 0
+  bloom_start_val: 0
+  bloom_goal_val: 5.3
+  bloom_lerp_time: 3.5
+  chromab_toggle: 1
+  chromab_instant: 0
+  chromab_start_val: 0
+  chromab_goal_val: 0.55
+  chromab_lerp_time: 3.5
+  flmgrn_toggle: 0
+  flmgrn_instant: 0
+  flmgrn_start_val: 0
+  flmgrn_goal_val: 0
+  flmgrn_lerp_time: 0
+  lift_toggle: 1
+  lift_instant: 0
+  lift_start_val: 0
+  lift_goal_val: 0.025
+  lift_lerp_time: 3.5
+  gamma_toggle: 0
+  gamma_instant: 0
+  gamma_start_val: 0
+  gamma_goal_val: 0
+  gamma_lerp_time: 0
+  gain_toggle: 1
+  gain_instant: 0
+  gain_start_val: 0
+  gain_goal_val: 0.025
+  gain_lerp_time: 3.5
+--- !u!114 &3233259910302734354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3316598071222053609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comment: sleep fx
+  vignette_toggle: 1
+  vignette_instant: 0
+  vignette_start_val: 0.675
+  vignette_goal_val: 0.4
+  vignette_lerp_time: 0.025
+  bloom_toggle: 1
+  bloom_instant: 0
+  bloom_start_val: 5.3
+  bloom_goal_val: 0
+  bloom_lerp_time: 0.25
+  chromab_toggle: 1
+  chromab_instant: 0
+  chromab_start_val: 0.55
+  chromab_goal_val: 0
+  chromab_lerp_time: 0.25
+  flmgrn_toggle: 0
+  flmgrn_instant: 0
+  flmgrn_start_val: 0
+  flmgrn_goal_val: 0
+  flmgrn_lerp_time: 0
+  lift_toggle: 1
+  lift_instant: 0
+  lift_start_val: 0.025
+  lift_goal_val: 0
+  lift_lerp_time: 0.25
+  gamma_toggle: 0
+  gamma_instant: 0
+  gamma_start_val: 0
+  gamma_goal_val: 0
+  gamma_lerp_time: 0
+  gain_toggle: 1
+  gain_instant: 0
+  gain_start_val: 0.025
+  gain_goal_val: 0
+  gain_lerp_time: 0.25
+--- !u!114 &8929831236405593091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3316598071222053609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comment: Activate FX
+  vignette_toggle: 1
+  vignette_instant: 1
+  vignette_start_val: 0
+  vignette_goal_val: 0.675
+  vignette_lerp_time: 0
+  bloom_toggle: 1
+  bloom_instant: 1
+  bloom_start_val: 0
+  bloom_goal_val: 5.3
+  bloom_lerp_time: 0
+  chromab_toggle: 1
+  chromab_instant: 1
+  chromab_start_val: 0
+  chromab_goal_val: 0.85
+  chromab_lerp_time: 0
+  flmgrn_toggle: 0
+  flmgrn_instant: 0
+  flmgrn_start_val: 0
+  flmgrn_goal_val: 0
+  flmgrn_lerp_time: 0
+  lift_toggle: 0
+  lift_instant: 0
+  lift_start_val: 0
+  lift_goal_val: 0
+  lift_lerp_time: 0
+  gamma_toggle: 0
+  gamma_instant: 0
+  gamma_start_val: 0
+  gamma_goal_val: 0
+  gamma_lerp_time: 0
+  gain_toggle: 0
+  gain_instant: 0
+  gain_start_val: 0
+  gain_goal_val: 0
+  gain_lerp_time: 0
+--- !u!114 &7059970352525603907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3316598071222053609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comment: Spotted FX
+  vignette_toggle: 0
+  vignette_instant: 0
+  vignette_start_val: 0
+  vignette_goal_val: 0
+  vignette_lerp_time: 0
+  bloom_toggle: 1
+  bloom_instant: 1
+  bloom_start_val: 0
+  bloom_goal_val: 13.8
+  bloom_lerp_time: 0
+  chromab_toggle: 1
+  chromab_instant: 1
+  chromab_start_val: 0
+  chromab_goal_val: 1
+  chromab_lerp_time: 0
+  flmgrn_toggle: 1
+  flmgrn_instant: 1
+  flmgrn_start_val: 0
+  flmgrn_goal_val: 0.875
+  flmgrn_lerp_time: 0
+  lift_toggle: 0
+  lift_instant: 0
+  lift_start_val: 0
+  lift_goal_val: 0
+  lift_lerp_time: 0
+  gamma_toggle: 0
+  gamma_instant: 0
+  gamma_start_val: 0
+  gamma_goal_val: 0
+  gamma_lerp_time: 0
+  gain_toggle: 0
+  gain_instant: 0
+  gain_start_val: 0
+  gain_goal_val: 0
+  gain_lerp_time: 0
