@@ -8,13 +8,14 @@
 //
 // Notes:
 //
-// Last Edit: 6/17/2023
+// Last Edit: 6/23/2023
 //
 //*************************************************
 
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor;
 using UnityEngine;
@@ -27,21 +28,7 @@ public class PlayerController : MonoBehaviour
     // VARIABLES ===========================================================
     [HideInInspector]
     public Rigidbody2D rb;
-
-    //public enum PlayerStates
-    //{
-    //    cInvalid = -1,
-    //    cIdle = 0,
-    //    cJump,
-    //    cWalk,
-    //    cFall,
-    //    cHiding,
-    //    cSeen,
-    //    cDead
-    //}
-
-    //private PlayerStates state_curr;
-    //private PlayerStates state_next;
+    public ParticleSystem dustParticles;
 
     private SetPlayerAnimState animState;
 
@@ -58,21 +45,6 @@ public class PlayerController : MonoBehaviour
 
     private bool isPaused = false;
     GameObject pauseUI;
-
-    //[SerializeField]
-    //private UnityEvent player_idle;
-    //[SerializeField]
-    //private UnityEvent player_walk;
-    //[SerializeField]
-    //private UnityEvent player_jump;
-    //[SerializeField]
-    //private UnityEvent player_falling;
-    //[SerializeField]
-    //private UnityEvent player_hide;
-    //[SerializeField]
-    //private UnityEvent player_seen;
-    //[SerializeField]
-    //private UnityEvent player_dead;
     // *********************************************************************
 
 
@@ -98,57 +70,6 @@ public class PlayerController : MonoBehaviour
     // FIXED UPDATE ========================================================
     void FixedUpdate()
     {
-        //state_curr = state_next;
-        ////player state machine
-
-        //switch (state_curr)
-        //{
-        //    // The player is idle
-        //    case PlayerStates.cIdle:
-        //    {
-        //        do_idle();
-        //        break;
-        //    }
-        //    //the player is walking
-        //    case PlayerStates.cWalk:
-        //    {
-        //        do_walk();
-        //        break;
-        //    }
-        //    //the player is in an upward motion
-        //    case PlayerStates.cJump:
-        //    {
-        //        do_jump();
-        //        break;
-        //    }
-        //    //the player is moving downward
-        //    case PlayerStates.cFall:
-        //    {
-        //        do_fall();
-        //        break;
-        //    }
-        //    //the player is hiding behind an object
-        //    case PlayerStates.cHiding:
-        //    {
-        //        do_hide();
-        //        break;
-        //    }
-        //    //the player has been spotted
-        //    case PlayerStates.cSeen:
-        //    {
-        //        do_seen();
-        //        break;
-        //    }
-        //    //the player is dead
-        //    case PlayerStates.cDead:
-        //    {
-        //        do_dead();
-        //        break;
-        //    }
-        //}
-
-        //CheckHide();
-
         //movement stuff
         if (Mathf.Abs(dir.x) > 0.65)
         {
@@ -163,8 +84,11 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(0, rb.velocity.y);
             }
         }
+        if (dir.x == 0 || !IsGrounded())
+        {
+            StopDustParticles();
+        }
     }
-
 
     ////////////////////////////////////////////////////////////////////////
     // MOVEMENT ============================================================
@@ -176,8 +100,9 @@ public class PlayerController : MonoBehaviour
         //set the state machine to walk
         //state_next = PlayerStates.cWalk;
         animState.SetNextState(SetPlayerAnimState.PlayerStates.cWalk);
-    }
 
+        EmitParticles(dir);
+    }
 
     ////////////////////////////////////////////////////////////////////////
     // JUMP ================================================================
@@ -191,8 +116,6 @@ public class PlayerController : MonoBehaviour
             //state_next = PlayerStates.cJump;
             animState.SetNextState(SetPlayerAnimState.PlayerStates.cJump);
         }
-
-
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -251,124 +174,23 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
     }
 
-    //***********************************************************************************
-    // STATE MACHINE ACTIONS ============================================================
-    //***********************************************************************************
-
-
     ////////////////////////////////////////////////////////////////////////
-    // IS IDLING =========================================================
-    //private void do_idle()
-    //{
-    //    //will take care of state change
-    //    //also checks for vertical movement
-    //    if(check_velocity_y())
-    //    {
-    //        return;
-    //    }
-    //    player_idle.Invoke();
-    //}
+    // PARTICLES ===========================================================
+    void EmitParticles(Vector2 vec)
+    {
+        if (IsGrounded())
+            CreateDustParticles();
+        else
+            StopDustParticles();
+    }
 
-    ////////////////////////////////////////////////////////////////////////
-    // IS WALKING =========================================================
-    //private void do_walk()
-    //{
-    //    //if not walking anymore
-    //    if (dir.x == 0.0f)
-    //    {
-    //        state_next = PlayerStates.cIdle;
-    //        return;
-    //    }
-    //    //will take care of state change
-    //    else if(check_velocity_y())
-    //    {
-    //        return;
-    //    }
-    //    //set walking animation
-    //    player_walk.Invoke();
-
-    //}
-
-    ////////////////////////////////////////////////////////////////////////
-    // IS JUMPING =========================================================
-    //private void do_jump()
-    //{
-    //    //checks for vertical movement
-    //    check_velocity_y();
-    //    player_jump.Invoke();
-
-    //}
-
-    ////////////////////////////////////////////////////////////////////////
-    // IS FALLING =========================================================
-    //private void do_fall()
-    //{
-    //    if (!IsGrounded())
-    //    {
-    //        //set animation state to falling
-    //        player_falling.Invoke();
-
-    //    }
-    //    else
-    //    {
-    //        state_next = PlayerStates.cWalk;
-    //    }
-
-    //}
-
-    ////////////////////////////////////////////////////////////////////////
-    // IS HIDING =========================================================
-    //private void do_hide()
-    //{
-    //    player_hide.Invoke();
-
-    //}
-
-    ////////////////////////////////////////////////////////////////////////
-    // IS SEEN =========================================================
-    //private void do_seen()
-    //{
-    //    player_seen.Invoke();
-    //}
-
-    ////////////////////////////////////////////////////////////////////////
-    // IS DEAD =========================================================
-    //private void do_dead()
-    //{
-    //    player_dead.Invoke();
-
-    //}
-
-    ////////////////////////////////////////////////////////////////////////
-    // IS DEAD =========================================================
-    // Checks if the player is moving up or down for state machine
-    //private bool check_velocity_y()
-    //{
-    //    //check for falling
-    //    if(rb.velocity.y <= -0.02f && !IsGrounded())
-    //    {
-    //        state_next = PlayerStates.cFall;
-    //        return true;
-    //    }
-    //    //check jumping
-    //    else if(rb.velocity.y >= 0.02f)
-    //    {
-    //        state_next = PlayerStates.cJump;
-    //        return true;
-    //    }
-
-    //    return false;
-    //}
-
-    ////////////////////////////////////////////////////////////////////////
-    // CHECK HIDING =========================================================
-    //void CheckHide()
-    //{
-    //    if(gameObject.GetComponent<Stats>().isHidden == true)
-    //    {
-    //        state_next = PlayerStates.cHiding;
-    //    }
-
-    //}
+    void CreateDustParticles()
+    {
+        dustParticles.Play();
+    }
+    void StopDustParticles()
+    {
+        dustParticles.Stop();
+    }
 
 }
