@@ -102,7 +102,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CheckOn: {fileID: 595365473, guid: 13ec76afb40eaa747bdc249c8cd47497, type: 3}
-  lightGrowRate: 2.5
+  lightGrowRate: 3.5
+  startLit: 0
 --- !u!61 &4505479744568465490
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -704,7 +705,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2

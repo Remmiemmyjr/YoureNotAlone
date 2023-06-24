@@ -116,6 +116,10 @@ public class Checkpoint : MonoBehaviour
                     // Update value
                     checkReached = true;
                 }
+                else if (EmberPlayer)
+                {
+                    EmberPlayer.Play();
+                }
             }
         }
     }
