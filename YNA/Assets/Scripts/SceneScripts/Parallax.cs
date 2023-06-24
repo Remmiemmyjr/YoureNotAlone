@@ -5,9 +5,6 @@
 //
 // Desc: Background parallaxing effect
 //
-// Notes:
-//  + Fix pls :) <3
-//
 // Last Edit: 5/4/2023
 //
 //*************************************************

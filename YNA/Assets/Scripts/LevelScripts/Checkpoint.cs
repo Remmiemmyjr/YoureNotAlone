@@ -12,6 +12,9 @@ public class Checkpoint : MonoBehaviour
     //private CheckpointController cc;
     public Sprite CheckOn;
 
+    // Check to use partner for checkpoint
+    private bool usePlayer = true;
+
     // Fancy little effects
     private ParticleSystem EmberPlayer;
     private UnityEngine.Rendering.Universal.Light2D CheckpointLight;
@@ -20,7 +23,7 @@ public class Checkpoint : MonoBehaviour
     private float lightGrowRate = 1.0f;
 
     [SerializeField]
-    private bool isSpawn = false;
+    private bool startLit = false;
 
     // Boolean to keep track of reached or not
     private bool checkReached = false;
@@ -33,8 +36,13 @@ public class Checkpoint : MonoBehaviour
         EmberPlayer = GetComponent<ParticleSystem>();
         CheckpointLight = GetComponent<UnityEngine.Rendering.Universal.Light2D>();
 
+        if(GameObject.FindWithTag("Partner"))
+        {
+            usePlayer = false;
+        }
+
         // Activate spawn lights on scene start
-        if (isSpawn)
+        if (startLit)
         {
             GetComponent<SpriteRenderer>().sprite = CheckOn;
 
@@ -64,24 +72,50 @@ public class Checkpoint : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //check for checkpoint reached by partner
-        if(other.CompareTag("Partner"))
+        if (!usePlayer)
         {
-            CheckpointController.lastCheckpointPos = transform.position;
-
-            GetComponent<SpriteRenderer>().sprite = CheckOn;
-
-            // Make sure extra items exist
-            if (EmberPlayer && CheckpointLight && !checkReached)
+            //check for checkpoint reached by partner
+            if (other.CompareTag("Partner"))
             {
-                // Play Particles
-                EmberPlayer.Play();
+                CheckpointController.lastCheckpointPos = transform.position;
 
-                // Enable the light
-                CheckpointLight.enabled = true;
+                GetComponent<SpriteRenderer>().sprite = CheckOn;
 
-                // Update value
-                checkReached = true;
+                // Make sure extra items exist
+                if (EmberPlayer && CheckpointLight && !checkReached)
+                {
+                    // Play Particles
+                    EmberPlayer.Play();
+
+                    // Enable the light
+                    CheckpointLight.enabled = true;
+
+                    // Update value
+                    checkReached = true;
+                }
+            }
+        }
+        else
+        {
+            //check for checkpoint reached by player
+            if (other.CompareTag("Player"))
+            {
+                CheckpointController.lastCheckpointPos = transform.position;
+
+                GetComponent<SpriteRenderer>().sprite = CheckOn;
+
+                // Make sure extra items exist
+                if (EmberPlayer && CheckpointLight && !checkReached)
+                {
+                    // Play Particles
+                    EmberPlayer.Play();
+
+                    // Enable the light
+                    CheckpointLight.enabled = true;
+
+                    // Update value
+                    checkReached = true;
+                }
             }
         }
     }
