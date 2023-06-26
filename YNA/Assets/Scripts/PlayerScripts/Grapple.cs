@@ -190,7 +190,10 @@ public class Grapple : MonoBehaviour
         }
 
         // Logic for topsolid and partner
-        topSolidMap.GetComponent<PlatformEffector2D>().colliderMask |= (1 << partner.layer);
+        if (topSolidMap)
+        {
+            topSolidMap.GetComponent<PlatformEffector2D>().colliderMask |= (1 << partner.layer);
+        }
     }
 
 

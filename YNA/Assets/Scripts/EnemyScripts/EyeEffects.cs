@@ -47,8 +47,8 @@ public class EyeEffects : MonoBehaviour
     float chromaticStartVal = 0f;
     [SerializeField]
     float grainStartVal = 0f;
-    [SerializeField]
-    float gammaStartVal = 0f;
+    //[SerializeField]
+    //float gammaStartVal = 0f;
 
     [SerializeField]
     float bloomGoalVal = 5.3f;
@@ -133,8 +133,8 @@ public class EyeEffects : MonoBehaviour
         vignette.intensity.Override(vignetteStartVal);
         chromatic.intensity.Override(chromaticStartVal);
         filmGrain.intensity.Override(grainStartVal);
-        liftGammaGain.lift.Override(new Vector4(0,0,0, 0));
-        liftGammaGain.gain.Override(new Vector4(0,0,0, 0));
+        liftGammaGain.lift.Override(new Vector4(0,0,0,0));
+        liftGammaGain.gain.Override(new Vector4(0,0,0,0));
 
         inState = false;
         canShake = true;
