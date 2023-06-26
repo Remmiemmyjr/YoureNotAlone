@@ -25,6 +25,8 @@ public class Checkpoint : MonoBehaviour
     [SerializeField]
     private bool startLit = false;
 
+    private bool sparkPlayed = false;
+
     // Boolean to keep track of reached or not
     private bool checkReached = false;
 
@@ -116,9 +118,13 @@ public class Checkpoint : MonoBehaviour
                     // Update value
                     checkReached = true;
                 }
-                else if (EmberPlayer)
+                else if (EmberPlayer && !sparkPlayed)
                 {
+                    // Play Particles
                     EmberPlayer.Play();
+
+                    // Avaoid spam
+                    sparkPlayed = true;
                 }
             }
         }
