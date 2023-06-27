@@ -27,6 +27,9 @@ public class LevelProgression : MonoBehaviour
 
     public bool requiresPartner;
     bool atExit = false;
+
+    [SerializeField]
+    private bool proceedOnTouch = false;
     // *********************************************************************
 
 
@@ -87,8 +90,16 @@ public class LevelProgression : MonoBehaviour
     // TRIGGER ENTER =======================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        instructions.SetActive(true);
-        atExit = true;
+        if(proceedOnTouch)
+        {
+            CheckpointController.ResetLevel();
+            SceneManager.LoadScene(nextLevel);
+        }
+        else
+        {
+            instructions.SetActive(true);
+            atExit = true;
+        }
     }
 
 
