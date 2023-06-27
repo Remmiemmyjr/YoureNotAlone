@@ -7226,7 +7226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CheckOn: {fileID: 595365473, guid: 13ec76afb40eaa747bdc249c8cd47497, type: 3}
   lightGrowRate: 0
-  isSpawn: 1
+  startLit: 0
 --- !u!212 &501412386
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15462,7 +15462,6 @@ MonoBehaviour:
   vignetteStartVal: 0.4
   chromaticStartVal: 0
   grainStartVal: 0
-  gammaStartVal: 0
   bloomGoalVal: 5.3
   vignetteGoalVal: 0.675
   chromaticGoalVal: 0.55
@@ -16220,6 +16219,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11810131208851981, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: GlobalVolume
+      value: 
+      objectReference: {fileID: 1721634307}
     - target: {fileID: 3316598071222053609, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: m_Name
       value: EyeManager
