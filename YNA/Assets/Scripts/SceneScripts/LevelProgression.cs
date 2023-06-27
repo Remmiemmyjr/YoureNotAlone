@@ -30,6 +30,9 @@ public class LevelProgression : MonoBehaviour
 
     [SerializeField]
     private bool proceedOnTouch = false;
+
+    // Transitions
+    private Animator transitionCanvas;
     // *********************************************************************
 
 
@@ -41,6 +44,8 @@ public class LevelProgression : MonoBehaviour
 
         instructions.SetActive(false);
         displayMessage?.SetActive(false);
+
+        transitionCanvas = GameObject.FindWithTag("Transition").GetComponentInChildren<Animator>();
     }
 
 
@@ -60,14 +65,12 @@ public class LevelProgression : MonoBehaviour
                     }
                     else
                     {
-                        CheckpointController.ResetLevel();
-                        SceneManager.LoadScene(nextLevel);
+                        StartCoroutine(TransitionSequence());
                     }
                 }
                 else
                 {
-                    CheckpointController.ResetLevel();
-                    SceneManager.LoadScene(nextLevel);
+                    StartCoroutine(TransitionSequence());
                 }
             }
         }
@@ -92,8 +95,7 @@ public class LevelProgression : MonoBehaviour
     {
         if(proceedOnTouch)
         {
-            CheckpointController.ResetLevel();
-            SceneManager.LoadScene(nextLevel);
+            StartCoroutine(TransitionSequence());
         }
         else
         {
@@ -109,5 +111,20 @@ public class LevelProgression : MonoBehaviour
     {
         instructions.SetActive(false);
         atExit = false;
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // TRANSITION ==========================================================
+    private IEnumerator TransitionSequence()
+    {
+        if (transitionCanvas)
+        {
+            transitionCanvas.SetTrigger("EyeDeath");
+
+            yield return new WaitForSeconds(transitionCanvas.GetCurrentAnimatorClipInfo(0).Length);
+        }
+
+        CheckpointController.ResetLevel();
+        SceneManager.LoadScene(nextLevel);
     }
 }

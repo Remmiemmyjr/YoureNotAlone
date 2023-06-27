@@ -25,6 +25,9 @@ public class Stats : MonoBehaviour
     public bool isHidden;
     [HideInInspector]
     public bool isDead;
+
+    // Transitions
+    private Animator transitionCanvas;
     // *********************************************************************
 
 
@@ -32,7 +35,7 @@ public class Stats : MonoBehaviour
     // START ===============================================================
     void Start()
     {
-
+        transitionCanvas = GameObject.FindWithTag("Transition").GetComponentInChildren<Animator>();
     }
 
 
@@ -47,9 +50,23 @@ public class Stats : MonoBehaviour
             this.GetComponent<Rigidbody2D>().WakeUp();
         }
 
-        if(isDead)
+        if (isDead)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            StartCoroutine(TransitionSequence());
         }
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // TRANSITION ==========================================================
+    private IEnumerator TransitionSequence()
+    {
+        if (transitionCanvas)
+        {
+            transitionCanvas.SetTrigger("EyeDeath");
+
+            yield return new WaitForSeconds(transitionCanvas.GetCurrentAnimatorClipInfo(0).Length);
+        }
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
