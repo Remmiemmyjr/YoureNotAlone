@@ -20,7 +20,9 @@ using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using static System.Net.WebRequestMethods;
 
 public class PlayerController : MonoBehaviour
 {
@@ -108,7 +110,7 @@ public class PlayerController : MonoBehaviour
     // JUMP ================================================================
     public void Jump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && IsGrounded())
+        if (ctx.performed && IsGrounded() && !isPaused)
         {
             rb.velocity = Vector2.up * jumpHeight;
 
@@ -158,11 +160,31 @@ public class PlayerController : MonoBehaviour
                 {
                     // Show Pause UI
                     pauseUI.SetActive(true);
+
+                    // Set first button as being active
+                    GameObject resumeButton = pauseUI.transform.Find("Resume").gameObject;
+
+                    if(resumeButton)
+                    {
+                        EventSystem.current.SetSelectedGameObject(resumeButton);
+                    }
                 }
 
                 // Set paused timescale
                 Time.timeScale = 0;
             }
+        }
+    }
+
+    public void TogglePause()
+    {
+        if (isPaused)
+        {
+            isPaused = false;
+        }
+        else
+        {
+            isPaused = true;
         }
     }
 

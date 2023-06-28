@@ -1,13 +1,11 @@
 //*************************************************
 // Project: We're Tethered Together
-// File: MenuManager.cs
-// Author/s: Emmy Berg, Corbyn LaMar
+// File: PauseManager.cs
+// Author/s: Corbyn LaMar
 //
-// Desc: Manage the states of the main menu.
+// Desc: Manage the states of the pause menu.
 //
 // Notes:
-//  + Currently has other button actions. Will
-//    need to move to a pause manager.
 //
 // Last Edit: 6/28/2023
 //
@@ -15,24 +13,22 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class MenuManager : MonoBehaviour
+public class PauseManager : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
-    // VARIABLES ===========================================================
-    public GameObject menu, options;
-    // *********************************************************************
-
+    // VARIABLES FOR FANCY STUFF ===========================================
+    private Animator transitionCanvas;
 
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
     void Start()
     {
-        options.SetActive(false);
-        menu.SetActive(true);
+        transitionCanvas = GameObject.FindWithTag("Transition").GetComponentInChildren<Animator>();
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -48,7 +44,7 @@ public class MenuManager : MonoBehaviour
         // If the player wants to use buttons after using the mouse, reset the active object
         if (EventSystem.current.currentSelectedGameObject == null && Input.anyKey)
         {
-            GameObject resumeButton = transform.Find("StartButton").gameObject;
+            GameObject resumeButton = transform.Find("Resume").gameObject;
 
             if (resumeButton)
             {
@@ -57,12 +53,18 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-
     ////////////////////////////////////////////////////////////////////////
-    // START BUTTON ========================================================
-    public void StartButton()
+    // RESUME BUTTON =======================================================
+    public void ResumeButton()
     {
-        SceneManager.LoadScene("Tutorial1");
+        // Update variables
+        GameObject.FindWithTag("Player").GetComponent<PlayerController>().TogglePause();
+
+        // Reset timescale
+        Time.timeScale = 1;
+
+        // Hide Pause UI
+        gameObject.SetActive(false);
     }
 
 
@@ -70,8 +72,7 @@ public class MenuManager : MonoBehaviour
     // SETTINGS BUTTON =====================================================
     public void SettingsButton()
     {
-        options.SetActive(true);
-        menu.SetActive(false);
+        // options.SetActive(true);
     }
 
 
@@ -79,8 +80,7 @@ public class MenuManager : MonoBehaviour
     // RETURN BUTTON =======================================================
     public void ReturnMenu()
     {
-        options.SetActive(false);
-        menu.SetActive(true);
+        // options.SetActive(false);
     }
 
 
@@ -88,22 +88,24 @@ public class MenuManager : MonoBehaviour
     // QUIT BUTTON =========================================================
     public void QuitButton()
     {
-        Application.Quit();
+        // Reset timescale
+        Time.timeScale = 1;
+
+        // Do the animation
+        StartCoroutine(TransitionSequence());
     }
 
-
     ////////////////////////////////////////////////////////////////////////
-    // RESTART BUTTON ======================================================
-    //public void RestartButton()
-    //{
-    //    SceneManager.LoadScene(Stats.currLevel);
-    //}
-
-
-    ////////////////////////////////////////////////////////////////////////
-    // MENU BUTTON =========================================================
-    public void MenuButton()
+    // TRANSITION ON QUIT ==================================================
+    private IEnumerator TransitionSequence()
     {
+        if (transitionCanvas)
+        {
+            transitionCanvas.SetTrigger("EyeDeath");
+
+            yield return new WaitForSeconds(transitionCanvas.GetCurrentAnimatorClipInfo(0).Length);
+        }
+
         SceneManager.LoadScene("MainMenu");
     }
 }
