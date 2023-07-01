@@ -15,14 +15,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using static System.Net.WebRequestMethods;
 
 public class PlayerController : MonoBehaviour
 {
@@ -44,6 +41,9 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight = 16f;
     public float smoothDamp = 5f;
     public float smoothRange = 0.05f;
+
+    private float cTime = 0.2f;
+    private float cTimeCounter;
 
     private bool isPaused = false;
     GameObject pauseUI;
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
     // FIXED UPDATE ========================================================
     void FixedUpdate()
     {
-        //movement stuff
+        // slow-stop
         if (Mathf.Abs(dir.x) > 0.65)
         {
             rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
@@ -86,39 +86,59 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(0, rb.velocity.y);
             }
         }
+
         if (dir.x == 0 || !IsGrounded())
         {
             StopDustParticles();
         }
+
+        CoyoteTime();
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // MOVEMENT ============================================================
     public void Movement(InputAction.CallbackContext ctx)
     {
         dir.x = ctx.ReadValue<float>();
-        Debug.Log(dir.x);
 
-        //set the state machine to walk
-        //state_next = PlayerStates.cWalk;
         animState.SetNextState(SetPlayerAnimState.PlayerStates.cWalk);
 
         EmitParticles(dir);
     }
 
+
     ////////////////////////////////////////////////////////////////////////
     // JUMP ================================================================
     public void Jump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && IsGrounded() && !isPaused)
+        if(ctx.performed && cTimeCounter > 0 && !isPaused)
         {
             rb.velocity = Vector2.up * jumpHeight;
 
-            //set the state machine to jump
-            //state_next = PlayerStates.cJump;
             animState.SetNextState(SetPlayerAnimState.PlayerStates.cJump);
         }
+
+        if(ctx.canceled && rb.velocity.y > 0)
+        {
+            cTimeCounter = 0;
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
     }
+
+
+    void CoyoteTime()
+    {
+        if(IsGrounded())
+        {
+            cTimeCounter = cTime;
+        }
+        else
+        {
+            cTimeCounter -= Time.deltaTime;
+        }
+    }
+
 
     ////////////////////////////////////////////////////////////////////////
     // RESET =============================================================
@@ -196,11 +216,12 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
     }
 
+
     ////////////////////////////////////////////////////////////////////////
     // PARTICLES ===========================================================
     void EmitParticles(Vector2 vec)
     {
-        if (IsGrounded())
+        if (IsGrounded() && Mathf.Abs(vec.x) > 0)
             CreateDustParticles();
         else
             StopDustParticles();

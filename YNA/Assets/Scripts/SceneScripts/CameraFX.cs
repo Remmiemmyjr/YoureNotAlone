@@ -25,7 +25,6 @@ public class CameraFX : MonoBehaviour
     }
 
 
-
     Volume globalVolume;
     VolumeProfile volProf;
     Bloom bloom;
@@ -39,7 +38,6 @@ public class CameraFX : MonoBehaviour
     public bool vignette_toggle = false;
     public bool vignette_instant = false;
 
-
     public float vignette_start_val = 0.0f;
     public float vignette_goal_val = 0.0f;
     public float vignette_lerp_time = 0.0f;
@@ -49,10 +47,10 @@ public class CameraFX : MonoBehaviour
     public bool bloom_toggle = false;
     public bool bloom_instant = false;
 
-
     public float bloom_start_val = 0.0f;
     public float bloom_goal_val = 0.0f;
     public float bloom_lerp_time = 0.0f;
+
 
     //chromatic abberation values
     public bool chromab_toggle = false;
@@ -61,6 +59,7 @@ public class CameraFX : MonoBehaviour
     public float chromab_start_val = 0.0f;
     public float chromab_goal_val = 0.0f;
     public float chromab_lerp_time = 0.0f;
+
 
     //film grain values
     public bool flmgrn_toggle = false;
