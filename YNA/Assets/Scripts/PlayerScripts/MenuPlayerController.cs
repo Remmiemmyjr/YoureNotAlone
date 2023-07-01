@@ -37,7 +37,6 @@ public class MenuPlayerController : MonoBehaviour
     public float smoothDamp = 5f;
     public float smoothRange = 0.05f;
 
-    private bool isPaused = false;
     GameObject pauseUI;
     // *********************************************************************
 
