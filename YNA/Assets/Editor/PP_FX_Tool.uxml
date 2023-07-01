@@ -15,8 +15,8 @@
         <ui:Toggle label="Enable Bloom" name="bloom_Toggle" binding-path="bloom_toggle" />
         <ui:GroupBox style="height: auto; background-color: rgb(75, 75, 75); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; display: flex; visibility: visible; overflow: visible; opacity: 1;">
             <ui:Toggle label="Instant" name="bloom_instant" binding-path="bloom_instant" />
-            <uie:FloatField label="Start Value" value="0" name="bloom_lerp_time" binding-path="bloom_start_val" style="min-width: auto; max-width: 70%; height: 17px;" />
-            <uie:FloatField label="End Value" value="0" name="bloom_lerp_time" binding-path="bloom_goal_val" style="max-width: 70%;" />
+            <uie:FloatField label="Start Value" value="0" name="bloom_start_val" binding-path="bloom_start_val" style="min-width: auto; max-width: 70%; height: 17px;" />
+            <uie:FloatField label="End Value" value="0" name="bloom_goal_val" binding-path="bloom_goal_val" style="max-width: 70%;" />
             <uie:FloatField label="Transition Time" value="0" name="bloom_lerp_time" binding-path="bloom_lerp_time" style="max-width: 70%;" />
         </ui:GroupBox>
     </ui:Foldout>
