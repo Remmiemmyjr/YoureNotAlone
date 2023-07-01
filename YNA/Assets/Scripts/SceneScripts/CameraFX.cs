@@ -134,6 +134,7 @@ public class CameraFX : MonoBehaviour
             }
             else
             {
+                vignette.intensity.Override(vignette_start_val);
                 StartCoroutine(Lerp(vignette.intensity, vignette_start_val, vignette_goal_val, vignette_lerp_time));
             }
         }
@@ -142,11 +143,12 @@ public class CameraFX : MonoBehaviour
         {
             if (bloom_instant)
             {
-                bloom.dirtIntensity.Override(bloom_goal_val);
+                bloom.intensity.Override(bloom_goal_val);
             }
             else
             {
-                StartCoroutine(Lerp(bloom.dirtIntensity, bloom_start_val, bloom_goal_val, bloom_lerp_time));
+                bloom.intensity.Override(bloom_start_val);
+                StartCoroutine(Lerp(bloom.intensity, bloom_start_val, bloom_goal_val, bloom_lerp_time));
             }
         }
 
@@ -158,6 +160,7 @@ public class CameraFX : MonoBehaviour
             }
             else
             {
+                chromatic.intensity.Override(chromab_start_val);
                 StartCoroutine(Lerp(chromatic.intensity, chromab_start_val, chromab_goal_val, chromab_lerp_time));
             }
         }
@@ -170,6 +173,7 @@ public class CameraFX : MonoBehaviour
             }
             else
             {
+                filmGrain.intensity.Override(flmgrn_start_val);
                 StartCoroutine(Lerp(filmGrain.intensity, flmgrn_start_val, flmgrn_goal_val, flmgrn_lerp_time));
             }
         }
@@ -182,6 +186,7 @@ public class CameraFX : MonoBehaviour
             }
             else
             {
+                liftGammaGain.lift.Override(new Vector4(0, 0, 0, lift_start_val));
                 StartCoroutine(Lerp(liftGammaGain.lift, lift_start_val, lift_goal_val, lift_lerp_time));
             }
         }
@@ -194,6 +199,7 @@ public class CameraFX : MonoBehaviour
             }
             else
             {
+                liftGammaGain.gamma.Override(new Vector4(0, 0, 0, gamma_start_val));
                 StartCoroutine(Lerp(liftGammaGain.gamma, gamma_start_val, gamma_goal_val, gamma_lerp_time));
             }
         }
@@ -206,6 +212,7 @@ public class CameraFX : MonoBehaviour
             }
             else
             {
+                liftGammaGain.gain.Override(new Vector4(0, 0, 0, gain_start_val));
                 StartCoroutine(Lerp(liftGammaGain.gain, gain_start_val, gain_goal_val, gain_lerp_time));
             }
         }
