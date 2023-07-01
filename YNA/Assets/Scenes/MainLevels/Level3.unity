@@ -6460,6 +6460,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7c804ec5be70a4e96eb4aae22daed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eyeIntenstityOpen: 1
+  eyeIntenstityClosed: 0
 --- !u!1001 &336142721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6705,6 +6707,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7c804ec5be70a4e96eb4aae22daed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eyeIntenstityOpen: 1
+  eyeIntenstityClosed: 0
 --- !u!1 &533897722
 GameObject:
   m_ObjectHideFlags: 0
@@ -12081,6 +12085,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7c804ec5be70a4e96eb4aae22daed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eyeIntenstityOpen: 1
+  eyeIntenstityClosed: 0
 --- !u!1 &576627418
 GameObject:
   m_ObjectHideFlags: 0
@@ -12199,6 +12205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7c804ec5be70a4e96eb4aae22daed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eyeIntenstityOpen: 1
+  eyeIntenstityClosed: 0
 --- !u!1001 &680070955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12748,6 +12756,14 @@ PrefabInstance:
       propertyPath: GlobalVolume
       value: 
       objectReference: {fileID: 240549326}
+    - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: bloom_start_val
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: bloom_goal_val
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3316598071222053609, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: m_Name
       value: EyeManager
@@ -12844,6 +12860,10 @@ PrefabInstance:
       propertyPath: Eyes.Array.data[7]
       value: 
       objectReference: {fileID: 1486697690}
+    - target: {fileID: 8929831236405593091, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: bloom_toggle
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
 --- !u!4 &884605918 stripped
@@ -13386,7 +13406,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.685446, y: 1}
+    m_SensorSize: {x: 1.7761557, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -13590,6 +13610,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7c804ec5be70a4e96eb4aae22daed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eyeIntenstityOpen: 1
+  eyeIntenstityClosed: 0
 --- !u!1 &1279081848
 GameObject:
   m_ObjectHideFlags: 0
@@ -13944,6 +13966,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7c804ec5be70a4e96eb4aae22daed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eyeIntenstityOpen: 1
+  eyeIntenstityClosed: 0
 --- !u!1001 &1453808982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14194,6 +14218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7c804ec5be70a4e96eb4aae22daed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eyeIntenstityOpen: 1
+  eyeIntenstityClosed: 0
 --- !u!1 &1492344124
 GameObject:
   m_ObjectHideFlags: 0
@@ -14779,7 +14805,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554098009}
   m_LocalRotation: {x: -9.494824e-16, y: -0.0000000234804, z: -2.2294227e-23, w: 1}
-  m_LocalPosition: {x: 0.27447414, y: -1.0829439, z: -10}
+  m_LocalPosition: {x: 0.7280178, y: -1.0844779, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15515,6 +15541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7c804ec5be70a4e96eb4aae22daed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eyeIntenstityOpen: 1
+  eyeIntenstityClosed: 0
 --- !u!1 &1953918396
 GameObject:
   m_ObjectHideFlags: 0
