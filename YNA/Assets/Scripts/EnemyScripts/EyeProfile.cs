@@ -16,7 +16,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Rendering.Universal;
 
 
 public class EyeProfile : MonoBehaviour
@@ -24,6 +24,11 @@ public class EyeProfile : MonoBehaviour
     ActivateEyes manager;
     Animator eyeAnim;
     SpriteRenderer eyeRenderer;
+    Light2D eyeLight;
+    [SerializeField]
+    private float eyeIntenstityOpen = 1.0f;
+    [SerializeField]
+    private float eyeIntenstityClosed = 0.0f;
 
     void Awake()
     {
@@ -32,6 +37,8 @@ public class EyeProfile : MonoBehaviour
         
         eyeAnim = GetComponent<Animator>();
         eyeRenderer = GetComponent<SpriteRenderer>();
+
+        eyeLight = GetComponent<Light2D>();
     }
 
     public void SetStatusSleeping()
@@ -39,6 +46,7 @@ public class EyeProfile : MonoBehaviour
         eyeRenderer.sprite = manager.closed;
         eyeAnim.Play("EyeballClosed");
         eyeAnim.SetBool("isOpen", manager.timeToHide);
+        eyeLight.intensity = eyeIntenstityClosed;
     }
 
     public void SetStatusWaking()
@@ -52,5 +60,6 @@ public class EyeProfile : MonoBehaviour
         eyeRenderer.sprite = manager.open;
         eyeAnim.Play("EyeballOpen");
         eyeAnim.SetBool("isOpen", manager.timeToHide);
+        eyeLight.intensity = eyeIntenstityOpen;
     }
 }
