@@ -2935,7 +2935,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.685446, y: 1}
+    m_SensorSize: {x: 1.7780488, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -8835,7 +8835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CheckOn: {fileID: 595365473, guid: 13ec76afb40eaa747bdc249c8cd47497, type: 3}
   lightGrowRate: 0
-  isSpawn: 0
+  startLit: 0
 --- !u!212 &922360795
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9271,7 +9271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1239543602}
   m_LocalRotation: {x: -9.494824e-16, y: -0.0000000234804, z: -2.2294227e-23, w: 1}
-  m_LocalPosition: {x: 0.27352142, y: -0.9842663, z: -10}
+  m_LocalPosition: {x: 0.736537, y: -0.984169, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9279,6 +9279,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1256819376 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2277467396454445420, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
+  m_PrefabInstance: {fileID: 2277467396068047623}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1256819379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256819376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e005f26c21aaed458c62f7dabde3cd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickerRadius: 1
+  lightFlickerRadiusRate: 0.095
+  radiusBase: 2
+  radiusHighEnd: 2.15
+  flickerIntensity: 0
+  lightFlickerIntensityRate: 1
+  intensityBase: 0.5
+  intensityHighEnd: 0.5
 --- !u!1 &1261926285
 GameObject:
   m_ObjectHideFlags: 0
@@ -9625,7 +9650,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375759415}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e005f26c21aaed458c62f7dabde3cd4, type: 3}
   m_Name: 
@@ -9633,11 +9658,11 @@ MonoBehaviour:
   flickerRadius: 1
   lightFlickerRadiusRate: 1
   radiusBase: 20
-  radiusOffset: 25
+  radiusHighEnd: 1
   flickerIntensity: 1
   lightFlickerIntensityRate: 1
   intensityBase: 0.7
-  intensityOffset: 1
+  intensityHighEnd: 1
 --- !u!1 &1379132217
 GameObject:
   m_ObjectHideFlags: 3
@@ -10466,7 +10491,6 @@ MonoBehaviour:
   vignetteStartVal: 0.4
   chromaticStartVal: 0
   grainStartVal: 0
-  gammaStartVal: 0
   bloomGoalVal: 5.3
   vignetteGoalVal: 0.675
   chromaticGoalVal: 0.55
