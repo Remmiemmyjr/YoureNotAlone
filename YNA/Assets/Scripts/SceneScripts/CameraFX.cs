@@ -1,3 +1,16 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: EyeEffects.cs
+// Author/s: Cameron Myers
+//           Emmy Berg
+//
+// Desc: Controls post processing / special effects
+//       for the eye states
+//
+// Last Edit: 7/2/2023
+//
+//*************************************************
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,8 +25,11 @@ using UnityEngine.Rendering.Universal;
     [SerializeField] private UnityEvent<CameraFX> fx_event = new UnityEvent<CameraFX>();
 }*/
 
+
 public class CameraFX : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     public string comment;
 
     public enum FX
@@ -89,8 +105,12 @@ public class CameraFX : MonoBehaviour
     public float gain_start_val = 0.0f;
     public float gain_goal_val = 0.0f;
     public float gain_lerp_time = 0.0f;
+    // *********************************************************************
 
-    //MOVE TO PP MANAGER
+
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
+    // Move to PPManager
     void Awake()
     {
         globalVolume = gameObject.GetComponent<PostProcessingManager>().GetGlobalVolume();
@@ -105,20 +125,23 @@ public class CameraFX : MonoBehaviour
         liftGammaGain.gamma.overrideState = false;
     }
 
-    // Start is called before the first frame update
+
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    ////////////////////////////////////////////////////////////////////////
+    // UPDATE ==============================================================
     void Update()
     {
     }
 
-    /// <summary>
-    /// Activate post processing based on stored parameters 
-    /// </summary>
+
+    ////////////////////////////////////////////////////////////////////////
+    // ACTIVATE ============================================================
     public void Activate()
     {
         //stop any active lerps
@@ -215,8 +238,6 @@ public class CameraFX : MonoBehaviour
                 StartCoroutine(Lerp(liftGammaGain.gain, gain_start_val, gain_goal_val, gain_lerp_time));
             }
         }
-
-
     }
 
 

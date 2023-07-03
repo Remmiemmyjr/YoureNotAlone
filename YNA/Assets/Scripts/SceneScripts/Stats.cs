@@ -2,13 +2,14 @@
 // Project: We're Tethered Together
 // File: Stats.cs
 // Author/s: Emmy Berg
+//           Corbyn Lamar
 //
 // Desc: Manage stats for the scene
 //
 // Notes:
 //  + See Start() and Update()'s comments
 //
-// Last Edit: 5/3/2023
+// Last Edit: 7/2/2023
 //
 //*************************************************
 
