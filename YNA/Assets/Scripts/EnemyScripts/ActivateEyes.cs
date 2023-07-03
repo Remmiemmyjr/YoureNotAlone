@@ -251,8 +251,11 @@ public class ActivateEyes : MonoBehaviour
     // Returns true if the player or partner is visible.
     bool KillCheck()
     {
+        // Temp variable
+        bool playerHidden = Player.GetComponent<Stats>().isHidden;
+
         // If the player or partner are visible...
-        if (Player.GetComponent<Stats>().isHidden == false || Partner.GetComponent<Stats>().isHidden == false)
+        if (playerHidden == false || Partner.GetComponent<Stats>().isHidden == false)
         {
             status = EyeStates.SEEN;
             // If they've just been spotted...
@@ -281,6 +284,70 @@ public class ActivateEyes : MonoBehaviour
                 timeInSight -= Time.deltaTime;
             }
 
+            // Have each eye look in the direction of who is visible
+            for (int i = 0; i < Eyes.Length; i++)
+            {
+                Animator eyeAnim = Eyes[i].GetComponent<Animator>();
+
+                // Look at the player if they are visible
+                if (playerHidden == false)
+                {
+                    // Left
+                    if (Player.transform.position.x <= Eyes[i].transform.position.x)
+                    {
+                        // Top
+                        if(Player.transform.position.y >= Eyes[i].transform.position.y)
+                        {
+                            eyeAnim.Play("EyeballTopLeft");
+                        }
+                        else // Bottom
+                        {
+                            eyeAnim.Play("EyeballBottomLeft");
+                        }
+                    }
+                    else // Right
+                    {
+                        // Top
+                        if (Player.transform.position.y >= Eyes[i].transform.position.y)
+                        {
+                            eyeAnim.Play("EyeballTopRight");
+                        }
+                        else // Bottom
+                        {
+                            eyeAnim.Play("EyeballBottomRight");
+                        }
+                    }
+                }
+                else // Only the partner must be visible, so look at them
+                {
+                    // Left
+                    if (Partner.transform.position.x <= Eyes[i].transform.position.x)
+                    {
+                        // Top
+                        if (Partner.transform.position.y >= Eyes[i].transform.position.y)
+                        {
+                            eyeAnim.Play("EyeballTopLeft");
+                        }
+                        else // Bottom
+                        {
+                            eyeAnim.Play("EyeballBottomLeft");
+                        }
+                    }
+                    else // Right
+                    {
+                        // Top
+                        if (Partner.transform.position.y >= Eyes[i].transform.position.y)
+                        {
+                            eyeAnim.Play("EyeballTopRight");
+                        }
+                        else // Bottom
+                        {
+                            eyeAnim.Play("EyeballBottomRight");
+                        }
+                    }
+                }
+            }
+
             return true;
         }
         else
@@ -292,6 +359,13 @@ public class ActivateEyes : MonoBehaviour
                 StartCoroutine(FadeMixerGroup.StartFade(iseeyou.outputAudioMixerGroup.audioMixer, iseeyouMGEP, 0.5f, 0.0f));
                 // Fade in iamwatching
                 StartCoroutine(FadeMixerGroup.StartFade(iamwatching.outputAudioMixerGroup.audioMixer, iamwatchingMGEP, 0.5f, 1.0f));
+
+                // Have each eye resume looking around
+                for (int i = 0; i < Eyes.Length; i++)
+                {
+                    Animator eyeAnim = Eyes[i].GetComponent<Animator>();
+                    eyeAnim.Play("EyeballOpen", -1, Random.Range(0.0f, 1.0f));
+                }
             }
         }
 
