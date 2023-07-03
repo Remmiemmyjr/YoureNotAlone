@@ -28,6 +28,8 @@ public class EyeProfile : MonoBehaviour
     [SerializeField]
     private float eyeIntenstityOpen = 1.0f;
     [SerializeField]
+    private float eyeIntenstityHalf = 0.25f;
+    [SerializeField]
     private float eyeIntenstityClosed = 0.0f;
 
     void Awake()
@@ -53,6 +55,7 @@ public class EyeProfile : MonoBehaviour
     {
         eyeRenderer.sprite = manager.halfway;
         eyeAnim.Play("EyeballHalfway");
+        eyeLight.intensity = eyeIntenstityHalf;
     }
 
     public void SetStatusActive()
