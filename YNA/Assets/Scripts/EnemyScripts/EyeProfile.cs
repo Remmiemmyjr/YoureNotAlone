@@ -61,7 +61,7 @@ public class EyeProfile : MonoBehaviour
     public void SetStatusActive()
     {
         eyeRenderer.sprite = manager.open;
-        eyeAnim.Play("EyeballOpen");
+        eyeAnim.Play("EyeballOpen", -1, Random.Range(0.0f, 1.0f));
         eyeAnim.SetBool("isOpen", manager.timeToHide);
         eyeLight.intensity = eyeIntenstityOpen;
     }

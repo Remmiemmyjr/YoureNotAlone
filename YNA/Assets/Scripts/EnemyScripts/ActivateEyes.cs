@@ -125,7 +125,7 @@ public class ActivateEyes : MonoBehaviour
         }
 
         // Open
-        if (currTime <= 0)
+        if (currTime <= 0 && status != EyeStates.ACTIVE && status != EyeStates.SEEN)
         {
             Activate();
             prevStatus = status;
