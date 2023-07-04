@@ -28,8 +28,8 @@ public enum EyeStates
 
 public class ActivateEyes : MonoBehaviour
 {
-    ////////////////////////////////////////////////////////////////////////
-    // VARIABLES ===========================================================
+ ////////////////////////////////////////////////////////////////////////
+ // VARIABLES ===========================================================
     [HideInInspector]
     public EyeStates status;
     [HideInInspector]
@@ -78,12 +78,11 @@ public class ActivateEyes : MonoBehaviour
     private UnityEvent activateEvent;
     [SerializeField]
     private UnityEvent spottedEvent;
-    // *********************************************************************
+ // *********************************************************************
 
 
-
-    ////////////////////////////////////////////////////////////////////////
-    // AWAKE ===============================================================
+ ////////////////////////////////////////////////////////////////////////
+ // AWAKE ===============================================================
     void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -91,8 +90,8 @@ public class ActivateEyes : MonoBehaviour
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // START ===============================================================
+ ////////////////////////////////////////////////////////////////////////
+ // START ===============================================================
     void Start()
     {
         SelectNewTime();
@@ -105,8 +104,8 @@ public class ActivateEyes : MonoBehaviour
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // UPDATE ==============================================================
+ ////////////////////////////////////////////////////////////////////////
+ // UPDATE ==============================================================
     void Update()
     {
         // Closed
@@ -140,8 +139,8 @@ public class ActivateEyes : MonoBehaviour
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // SLEEP ===============================================================
+ ////////////////////////////////////////////////////////////////////////
+ // SLEEP ===============================================================
     void Sleep()
     {
         // If the eyes just closed...
@@ -171,8 +170,8 @@ public class ActivateEyes : MonoBehaviour
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // BEGIN WAKE ==========================================================
+ ////////////////////////////////////////////////////////////////////////
+ // BEGIN WAKE ==========================================================
     void BeginWake()
     {
         // If we just entered this state...
@@ -201,8 +200,8 @@ public class ActivateEyes : MonoBehaviour
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // ACTIVATE ============================================================
+ ////////////////////////////////////////////////////////////////////////
+ // ACTIVATE ============================================================
     void Activate()
     {
         // If the eyes just opened...
@@ -242,9 +241,9 @@ public class ActivateEyes : MonoBehaviour
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // KILL CHECK ==========================================================
-    // Returns true if the player or partner is visible.
+ ////////////////////////////////////////////////////////////////////////
+ // KILL CHECK ==========================================================
+ // Returns true if the player or partner is visible.
     bool KillCheck()
     {
         // Temp variable
@@ -290,64 +289,17 @@ public class ActivateEyes : MonoBehaviour
                 // Look at the player if they are visible
                 if (playerHidden == false)
                 {
-                    // Left
-                    if (Player.transform.position.x <= Eyes[i].transform.position.x)
-                    {
-                        // Top
-                        if(Player.transform.position.y >= Eyes[i].transform.position.y)
-                        {
-                            eyeAnim.Play("EyeballTopLeft");
-                        }
-                        else // Bottom
-                        {
-                            eyeAnim.Play("EyeballBottomLeft");
-                        }
-                    }
-                    else // Right
-                    {
-                        // Top
-                        if (Player.transform.position.y >= Eyes[i].transform.position.y)
-                        {
-                            eyeAnim.Play("EyeballTopRight");
-                        }
-                        else // Bottom
-                        {
-                            eyeAnim.Play("EyeballBottomRight");
-                        }
-                    }
+                    LookAtTarget(Player, Eyes[i], eyeAnim);
                 }
-                else // Only the partner must be visible, so look at them
+                // Only the partner must be visible, so look at them
+                else
                 {
-                    // Left
-                    if (Partner.transform.position.x <= Eyes[i].transform.position.x)
-                    {
-                        // Top
-                        if (Partner.transform.position.y >= Eyes[i].transform.position.y)
-                        {
-                            eyeAnim.Play("EyeballTopLeft");
-                        }
-                        else // Bottom
-                        {
-                            eyeAnim.Play("EyeballBottomLeft");
-                        }
-                    }
-                    else // Right
-                    {
-                        // Top
-                        if (Partner.transform.position.y >= Eyes[i].transform.position.y)
-                        {
-                            eyeAnim.Play("EyeballTopRight");
-                        }
-                        else // Bottom
-                        {
-                            eyeAnim.Play("EyeballBottomRight");
-                        }
-                    }
+                    LookAtTarget(Partner, Eyes[i], eyeAnim);
                 }
             }
-
             return true;
         }
+
         else
         {
             // If the player was previously visible...
@@ -366,19 +318,51 @@ public class ActivateEyes : MonoBehaviour
                 }
             }
         }
-
         return false;
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // SELECT NEW TIME =====================================================
-    // Pick a new random sleep time-period
+ ////////////////////////////////////////////////////////////////////////
+ // SELECT NEW TIME =====================================================
+ // Pick a new random sleep time-period
     void SelectNewTime()
     {
         seekTime = Random.Range(minSeek, maxSeek);
         maxTime = Random.Range(min, max);
         currTime = maxTime;
+    }
+
+
+ ////////////////////////////////////////////////////////////////////////
+ // LOOK AT TARGET ======================================================
+ // Make the eye's look at the highest prioritized visible target
+    void LookAtTarget(GameObject target, GameObject eye, Animator anim)
+    {
+        // Left
+        if (target.transform.position.x <= eye.transform.position.x)
+        {
+            // Top
+            if (target.transform.position.y >= eye.transform.position.y)
+            {
+                anim.Play("EyeballTopLeft");
+            }
+            else // Bottom
+            {
+                anim.Play("EyeballBottomLeft");
+            }
+        }
+        else // Right
+        {
+            // Top
+            if (target.transform.position.y >= eye.transform.position.y)
+            {
+                anim.Play("EyeballTopRight");
+            }
+            else // Bottom
+            {
+                anim.Play("EyeballBottomRight");
+            }
+        }
     }
 
 
