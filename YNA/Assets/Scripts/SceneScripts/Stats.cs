@@ -44,10 +44,6 @@ public class Stats : MonoBehaviour
     {
         // I dont remember why I needed to do this. I think it had to do with
         // making sure "on-trigger-stay" always worked. Doesnt cost much tho?
-        if (this.GetComponent<Rigidbody2D>().IsSleeping())
-        {
-            this.GetComponent<Rigidbody2D>().WakeUp();
-        }
 
         if (isDead)
         {

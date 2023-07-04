@@ -56,11 +56,18 @@ public class PartnerController : MonoBehaviour
     }
 
 
+
     ////////////////////////////////////////////////////////////////////////
     // FIXED UPDATE ========================================================
     void Update()
     {
         velocity = rb.velocity;
+              
+        //if (this.GetComponent<Rigidbody2D>().IsSleeping())
+        //{
+        //    this.GetComponent<Rigidbody2D>().WakeUp();
+        //}
+        
 
         //TODO:
         //check for what state to be in

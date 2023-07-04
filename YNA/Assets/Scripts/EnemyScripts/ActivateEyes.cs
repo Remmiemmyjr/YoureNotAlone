@@ -152,8 +152,6 @@ public class ActivateEyes : MonoBehaviour
 
             sleepEvent.Invoke();
 
-
-
             // Restart level music.
             GameObject.Find("MusicController").GetComponent<AudioSource>().Play();
         }
@@ -194,6 +192,7 @@ public class ActivateEyes : MonoBehaviour
         // Set the iamwatching mixer group level to 1.
         AudioMixer iamwatchingMG = iamwatching.outputAudioMixerGroup.audioMixer;
         iamwatchingMG.SetFloat(iamwatchingMGEP, 0.0f);
+
         // Set the iseeyou mixer group level to 0.
         AudioMixer iseeyouMG = iseeyou.outputAudioMixerGroup.audioMixer;
         iseeyouMG.SetFloat(iseeyouMGEP, -80.0f);
@@ -217,12 +216,14 @@ public class ActivateEyes : MonoBehaviour
             // Play both sounds.
             iamwatching.Play();
             iseeyou.Play();
+
             // Stop the level music.
             GameObject.Find("MusicController").GetComponent<AudioSource>().Stop();
 
             // Set the iamwatching mixer group level to 1.
             AudioMixer iamwatchingMG = iamwatching.outputAudioMixerGroup.audioMixer;
             iamwatchingMG.SetFloat(iamwatchingMGEP, 0.0f);
+
             // Set the iseeyou mixer group level to 0.
             AudioMixer iseeyouMG = iseeyou.outputAudioMixerGroup.audioMixer;
             iseeyouMG.SetFloat(iseeyouMGEP, -80.0f);
@@ -243,7 +244,7 @@ public class ActivateEyes : MonoBehaviour
 
  ////////////////////////////////////////////////////////////////////////
  // KILL CHECK ==========================================================
- // Returns true if the player or partner is visible.
+ // Returns true if the player or partner is visible, and acts accordingly.
     bool KillCheck()
     {
         // Temp variable
@@ -260,10 +261,13 @@ public class ActivateEyes : MonoBehaviour
             {
                 // Play ifoundyou
                 ifoundyou.Play();
+
                 spottedEvent.Invoke();
+
                 // Set the iamwatching mixer group level to 0.
                 AudioMixer iamwatchingMG = iamwatching.outputAudioMixerGroup.audioMixer;
                 iamwatchingMG.SetFloat(iamwatchingMGEP, -80.0f);
+
                 // Set the iseeyou mixer group level to 1.
                 AudioMixer iseeyouMG = iseeyou.outputAudioMixerGroup.audioMixer;
                 iseeyouMG.SetFloat(iseeyouMGEP, 0.0f);
@@ -272,9 +276,7 @@ public class ActivateEyes : MonoBehaviour
             // If timeInSight has depleted the gracePeriod, kill the player.
             if(timeInSight <= 0)
             {
-                Debug.Log("YOURE DEAD");
-                Player.GetComponent<Stats>().isDead = true;
-                Partner.GetComponent<Stats>().isDead = true;
+                GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>().isDead = true;
             }
             else
             {

@@ -95,6 +95,14 @@ public class PlayerController : MonoBehaviour
         CoyoteTime();
     }
 
+    //private void Update()
+    //{
+    //    if (this.GetComponent<Rigidbody2D>().IsSleeping())
+    //    {
+    //        this.GetComponent<Rigidbody2D>().WakeUp();
+    //    }
+    //}
+
 
     ////////////////////////////////////////////////////////////////////////
     // MOVEMENT ============================================================
