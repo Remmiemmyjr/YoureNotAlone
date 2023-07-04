@@ -1,3 +1,14 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: EyeEffects.cs
+// Author/s: Corbyn Lamar
+//
+// Desc: Tool for creating light flicker / pulse
+//
+// Last Edit: 7/3/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -3,6 +3,7 @@
 // File: ActivateEyes.cs
 // Author/s: Emmy Berg
 //           K Preston
+//           Corbyn Lamar
 //
 // Desc: Controls the Eyes states
 //
@@ -81,8 +82,6 @@ public class ActivateEyes : MonoBehaviour
 
 
 
-
-
     ////////////////////////////////////////////////////////////////////////
     // AWAKE ===============================================================
     void Awake()
@@ -104,6 +103,7 @@ public class ActivateEyes : MonoBehaviour
             profile.SetStatusSleeping();
         }
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // UPDATE ==============================================================
@@ -185,8 +185,6 @@ public class ActivateEyes : MonoBehaviour
             // Play goodmorning
             goodmorning.Play();
             wakeEvent.Invoke();
-
-
         }
 
         for (int i = 0; i < Eyes.Length; i++)
@@ -200,8 +198,6 @@ public class ActivateEyes : MonoBehaviour
         // Set the iseeyou mixer group level to 0.
         AudioMixer iseeyouMG = iseeyou.outputAudioMixerGroup.audioMixer;
         iseeyouMG.SetFloat(iseeyouMGEP, -80.0f);
-
-
     }
 
 
@@ -252,12 +248,14 @@ public class ActivateEyes : MonoBehaviour
     bool KillCheck()
     {
         // Temp variable
-        bool playerHidden = Player.GetComponent<Stats>().isHidden;
+        bool playerHidden = Player.GetComponent<Hide>().isHidden;
+        bool partnerHidden = Partner.GetComponent<Hide>().isHidden;
 
         // If the player or partner are visible...
-        if (playerHidden == false || Partner.GetComponent<Stats>().isHidden == false)
+        if (!playerHidden || !partnerHidden)
         {
             status = EyeStates.SEEN;
+
             // If they've just been spotted...
             if (!playerSpotted)
             {

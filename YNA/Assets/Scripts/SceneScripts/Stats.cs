@@ -23,8 +23,6 @@ public class Stats : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
     [HideInInspector]
-    public bool isHidden;
-    [HideInInspector]
     public bool isDead;
 
     // Transitions
@@ -56,6 +54,7 @@ public class Stats : MonoBehaviour
             StartCoroutine(TransitionSequence());
         }
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // TRANSITION ==========================================================

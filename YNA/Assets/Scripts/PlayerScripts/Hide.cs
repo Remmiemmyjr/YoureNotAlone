@@ -18,14 +18,17 @@ using UnityEngine;
 
 public class Hide : MonoBehaviour
 {
+    [HideInInspector]
+    public bool isHidden;
+
     ////////////////////////////////////////////////////////////////////////
     // TRIGGER ENTER =======================================================
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Partner")
+        if (collision.gameObject.tag == "Hideable")
         {
-            collision.gameObject.GetComponent<Stats>().isHidden = true;
-            collision.gameObject.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
+            isHidden = true;
+            GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
         }
     }
 
@@ -34,10 +37,10 @@ public class Hide : MonoBehaviour
     // TRIGGER EXIT ========================================================
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Partner")
+        if (collision.gameObject.tag == "Hideable")
         {
-            collision.gameObject.GetComponent<Stats>().isHidden = false;
-            collision.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            isHidden = false;
+            GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
 }

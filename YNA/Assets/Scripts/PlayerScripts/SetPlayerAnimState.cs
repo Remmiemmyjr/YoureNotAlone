@@ -128,7 +128,7 @@ public class SetPlayerAnimState : MonoBehaviour
     // CHECK HIDING ========================================================
     void CheckHide()
     {
-        if (gameObject.GetComponent<Stats>().isHidden == true)
+        if (gameObject.GetComponent<Hide>().isHidden == true)
         {
             state_next = PlayerStates.cHiding;
         }

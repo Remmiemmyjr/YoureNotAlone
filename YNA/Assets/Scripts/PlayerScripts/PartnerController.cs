@@ -23,7 +23,6 @@ public class PartnerController : MonoBehaviour
     private PartnerStates state_curr;
     private PartnerStates state_next;
 
-
     public Transform groundObject;
     public LayerMask layer;
 
@@ -194,7 +193,7 @@ public class PartnerController : MonoBehaviour
     // CHECK HIDING =========================================================
     void CheckHide()
     {
-        if(gameObject.GetComponent<Stats>().isHidden == true)
+        if(gameObject.GetComponent<Hide>().isHidden == true)
         {
             state_next = PartnerStates.cHiding;
         }
@@ -205,7 +204,7 @@ public class PartnerController : MonoBehaviour
     void CheckSeen()
     {
         //change to seen check
-        if(gameObject.GetComponent<Stats>().isHidden == true)
+        if(gameObject.GetComponent<Hide>().isHidden == true)
         {
             state_next = PartnerStates.cHiding;
         }

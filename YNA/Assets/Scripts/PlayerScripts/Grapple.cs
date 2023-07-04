@@ -2,6 +2,7 @@
 // Project: We're Tethered Together
 // File: Grapple.cs
 // Author/s: Emmy Berg
+//           Corbyn Lamar
 //
 // Desc: Rope controls & actions for player
 //
