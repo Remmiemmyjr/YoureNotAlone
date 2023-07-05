@@ -12,10 +12,7 @@
 //
 //*************************************************
 
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using UnityEditor;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -76,6 +73,7 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(dir.x) > 0.65)
         {
             rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
+            
         }
         else
         {
@@ -87,10 +85,19 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (dir.x == 0 || !IsGrounded())
+        if (IsStopped() && IsGrounded())
         {
+            animState.SetNextState(SetPlayerAnimState.PlayerStates.cIdle);
             StopDustParticles();
+
         }
+        if (!IsGrounded())
+        {
+            animState.SetNextState(SetPlayerAnimState.PlayerStates.cIdle);
+            StopDustParticles();
+            
+        }
+        
 
         CoyoteTime();
     }
@@ -109,6 +116,7 @@ public class PlayerController : MonoBehaviour
     public void Movement(InputAction.CallbackContext ctx)
     {
         dir.x = ctx.ReadValue<float>();
+       
 
         animState.SetNextState(SetPlayerAnimState.PlayerStates.cWalk);
 
@@ -226,6 +234,12 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
     }
 
+    ////////////////////////////////////////////////////////////////////////
+    // IS STOPPED =========================================================
+    public bool IsStopped()
+    {
+        return Math.Abs(dir.x) < 0.1f;
+    }
 
     ////////////////////////////////////////////////////////////////////////
     // PARTICLES ===========================================================

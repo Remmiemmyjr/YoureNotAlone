@@ -65,6 +65,8 @@ public class SetPlayerAnimState : MonoBehaviour
     // FIXED UPDATE ========================================================
     void FixedUpdate()
     {
+        check_velocity_y();
+
         state_curr = state_next;
         
         //player state machine
@@ -143,12 +145,6 @@ public class SetPlayerAnimState : MonoBehaviour
     // IS IDLING ===========================================================
     private void do_idle()
     {
-        //will take care of state change
-        //also checks for vertical movement
-        if (check_velocity_y())
-        {
-            return;
-        }
         player_idle.Invoke();
     }
 
@@ -156,17 +152,6 @@ public class SetPlayerAnimState : MonoBehaviour
     // IS WALKING ==========================================================
     private void do_walk()
     {
-        //if not walking anymore
-        if (pc.dir.x == 0.0f)
-        {
-            state_next = PlayerStates.cIdle;
-            return;
-        }
-        //will take care of state change
-        else if (check_velocity_y())
-        {
-            return;
-        }
         //set walking animation
         player_walk.Invoke();
     }
@@ -176,7 +161,6 @@ public class SetPlayerAnimState : MonoBehaviour
     private void do_jump()
     {
         //checks for vertical movement
-        check_velocity_y();
         player_jump.Invoke();
     }
 
@@ -192,7 +176,8 @@ public class SetPlayerAnimState : MonoBehaviour
         }
         else
         {
-            state_next = PlayerStates.cWalk;
+
+            state_next = PlayerStates.cIdle;
         }
     }
 

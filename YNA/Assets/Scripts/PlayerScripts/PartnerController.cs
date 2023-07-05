@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -159,7 +158,7 @@ public class PartnerController : MonoBehaviour
     // CHECK WALK ==========================================================
     void CheckWalk()
     {
-        if ((velocity.x > 0.2f || velocity.x < -0.2f) && velocity.y < 0.2f && velocity.y > -0.2f)
+        if (!IsStopped())
         {
             state_next = PartnerStates.cWalk;
         }
@@ -169,7 +168,7 @@ public class PartnerController : MonoBehaviour
     // CHECK JUMP ==========================================================
     void CheckJump()
     {
-        if (velocity.y > 0.2f && velocity.y != 0.0f)
+        if (velocity.y > 0.05f && velocity.y != 0.0f)
         {
             state_next = PartnerStates.cJump;
 
@@ -180,7 +179,7 @@ public class PartnerController : MonoBehaviour
     // CHECK FALL ==========================================================
     void CheckFall()
     {
-        if (velocity.y < -0.2f && velocity.y != 0.0f && !IsGrounded())
+        if (velocity.y < -0.05f && velocity.y != 0.0f && !IsGrounded())
         {
             state_next = PartnerStates.cFall;
         }
@@ -190,7 +189,7 @@ public class PartnerController : MonoBehaviour
     // CHECK IDLE ==========================================================
     void CheckIdle()
     {
-        if (velocity.x == 0.0f && velocity.y == 0.0f)
+        if (IsStopped())
         {
             state_next = PartnerStates.cIdle;
         }
@@ -217,6 +216,12 @@ public class PartnerController : MonoBehaviour
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////
+    // IS STOPPED =========================================================
+    public bool IsStopped()
+    {
+        return Math.Abs(velocity.x) < 0.05f;
+    }
 
     //***********************************************************************************
     // STATE MACHINE ACTIONS ============================================================
@@ -235,7 +240,7 @@ public class PartnerController : MonoBehaviour
     private void do_walk()
     {
         //if not walking anymore
-        if ((velocity.x < 0.5f && velocity.x > -0.5f) && velocity.y < 0.5f && velocity.y > -0.5f)
+        if (IsStopped())
         {
             state_next = PartnerStates.cIdle;
             return;

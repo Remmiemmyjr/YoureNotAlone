@@ -53,6 +53,7 @@ public class AnimationManager : MonoBehaviour
     // UPDATE ==============================================================
     void Update()
     {
+        SetFlip();
 
     }
 
@@ -64,12 +65,12 @@ public class AnimationManager : MonoBehaviour
         float velX = gameObject.GetComponent<Rigidbody2D>().velocity.x;
 
         //check if moving left
-        if (velX >= 0.05f)
+        if (velX >= 0.02f)
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
         //check if moving right
-        if (velX <= -0.05f)
+        if (velX <= -0.02f)
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
@@ -82,7 +83,6 @@ public class AnimationManager : MonoBehaviour
     public void SetStateWalk()
     {
         //flip to face the correct direction
-        SetFlip();
         animator.Play(currChar + "_Walk");
 
     }
@@ -91,6 +91,7 @@ public class AnimationManager : MonoBehaviour
     // SET STATE JUMP ==========================================================
     public void SetStateJump()
     {
+        
         animator.Play(currChar + "_Jump");
     }
 
