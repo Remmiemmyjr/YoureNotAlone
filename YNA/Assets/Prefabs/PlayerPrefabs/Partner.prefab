@@ -239,6 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83448ee91cca42e46bceca7f86c8c388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state_next: 0
   groundObject: {fileID: 2277467395821205536}
   layer:
     serializedVersion: 2
@@ -308,7 +309,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2277467395215038048}
         m_TargetAssemblyTypeName: AnimationManager, Assembly-CSharp
-        m_MethodName: SetStateIdle
+        m_MethodName: SetStateHide
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

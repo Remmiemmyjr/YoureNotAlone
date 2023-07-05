@@ -20,7 +20,8 @@ public class PartnerController : MonoBehaviour
     }
 
     private PartnerStates state_curr;
-    private PartnerStates state_next;
+    [HideInInspector]
+    public PartnerStates state_next;
 
     public Transform groundObject;
     public LayerMask layer;
@@ -60,13 +61,7 @@ public class PartnerController : MonoBehaviour
     // FIXED UPDATE ========================================================
     void Update()
     {
-        velocity = rb.velocity;
-              
-        //if (this.GetComponent<Rigidbody2D>().IsSleeping())
-        //{
-        //    this.GetComponent<Rigidbody2D>().WakeUp();
-        //}
-        
+        velocity = rb.velocity;        
 
         //TODO:
         //check for what state to be in
@@ -189,7 +184,7 @@ public class PartnerController : MonoBehaviour
     // CHECK IDLE ==========================================================
     void CheckIdle()
     {
-        if (IsStopped())
+        if (IsStopped() && gameObject.GetComponent<Hide>().isHidden == false)
         {
             state_next = PartnerStates.cIdle;
         }

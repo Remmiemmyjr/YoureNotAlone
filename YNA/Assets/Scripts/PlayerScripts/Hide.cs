@@ -29,6 +29,18 @@ public class Hide : MonoBehaviour
         {
             isHidden = true;
             GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
+            
+            if(gameObject.GetComponent<Rigidbody2D>().velocity == Vector2.zero)
+            {
+                if (gameObject.tag == "Player")
+                {
+                    gameObject.GetComponent<SetPlayerAnimState>().SetNextState(SetPlayerAnimState.PlayerStates.cHiding);
+                }
+                else
+                {
+                    gameObject.GetComponent<PartnerController>().state_next = PartnerController.PartnerStates.cHiding;
+                }
+            }
         }
     }
 

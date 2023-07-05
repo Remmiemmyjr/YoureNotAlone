@@ -116,7 +116,7 @@ public class SetPlayerAnimState : MonoBehaviour
                 }
         }
 
-        CheckHide();
+        //CheckHide();
     }
 
     ////////////////////////////////////////////////////////////////////////

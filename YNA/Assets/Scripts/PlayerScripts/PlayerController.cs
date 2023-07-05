@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (IsStopped() && IsGrounded())
+        if (IsStopped() && IsGrounded() && !(gameObject.GetComponent<Hide>().isHidden))
         {
             animState.SetNextState(SetPlayerAnimState.PlayerStates.cIdle);
             StopDustParticles();
@@ -93,22 +93,12 @@ public class PlayerController : MonoBehaviour
         }
         if (!IsGrounded())
         {
-            animState.SetNextState(SetPlayerAnimState.PlayerStates.cIdle);
+            animState.SetNextState(SetPlayerAnimState.PlayerStates.cFall);
             StopDustParticles();
-            
         }
-        
 
         CoyoteTime();
     }
-
-    //private void Update()
-    //{
-    //    if (this.GetComponent<Rigidbody2D>().IsSleeping())
-    //    {
-    //        this.GetComponent<Rigidbody2D>().WakeUp();
-    //    }
-    //}
 
 
     ////////////////////////////////////////////////////////////////////////
@@ -117,7 +107,6 @@ public class PlayerController : MonoBehaviour
     {
         dir.x = ctx.ReadValue<float>();
        
-
         animState.SetNextState(SetPlayerAnimState.PlayerStates.cWalk);
 
         EmitParticles(dir);
