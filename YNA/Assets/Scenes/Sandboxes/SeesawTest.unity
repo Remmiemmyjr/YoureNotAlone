@@ -2935,7 +2935,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7780488, y: 1}
+    m_SensorSize: {x: 2.1267252, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -9271,7 +9271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1239543602}
   m_LocalRotation: {x: -9.494824e-16, y: -0.0000000234804, z: -2.2294227e-23, w: 1}
-  m_LocalPosition: {x: 0.736537, y: -0.984169, z: -10}
+  m_LocalPosition: {x: 2.4799213, y: -0.98380136, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9638,31 +9638,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1375759415 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2277467395175042710, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
-  m_PrefabInstance: {fileID: 2277467396068047623}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1375759418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1375759415}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e005f26c21aaed458c62f7dabde3cd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flickerRadius: 1
-  lightFlickerRadiusRate: 1
-  radiusBase: 20
-  radiusHighEnd: 1
-  flickerIntensity: 1
-  lightFlickerIntensityRate: 1
-  intensityBase: 0.7
-  intensityHighEnd: 1
 --- !u!1 &1379132217
 GameObject:
   m_ObjectHideFlags: 3
@@ -10894,5 +10869,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5817286688752472058, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
