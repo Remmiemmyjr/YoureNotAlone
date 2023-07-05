@@ -73,7 +73,6 @@ public class PartnerController : MonoBehaviour
         CheckSeen();
         CheckIdle();
 
-
         //set state
         state_curr = state_next;
 
@@ -153,7 +152,7 @@ public class PartnerController : MonoBehaviour
     // CHECK WALK ==========================================================
     void CheckWalk()
     {
-        if (!IsStopped())
+        if (!IsStopped() && IsGrounded())
         {
             state_next = PartnerStates.cWalk;
         }
@@ -174,7 +173,7 @@ public class PartnerController : MonoBehaviour
     // CHECK FALL ==========================================================
     void CheckFall()
     {
-        if (velocity.y < -0.05f && velocity.y != 0.0f && !IsGrounded())
+        if (!IsGrounded() && (velocity.y < -0.05f || velocity.y != 0.0f))
         {
             state_next = PartnerStates.cFall;
         }
@@ -184,7 +183,7 @@ public class PartnerController : MonoBehaviour
     // CHECK IDLE ==========================================================
     void CheckIdle()
     {
-        if (IsStopped() && gameObject.GetComponent<Hide>().isHidden == false)
+        if (IsStopped() && gameObject.GetComponent<Hide>().isHidden == false && IsGrounded())
         {
             state_next = PartnerStates.cIdle;
         }
@@ -194,7 +193,7 @@ public class PartnerController : MonoBehaviour
     // CHECK HIDING =========================================================
     void CheckHide()
     {
-        if(gameObject.GetComponent<Hide>().isHidden == true)
+        if(gameObject.GetComponent<Hide>().isHidden && IsStopped())
         {
             state_next = PartnerStates.cHiding;
         }
@@ -272,17 +271,22 @@ public class PartnerController : MonoBehaviour
             partner_falling.Invoke();
 
         }
-        else
-        {
-            state_next = PartnerStates.cWalk;
-        }
+        //else
+        //{
+        //    state_next = PartnerStates.cWalk;
+        //}
     }
 
     ////////////////////////////////////////////////////////////////////////
     // IS HIDING =========================================================
     private void do_hide()
     {
-        partner_hide.Invoke();
+        if (IsStopped())
+        {
+            partner_hide.Invoke();
+        }
+
+        state_next = PartnerStates.cWalk;
 
         //set animation state to hiding
     }
