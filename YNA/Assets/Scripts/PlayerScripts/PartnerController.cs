@@ -173,7 +173,7 @@ public class PartnerController : MonoBehaviour
     // CHECK FALL ==========================================================
     void CheckFall()
     {
-        if (!IsGrounded() && (velocity.y < -0.05f || velocity.y != 0.0f))
+        if (!IsGrounded() && (velocity.y < -0.05f && velocity.y != 0.0f))
         {
             state_next = PartnerStates.cFall;
         }
