@@ -42,10 +42,11 @@ public class Grapple : MonoBehaviour
     [HideInInspector]
     public bool isTethered;
     [HideInInspector]
-    public bool latching;
+    public bool canLatch;
 
     bool isExtending;
     bool isReeling;
+    bool isLatching;
     // *********************************************************************
 
 
@@ -126,17 +127,31 @@ public class Grapple : MonoBehaviour
     {
         if (ctx.performed)
         {
-            if (currDist <= (maxLimit + 1) && !target.enabled)
+            if (!canLatch)
             {
-                target.enabled = true;
-                line.enabled = true;
-                isTethered = true;
+                if (currDist <= (maxLimit + 1) && !target.enabled)
+                {
+                    target.enabled = true;
+                    line.enabled = true;
+                    isTethered = true;
+                }
+                else
+                {
+                    target.enabled = false;
+                    line.enabled = false;
+                    isTethered = false;
+                }
             }
             else
             {
-                target.enabled = false;
-                line.enabled = false;
-                isTethered = false;
+                if(isLatching)
+                {
+                    isLatching = false;
+                }
+                else
+                {
+                    isLatching = true;
+                }
             }
         }
     }
