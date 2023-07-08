@@ -8153,14 +8153,6 @@ MonoBehaviour:
     m_ActionName: Gameplay/Extend[/Keyboard/shift]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: e53cc3a9-cbf0-4867-8e8f-6e552b9ba4d8
-    m_ActionName: Gameplay/Pause[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: aad7258b-cfe7-4264-a5d9-adf6be6156be
-    m_ActionName: Gameplay/Reset[/Keyboard/r]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 3ca268a6-a8ec-4789-9179-bec90c176e07
     m_ActionName: Gameplay/Progress[/Keyboard/enter]
   - m_PersistentCalls:
@@ -8175,6 +8167,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 2780fdc2-064d-41ae-bf94-7b6ee9d1661f
     m_ActionName: UI/Confirm[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c694695-bdc6-4985-9b61-5deb7e23d05b
+    m_ActionName: Scene/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 82ce5d1a-f46c-4ee3-be02-63874c0139a1
+    m_ActionName: Scene/Reset[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -8199,6 +8199,7 @@ MonoBehaviour:
   reelSpeed: 1.55
   airReelSpeed: 1
   isTethered: 0
+  canLatch: 0
 --- !u!120 &1454732877
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -8219,7 +8220,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a1bfdb313ef7d8f41876b5be31bb515b, type: 2}
+  - {fileID: 2100000, guid: 44011b38e44c5774bb8dda6be9542ef3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
