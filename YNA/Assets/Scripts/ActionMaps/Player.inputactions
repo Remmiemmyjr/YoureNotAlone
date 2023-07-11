@@ -58,6 +58,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "e43f9b79-5646-438b-a2f9-19f42d1fb299",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reset",
+                    "type": "Button",
+                    "id": "7bb1ffa5-6642-4aed-9e00-acfacc3421c0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -250,6 +268,17 @@
                 },
                 {
                     "name": "",
+                    "id": "f7a86fb7-8ee4-450a-88e1-10ae41fcd09e",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Progress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d96a69b7-5a7c-4f5e-aadb-a68b42fc2b9d",
                     "path": "<Keyboard>/enter",
                     "interactions": "",
@@ -267,6 +296,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Progress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c0f23320-6d9c-4f12-bb11-3a2dd00755a4",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3aa61a2a-b61f-4feb-9aa0-74110dafee8e",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "448032ca-e289-4950-a5aa-24fbd2e42cd9",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6eeed8e0-11bf-41e7-ab69-77de581582a5",
+                    "path": "<Keyboard>/#(R)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reset",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -409,72 +482,8 @@
         {
             "name": "Scene",
             "id": "8cfafcf4-3856-42dc-9caa-0c68c5975d1c",
-            "actions": [
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "3c694695-bdc6-4985-9b61-5deb7e23d05b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Reset",
-                    "type": "Button",
-                    "id": "82ce5d1a-f46c-4ee3-be02-63874c0139a1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "5dd029f0-0854-4db8-b525-9ac38a8f6f16",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "457b4ac8-ef71-4ef5-a44c-802587b7f52e",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "508cc88a-3cef-4ead-97fe-7ae4a9ed1e02",
-                    "path": "<Gamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reset",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0593348d-3ce3-44c4-bcf4-7867ecaa8473",
-                    "path": "<Keyboard>/#(R)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reset",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": []

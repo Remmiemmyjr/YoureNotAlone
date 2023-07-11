@@ -151,7 +151,8 @@ public class PlayerController : MonoBehaviour
     // RESET =============================================================
     public void Reset(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        // Action performed and not in a cutscene
+        if (ctx.performed && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
         {
             GetComponent<Stats>().isDead = true;
         }
@@ -162,7 +163,8 @@ public class PlayerController : MonoBehaviour
     // PAUSE =============================================================
     public void Pause(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        // Action performed and not in a cutscene
+        if (ctx.performed && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
         {
             // Paused -> Unpaused
             if(isPaused)
@@ -199,6 +201,21 @@ public class PlayerController : MonoBehaviour
 
                 // Set paused timescale
                 Time.timeScale = 0;
+            }
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // PROGRESS ============================================================
+    public void Progress(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            GameObject cutCanv = GameObject.FindGameObjectWithTag("CutsceneCanvas"); 
+
+            if(cutCanv)
+            {
+                cutCanv.GetComponent<CutsceneManager>().SkipCutsceneFrame();
             }
         }
     }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 783348941237856851}
   - component: {fileID: 783348941237856848}
   - component: {fileID: 783348941237856861}
+  - component: {fileID: 8912678965732319839}
   - component: {fileID: 783348941237856850}
   - component: {fileID: 436255601252183364}
   - component: {fileID: 783348941237856857}
@@ -120,6 +121,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &8912678965732319839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783348941237856849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b38dbda957ac02545a4bce822f867ff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDead: 0
 --- !u!114 &783348941237856850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +266,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 783348941237856850}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: Pause
+        m_MethodName: Progress
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -262,26 +276,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: e53cc3a9-cbf0-4867-8e8f-6e552b9ba4d8
-    m_ActionName: Gameplay/Pause[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 783348941237856850}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: Reset
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: aad7258b-cfe7-4264-a5d9-adf6be6156be
-    m_ActionName: Gameplay/Reset[/Keyboard/r]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 3ca268a6-a8ec-4789-9179-bec90c176e07
     m_ActionName: Gameplay/Progress[/Keyboard/enter]
   - m_PersistentCalls:
@@ -296,6 +290,38 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 2780fdc2-064d-41ae-bf94-7b6ee9d1661f
     m_ActionName: UI/Confirm[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 783348941237856850}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e43f9b79-5646-438b-a2f9-19f42d1fb299
+    m_ActionName: Gameplay/Pause[/XInputControllerWindows/start,/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 783348941237856850}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Reset
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7bb1ffa5-6642-4aed-9e00-acfacc3421c0
+    m_ActionName: Gameplay/Reset[/XInputControllerWindows/select,/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

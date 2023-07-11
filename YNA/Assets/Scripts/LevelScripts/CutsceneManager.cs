@@ -1,0 +1,207 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: CutsceneManager.cs
+// Author/s: Corbyn LaMar
+//
+// Desc: Manages the cutscenes associated with the
+//       current scene.
+//
+// Notes:
+// - 
+//
+// Last Edit: 7/10/2023
+//
+//*************************************************
+
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+public class CutsceneManager : MonoBehaviour
+{
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
+    public Cutscene[] cutscenes;
+    private Cutscene activeCutscene;
+
+    private Image cutsceneCanvasFrame;
+
+    private bool isCurrentlyPlaying = false;
+    private int currentFrameIndex = 0;
+    private float cutsceneTimer = 0.0f;
+    private bool skipFrame = false;
+
+    private bool isStartCutscene = false;
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
+    void Start()
+    {
+        // Get the canvas to play cutscenes on
+        cutsceneCanvasFrame = GetComponentInChildren<Image>();
+
+        // If a cutscene is to play when the scene is loaded, then trigger it
+        foreach (Cutscene currCutscene in cutscenes)
+        {
+            if (currCutscene.playOnSceneStart)
+            {
+                isStartCutscene = true;
+
+                activeCutscene = currCutscene;
+
+                StartCutscene();
+            }
+        }
+
+        if (isStartCutscene == false)
+        {
+            GameObject.FindGameObjectWithTag("Transition").GetComponentInChildren<Animator>().SetTrigger("SceneStart");
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // UPDATE ==============================================================
+    void Update()
+    {
+        // Make sure something is playing
+        if (isCurrentlyPlaying && activeCutscene != null)
+        {
+            // Update cutscene time
+            cutsceneTimer += Time.deltaTime;
+
+            // Check if the timer has elapsed
+            if (cutsceneTimer >= activeCutscene.timeBetween || skipFrame)
+            {
+                // Reset timer and possible frame skip
+                cutsceneTimer = 0.0f;
+                skipFrame = false;
+
+                // Advance or end cutscene
+                if (currentFrameIndex < activeCutscene.frames.Length - 1)
+                {
+                    currentFrameIndex++;
+
+                    cutsceneCanvasFrame.sprite = activeCutscene.frames[currentFrameIndex];
+                }
+                else
+                {
+                    FinishCutscene();
+                }
+            }
+        }
+    }
+
+
+    //----------------------------------------------------------------------
+    // PRIVATE FUNCTIONS
+    //----------------------------------------------------------------------
+
+    ////////////////////////////////////////////////////////////////////////
+    // START CUTSCENE ======================================================
+    private void StartCutscene()
+    {
+        // Update sprite
+        cutsceneCanvasFrame.sprite = activeCutscene.frames[currentFrameIndex];
+
+        // Turn on canvas image for cutscene play
+        cutsceneCanvasFrame.enabled = true;
+
+        // Update variables
+        isCurrentlyPlaying = true;
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // FINISH CUTSCENE =====================================================
+    private void FinishCutscene()
+    {
+        // Update variables
+        isCurrentlyPlaying = false;
+
+        // Turn on canvas image for cutscene play
+        cutsceneCanvasFrame.enabled = false;
+
+        // If marked to be at the end of a scene, advance
+        if(activeCutscene.nextSceneOnFinish)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
+        }
+        else
+        {
+            // If coming from cutscene into the level, transition
+            if (activeCutscene.playOnSceneStart)
+            {
+                GameObject.FindGameObjectWithTag("Transition").GetComponentInChildren<Animator>().SetTrigger("SceneStart");
+            }
+
+            // Reset active cutscene
+            activeCutscene = null;
+        }
+    }
+
+
+    //----------------------------------------------------------------------
+    // PUBLIC FUNCTIONS
+    //----------------------------------------------------------------------
+
+    ////////////////////////////////////////////////////////////////////////
+    // TRIGGER CUTSCENE ====================================================
+    public void TriggerCutscene(string name)
+    {
+        //--- Function for use with cutscene trigger areas ---//
+
+        foreach (Cutscene currCutscene in cutscenes)
+        {
+            if (currCutscene.name == name)
+            {
+                activeCutscene = currCutscene;
+
+                StartCutscene();
+
+                break;
+            }
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // SKIP CUTSCENE FRAME =================================================
+    public void SkipCutsceneFrame()
+    {
+        // Make sure a cutscene is playing
+        if (isCurrentlyPlaying)
+        {
+            skipFrame = true;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // GET IS PLAYING ======================================================
+    public bool GetIsCurrentlyPlaying()
+    {
+        return isCurrentlyPlaying;
+    }
+}
+
+//=================================================================================
+// Cutscene Class
+//=================================================================================
+[Serializable]
+public class Cutscene
+{
+    [SerializeField]
+    public string name;
+
+    [SerializeField]
+    public Sprite[] frames;
+
+    [SerializeField]
+    public bool playOnSceneStart = false;
+
+    [SerializeField]
+    public bool nextSceneOnFinish = false;
+
+    [SerializeField]
+    public float timeBetween = 5.0f;
+}
