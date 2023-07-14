@@ -9,7 +9,7 @@
 // Notes:
 // - 
 //
-// Last Edit: 7/10/2023
+// Last Edit: 7/14/2023
 //
 //*************************************************
 
@@ -17,15 +17,21 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class CutsceneManager : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
+    
+    // Cutscene Items
     public Cutscene[] cutscenes;
     private Cutscene activeCutscene;
 
     private Image cutsceneCanvasFrame;
+    private Image cutsceneCanvasTimer;
 
     private bool isCurrentlyPlaying = false;
     private int currentFrameIndex = 0;
@@ -34,13 +40,31 @@ public class CutsceneManager : MonoBehaviour
 
     private bool isStartCutscene = false;
 
+    // Post Processing Items
+    Volume globalVolume;
+    VolumeProfile volProf;
+    Bloom bloom;
+    Vignette vignette;
+    ChromaticAberration chromatic;
+    FilmGrain filmGrain;
+
 
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
     void Start()
     {
+        // Get the objects needed for post processing effects
+        globalVolume = GetComponent<Volume>();
+        volProf = globalVolume.profile;
+
+        volProf.TryGet<Bloom>(out bloom);
+        volProf.TryGet<Vignette>(out vignette);
+        volProf.TryGet<ChromaticAberration>(out chromatic);
+        volProf.TryGet<FilmGrain>(out filmGrain);
+
         // Get the canvas to play cutscenes on
-        cutsceneCanvasFrame = GetComponentInChildren<Image>();
+        cutsceneCanvasFrame = transform.Find("Frame").GetComponent<Image>();
+        cutsceneCanvasTimer = transform.Find("Timer").GetComponent<Image>();
 
         // If a cutscene is to play when the scene is loaded, then trigger it
         foreach (Cutscene currCutscene in cutscenes)
@@ -52,6 +76,7 @@ public class CutsceneManager : MonoBehaviour
                 activeCutscene = currCutscene;
 
                 StartCutscene();
+                ProcessCutsceneEffects();
             }
         }
 
@@ -84,11 +109,21 @@ public class CutsceneManager : MonoBehaviour
                 {
                     currentFrameIndex++;
 
-                    cutsceneCanvasFrame.sprite = activeCutscene.frames[currentFrameIndex];
+                    cutsceneCanvasFrame.sprite = activeCutscene.frames[currentFrameIndex].frameImage;
+
+                    ProcessCutsceneEffects();
                 }
                 else
                 {
                     FinishCutscene();
+                }
+            }
+            else
+            {
+                // Update the timer UI
+                if(cutsceneCanvasTimer)
+                {
+                    cutsceneCanvasTimer.fillAmount = 1.0f - (cutsceneTimer / activeCutscene.timeBetween);
                 }
             }
         }
@@ -104,13 +139,25 @@ public class CutsceneManager : MonoBehaviour
     private void StartCutscene()
     {
         // Update sprite
-        cutsceneCanvasFrame.sprite = activeCutscene.frames[currentFrameIndex];
+        cutsceneCanvasFrame.sprite = activeCutscene.frames[currentFrameIndex].frameImage;
 
-        // Turn on canvas image for cutscene play
-        cutsceneCanvasFrame.enabled = true;
+        // Ensure they exist
+        if (cutsceneCanvasFrame && cutsceneCanvasTimer)
+        {
+            // Turn on canvas image for cutscene play
+            cutsceneCanvasFrame.enabled = true;
+            cutsceneCanvasTimer.enabled = true;
+        }
 
         // Update variables
         isCurrentlyPlaying = true;
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // PROCESS CUTSCENE ====================================================
+    private void ProcessCutsceneEffects()
+    {
+        
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -120,11 +167,16 @@ public class CutsceneManager : MonoBehaviour
         // Update variables
         isCurrentlyPlaying = false;
 
-        // Turn on canvas image for cutscene play
-        cutsceneCanvasFrame.enabled = false;
+        // Ensure they exist
+        if (cutsceneCanvasFrame && cutsceneCanvasTimer)
+        {
+            // Turn off canvas image for cutscene
+            cutsceneCanvasFrame.enabled = false;
+            cutsceneCanvasTimer.enabled = false;
+        }
 
         // If marked to be at the end of a scene, advance
-        if(activeCutscene.nextSceneOnFinish)
+        if (activeCutscene.nextSceneOnFinish)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
         }
@@ -194,7 +246,7 @@ public class Cutscene
     public string name;
 
     [SerializeField]
-    public Sprite[] frames;
+    public FrameData[] frames;
 
     [SerializeField]
     public bool playOnSceneStart = false;
@@ -204,4 +256,17 @@ public class Cutscene
 
     [SerializeField]
     public float timeBetween = 5.0f;
+}
+
+//=================================================================================
+// Frame Class
+//=================================================================================
+[Serializable]
+public class FrameData
+{
+    [SerializeField]
+    public Sprite frameImage;
+
+    [SerializeField]
+    public CameraFX camFX;
 }
