@@ -147,10 +147,12 @@ public class Grapple : MonoBehaviour
                 if(isLatching)
                 {
                     isLatching = false;
+                    partner.transform.Find("LatchRadius").GetComponent<Latch>().ReleaseObject();
                 }
                 else
                 {
                     isLatching = true;
+                    partner.transform.Find("LatchRadius").GetComponent<Latch>().GrabObject();
                 }
             }
         }
