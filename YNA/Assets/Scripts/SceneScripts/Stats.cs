@@ -34,7 +34,7 @@ public class Stats : MonoBehaviour
     // START ===============================================================
     void Start()
     {
-        transitionCanvas = GameObject.FindWithTag("Transition").GetComponentInChildren<Animator>();
+        transitionCanvas = GameObject.FindWithTag("Transition")?.GetComponentInChildren<Animator>();
     }
 
 
