@@ -249,7 +249,10 @@ public class ActivateEyes : MonoBehaviour
     {
         // Temp variable
         bool playerHidden = Player.GetComponent<Hide>().isHidden;
-        bool partnerHidden = Partner.GetComponent<Hide>().isHidden;
+        bool partnerHidden = true;
+
+        if (Partner)
+            partnerHidden = Partner.GetComponent<Hide>().isHidden;
 
         // If the player or partner are visible...
         if (!playerHidden || !partnerHidden)
