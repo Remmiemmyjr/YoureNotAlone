@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
             animState.SetNextState(SetPlayerAnimState.PlayerStates.cIdle);
             StopDustParticles();
         }
-        else if (!IsStopped() && IsGrounded()) // Walk if walking regardless of hiding
+        else if (!IsStopped() && IsGrounded() && !(gameObject.GetComponent<Hide>().isHidden))
         {
             animState.SetNextState(SetPlayerAnimState.PlayerStates.cWalk);
 
