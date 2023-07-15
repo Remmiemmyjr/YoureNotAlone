@@ -249,7 +249,6 @@ public class CameraFX : MonoBehaviour
     IEnumerator Lerp(object param, float start, float end, float time)
     {
         float timeElapsed = 0;
-        float timeDelta = Time.deltaTime;
 
         while (timeElapsed <= time)
         {
@@ -265,9 +264,9 @@ public class CameraFX : MonoBehaviour
                     break;
             }
 
-            timeElapsed += timeDelta;
+            timeElapsed += Time.deltaTime;
 
-            yield return new WaitForSeconds(timeDelta);
+            yield return new WaitForSeconds(Time.deltaTime);
         }
     }
 }

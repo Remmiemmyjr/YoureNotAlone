@@ -222,7 +222,6 @@ public class EyeEffects : MonoBehaviour
     IEnumerator Lerp(object param, float start, float end, float time)
     {
         float timeElapsed = 0;
-        float timeDelta = time / 200;
 
         while (timeElapsed <= time)
         {
@@ -238,9 +237,9 @@ public class EyeEffects : MonoBehaviour
                     break;
             }
 
-            timeElapsed += timeDelta;
+            timeElapsed += Time.deltaTime;
 
-            yield return new WaitForSeconds(timeDelta);
+            yield return new WaitForSeconds(Time.deltaTime);
         }
     }
 }
