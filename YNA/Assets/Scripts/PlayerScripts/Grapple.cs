@@ -43,10 +43,11 @@ public class Grapple : MonoBehaviour
     public bool isTethered;
     [HideInInspector]
     public bool canLatch;
+    [HideInInspector]
+    public bool isLatching;
 
     bool isExtending;
     bool isReeling;
-    bool isLatching;
     // *********************************************************************
 
 
@@ -142,19 +143,19 @@ public class Grapple : MonoBehaviour
                     isTethered = false;
                 }
             }
-            //else
-            //{
-            //    if(isLatching)
-            //    {
-            //        isLatching = false;
-            //        partner.transform.Find("LatchRadius").GetComponent<Latch>().ReleaseObject();
-            //    }
-            //    else
-            //    {
-            //        isLatching = true;
-            //        partner.transform.Find("LatchRadius").GetComponent<Latch>().GrabObject();
-            //    }
-            //}
+            else
+            {
+                if(isLatching)
+                {
+                    isLatching = false;
+                    partner.transform.Find("LatchRadius").GetComponent<Latch>().ReleaseObject();
+                }
+                else
+                {
+                    isLatching = true;
+                    partner.transform.Find("LatchRadius").GetComponent<Latch>().GrabObject();
+                }
+            }
         }
     }
 
