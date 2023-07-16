@@ -143,7 +143,6 @@ public class Grapple : MonoBehaviour
                     isTethered = false;
                 }
             }
-
             else
             {
                 if(isLatching)
