@@ -5,13 +5,14 @@ using UnityEngine;
 public class Latch : MonoBehaviour
 {
     Grapple playerGrapple;
-    GameObject obj;
+    Rigidbody2D objRB;
     HingeJoint2D joint;
+    float ogMass;
 
     private void Awake()
     {
         playerGrapple = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Grapple>();
-        joint = GetComponent<HingeJoint2D>();
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,30 +20,33 @@ public class Latch : MonoBehaviour
         if (collision.gameObject.tag == "Grabbable")
         {
             playerGrapple.canLatch = true;
-            obj = collision.gameObject;
+            joint = collision.gameObject.GetComponent<HingeJoint2D>();
+            objRB = collision.GetComponent<Rigidbody2D>();
+            ogMass = objRB.mass;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Grabbable")
-        {
-            playerGrapple.canLatch = false;
-            obj = null;
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Grabbable" && playerGrapple.isLatching)
+    //    {
+    //        playerGrapple.canLatch = false;
+    //    }
+    //}
 
     public void GrabObject()
     {
-        //obj.transform.parent = transform;
-        joint.connectedBody = obj.GetComponent<Rigidbody2D>();
-        //joint.anchor = obj.transform.position;
+        joint.connectedBody = GetComponentInParent<Rigidbody2D>();
+        objRB.mass = 1.0f;
+        joint.enabled = true;
     }
 
     public void ReleaseObject()
     {
-        //obj.transform.parent = null;
+        joint.enabled = false;
+        playerGrapple.canLatch = false;
         joint.connectedBody = null;
-        //joint.anchor = transform.position;
+        objRB.mass = ogMass;
+        objRB = null;
     }
 }

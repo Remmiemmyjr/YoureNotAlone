@@ -43,10 +43,11 @@ public class Grapple : MonoBehaviour
     public bool isTethered;
     [HideInInspector]
     public bool canLatch;
+    [HideInInspector]
+    public bool isLatching;
 
     bool isExtending;
     bool isReeling;
-    bool isLatching;
     // *********************************************************************
 
 
@@ -142,6 +143,7 @@ public class Grapple : MonoBehaviour
                     isTethered = false;
                 }
             }
+
             else
             {
                 if(isLatching)

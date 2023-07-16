@@ -45,7 +45,7 @@ public class LevelProgression : MonoBehaviour
         instructions.SetActive(false);
         displayMessage?.SetActive(false);
 
-        transitionCanvas = GameObject.FindWithTag("Transition").GetComponentInChildren<Animator>();
+        transitionCanvas = GameObject.FindWithTag("Transition")?.GetComponentInChildren<Animator>();
     }
 
 
