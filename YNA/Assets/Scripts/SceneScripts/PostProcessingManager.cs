@@ -1,3 +1,17 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: PostProcessingManager.cs
+// Author/s: Cameron Myers
+//
+// Desc: Manage global volume
+//
+// Notes:
+// -
+//
+// Last Edit: 6/23/2023
+//
+//*************************************************
+
 using RotaryHeart.Lib.SerializableDictionary;
 using System;
 using System.Collections;

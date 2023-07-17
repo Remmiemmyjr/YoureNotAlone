@@ -1,3 +1,18 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: PartnerController.cs
+// Author/s: Emmy Berg
+//           Cameron Myers
+//
+// Desc: Manage partner actions & animation
+//
+// Notes:
+// -
+//
+// Last Edit: 7/16/2023
+//
+//*************************************************
+
 using System;
 using UnityEngine;
 using UnityEngine.Events;

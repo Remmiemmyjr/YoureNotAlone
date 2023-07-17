@@ -1,3 +1,17 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: LevelMusicController.cs
+// Author/s: K Preston
+//
+// Desc: Setup level music and mixer info
+//
+// Notes:
+// -
+//
+// Last Edit: 7/16/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,11 +27,5 @@ public class LevelMusicController : MonoBehaviour
     {
         AudioMixer mixerGroup = GetComponent<AudioSource>().outputAudioMixerGroup.audioMixer;
         mixerGroup.SetFloat(mixerGroupExposedParameter, startingVolume);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

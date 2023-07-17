@@ -6,7 +6,7 @@
 // Desc: Manages player footstep sfx
 //
 // Notes:
-//  + Add footsteps to partner
+// -
 //
 // Last Edit: 5/4/2023
 //

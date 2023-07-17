@@ -3,9 +3,12 @@
 // File: ActivateEyes.cs
 // Author/s: Emmy Berg
 //           K Preston
-//           Corbyn Lamar
+//           Corbyn LaMar
 //
 // Desc: Controls the Eyes states
+//
+// Notes:
+// -
 //
 // Last Edit: 5/11/2023
 //

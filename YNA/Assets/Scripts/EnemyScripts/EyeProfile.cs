@@ -7,7 +7,7 @@
 // Desc: Controls the Eyes three states
 //
 // Notes:
-//  + Holy shit we need more helper functions lol
+//  -
 //
 // Last Edit: 5/3/2023
 //

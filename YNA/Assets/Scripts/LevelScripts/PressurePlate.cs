@@ -1,22 +1,40 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: PressurePlate.cs
+// Author/s: Emmy Berg
+//           Corbyn LaMar
+//
+// Desc: Open and close assigned doors via plate
+//       activation
+//
+// Notes:
+// -
+//
+// Last Edit: 7/16/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
 {
+////////////////////////////////////////////////////////////////////////
+// VARIABLES ===========================================================
     Vector2 ogPosDoor;
-
     Color ogColor;
-
-    bool timeToReturn = false;
-    bool onPlate;
 
     public GameObject door;
 
     [SerializeField]
     private bool isHorizontal = false;
+    bool timeToReturn = false;
+// *********************************************************************
 
 
+////////////////////////////////////////////////////////////////////////
+// START ===============================================================
     void Start()
     {
         ogColor = gameObject.GetComponent<SpriteRenderer>().color;
@@ -24,7 +42,9 @@ public class PressurePlate : MonoBehaviour
     }
 
 
-    private void Update()
+////////////////////////////////////////////////////////////////////////
+// UPDATE ==============================================================
+    void Update()
     {
         if(timeToReturn)
         {
@@ -41,24 +61,11 @@ public class PressurePlate : MonoBehaviour
                 timeToReturn = false;
             }
         }
-
-        if(onPlate)
-        {
-
-        }    
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        onPlate = true;
     }
 
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-
-    }
-
+////////////////////////////////////////////////////////////////////////
+// TRIGGER STAY ========================================================
     private void OnTriggerStay2D(Collider2D collision)
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0.35f, 0.51f, 0.39f);
@@ -72,18 +79,13 @@ public class PressurePlate : MonoBehaviour
         {
             door.GetComponent<Transform>().Translate(0, -7f * Time.deltaTime, 0);
         }
-
     }
 
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-
-    }
-
+////////////////////////////////////////////////////////////////////////
+// TRIGGER EXIT ========================================================
     private void OnTriggerExit2D(Collider2D collision)
     {
-        onPlate = false;
         timeToReturn = true;
         gameObject.GetComponent<SpriteRenderer>().color = ogColor;
     }
