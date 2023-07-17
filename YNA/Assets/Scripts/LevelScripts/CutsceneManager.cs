@@ -47,6 +47,7 @@ public class CutsceneManager : MonoBehaviour
     Vignette vignette;
     ChromaticAberration chromatic;
     FilmGrain filmGrain;
+    // *********************************************************************
 
 
     ////////////////////////////////////////////////////////////////////////

@@ -6,9 +6,9 @@
 // Desc: Manages the hide state for both actors.
 //
 // Notes:
-//  + The redundancy can be greatly minimized.
+// - 
 //
-// Last Edit: 5/4/2023
+// Last Edit: 7/05/2023
 //
 //*************************************************
 

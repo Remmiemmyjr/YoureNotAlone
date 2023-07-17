@@ -1,18 +1,25 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: BoxStats.cs
+// Author/s: Emmy Berg
+//
+// Desc: Keeps track of box info
+//
+// Notes:
+// - 
+//
+// Last Edit: 7/16/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BoxStats : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         GetComponent<HingeJoint2D>().enabled = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
