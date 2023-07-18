@@ -21,6 +21,8 @@ using UnityEngine.Rendering.Universal;
 
 public class EyeProfile : MonoBehaviour
 {
+////////////////////////////////////////////////////////////////////////
+// VARIABLES ===========================================================
     ActivateEyes manager;
     Animator eyeAnim;
     SpriteRenderer eyeRenderer;
@@ -31,10 +33,13 @@ public class EyeProfile : MonoBehaviour
     private float eyeIntenstityHalf = 0.25f;
     [SerializeField]
     private float eyeIntenstityClosed = 0.0f;
+// *********************************************************************
 
+
+////////////////////////////////////////////////////////////////////////
+// AWAKE ===============================================================
     void Awake()
     {
-
         manager = GameObject.FindGameObjectWithTag("EyeManager")?.GetComponent<ActivateEyes>();
         
         eyeAnim = GetComponent<Animator>();
@@ -43,6 +48,9 @@ public class EyeProfile : MonoBehaviour
         eyeLight = GetComponent<Light2D>();
     }
 
+
+////////////////////////////////////////////////////////////////////////
+// STATUS SLEEPING =====================================================
     public void SetStatusSleeping()
     {
         eyeRenderer.sprite = manager.closed;
@@ -51,6 +59,9 @@ public class EyeProfile : MonoBehaviour
         eyeLight.intensity = eyeIntenstityClosed;
     }
 
+
+////////////////////////////////////////////////////////////////////////
+// STATUS WAKING =======================================================
     public void SetStatusWaking()
     {
         eyeRenderer.sprite = manager.halfway;
@@ -58,6 +69,9 @@ public class EyeProfile : MonoBehaviour
         eyeLight.intensity = eyeIntenstityHalf;
     }
 
+
+////////////////////////////////////////////////////////////////////////
+// STATUS ACTIVE =======================================================
     public void SetStatusActive()
     {
         eyeRenderer.sprite = manager.open;
