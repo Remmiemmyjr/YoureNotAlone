@@ -17,21 +17,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//README 
-//add this script to an empty gameObject, also set tag to "CC"
-//No need to set a pos in the inspector, itll look for an object tagged "Respawm"
+// README *************************************************************************
+// add this script to an empty gameObject, also set tag to "CC"
+// No need to set a pos in the inspector, itll look for an object tagged "Respawn"
+// ********************************************************************************
 public class CheckpointController : MonoBehaviour
 {
-    ////////////////////////////////////////////////////////////////////////
-    // VARIABLES ===========================================================
+////////////////////////////////////////////////////////////////////////
+// VARIABLES ===========================================================
     private static bool levelRestart = true;
 
     public static Vector2 lastCheckpointPos;
-    // *********************************************************************
+// *********************************************************************
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // AWAKE ===============================================================
+////////////////////////////////////////////////////////////////////////
+// AWAKE ===============================================================
     void Awake()
     {
         if(levelRestart)
@@ -44,8 +45,8 @@ public class CheckpointController : MonoBehaviour
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // AWAKE ===============================================================
+////////////////////////////////////////////////////////////////////////
+// RESTART LEVEL =======================================================
     internal static void ResetLevel()
     {
         levelRestart = true;

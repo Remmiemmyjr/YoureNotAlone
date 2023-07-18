@@ -24,8 +24,8 @@ using Cinemachine;
 
 public class EyeEffects : MonoBehaviour
 {
-    ////////////////////////////////////////////////////////////////////////
-    // VARIABLES ===========================================================
+////////////////////////////////////////////////////////////////////////
+// VARIABLES ===========================================================
     ActivateEyes eyeController;
     CinemachineImpulseSource impulse;
 
@@ -63,13 +63,11 @@ public class EyeEffects : MonoBehaviour
     float grainGoalVal = 0.875f;
     [SerializeField]
     float gammaGoalVal = 0.025f;
+// *********************************************************************
 
 
-    // *********************************************************************
-
-
-    ////////////////////////////////////////////////////////////////////////
-    // AWAKE ===============================================================
+////////////////////////////////////////////////////////////////////////
+// AWAKE ===============================================================
     void Awake()
     {
         impulse = GetComponent<CinemachineImpulseSource>();
@@ -92,16 +90,16 @@ public class EyeEffects : MonoBehaviour
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // START ===============================================================
+////////////////////////////////////////////////////////////////////////
+// START ===============================================================
     void Start()
     {
         SleepFX();
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // UPDATE ==============================================================
+////////////////////////////////////////////////////////////////////////
+// UPDATE ==============================================================
     void Update()
     {
         switch(eyeController.status)
@@ -127,9 +125,9 @@ public class EyeEffects : MonoBehaviour
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // SLEEP FX ============================================================
-    // Special effects for when eye is in "sleeping state"
+////////////////////////////////////////////////////////////////////////
+// SLEEP FX ============================================================
+// Special effects for when eye is in "sleeping state"
     void SleepFX()
     {
         bloom.dirtIntensity.Override(bloomStartVal);
@@ -144,9 +142,9 @@ public class EyeEffects : MonoBehaviour
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // GO TO SLEEP FX ======================================================
-    // Special effects for when eye transitions back to sleep from active
+////////////////////////////////////////////////////////////////////////
+// GO TO SLEEP FX ======================================================
+// Special effects for when eye transitions back to sleep from active
     void GoToSleepFX()
     {
         if (inState == false)
@@ -167,9 +165,9 @@ public class EyeEffects : MonoBehaviour
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // WAKING FX ===========================================================
-    // Special effects for when eye is beginning to wake
+////////////////////////////////////////////////////////////////////////
+// WAKING FX ===========================================================
+// Special effects for when eye is beginning to wake
     void WakingFX()
     {
         if (inState == false)
@@ -185,9 +183,9 @@ public class EyeEffects : MonoBehaviour
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // ACTIVE FX ===========================================================
-    // Special effects for when eye is currently active
+////////////////////////////////////////////////////////////////////////
+// ACTIVE FX ===========================================================
+// Special effects for when eye is currently active
     void ActiveFX()
     {
         StopAllCoroutines();
@@ -205,9 +203,9 @@ public class EyeEffects : MonoBehaviour
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // SEEN FX =============================================================
-    // Special effects for when eye has seen player
+////////////////////////////////////////////////////////////////////////
+// SEEN FX =============================================================
+// Special effects for when eye has seen player
     void SeenFX()
     {
         CameraShake.manager.Shake(impulse);
@@ -217,11 +215,11 @@ public class EyeEffects : MonoBehaviour
     }
 
 
-    ////////////////////////////////////////////////////////////////////////
-    // LERP ================================================================
-    // Interpolates [param] from [start] to [end] val, within the duration
-    // of [time] seconds.
-    // [param] should either be a float or vec4 parameter
+////////////////////////////////////////////////////////////////////////
+// LERP ================================================================
+// Interpolates [param] from [start] to [end] val, within the duration
+// of [time] seconds.
+// [param] should either be a float or vec4 parameter
     IEnumerator Lerp(object param, float start, float end, float time)
     {
         float timeElapsed = 0;

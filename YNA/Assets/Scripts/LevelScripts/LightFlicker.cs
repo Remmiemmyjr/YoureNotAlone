@@ -15,6 +15,8 @@ using UnityEngine;
 
 public class LightFlicker : MonoBehaviour
 {
+////////////////////////////////////////////////////////////////////////
+// VARIABLES ===========================================================
     // Light component on the current object
     private UnityEngine.Rendering.Universal.Light2D currLight;
 
@@ -43,14 +45,18 @@ public class LightFlicker : MonoBehaviour
 
     [SerializeField]
     private float intensityHighEnd = 1.0f;
+// *********************************************************************
 
-    // Start is called before the first frame update
+
+////////////////////////////////////////////////////////////////////////
+// AWAKE ===============================================================
     void Awake()
     {
         currLight = GetComponent<UnityEngine.Rendering.Universal.Light2D>();
     }
 
-    // Update is called once per frame
+////////////////////////////////////////////////////////////////////////
+// UPDATE ==============================================================
     void Update()
     {
         if (flickerRadius)
