@@ -34,7 +34,8 @@ public class ObstacleKill : MonoBehaviour
 // TRIGGER ENTER =======================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        StartCoroutine(TransitionSequence());
+        if(collision.tag == "Player" || collision.tag == "Partner")
+            StartCoroutine(TransitionSequence());
     }
 
 
