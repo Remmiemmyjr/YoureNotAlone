@@ -7,7 +7,7 @@
 // Desc: Manage stats for the scene
 //
 // Notes:
-//  + See Start() and Update()'s comments
+// - 
 //
 // Last Edit: 7/2/2023
 //
@@ -16,6 +16,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Stats : MonoBehaviour
@@ -24,9 +26,13 @@ public class Stats : MonoBehaviour
     // VARIABLES ===========================================================
     [HideInInspector]
     public bool isDead;
+    [HideInInspector]
+    public bool isPaused = false;
 
     // Transitions
     private Animator transitionCanvas;
+
+    GameObject pauseUI;
     // *********************************************************************
 
 
@@ -35,6 +41,14 @@ public class Stats : MonoBehaviour
     void Start()
     {
         transitionCanvas = GameObject.FindWithTag("Transition")?.GetComponentInChildren<Animator>();
+
+        pauseUI = GameObject.FindWithTag("Pause");
+
+        if (pauseUI)
+        {
+            // Hide Pause UI
+            pauseUI.SetActive(false);
+        }
     }
 
 
@@ -42,12 +56,97 @@ public class Stats : MonoBehaviour
     // UPDATE ==============================================================
     void Update()
     {
-        // I dont remember why I needed to do this. I think it had to do with
-        // making sure "on-trigger-stay" always worked. Doesnt cost much tho?
-
         if (isDead)
         {
             StartCoroutine(TransitionSequence());
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // RESET =============================================================
+    public void ResetLevel(InputAction.CallbackContext ctx)
+    {
+        // Action performed and not in a cutscene
+        if (ctx.performed && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
+        {
+            GetComponent<Stats>().isDead = true;
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // PAUSE =============================================================
+    public void Pause(InputAction.CallbackContext ctx)
+    {
+        // Action performed and not in a cutscene
+        if (ctx.performed && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
+        {
+            // Paused -> Unpaused
+            if (isPaused)
+            {
+                isPaused = false;
+
+                if (pauseUI)
+                {
+                    // Hide Pause UI
+                    pauseUI.SetActive(false);
+                }
+
+                // Reset timescale
+                Time.timeScale = 1;
+            }
+
+            // Unpaused -> Paused
+            else
+            {
+                isPaused = true;
+
+                if (pauseUI)
+                {
+                    // Show Pause UI
+                    pauseUI.SetActive(true);
+
+                    // Set first button as being active
+                    GameObject resumeButton = pauseUI.transform.Find("Resume").gameObject;
+
+                    if (resumeButton)
+                    {
+                        EventSystem.current.SetSelectedGameObject(resumeButton);
+                    }
+                }
+
+                // Set paused timescale
+                Time.timeScale = 0;
+            }
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // PROGRESS ============================================================
+    public void Progress(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            GameObject cutCanv = GameObject.FindGameObjectWithTag("CutsceneCanvas");
+
+            if (cutCanv)
+            {
+                cutCanv.GetComponent<CutsceneManager>().SkipCutsceneFrame();
+            }
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // TOGGLE PAUSE ========================================================
+    public void TogglePause()
+    {
+        if (isPaused)
+        {
+            isPaused = false;
+        }
+        else
+        {
+            isPaused = true;
         }
     }
 

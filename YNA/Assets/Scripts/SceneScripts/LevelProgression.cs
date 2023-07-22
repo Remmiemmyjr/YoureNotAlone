@@ -13,23 +13,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class LevelProgression : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
-    GameObject Player;
-
     public GameObject instructions;
     public GameObject displayMessage;
 
     public string nextLevel;
 
     public bool requiresPartner;
-    bool atExit = false;
-
-    [SerializeField]
-    private bool proceedOnTouch = false;
 
     // Transitions
     private Animator transitionCanvas;
@@ -40,8 +35,6 @@ public class LevelProgression : MonoBehaviour
     // START ===============================================================
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
-
         instructions.SetActive(false);
         displayMessage?.SetActive(false);
 
@@ -50,67 +43,12 @@ public class LevelProgression : MonoBehaviour
 
 
     ////////////////////////////////////////////////////////////////////////
-    // UPDATE ==============================================================
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            if (atExit)
-            {
-                if (requiresPartner == true)
-                {
-                    if (Player.GetComponent<Grapple>().isTethered == false)
-                    {
-                        StartCoroutine(DisplayMessage());
-                    }
-                    else
-                    {
-                        StartCoroutine(TransitionSequence());
-                    }
-                }
-                else
-                {
-                    StartCoroutine(TransitionSequence());
-                }
-            }
-        }
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////
-    // DISPLAY MESSAGE =====================================================
-    IEnumerator DisplayMessage()
-    {
-        Debug.Log("You cannot proceed without your partner");
-        displayMessage?.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        displayMessage?.SetActive(false);
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////
     // TRIGGER ENTER =======================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(proceedOnTouch)
-        {
-            StartCoroutine(TransitionSequence());
-        }
-        else
-        {
-            instructions.SetActive(true);
-            atExit = true;
-        }
+        StartCoroutine(TransitionSequence());
     }
 
-
-    ////////////////////////////////////////////////////////////////////////
-    // TRIGGER EXIT ========================================================
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        instructions.SetActive(false);
-        atExit = false;
-    }
 
     ////////////////////////////////////////////////////////////////////////
     // TRANSITION ==========================================================

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2471410413492978150}
   - component: {fileID: 2471410413492978151}
+  - component: {fileID: 8241769704791665865}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -45,3 +46,118 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
+  isPaused: 0
+--- !u!114 &8241769704791665865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2471410413492978148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 1da487ca7f855634aabe8593fcb92363, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 217b65e5-f5f4-48fc-9b41-9e0abaf48bfe
+    m_ActionName: Gameplay/Move[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3a99ccda-4940-4a67-a3a8-b6711dc4def9
+    m_ActionName: Gameplay/Jump[/Keyboard/space,/Keyboard/upArrow,/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 66b3e494-8dee-49a2-95bf-5112bb966753
+    m_ActionName: Gameplay/Tether[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 04efdc5e-14ca-471b-b7e7-aa8d11d90082
+    m_ActionName: Gameplay/Pull[/Keyboard/z]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 089fcf38-be24-429a-aaeb-847d2a639fdc
+    m_ActionName: Gameplay/Extend[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e36fb31f-d2da-4f54-b0e3-63418f60183d
+    m_ActionName: UI/Down[/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e12d5d6e-e8f3-4aab-a61c-d38c03ee3721
+    m_ActionName: UI/Up[/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2780fdc2-064d-41ae-bf94-7b6ee9d1661f
+    m_ActionName: UI/Confirm[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2471410413492978151}
+        m_TargetAssemblyTypeName: Stats, Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e9c2f8af-497b-4d0e-93b0-542e6eabf63d
+    m_ActionName: Scene/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2471410413492978151}
+        m_TargetAssemblyTypeName: Stats, Assembly-CSharp
+        m_MethodName: ResetLevel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8cd10faf-3294-4ec8-9d16-171c4c1c549d
+    m_ActionName: Scene/Reset[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2471410413492978151}
+        m_TargetAssemblyTypeName: Stats, Assembly-CSharp
+        m_MethodName: Progress
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4ccc807b-2ab4-417c-bab0-89a0263e9f46
+    m_ActionName: Scene/SkipCutscene[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 665d4313-7ac3-4f1d-bbfb-67766fa83a87
+    m_ActionName: Scene/Door
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Scene
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

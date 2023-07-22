@@ -7,6 +7,7 @@
 // Desc: Manage player actions
 //
 // Notes:
+// -
 //
 // Last Edit: 6/23/2023
 //
@@ -26,6 +27,8 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public ParticleSystem dustParticles;
 
+    GameObject manager;
+
     private SetPlayerAnimState animState;
 
     [HideInInspector]
@@ -41,9 +44,6 @@ public class PlayerController : MonoBehaviour
 
     private float cTime = 0.2f;
     private float cTimeCounter;
-
-    private bool isPaused = false;
-    GameObject pauseUI;
     // *********************************************************************
 
 
@@ -53,15 +53,9 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        pauseUI = GameObject.FindWithTag("Pause");
-
-        if (pauseUI)
-        {
-            // Hide Pause UI
-            pauseUI.SetActive(false);
-        }
-
         animState = GetComponent<SetPlayerAnimState>();
+
+        manager = GameObject.FindGameObjectWithTag("GameManager");
     }
 
 
@@ -73,8 +67,8 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(dir.x) > 0.65)
         {
             rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
-            
         }
+
         else
         {
             rb.AddForce(new Vector2(-(rb.velocity.x * smoothDamp), 0));
@@ -90,12 +84,14 @@ public class PlayerController : MonoBehaviour
             animState.SetNextState(SetPlayerAnimState.PlayerStates.cIdle);
             StopDustParticles();
         }
+
         else if (!IsStopped() && IsGrounded() && !(gameObject.GetComponent<Hide>().isHidden))
         {
             animState.SetNextState(SetPlayerAnimState.PlayerStates.cWalk);
 
             EmitParticles(dir);
         }
+
         if (!IsGrounded())
         {
             animState.SetNextState(SetPlayerAnimState.PlayerStates.cFall);
@@ -122,7 +118,7 @@ public class PlayerController : MonoBehaviour
     // JUMP ================================================================
     public void Jump(InputAction.CallbackContext ctx)
     {
-        if(ctx.performed && cTimeCounter > 0 && !isPaused)
+        if(ctx.performed && cTimeCounter > 0 && !manager.GetComponent<Stats>().isPaused)
         {
             rb.velocity = Vector2.up * jumpHeight;
 
@@ -153,97 +149,12 @@ public class PlayerController : MonoBehaviour
 
 
     ////////////////////////////////////////////////////////////////////////
-    // RESET =============================================================
-    public void Reset(InputAction.CallbackContext ctx)
-    {
-        // Action performed and not in a cutscene
-        if (ctx.performed && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
-        {
-            GetComponent<Stats>().isDead = true;
-        }
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////
-    // PAUSE =============================================================
-    public void Pause(InputAction.CallbackContext ctx)
-    {
-        // Action performed and not in a cutscene
-        if (ctx.performed && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
-        {
-            // Paused -> Unpaused
-            if(isPaused)
-            {
-                isPaused = false;
-
-                if (pauseUI)
-                {
-                    // Hide Pause UI
-                    pauseUI.SetActive(false);
-                }
-
-                // Reset timescale
-                Time.timeScale = 1;
-            }
-            // Unpaused -> Paused
-            else
-            {
-                isPaused = true;
-
-                if (pauseUI)
-                {
-                    // Show Pause UI
-                    pauseUI.SetActive(true);
-
-                    // Set first button as being active
-                    GameObject resumeButton = pauseUI.transform.Find("Resume").gameObject;
-
-                    if(resumeButton)
-                    {
-                        EventSystem.current.SetSelectedGameObject(resumeButton);
-                    }
-                }
-
-                // Set paused timescale
-                Time.timeScale = 0;
-            }
-        }
-    }
-
-    ////////////////////////////////////////////////////////////////////////
-    // PROGRESS ============================================================
-    public void Progress(InputAction.CallbackContext ctx)
-    {
-        if (ctx.performed)
-        {
-            GameObject cutCanv = GameObject.FindGameObjectWithTag("CutsceneCanvas"); 
-
-            if(cutCanv)
-            {
-                cutCanv.GetComponent<CutsceneManager>().SkipCutsceneFrame();
-            }
-        }
-    }
-
-    public void TogglePause()
-    {
-        if (isPaused)
-        {
-            isPaused = false;
-        }
-        else
-        {
-            isPaused = true;
-        }
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////
     // IS GROUNDED =========================================================
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundObject.position, 0.2f, layer);
+        return Physics2D.OverlapCircle(groundObject.position, 0.2f, layer) || rb.velocity.y == 0;
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // IS STOPPED =========================================================
@@ -251,6 +162,7 @@ public class PlayerController : MonoBehaviour
     {
         return Math.Abs(dir.x) < 0.1f;
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // PARTICLES ===========================================================

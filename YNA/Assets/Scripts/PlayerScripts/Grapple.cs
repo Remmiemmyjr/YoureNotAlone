@@ -63,16 +63,13 @@ public class Grapple : MonoBehaviour
 
         if (target != null)
         {
-            target.enabled = true;
-            line.enabled = true;
-            isTethered = true;
+            Tethered(true);
         }
         else
         {
             line.enabled = false;
         }
    
-
         isExtending = false;
         currLength = maxLimit;
     }
@@ -93,8 +90,12 @@ public class Grapple : MonoBehaviour
 
         if (currDist > breakingPoint)
         {
-            line.enabled = false;
-            target.enabled = false;
+            Tethered(false);
+            if (isLatching)
+            {
+                isLatching = false;
+                partner.transform.Find("LatchRadius").GetComponent<Latch>().ReleaseObject();
+            }
         }
 
         if (line.enabled && !isReeling)
@@ -132,17 +133,14 @@ public class Grapple : MonoBehaviour
             {
                 if (currDist <= (maxLimit + 1) && !target.enabled)
                 {
-                    target.enabled = true;
-                    line.enabled = true;
-                    isTethered = true;
+                    Tethered(true);
                 }
                 else
                 {
-                    target.enabled = false;
-                    line.enabled = false;
-                    isTethered = false;
+                    Tethered(false);
                 }
             }
+
             else
             {
                 if(isLatching)
@@ -194,6 +192,7 @@ public class Grapple : MonoBehaviour
             target.distance = 0;
             currLength = maxLimit;
             maxLimit = 0.95f;
+
             if (gameObject.GetComponent<PlayerController>() && gameObject.GetComponent<PlayerController>().IsGrounded() == false)
             {
                 target.frequency = airReelSpeed;
@@ -236,5 +235,12 @@ public class Grapple : MonoBehaviour
         {
             topSolidMap.GetComponent<PlatformEffector2D>().colliderMask &= ~(1 << partner.layer);
         }
+    }
+
+    void Tethered(bool tethered)
+    {
+        isTethered = tethered;
+        target.enabled = tethered;
+        line.enabled = tethered;
     }
 }

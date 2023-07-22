@@ -58,7 +58,7 @@ public class PauseManager : MonoBehaviour
     public void ResumeButton()
     {
         // Update variables
-        GameObject.FindWithTag("Player").GetComponent<PlayerController>().TogglePause();
+        GameObject.FindWithTag("GameManager").GetComponent<Stats>().TogglePause();
 
         // Reset timescale
         Time.timeScale = 1;
@@ -94,6 +94,7 @@ public class PauseManager : MonoBehaviour
         // Do the animation
         StartCoroutine(TransitionSequence());
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // TRANSITION ON QUIT ==================================================
