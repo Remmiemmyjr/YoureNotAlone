@@ -40,13 +40,6 @@ public class CutsceneManager : MonoBehaviour
 
     private bool isStartCutscene = false;
 
-    // Post Processing Items
-    Volume globalVolume;
-    VolumeProfile volProf;
-    Bloom bloom;
-    Vignette vignette;
-    ChromaticAberration chromatic;
-    FilmGrain filmGrain;
     // *********************************************************************
 
 
@@ -54,15 +47,6 @@ public class CutsceneManager : MonoBehaviour
 // START ===============================================================
     void Start()
     {
-        // Get the objects needed for post processing effects
-        globalVolume = GetComponent<Volume>();
-        volProf = globalVolume.profile;
-
-        volProf.TryGet<Bloom>(out bloom);
-        volProf.TryGet<Vignette>(out vignette);
-        volProf.TryGet<ChromaticAberration>(out chromatic);
-        volProf.TryGet<FilmGrain>(out filmGrain);
-
         // Get the canvas to play cutscenes on
         cutsceneCanvasFrame = transform.Find("Frame").GetComponent<Image>();
         cutsceneCanvasTimer = transform.Find("Timer").GetComponent<Image>();

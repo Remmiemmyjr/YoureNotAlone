@@ -85,6 +85,7 @@ public class CameraFX : MonoBehaviour
     public float flmgrn_goal_val = 0.0f;
     public float flmgrn_lerp_time = 0.0f;
 
+    //lift 
     public bool lift_toggle = false;
     public bool lift_instant = false;
 
@@ -264,9 +265,9 @@ public class CameraFX : MonoBehaviour
                     break;
             }
 
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.unscaledDeltaTime;
 
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return null;
         }
     }
 }
