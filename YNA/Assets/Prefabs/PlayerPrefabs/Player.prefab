@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
+  isPaused: 0
 --- !u!114 &783348941237856850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,22 +264,6 @@ MonoBehaviour:
     m_ActionId: 089fcf38-be24-429a-aaeb-847d2a639fdc
     m_ActionName: Gameplay/Extend[/Keyboard/shift]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 783348941237856850}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: Progress
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 3ca268a6-a8ec-4789-9179-bec90c176e07
-    m_ActionName: Gameplay/Progress[/Keyboard/enter]
-  - m_PersistentCalls:
       m_Calls: []
     m_ActionId: e36fb31f-d2da-4f54-b0e3-63418f60183d
     m_ActionName: UI/Down[/Keyboard/downArrow]
@@ -291,37 +276,17 @@ MonoBehaviour:
     m_ActionId: 2780fdc2-064d-41ae-bf94-7b6ee9d1661f
     m_ActionName: UI/Confirm[/Keyboard/enter]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 783348941237856850}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: Pause
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: e43f9b79-5646-438b-a2f9-19f42d1fb299
-    m_ActionName: Gameplay/Pause[/XInputControllerWindows/start,/Keyboard/escape]
+      m_Calls: []
+    m_ActionId: e9c2f8af-497b-4d0e-93b0-542e6eabf63d
+    m_ActionName: Scene/Pause[/Keyboard/escape]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 783348941237856850}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: Reset
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 7bb1ffa5-6642-4aed-9e00-acfacc3421c0
-    m_ActionName: Gameplay/Reset[/XInputControllerWindows/select,/Keyboard/r]
+      m_Calls: []
+    m_ActionId: 8cd10faf-3294-4ec8-9d16-171c4c1c549d
+    m_ActionName: Scene/Reset[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4ccc807b-2ab4-417c-bab0-89a0263e9f46
+    m_ActionName: Scene/SkipCutscene[/Keyboard/enter]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -347,6 +312,7 @@ MonoBehaviour:
   airReelSpeed: 1
   isTethered: 0
   canLatch: 0
+  isLatching: 0
 --- !u!114 &7051889565614328847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5667,6 +5633,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4116983695250163584}
   - component: {fileID: 6697592896519079500}
+  - component: {fileID: 5254988319845185879}
   m_Layer: 6
   m_Name: Stone
   m_TagString: Untagged
@@ -5730,7 +5697,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 981669407, guid: 2b12c9a9346c7e340b93d19c708a4ad3, type: 3}
+  m_Sprite: {fileID: -169533736, guid: 2b12c9a9346c7e340b93d19c708a4ad3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5741,3 +5708,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5254988319845185879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8430895359532670629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f538d4de69c929244a7ee414ffa7abb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stone: {fileID: 2100000, guid: f38e7c1999ea071418d3fe763c546eff, type: 2}
