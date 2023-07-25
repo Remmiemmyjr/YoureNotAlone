@@ -3,6 +3,7 @@
 // File: Checkpoint.cs
 // Author/s: Emmy Berg
 //           Cameron Myers
+//           Corbyn LaMar
 //
 // Desc: Functionality for checkpoint objects
 //

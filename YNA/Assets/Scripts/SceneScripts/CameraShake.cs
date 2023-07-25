@@ -36,8 +36,8 @@ public class CameraShake : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////
     // SHAKE ===============================================================
     // Perform the *shake*
-    public void Shake(CinemachineImpulseSource source)
+    public void Shake(CinemachineImpulseSource source, float force)
     {
-        source.GenerateImpulseWithForce(0.1f);
+        source.GenerateImpulseWithForce(force);
     }
 }

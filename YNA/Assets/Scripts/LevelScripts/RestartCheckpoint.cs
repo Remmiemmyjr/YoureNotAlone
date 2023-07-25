@@ -7,6 +7,8 @@ public class RestartCheckpoint : MonoBehaviour
     GameObject player, partner;
     Vector3 checkpointPos;
 
+    public bool startWithPartner = true;
+
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -19,7 +21,7 @@ public class RestartCheckpoint : MonoBehaviour
         SetPos(player, new Vector3(0, 0, 0));
         
         // Make sure there is a partner in this level
-        if (partner)
+        if (partner && startWithPartner)
             SetPos(partner, new Vector3(-0.5f, 0, 0));
     }
 

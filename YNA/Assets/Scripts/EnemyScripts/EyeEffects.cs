@@ -160,7 +160,7 @@ public class EyeEffects : MonoBehaviour
         if (canShake == false)
         {
             canShake = true;
-            CameraShake.manager.Shake(impulse);
+            CameraShake.manager.Shake(impulse, 0.15f);
         }
     }
 
@@ -193,7 +193,7 @@ public class EyeEffects : MonoBehaviour
         if(canShake)
         {
             canShake = false;
-            CameraShake.manager.Shake(impulse);
+            CameraShake.manager.Shake(impulse, 0.15f);
         }    
         // TODO: put in lerp function
         chromatic.intensity.Override(0.85f);
@@ -208,7 +208,7 @@ public class EyeEffects : MonoBehaviour
 // Special effects for when eye has seen player
     void SeenFX()
     {
-        CameraShake.manager.Shake(impulse);
+        CameraShake.manager.Shake(impulse, 0.15f);
         chromatic.intensity.Override(1);
         filmGrain.intensity.Override(grainGoalVal);
         bloom.dirtIntensity.Override(bloomGoalVal + 8.5f);
@@ -240,7 +240,7 @@ public class EyeEffects : MonoBehaviour
 
             timeElapsed += Time.deltaTime;
 
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return null;
         }
     }
 }

@@ -14,6 +14,7 @@
 //
 //*************************************************
 
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -81,15 +82,21 @@ public class ActivateEyes : MonoBehaviour
     private UnityEvent activateEvent;
     [SerializeField]
     private UnityEvent spottedEvent;
- // *********************************************************************
+    [SerializeField]
+    private UnityEvent rehiddenEvent;
+
+    CinemachineImpulseSource impulse;
+    // *********************************************************************
 
 
- ////////////////////////////////////////////////////////////////////////
- // AWAKE ===============================================================
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
     void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         Partner = GameObject.FindGameObjectWithTag("Partner");
+
+        impulse = GetComponent<CinemachineImpulseSource>();
     }
 
 
@@ -209,6 +216,9 @@ public class ActivateEyes : MonoBehaviour
         // If the eyes just opened...
         if (!timeToHide)
         {
+            // Pulse
+            CameraShake.manager.Shake(impulse, 0.25f);
+
             // Reset timeInSight timer to the gracePeriod.
             timeInSight = gracePeriod;
 
@@ -262,6 +272,9 @@ public class ActivateEyes : MonoBehaviour
         {
             status = EyeStates.SEEN;
 
+            // Camera shake on seen
+            CameraShake.manager.Shake(impulse, 0.15f);
+
             // If they've just been spotted...
             if (!playerSpotted)
             {
@@ -313,10 +326,15 @@ public class ActivateEyes : MonoBehaviour
             // If the player was previously visible...
             if(playerSpotted)
             {
+                status = EyeStates.ACTIVE;
+
                 // Fade out iseeyou
                 StartCoroutine(FadeMixerGroup.StartFade(iseeyou.outputAudioMixerGroup.audioMixer, iseeyouMGEP, 0.5f, 0.0f));
                 // Fade in iamwatching
                 StartCoroutine(FadeMixerGroup.StartFade(iamwatching.outputAudioMixerGroup.audioMixer, iamwatchingMGEP, 0.5f, 1.0f));
+
+                // Go back to active fx
+                rehiddenEvent.Invoke();
 
                 // Have each eye resume looking around
                 for (int i = 0; i < Eyes.Length; i++)

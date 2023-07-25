@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7643899846685577920}
   - component: {fileID: 7643899846685577951}
+  - component: {fileID: 9148897151161603060}
   m_Layer: 0
   m_Name: CheckPointController
   m_TagString: CC
@@ -44,4 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99415089f2dccc42b21933344967bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastCheckpointPos: {x: 0, y: 0}
+--- !u!114 &9148897151161603060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7643899846685577950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58d1d1ced8c4a744b4c630dda98643e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

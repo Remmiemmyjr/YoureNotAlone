@@ -48,6 +48,8 @@ public class Grapple : MonoBehaviour
 
     bool isExtending;
     bool isReeling;
+
+    public bool startTethered = true;
     // *********************************************************************
 
 
@@ -61,7 +63,7 @@ public class Grapple : MonoBehaviour
         line = GetComponent<LineRenderer>();
         target = partner?.GetComponent<SpringJoint2D>();
 
-        if (target != null)
+        if (target != null && startTethered)
         {
             Tethered(true);
         }
