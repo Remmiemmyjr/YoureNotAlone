@@ -54,12 +54,9 @@ public class TetherRope : MonoBehaviour
         segPos += (Vector2)(lastNode.transform.position);
 
         GameObject newNode = Instantiate(ropeSegment, segPos, Quaternion.identity);
-        //Rope.PushFront(newNode);
         Rope.Enqueue(newNode);
 
-
         lastNode.GetComponent<HingeJoint2D>().connectedBody = newNode.GetComponent<Rigidbody2D>();
-
         lastNode = newNode;
     }
 
