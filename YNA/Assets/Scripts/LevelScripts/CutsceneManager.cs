@@ -165,6 +165,10 @@ public class CutsceneManager : MonoBehaviour
         // If marked to be at the end of a scene, advance
         if (activeCutscene.nextSceneOnFinish)
         {
+            // Reset active cutscene
+            activeCutscene = null;
+
+            CheckpointController.ResetLevel();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
         }
         else
