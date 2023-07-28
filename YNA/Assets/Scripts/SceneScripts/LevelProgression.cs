@@ -46,7 +46,28 @@ public class LevelProgression : MonoBehaviour
     // TRIGGER ENTER =======================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        StartCoroutine(TransitionSequence());
+        if (collision.tag == "Player")
+        {
+            if (!requiresPartner || (collision.GetComponent<Grapple>().isTethered))
+            {
+                StartCoroutine(TransitionSequence());
+            }
+            else
+            {
+                displayMessage?.SetActive(true);
+            }
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // TRIGGER EXIT =======================================================
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            displayMessage?.SetActive(false);
+        }
     }
 
 
