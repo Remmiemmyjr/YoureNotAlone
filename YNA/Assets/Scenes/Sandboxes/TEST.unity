@@ -143,7 +143,9 @@ MonoBehaviour:
   ropeSegment: {fileID: 8711870394290660930, guid: cae5e90403110db419c7c681793381aa, type: 3}
   lastNode: {fileID: 0}
   targetPartner: {fileID: 1163048184}
-  segmentDistance: 0.25
+  segmentDist: 0.25
+  maxDist: 2
+  minDist: 0.3
 --- !u!233 &347625405
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -223,6 +225,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2277467395215038059, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
+      propertyPath: m_Mass
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2277467395215038059, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
+      propertyPath: m_GravityScale
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2277467395215038062, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -235,30 +245,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2277467395215038051, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
   m_PrefabInstance: {fileID: 702160160}
   m_PrefabAsset: {fileID: 0}
---- !u!233 &1163048194
-HingeJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1163048184}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -2.8, y: -2.2493804}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 359
 --- !u!1001 &1200796881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -345,6 +331,10 @@ PrefabInstance:
     - target: {fileID: 783348941237856857, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 783348941237856861, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
+      propertyPath: m_GravityScale
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 783348941237856862, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
       propertyPath: m_Enabled
