@@ -21,6 +21,7 @@ public class SetPlayerAnimState : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
     PlayerController pc;
+    Stats manager;
 
     public enum PlayerStates
     {
@@ -59,6 +60,7 @@ public class SetPlayerAnimState : MonoBehaviour
     void Awake()
     {
         pc = GetComponent<PlayerController>();
+        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>();
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -68,52 +70,55 @@ public class SetPlayerAnimState : MonoBehaviour
         check_velocity_y();
 
         state_curr = state_next;
-        
-        //player state machine
-        switch (state_curr)
+
+        if (!manager.isDead)
         {
-            // The player is idle
-            case PlayerStates.cIdle:
-                {
-                    do_idle();
-                    break;
-                }
-            //the player is walking
-            case PlayerStates.cWalk:
-                {
-                    do_walk();
-                    break;
-                }
-            //the player is in an upward motion
-            case PlayerStates.cJump:
-                {
-                    do_jump();
-                    break;
-                }
-            //the player is moving downward
-            case PlayerStates.cFall:
-                {
-                    do_fall();
-                    break;
-                }
-            //the player is hiding behind an object
-            case PlayerStates.cHiding:
-                {
-                    do_hide();
-                    break;
-                }
-            //the player has been spotted
-            case PlayerStates.cSeen:
-                {
-                    do_seen();
-                    break;
-                }
-            //the player is dead
-            case PlayerStates.cDead:
-                {
-                    do_dead();
-                    break;
-                }
+            //player state machine
+            switch (state_curr)
+            {
+                // The player is idle
+                case PlayerStates.cIdle:
+                    {
+                        do_idle();
+                        break;
+                    }
+                //the player is walking
+                case PlayerStates.cWalk:
+                    {
+                        do_walk();
+                        break;
+                    }
+                //the player is in an upward motion
+                case PlayerStates.cJump:
+                    {
+                        do_jump();
+                        break;
+                    }
+                //the player is moving downward
+                case PlayerStates.cFall:
+                    {
+                        do_fall();
+                        break;
+                    }
+                //the player is hiding behind an object
+                case PlayerStates.cHiding:
+                    {
+                        do_hide();
+                        break;
+                    }
+                //the player has been spotted
+                case PlayerStates.cSeen:
+                    {
+                        do_seen();
+                        break;
+                    }
+                //the player is dead
+                case PlayerStates.cDead:
+                    {
+                        do_dead();
+                        break;
+                    }
+            }
         }
 
         //CheckHide();

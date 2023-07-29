@@ -29,15 +29,23 @@ public class AnimationManager : MonoBehaviour
     private Character currChar;
 
     private Animator animator;
+
+    Stats manager;
     // *********************************************************************
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
 
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
     void Start()
     {
-        animator = GetComponent<Animator>();
-
         if(gameObject.tag == "Player")
         {
             currChar = Character.Player;
@@ -74,9 +82,8 @@ public class AnimationManager : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
-    
-
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // SET STATE WALK ==========================================================
@@ -84,14 +91,13 @@ public class AnimationManager : MonoBehaviour
     {
         //flip to face the correct direction
         animator.Play(currChar + "_Walk");
-
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // SET STATE JUMP ==========================================================
     public void SetStateJump()
     {
-        
         animator.Play(currChar + "_Jump");
     }
 
@@ -117,7 +123,6 @@ public class AnimationManager : MonoBehaviour
     public void SetStateHide()
     {
         animator.Play(currChar + "_Hide");
-
     }
 
 
@@ -126,15 +131,14 @@ public class AnimationManager : MonoBehaviour
     public void SetStateSeen()
     {
         animator.Play(currChar + "_Seen");
-
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // SET STATE DEAD =======================================================
     public void SetStateDead()
     {
         animator.Play(currChar + "_Dead");
-
     }
 
 

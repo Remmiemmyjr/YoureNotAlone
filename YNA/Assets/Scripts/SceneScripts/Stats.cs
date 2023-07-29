@@ -52,8 +52,6 @@ public class Stats : MonoBehaviour
     // START ===============================================================
     void Start()
     {
-        //playerInput.actions.FindActionMap("Gameplay").Enable();
-
         if (pauseUI)
         {
             // Hide Pause UI
@@ -163,14 +161,7 @@ public class Stats : MonoBehaviour
     // TOGGLE PAUSE ========================================================
     public void TogglePause()
     {
-        if (isPaused)
-        {
-            isPaused = false;
-        }
-        else
-        {
-            isPaused = true;
-        }
+        isPaused = !isPaused;
     }
 
 

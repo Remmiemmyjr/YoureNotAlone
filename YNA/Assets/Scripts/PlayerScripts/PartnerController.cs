@@ -22,6 +22,8 @@ public class PartnerController : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
     Rigidbody2D rb;
+    Stats manager;
+
     public enum PartnerStates
     {
         cInvalid = -1,
@@ -68,6 +70,7 @@ public class PartnerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>();
     }
 
 
@@ -91,52 +94,55 @@ public class PartnerController : MonoBehaviour
         //set state
         state_curr = state_next;
 
-        //partner state machine
-        //do actions
-        switch (state_curr)
+        if (!manager.isDead)
         {
-            // The partner is idle
-            case PartnerStates.cIdle:
-                {
-                    do_idle();
-                    break;
-                }
-            //the partner is walking
-            case PartnerStates.cWalk:
-                {
-                    do_walk();
-                    break;
-                }
-            //the partner is in an upward motion
-            case PartnerStates.cJump:
-                {
-                    do_jump();
-                    break;
-                }
-            //the partner is moving downward
-            case PartnerStates.cFall:
-                {
-                    do_fall();
-                    break;
-                }
-            //the partner is hiding behind an object
-            case PartnerStates.cHiding:
-                {
-                    do_hide();
-                    break;
-                }
-            //the partner has been spotted
-            case PartnerStates.cSeen:
-                {
-                    do_seen();
-                    break;
-                }
-            //the partner is dead
-            case PartnerStates.cDead:
-                {
-                    do_dead();
-                    break;
-                }
+            //partner state machine
+            //do actions
+            switch (state_curr)
+            {
+                // The partner is idle
+                case PartnerStates.cIdle:
+                    {
+                        do_idle();
+                        break;
+                    }
+                //the partner is walking
+                case PartnerStates.cWalk:
+                    {
+                        do_walk();
+                        break;
+                    }
+                //the partner is in an upward motion
+                case PartnerStates.cJump:
+                    {
+                        do_jump();
+                        break;
+                    }
+                //the partner is moving downward
+                case PartnerStates.cFall:
+                    {
+                        do_fall();
+                        break;
+                    }
+                //the partner is hiding behind an object
+                case PartnerStates.cHiding:
+                    {
+                        do_hide();
+                        break;
+                    }
+                //the partner has been spotted
+                case PartnerStates.cSeen:
+                    {
+                        do_seen();
+                        break;
+                    }
+                //the partner is dead
+                case PartnerStates.cDead:
+                    {
+                        do_dead();
+                        break;
+                    }
+            }
         }
 
     }

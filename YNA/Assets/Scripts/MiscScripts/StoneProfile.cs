@@ -27,6 +27,8 @@ public class StoneProfile : MonoBehaviour
         if (manager.isDead && shouldDoThis)
         {
             shouldDoThis = false;
+            owner.GetComponent<Rigidbody2D>().velocity = Vector2.zero; 
+
             if (owner.tag == "Player")
                 ownerAnim.Play("Player_Still");
 
