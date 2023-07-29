@@ -65,4 +65,10 @@ public class SettingsControl : MonoBehaviour
         Screen.fullScreen = isFullScreen;
     }
 
+    public void SetGamma(float gammaVal)
+    {
+        PlayerPrefs.SetFloat("Gamma", gammaVal);
+        PlayerPrefs.Save();
+    }
+
 }

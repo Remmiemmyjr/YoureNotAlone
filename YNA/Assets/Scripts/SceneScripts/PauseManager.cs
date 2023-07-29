@@ -23,6 +23,7 @@ public class PauseManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES FOR FANCY STUFF ===========================================
     private Animator transitionCanvas;
+    private GameObject settingsCanvas;
 
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================

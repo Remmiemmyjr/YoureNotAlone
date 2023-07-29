@@ -36,22 +36,32 @@ public class Stats : MonoBehaviour
     private Animator transitionCanvas;
 
     GameObject pauseUI;
+    private GameObject settingsCanvas;
     // *********************************************************************
+    private void Awake()
+    {
+        transitionCanvas = GameObject.FindWithTag("Transition")?.GetComponentInChildren<Animator>();
 
+        pauseUI = GameObject.FindWithTag("Pause");
+        settingsCanvas = GameObject.FindWithTag("SettingsCanvas");
+    }
 
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
     void Start()
     {
         //playerInput.actions.FindActionMap("Gameplay").Enable();
-        transitionCanvas = GameObject.FindWithTag("Transition")?.GetComponentInChildren<Animator>();
-
-        pauseUI = GameObject.FindWithTag("Pause");
 
         if (pauseUI)
         {
             // Hide Pause UI
             pauseUI.SetActive(false);
+        }
+
+        if (settingsCanvas)
+        {
+            // Hide Pause UI
+            settingsCanvas.SetActive(false);
         }
     }
 
@@ -85,6 +95,13 @@ public class Stats : MonoBehaviour
         // Action performed and not in a cutscene
         if (ctx.performed && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
         {
+            // If the Pause menu isn't there, try to find it
+            if(!pauseUI)
+            {
+                pauseUI = GameObject.FindWithTag("Pause");
+            }
+
+
             // Paused -> Unpaused
             if (isPaused)
             {
