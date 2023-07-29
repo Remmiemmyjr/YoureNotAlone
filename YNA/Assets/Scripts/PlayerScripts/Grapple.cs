@@ -21,13 +21,13 @@ public class Grapple : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
     GameObject partner;
+    GameObject topSolidMap;
     LineRenderer line;
     SpringJoint2D target;
+    Stats manager;
 
     Vector2 playerLinePos;
     Vector2 partnerLinePos;
-
-    GameObject topSolidMap;
 
     public float maxLimit = 0.95f;
     public float minLimit = 0.75f;
@@ -59,6 +59,7 @@ public class Grapple : MonoBehaviour
     {
         partner = GameObject.FindGameObjectWithTag("Partner");
         topSolidMap = GameObject.FindGameObjectWithTag("TopSolidMap");
+        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>();
 
         line = GetComponent<LineRenderer>();
         target = partner?.GetComponent<SpringJoint2D>();
@@ -129,7 +130,7 @@ public class Grapple : MonoBehaviour
 
     public void EnableRope(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.performed && !manager.isDead)
         {
             if (!canLatch)
             {
@@ -188,7 +189,7 @@ public class Grapple : MonoBehaviour
     // REEL IN =============================================================
     public void ReelIn(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.performed && !manager.isDead)
         {
             isExtending = false;
             target.distance = 0;

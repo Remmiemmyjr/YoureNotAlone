@@ -44,6 +44,8 @@ public class Stats : MonoBehaviour
 
         pauseUI = GameObject.FindWithTag("Pause");
         settingsCanvas = GameObject.FindWithTag("SettingsCanvas");
+
+        isDead = false;
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -177,7 +179,6 @@ public class Stats : MonoBehaviour
     private IEnumerator TransitionSequence()
     {
         StartCoroutine(GetComponent<DeathShader>().Lerp(1));
-        playerInput.actions.FindActionMap("Gameplay").Disable();
         yield return new WaitForSeconds(1.5f);
 
         if (transitionCanvas)

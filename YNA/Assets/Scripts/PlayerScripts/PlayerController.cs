@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public ParticleSystem dustParticles;
 
-    GameObject manager;
+    Stats manager;
 
     private SetPlayerAnimState animState;
 
@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
         animState = GetComponent<SetPlayerAnimState>();
 
-        manager = GameObject.FindGameObjectWithTag("GameManager");
+        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>();
     }
 
 
@@ -106,11 +106,14 @@ public class PlayerController : MonoBehaviour
     // MOVEMENT ============================================================
     public void Movement(InputAction.CallbackContext ctx)
     {
-        dir.x = ctx.ReadValue<float>();
-       
-        animState.SetNextState(SetPlayerAnimState.PlayerStates.cWalk);
+        if (!manager.isDead)
+        {
+            dir.x = ctx.ReadValue<float>();
 
-        EmitParticles(dir);
+            animState.SetNextState(SetPlayerAnimState.PlayerStates.cWalk);
+
+            EmitParticles(dir);
+        }
     }
 
 
@@ -118,17 +121,21 @@ public class PlayerController : MonoBehaviour
     // JUMP ================================================================
     public void Jump(InputAction.CallbackContext ctx)
     {
-        if(ctx.performed && cTimeCounter > 0 && !manager.GetComponent<Stats>().isPaused)
+        if (!manager.isDead)
         {
-            rb.velocity = Vector2.up * jumpHeight;
+            if (ctx.performed && cTimeCounter > 0 && !manager.isPaused)
+            {
+                rb.velocity = Vector2.up * jumpHeight;
 
-            animState.SetNextState(SetPlayerAnimState.PlayerStates.cJump);
-        }
+                animState.SetNextState(SetPlayerAnimState.PlayerStates.cJump);
+            }
 
-        if(ctx.canceled && rb.velocity.y > 0)
-        {
-            cTimeCounter = 0;
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+
+            if (ctx.canceled && rb.velocity.y > 0)
+            {
+                cTimeCounter = 0;
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            }
         }
     }
 
