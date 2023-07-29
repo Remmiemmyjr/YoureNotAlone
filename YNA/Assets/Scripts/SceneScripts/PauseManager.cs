@@ -26,6 +26,13 @@ public class PauseManager : MonoBehaviour
     private GameObject settingsCanvas;
 
     ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
+    void Awake()
+    {
+        settingsCanvas = GameObject.FindWithTag("SettingsCanvas");
+    }
+
+    ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
     void Start()
     {
@@ -73,7 +80,7 @@ public class PauseManager : MonoBehaviour
     // SETTINGS BUTTON =====================================================
     public void SettingsButton()
     {
-        // options.SetActive(true);
+        settingsCanvas.SetActive(true);
     }
 
 
@@ -81,7 +88,7 @@ public class PauseManager : MonoBehaviour
     // RETURN BUTTON =======================================================
     public void ReturnMenu()
     {
-        // options.SetActive(false);
+        settingsCanvas.SetActive(false);
     }
 
 
