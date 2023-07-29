@@ -11,11 +11,11 @@ public class TetherRope : MonoBehaviour
     public GameObject lastNode;
     public GameObject targetPartner;
 
-    Queue<GameObject> Rope = new Queue<GameObject>();
+    List<GameObject> Rope = new List<GameObject>();
 
     public float segmentDist = 0.25f;
-    public float maxDist = 2.0f;
-    public float minDist = 0.3f;
+    public int maxDist = 10;
+    public int minDist = 3;
 
     float currDist;
     bool isTethered;
@@ -33,6 +33,11 @@ public class TetherRope : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V))
         {
             RemoveRopeSegment();
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            AddRopeSegment();
         }
     }
 
@@ -54,7 +59,7 @@ public class TetherRope : MonoBehaviour
         segPos += (Vector2)(lastNode.transform.position);
 
         GameObject newNode = Instantiate(ropeSegment, segPos, Quaternion.identity);
-        Rope.Enqueue(newNode);
+        Rope.Add(newNode);
 
         lastNode.GetComponent<HingeJoint2D>().connectedBody = newNode.GetComponent<Rigidbody2D>();
         lastNode = newNode;
@@ -62,20 +67,30 @@ public class TetherRope : MonoBehaviour
 
     void DestroyRope()
     {
-        
+        for(int i = Rope.Count - 1; i >= 0; i--)
+        {
+            GameObject currNode = Rope[i];
+            currNode.GetComponent<HingeJoint2D>().enabled = false;
+            Rope.Remove(currNode);
+            Destroy(currNode);
+        }
+        Rope.Clear();
+        lastNode = transform.gameObject;
     }
 
     void RemoveRopeSegment()
     {
-        if (Rope.Count > 0)
+        if (Rope.Count > minDist)
         {
-            GameObject prevNode = Rope.ElementAt(Rope.Count - 2);
-            prevNode.GetComponent<HingeJoint2D>().connectedBody = targetPartner.GetComponent<Rigidbody2D>();
-            
-            Destroy(Rope.Last());
-            Rope.Dequeue();
+            Rope.Remove(lastNode);
+            Destroy(lastNode);
 
-            lastNode = prevNode;
+            lastNode = Rope.Last();
+            lastNode.GetComponent<HingeJoint2D>().connectedBody = targetPartner.GetComponent<Rigidbody2D>();
+
+            targetPartner.transform.position = Vector2.MoveTowards(targetPartner.transform.position, lastNode.transform.position, 0.25f);
+
+            lastNode.tag = "Last";
         }
     }
 
@@ -90,6 +105,7 @@ public class TetherRope : MonoBehaviour
                 while (Vector2.Distance(targetPartner.transform.position, lastNode.transform.position) > segmentDist)
                 {
                     AddRopeSegment();
+                    //yield return new WaitForSeconds(1.0f);
                 }
                 
                 lastNode.GetComponent<HingeJoint2D>().connectedBody = targetPartner.GetComponent<Rigidbody2D>();
