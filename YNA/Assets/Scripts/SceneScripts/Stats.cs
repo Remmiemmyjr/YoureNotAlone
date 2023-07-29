@@ -33,6 +33,8 @@ public class Stats : MonoBehaviour
     private Animator transitionCanvas;
 
     GameObject pauseUI;
+
+    GameObject[] statues;
     // *********************************************************************
 
 
