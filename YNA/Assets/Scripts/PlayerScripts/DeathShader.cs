@@ -14,7 +14,7 @@ public class DeathShader : MonoBehaviour
         stone.SetFloat("_ClippingVal", 1);
     }
 
-    IEnumerator Lerp(float time)
+    public IEnumerator Lerp(float time)
     {
         float timeElapsed = 0;
 

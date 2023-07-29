@@ -43,6 +43,7 @@ public class Stats : MonoBehaviour
     void Start()
     {
         transitionCanvas = GameObject.FindWithTag("Transition")?.GetComponentInChildren<Animator>();
+        statues = GameObject.FindGameObjectsWithTag("Statue");
 
         pauseUI = GameObject.FindWithTag("Pause");
 
