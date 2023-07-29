@@ -1,3 +1,4 @@
+#region Header
 //*************************************************
 // Project: We're Tethered Together
 // File: EyeEffects.cs
@@ -7,11 +8,19 @@
 //       for the eye states
 //
 // Notes:
-// -
+//  + DEPRECIATED
 //
 // Last Edit: 5/11/2023
 //
 //*************************************************
+#endregion
+
+// !*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!
+// ////////////////////////////////////////////////////////////////////////////
+// DEPRECIATED
+// ///////////////////////////////////////////////////////////////////////////
+// !*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!*+!
+
 
 using System.Collections;
 using System.Collections.Generic;
@@ -24,8 +33,9 @@ using Cinemachine;
 
 public class EyeEffects : MonoBehaviour
 {
-////////////////////////////////////////////////////////////////////////
-// VARIABLES ===========================================================
+    #region DEPRECIATED
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     ActivateEyes eyeController;
     CinemachineImpulseSource impulse;
 
@@ -243,4 +253,5 @@ public class EyeEffects : MonoBehaviour
             yield return null;
         }
     }
+    #endregion
 }
