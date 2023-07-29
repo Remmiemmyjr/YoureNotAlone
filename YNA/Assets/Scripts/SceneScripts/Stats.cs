@@ -20,6 +20,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+
 public class Stats : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
@@ -29,12 +30,12 @@ public class Stats : MonoBehaviour
     [HideInInspector]
     public bool isPaused = false;
 
+    public PlayerInput playerInput;
+
     // Transitions
     private Animator transitionCanvas;
 
     GameObject pauseUI;
-
-    GameObject[] statues;
     // *********************************************************************
 
 
@@ -42,8 +43,8 @@ public class Stats : MonoBehaviour
     // START ===============================================================
     void Start()
     {
+        //playerInput.actions.FindActionMap("Gameplay").Enable();
         transitionCanvas = GameObject.FindWithTag("Transition")?.GetComponentInChildren<Animator>();
-        statues = GameObject.FindGameObjectsWithTag("Statue");
 
         pauseUI = GameObject.FindWithTag("Pause");
 
@@ -158,6 +159,10 @@ public class Stats : MonoBehaviour
     // TRANSITION ==========================================================
     private IEnumerator TransitionSequence()
     {
+        StartCoroutine(GetComponent<DeathShader>().Lerp(1));
+        playerInput.actions.FindActionMap("Gameplay").Disable();
+        yield return new WaitForSeconds(1.5f);
+
         if (transitionCanvas)
         {
             transitionCanvas.SetTrigger("EyeDeath");

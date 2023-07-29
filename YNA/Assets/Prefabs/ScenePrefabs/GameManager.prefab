@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2471410413492978150}
   - component: {fileID: 2471410413492978151}
   - component: {fileID: 8241769704791665865}
+  - component: {fileID: 3243969560651696710}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDead: 0
   isPaused: 0
+  playerInput: {fileID: 8241769704791665865}
 --- !u!114 &8241769704791665865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,12 +154,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 4ccc807b-2ab4-417c-bab0-89a0263e9f46
     m_ActionName: Scene/SkipCutscene[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 665d4313-7ac3-4f1d-bbfb-67766fa83a87
-    m_ActionName: Scene/Door
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Scene
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3243969560651696710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2471410413492978148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f538d4de69c929244a7ee414ffa7abb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stone: {fileID: 2100000, guid: f38e7c1999ea071418d3fe763c546eff, type: 2}

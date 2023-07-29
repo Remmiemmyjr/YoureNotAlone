@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDead: 0
   isPaused: 0
+  playerInput: {fileID: 0}
 --- !u!114 &783348941237856850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +314,7 @@ MonoBehaviour:
   isTethered: 0
   canLatch: 0
   isLatching: 0
+  startTethered: 1
 --- !u!114 &7051889565614328847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5633,14 +5635,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4116983695250163584}
   - component: {fileID: 6697592896519079500}
-  - component: {fileID: 5254988319845185879}
+  - component: {fileID: 6988202371848372612}
   m_Layer: 6
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4116983695250163584
 Transform:
   m_ObjectHideFlags: 0
@@ -5708,7 +5710,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5254988319845185879
+--- !u!114 &6988202371848372612
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5717,7 +5719,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8430895359532670629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f538d4de69c929244a7ee414ffa7abb2, type: 3}
+  m_Script: {fileID: 11500000, guid: fd8ce5c4a8c9c7445aaf9f61eca554eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stone: {fileID: 2100000, guid: f38e7c1999ea071418d3fe763c546eff, type: 2}

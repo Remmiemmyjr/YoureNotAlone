@@ -5,12 +5,10 @@ using UnityEngine.Rendering;
 
 public class DeathShader : MonoBehaviour
 {
-    GameObject manager;
     public Material stone;
 
     private void Awake()
     {
-        manager = GameObject.FindGameObjectWithTag("GameManager");
         stone.SetFloat("_ClippingVal", 1);
     }
 
