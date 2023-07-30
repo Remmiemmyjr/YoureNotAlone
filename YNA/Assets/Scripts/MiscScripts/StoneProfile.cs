@@ -24,16 +24,20 @@ public class StoneProfile : MonoBehaviour
         // y no workie
         spr.flipX = owner.GetComponent<SpriteRenderer>().flipX;
 
-        if (manager.isDead && shouldDoThis)
+        if (manager.isDead)
         {
-            shouldDoThis = false;
-            owner.GetComponent<Rigidbody2D>().velocity = Vector2.zero; 
+            owner.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
-            if (owner.tag == "Player")
-                ownerAnim.Play("Player_Still");
+            if (shouldDoThis)
+            {
+                shouldDoThis = false;
 
-            else if (owner.tag == "Partner")
-                ownerAnim.Play("Partner_Still");
+                if (owner.tag == "Player")
+                    ownerAnim.Play("Player_Still");
+
+                else if (owner.tag == "Partner")
+                    ownerAnim.Play("Partner_Still");
+            }
         }
     }
 }

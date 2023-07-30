@@ -53,17 +53,20 @@ public class Grapple : MonoBehaviour
     // *********************************************************************
 
 
+    private void Awake()
+    {
+        partner = GameObject.FindGameObjectWithTag("Partner");
+        topSolidMap = GameObject.FindGameObjectWithTag("TopSolidMap");
+        manager = GameObject.FindGameObjectWithTag("GameManager")?.GetComponent<Stats>();
+
+        line = GetComponent<LineRenderer>();
+        target = partner?.GetComponent<SpringJoint2D>();
+    }
+
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
     void Start()
     {
-        partner = GameObject.FindGameObjectWithTag("Partner");
-        topSolidMap = GameObject.FindGameObjectWithTag("TopSolidMap");
-        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>();
-
-        line = GetComponent<LineRenderer>();
-        target = partner?.GetComponent<SpringJoint2D>();
-
         if (target != null && startTethered)
         {
             Tethered(true);
@@ -72,7 +75,7 @@ public class Grapple : MonoBehaviour
         {
             line.enabled = false;
         }
-   
+
         isExtending = false;
         currLength = maxLimit;
     }
