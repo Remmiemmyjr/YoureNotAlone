@@ -18,7 +18,7 @@ public class DeathShader : MonoBehaviour
 
         while (timeElapsed <= time)
         {
-            float valueToLerp = Mathf.Lerp(1, 0.1f, timeElapsed / time);
+            float valueToLerp = Mathf.Lerp(1, 0.001f, timeElapsed / time);
 
             stone.SetFloat("_ClippingVal", valueToLerp);
 

@@ -14,6 +14,7 @@
 //*************************************************
 
 using System;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -65,11 +66,28 @@ public class PlayerController : MonoBehaviour
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>();
     }
 
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
+    void Start()
+    {
+        resetTime = playInterval;
+    }
 
     ////////////////////////////////////////////////////////////////////////
     // FIXED UPDATE ========================================================
     void FixedUpdate()
     {
+        if (IsGrounded() && dir.x != 0.0f)
+        {
+            resetTime -= Time.deltaTime;
+
+            if (resetTime <= 0)
+            {
+                footstepSource.PlayOneShot(randClip.GetRandomClip());
+                resetTime = playInterval;
+            }
+        }
+
         // slow-stop
         if (Mathf.Abs(dir.x) > 0.65)
         {
@@ -115,17 +133,6 @@ public class PlayerController : MonoBehaviour
     {
         if (!manager.isDead)
         {
-            if(IsGrounded())
-            {
-                resetTime -= Time.deltaTime;
-
-                if (resetTime <= 0)
-                {
-                    footstepSource.PlayOneShot(randClip.GetRandomClip());
-                    resetTime = playInterval;
-                }
-            }
-
             dir.x = ctx.ReadValue<float>();
 
             animState.SetNextState(SetPlayerAnimState.PlayerStates.cWalk);
@@ -162,7 +169,7 @@ public class PlayerController : MonoBehaviour
     // COYOTE TIME =========================================================
     void CoyoteTime()
     {
-        if(IsGrounded())
+        if (IsGrounded())
         {
             cTimeCounter = cTime;
         }
