@@ -7,17 +7,16 @@ using UnityEngine.InputSystem;
 
 public class TetherRope : MonoBehaviour
 {
-    public GameObject ropeSegment;
+    public GameObject segmentPrefab;
     public GameObject lastNode;
     public GameObject targetPartner;
 
-    List<GameObject> Rope = new List<GameObject>();
+    List<GameObject> RopeList = new List<GameObject>();
 
-    public float segmentDist = 0.25f;
-    public int maxDist = 10;
-    public int minDist = 3;
+    public float segmentOffset = 0.25f;
+    public int maxNodes = 10;
+    public int minNodes = 3;
 
-    float currDist;
     bool isTethered;
 
     // Start is called before the first frame update
@@ -28,38 +27,41 @@ public class TetherRope : MonoBehaviour
         GetComponent<HingeJoint2D>().enabled = false;
     }
 
+    private void Start()
+    {
+        Tether();
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            RemoveRopeSegment();
-        }
+        //if (Input.GetKeyDown(KeyCode.V))
+        //{
+        //    RemoveRopeSegment();
+        //}
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            AddRopeSegment();
+            Tether();
         }
     }
 
-    public void Tether(InputAction.CallbackContext ctx)
+    public void Tether()
     {
-        if (ctx.performed)
-        {
-            isTethered = !isTethered;
-            StartCoroutine(ManageRope(isTethered));
-        }
+        isTethered = !isTethered;
+        StartCoroutine(ManageRope(isTethered));
+        
     }
 
-    void AddRopeSegment()
+    void AddRopeSegment(GameObject obj)
     {
-        Vector2 segPos = targetPartner.transform.position - lastNode.transform.position;
+        Vector2 segPos = (transform.position - new Vector3(0, 5)) - lastNode.transform.position;
         segPos.Normalize();
 
-        segPos *= segmentDist;
+        segPos *= segmentOffset;
         segPos += (Vector2)(lastNode.transform.position);
 
-        GameObject newNode = Instantiate(ropeSegment, segPos, Quaternion.identity);
-        Rope.Add(newNode);
+        GameObject newNode = Instantiate(obj, segPos, Quaternion.identity);
+        RopeList.Add(newNode);
 
         lastNode.GetComponent<HingeJoint2D>().connectedBody = newNode.GetComponent<Rigidbody2D>();
         lastNode = newNode;
@@ -67,32 +69,32 @@ public class TetherRope : MonoBehaviour
 
     void DestroyRope()
     {
-        for(int i = Rope.Count - 1; i >= 0; i--)
+        for(int i = RopeList.Count - 1; i >= 0; i--)
         {
-            GameObject currNode = Rope[i];
+            GameObject currNode = RopeList[i];
             currNode.GetComponent<HingeJoint2D>().enabled = false;
-            Rope.Remove(currNode);
+            RopeList.Remove(currNode);
             Destroy(currNode);
         }
-        Rope.Clear();
+        RopeList.Clear();
         lastNode = transform.gameObject;
     }
 
-    void RemoveRopeSegment()
-    {
-        if (Rope.Count > minDist)
-        {
-            Rope.Remove(lastNode);
-            Destroy(lastNode);
+    //void RemoveRopeSegment()
+    //{
+    //    if (RopeList.Count > minNodes)
+    //    {
+    //        RopeList.Remove(lastNode);
+    //        Destroy(lastNode);
 
-            lastNode = Rope.Last();
-            lastNode.GetComponent<HingeJoint2D>().connectedBody = targetPartner.GetComponent<Rigidbody2D>();
+    //        lastNode = RopeList.Last();
+    //        lastNode.GetComponent<HingeJoint2D>().connectedBody = targetPartner.GetComponent<Rigidbody2D>();
 
-            targetPartner.transform.position = Vector2.MoveTowards(targetPartner.transform.position, lastNode.transform.position, 0.25f);
+    //        targetPartner.transform.position = Vector2.MoveTowards(targetPartner.transform.position, lastNode.transform.position, 0.25f);
 
-            lastNode.tag = "Last";
-        }
-    }
+    //        lastNode.tag = "Last";
+    //    }
+    //}
 
     IEnumerator ManageRope(bool tethered)
     {
@@ -102,14 +104,15 @@ public class TetherRope : MonoBehaviour
             case true:
                 GetComponent<HingeJoint2D>().enabled = true;
 
-                while (Vector2.Distance(targetPartner.transform.position, lastNode.transform.position) > segmentDist)
+                while (Vector2.Distance(transform.position - new Vector3(0, 5), lastNode.transform.position) > segmentOffset)
                 {
-                    AddRopeSegment();
+                    AddRopeSegment(segmentPrefab);
                     //yield return new WaitForSeconds(1.0f);
                 }
+                AddRopeSegment(targetPartner);
                 
-                lastNode.GetComponent<HingeJoint2D>().connectedBody = targetPartner.GetComponent<Rigidbody2D>();
-                lastNode.tag = "Last";
+                //lastNode.GetComponent<HingeJoint2D>().connectedBody = targetPartner.GetComponent<Rigidbody2D>();
+                //lastNode.tag = "Last";
                 break;
 
             // If player should NOT be tethered: ----------------------------------------
