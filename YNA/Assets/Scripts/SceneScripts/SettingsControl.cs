@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class SettingsControl : MonoBehaviour
 {
@@ -11,6 +14,34 @@ public class SettingsControl : MonoBehaviour
     public TMP_Dropdown resolutionDropdown;
     float currentRefreshRate;
     List<Resolution> filteredResolutions = new List<Resolution>();
+
+    VolumeProfile volProf;
+    LiftGammaGain liftGammaGain;
+    Bloom bloom;
+    public float bloomDefaultThreshold = 0.725f;
+
+    public Slider volumeSlider;
+    public Slider brightnessSlider;
+
+
+    private void Awake()
+    {
+        // Update volume and brightness for scene
+        volProf = GameObject.FindWithTag("GlobalVolume").GetComponent<Volume>().profile;
+        volProf.TryGet(out liftGammaGain);
+        volProf.TryGet(out bloom);
+
+        float gammaVal = PlayerPrefs.GetFloat("Gamma");
+        liftGammaGain.gamma.Override(new Vector4(0, 0, 0, gammaVal));
+        bloom.threshold.value = bloomDefaultThreshold + (gammaVal * 0.1f);
+
+        // Update Slider UI
+        float masterVol = 0.0f;
+        audioMixer.GetFloat("MasterVolume", out masterVol);
+
+        volumeSlider.value = masterVol;
+        brightnessSlider.value = gammaVal;
+    }
 
     void Start()
     {
@@ -67,6 +98,9 @@ public class SettingsControl : MonoBehaviour
 
     public void SetGamma(float gammaVal)
     {
+        liftGammaGain.gamma.Override(new Vector4(0, 0, 0, gammaVal));
+        bloom.threshold.value = bloomDefaultThreshold + (gammaVal * 0.1f);
+
         PlayerPrefs.SetFloat("Gamma", gammaVal);
         PlayerPrefs.Save();
     }
