@@ -19,14 +19,21 @@ public class Parallax : MonoBehaviour
     // VARIABLES ===========================================================
     private float length, startpos;
     private float camPos;
-    public GameObject cam;
+    GameObject cam;
     public float parallaxEffect;
     // *********************************************************************
 
-
     ////////////////////////////////////////////////////////////////////////
-    // START ===============================================================
-    void Start()
+    // AWAKE ===============================================================
+    void Awake()
+    {
+        cam = GameObject.FindWithTag("MainCamera");
+    }
+
+
+        ////////////////////////////////////////////////////////////////////////
+        // START ===============================================================
+        void Start()
     {
         camPos = cam.transform.position.x;
         

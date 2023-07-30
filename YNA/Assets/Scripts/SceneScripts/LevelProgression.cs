@@ -20,7 +20,7 @@ public class LevelProgression : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
     public GameObject instructions;
-    public GameObject displayMessage;
+    GameObject displayMessage;
 
     public string nextLevel;
 
@@ -29,6 +29,13 @@ public class LevelProgression : MonoBehaviour
     // Transitions
     private Animator transitionCanvas;
     // *********************************************************************
+
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
+    void Awake()
+    {
+        displayMessage = GameObject.FindWithTag("ProceedCanvas")?.transform.GetChild(0).gameObject;
+    }
 
 
     ////////////////////////////////////////////////////////////////////////
