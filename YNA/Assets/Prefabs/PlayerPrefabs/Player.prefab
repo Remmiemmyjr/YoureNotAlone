@@ -159,6 +159,10 @@ MonoBehaviour:
   jumpHeight: 16
   smoothDamp: 5
   smoothRange: 0.05
+  footstepSource: {fileID: 4507253564645302088}
+  randClip: {fileID: 887363957510537369}
+  playInterval: 0.3
+  resetTime: 0
 --- !u!114 &436255601252183364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5460,7 +5464,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6153674724854329950}
-  - component: {fileID: 8503721062006722536}
   - component: {fileID: 887363957510537369}
   - component: {fileID: 4507253564645302088}
   - component: {fileID: 7494295596286159181}
@@ -5486,23 +5489,6 @@ Transform:
   m_Father: {fileID: 783348941237856851}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8503721062006722536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5775330145399386333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c24a7940676c97247a549c648079cf2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 783348941237856849}
-  _moveScript: {fileID: 783348941237856850}
-  randClip: {fileID: 887363957510537369}
-  playInterval: 0.3
-  resetTime: 0
 --- !u!114 &887363957510537369
 MonoBehaviour:
   m_ObjectHideFlags: 0

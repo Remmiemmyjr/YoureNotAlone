@@ -18,6 +18,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using static Unity.VisualScripting.Member;
 
 public class PlayerController : MonoBehaviour
 {
@@ -44,6 +46,11 @@ public class PlayerController : MonoBehaviour
 
     private float cTime = 0.2f;
     private float cTimeCounter;
+
+    public AudioSource footstepSource;
+    public PlayAudio randClip;
+    public float playInterval = 0.3f;
+    public float resetTime = 0.0f;
     // *********************************************************************
 
 
@@ -108,6 +115,17 @@ public class PlayerController : MonoBehaviour
     {
         if (!manager.isDead)
         {
+            if(IsGrounded())
+            {
+                resetTime -= Time.deltaTime;
+
+                if (resetTime <= 0)
+                {
+                    footstepSource.PlayOneShot(randClip.GetRandomClip());
+                    resetTime = playInterval;
+                }
+            }
+
             dir.x = ctx.ReadValue<float>();
 
             animState.SetNextState(SetPlayerAnimState.PlayerStates.cWalk);
