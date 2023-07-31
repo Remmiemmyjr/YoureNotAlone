@@ -97,11 +97,6 @@ public class Grapple : MonoBehaviour
         if (currDist > breakingPoint)
         {
             Tethered(false);
-            if (isLatching)
-            {
-                isLatching = false;
-                partner.transform.Find("LatchRadius").GetComponent<Latch>().ReleaseObject();
-            }
         }
 
         if (line.enabled && !isReeling)
@@ -133,31 +128,18 @@ public class Grapple : MonoBehaviour
 
     public void EnableRope(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !manager.isDead)
+        if (ctx.performed && !Info.isDead)
         {
-            if (!canLatch)
+            if (currDist <= (maxLimit + 1) && !target.enabled)
             {
-                if (currDist <= (maxLimit + 1) && !target.enabled)
-                {
-                    Tethered(true);
-                }
-                else
-                {
-                    Tethered(false);
-                }
+                Tethered(true);
             }
-
             else
             {
-                if(isLatching)
+                Tethered(false);
+                if(Info.latch.isLatched)
                 {
-                    isLatching = false;
-                    partner.transform.Find("LatchRadius").GetComponent<Latch>().ReleaseObject();
-                }
-                else
-                {
-                    isLatching = true;
-                    partner.transform.Find("LatchRadius").GetComponent<Latch>().GrabObject();
+                    Info.latch.ReleaseObject();
                 }
             }
         }
@@ -192,14 +174,14 @@ public class Grapple : MonoBehaviour
     // REEL IN =============================================================
     public void ReelIn(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !manager.isDead)
+        if (ctx.performed && !Info.isDead)
         {
             isExtending = false;
             target.distance = 0;
             currLength = maxLimit;
             maxLimit = 0.95f;
 
-            if (gameObject.GetComponent<PlayerController>() && gameObject.GetComponent<PlayerController>().IsGrounded() == false)
+            if (Info.movement && Info.movement.IsGrounded() == false)
             {
                 target.frequency = airReelSpeed;
             }

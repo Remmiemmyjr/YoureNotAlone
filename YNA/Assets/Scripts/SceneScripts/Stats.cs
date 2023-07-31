@@ -25,12 +25,13 @@ public class Stats : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
+    //[HideInInspector]
+    //public bool isDead;
     [HideInInspector]
-    public bool isDead;
-    [HideInInspector]
-    public bool isPaused = false;
+    //public bool isPaused = false;
 
     public PlayerInput playerInput;
+    DeathShader stoneShader;
 
     // Transitions
     private Animator transitionCanvas;
@@ -44,8 +45,9 @@ public class Stats : MonoBehaviour
 
         pauseUI = GameObject.FindWithTag("Pause");
         settingsCanvas = GameObject.FindWithTag("SettingsCanvas");
+        stoneShader = gameObject.GetComponent<DeathShader>();
 
-        isDead = false;
+        Info.isDead = false;
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -70,7 +72,7 @@ public class Stats : MonoBehaviour
     // UPDATE ==============================================================
     void Update()
     {
-        if (isDead)
+        if (Info.isDead)
         {
             StartCoroutine(TransitionSequence());
         }
@@ -83,7 +85,7 @@ public class Stats : MonoBehaviour
         // Action performed and not in a cutscene
         if (ctx.performed && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
         {
-            GetComponent<Stats>().isDead = true;
+            Info.isDead = true;
         }
     }
 
@@ -103,9 +105,9 @@ public class Stats : MonoBehaviour
 
 
             // Paused -> Unpaused
-            if (isPaused && !pauseUI.GetComponent<PauseManager>().GetInSettings())
+            if (Info.isPaused && !pauseUI.GetComponent<PauseManager>().GetInSettings())
             {
-                isPaused = false;
+                Info.isPaused = false;
 
                 if (pauseUI)
                 {
@@ -118,9 +120,9 @@ public class Stats : MonoBehaviour
             }
 
             // Unpaused -> Paused
-            else if (!isPaused)
+            else if (!Info.isPaused)
             {
-                isPaused = true;
+                Info.isPaused = true;
 
                 if (pauseUI)
                 {
@@ -157,19 +159,20 @@ public class Stats : MonoBehaviour
         }
     }
 
+
     ////////////////////////////////////////////////////////////////////////
     // TOGGLE PAUSE ========================================================
     public void TogglePause()
     {
-        isPaused = !isPaused;
+        Info.isPaused = !Info.isPaused;
     }
-
+    
 
     ////////////////////////////////////////////////////////////////////////
     // TRANSITION ==========================================================
     private IEnumerator TransitionSequence()
     {
-        StartCoroutine(GetComponent<DeathShader>().Lerp(1));
+        StartCoroutine(stoneShader.Lerp(1));
         yield return new WaitForSeconds(1.5f);
 
         if (transitionCanvas)

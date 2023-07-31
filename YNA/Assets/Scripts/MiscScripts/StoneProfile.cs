@@ -24,7 +24,7 @@ public class StoneProfile : MonoBehaviour
         // y no workie
         spr.flipX = owner.GetComponent<SpriteRenderer>().flipX;
 
-        if (manager.isDead)
+        if (Info.isDead)
         {
             owner.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 

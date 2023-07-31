@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
     // MOVEMENT ============================================================
     public void Movement(InputAction.CallbackContext ctx)
     {
-        if (!manager.isDead)
+        if (!Info.isDead)
         {
             dir.x = ctx.ReadValue<float>();
 
@@ -146,9 +146,9 @@ public class PlayerController : MonoBehaviour
     // JUMP ================================================================
     public void Jump(InputAction.CallbackContext ctx)
     {
-        if (!manager.isDead)
+        if (!Info.isDead)
         {
-            if (ctx.performed && cTimeCounter > 0 && !manager.isPaused)
+            if (ctx.performed && cTimeCounter > 0 && !Info.isPaused)
             {
                 rb.velocity = Vector2.up * jumpHeight;
 

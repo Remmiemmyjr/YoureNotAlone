@@ -133,8 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38dbda957ac02545a4bce822f867ff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDead: 0
-  isPaused: 0
   playerInput: {fileID: 0}
 --- !u!114 &783348941237856850
 MonoBehaviour:
@@ -292,6 +290,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 4ccc807b-2ab4-417c-bab0-89a0263e9f46
     m_ActionName: Scene/SkipCutscene[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6640841632957439881, guid: 5aea80f51ff0efd4f8b52055ae96ab53, type: 3}
+        m_TargetAssemblyTypeName: Latch, Assembly-CSharp
+        m_MethodName: LatchBox
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d91dce62-585e-4bf3-88de-827cfe491eac
+    m_ActionName: Gameplay/Latch[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

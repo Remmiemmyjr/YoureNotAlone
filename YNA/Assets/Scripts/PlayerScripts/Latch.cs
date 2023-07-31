@@ -16,23 +16,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Latch : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
-    Grapple playerGrapple;
     Rigidbody2D objRB;
     HingeJoint2D joint;
     float ogMass;
+    public bool isLatched;
+    bool canLatch;
     // *********************************************************************
 
 
     ////////////////////////////////////////////////////////////////////////
     // AWAKE ===============================================================
-    private void Awake()
+    void Awake()
     {
-        playerGrapple = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Grapple>();
+        DontDestroyOnLoad(this);
+        isLatched = false;
+    }
+
+    void Update()
+    {
+    }
+
+
+    public void LatchBox(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed && canLatch)
+        {
+            if (Info.grapple.isTethered)
+            {
+                isLatched = !isLatched;
+
+                if (isLatched)
+                {
+                    GrabObject();
+                }
+                else
+                {
+                    ReleaseObject();
+                }
+            }
+        }
     }
 
 
@@ -42,10 +70,21 @@ public class Latch : MonoBehaviour
     {
         if (collision.gameObject.tag == "Grabbable")
         {
-            playerGrapple.canLatch = true;
+            canLatch = true;
             joint = collision.gameObject.GetComponent<HingeJoint2D>();
             objRB = collision.GetComponent<Rigidbody2D>();
             ogMass = objRB.mass;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Grabbable")
+        {
+            canLatch = false;
+            joint = null;
+            objRB = null;
+            //objRB.mass = ogMass;
         }
     }
 
@@ -55,7 +94,7 @@ public class Latch : MonoBehaviour
     public void GrabObject()
     {
         joint.connectedBody = GetComponentInParent<Rigidbody2D>();
-        objRB.mass = 1.0f;
+        objRB.mass = 0.5f;
         joint.enabled = true;
     }
 
@@ -65,7 +104,8 @@ public class Latch : MonoBehaviour
     public void ReleaseObject()
     {
         joint.enabled = false;
-        playerGrapple.canLatch = false;
+        isLatched = false;
+        canLatch = false;
         joint.connectedBody = null;
         objRB.mass = ogMass;
         objRB = null;
