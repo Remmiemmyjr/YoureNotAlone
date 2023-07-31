@@ -12,6 +12,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
@@ -20,24 +21,23 @@ public class Grapple : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
-    GameObject partner;
     GameObject topSolidMap;
     LineRenderer line;
     SpringJoint2D target;
-    Stats manager;
 
     Vector2 playerLinePos;
     Vector2 partnerLinePos;
 
-    public float maxLimit = 0.95f;
-    public float minLimit = 0.75f;
-    public float breakingPoint = 7f;
-    public float pullSpeed = 1f;
-    public float reelSpeed = 1.75f;
-    public float airReelSpeed = 1f;
+    public float maxTetherDist = 1.5f;
+    public float minTetherDist = 0.35f;
+    public float ropeSpeed = 3f;
 
-    float currDist;
-    float currLength;
+    float minRopeLimit = 0.25f;
+    float maxRopeLimit = 10f;
+    float currMaxRopeLimit;
+
+    float currDistFromPartner;
+    float currRopeLength;
 
     [HideInInspector]
     public bool isTethered;
@@ -53,31 +53,33 @@ public class Grapple : MonoBehaviour
     // *********************************************************************
 
 
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
     private void Awake()
     {
-        partner = GameObject.FindGameObjectWithTag("Partner");
         topSolidMap = GameObject.FindGameObjectWithTag("TopSolidMap");
-        manager = GameObject.FindGameObjectWithTag("GameManager")?.GetComponent<Stats>();
-
         line = GetComponent<LineRenderer>();
-        target = partner?.GetComponent<SpringJoint2D>();
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
     void Start()
     {
+        target = Info.partner?.GetComponent<SpringJoint2D>();
+
         if (target != null && startTethered)
         {
             Tethered(true);
         }
         else
         {
-            line.enabled = false;
+            Tethered(false);
         }
 
         isExtending = false;
-        currLength = maxLimit;
+        currRopeLength = maxTetherDist;
+        currMaxRopeLimit = currRopeLength;
     }
 
 
@@ -85,34 +87,31 @@ public class Grapple : MonoBehaviour
     // UPDATE ==============================================================
     void Update()
     {
-        if (partner == null)
+        if (Info.partner == null)
         {
             return;
         }
 
         SetRope();
 
-        currDist = (transform.position - partner.transform.position).magnitude;
+        currDistFromPartner = (transform.position - Info.partner.transform.position).magnitude;
 
-        //if (currDist > breakingPoint)
-        //{
-        //    Tethered(false);
-        //}
-
-        if (line.enabled && !isReeling)
+        if (isTethered)
         {
             Pull();
         }
 
-        if (isReeling && currLength > 0.5)
+        if (isReeling && currRopeLength > minRopeLimit)
         {
-            target.distance -= (Time.deltaTime * 2.5f);
-            currLength = target.distance;
+            target.distance -= (Time.deltaTime * ropeSpeed);
+            currRopeLength = target.distance;
+            currMaxRopeLimit = currRopeLength;
         }
-        else if (isExtending && currLength < 10)
+        else if (isExtending && currRopeLength < maxRopeLimit)
         {
-            target.distance += (Time.deltaTime * 2.5f);
-            currLength = target.distance;
+            target.distance += (Time.deltaTime * ropeSpeed);
+            currRopeLength = target.distance;
+            currMaxRopeLimit = currRopeLength;
         }
     }
 
@@ -122,7 +121,7 @@ public class Grapple : MonoBehaviour
     void SetRope()
     {
         playerLinePos = new Vector2(transform.position.x, transform.position.y - 0.235f);
-        partnerLinePos = new Vector2(partner.transform.position.x, partner.transform.position.y - 0.235f);
+        partnerLinePos = new Vector2(Info.partner.transform.position.x, Info.partner.transform.position.y - 0.235f);
 
         line.SetPosition(0, playerLinePos);
         line.SetPosition(1, partnerLinePos);
@@ -135,13 +134,14 @@ public class Grapple : MonoBehaviour
     {
         if (ctx.performed && !Info.isDead)
         {
-            if (currDist <= (maxLimit + 1) && !target.enabled)
+            if (currDistFromPartner <= (maxTetherDist + 1) && !target.enabled)
             {
                 Tethered(true);
             }
             else
             {
                 Tethered(false);
+
                 if(Info.latch.isLatched)
                 {
                     Info.latch.ReleaseObject();
@@ -155,21 +155,21 @@ public class Grapple : MonoBehaviour
     // PULL ================================================================
     void Pull()
     {
-        target.frequency = pullSpeed;
+        target.frequency = ropeSpeed;
 
-        if (isExtending == false)
+        if ((isExtending == false) && (isReeling == false))
         {
-            if (currDist < minLimit)
+            if (currDistFromPartner < minTetherDist)
             {
-                target.distance = minLimit;
+                target.distance = minTetherDist;
             }
-            else if (currDist < currLength)
+            else if (currDistFromPartner >= currMaxRopeLimit)
             {
-                target.distance = currDist;
+                target.distance = currMaxRopeLimit;
             }
             else
             {
-                target.distance = currLength;
+                target.distance = currDistFromPartner;
             }
         }
     }
@@ -181,21 +181,8 @@ public class Grapple : MonoBehaviour
     {
         if (ctx.performed && !Info.isDead)
         {
-            isExtending = false;
-            //target.distance = 0;
-            //currLength = maxLimit;
-            //maxLimit = 0.95f;
-
-            //if (Info.movement && Info.movement.IsGrounded() == false)
-            //{
-            //    target.frequency = airReelSpeed;
-            //}
-            //else
-            //{
-            //    target.frequency = reelSpeed;
-            //}
-
             isReeling = true;
+            isExtending = false;
         }
         else
         {
@@ -205,7 +192,7 @@ public class Grapple : MonoBehaviour
         // Logic for topsolid and partner
         if (topSolidMap)
         {
-            topSolidMap.GetComponent<PlatformEffector2D>().colliderMask |= (1 << partner.layer);
+            topSolidMap.GetComponent<PlatformEffector2D>().colliderMask |= (1 << Info.partner.layer);
         }
     }
 
@@ -217,6 +204,7 @@ public class Grapple : MonoBehaviour
         if (ctx.performed)
         {
             isExtending = true;
+            isReeling = false;
         }
         else
         {
@@ -226,10 +214,13 @@ public class Grapple : MonoBehaviour
         // Logic for topsolid and partner
         if (topSolidMap)
         {
-            topSolidMap.GetComponent<PlatformEffector2D>().colliderMask &= ~(1 << partner.layer);
+            topSolidMap.GetComponent<PlatformEffector2D>().colliderMask &= ~(1 << Info.partner.layer);
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // TETHERED ============================================================
     void Tethered(bool tethered)
     {
         isTethered = tethered;

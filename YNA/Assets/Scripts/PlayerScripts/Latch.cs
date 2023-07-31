@@ -45,13 +45,13 @@ public class Latch : MonoBehaviour
 
     public void LatchBox(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && canLatch)
+        if (ctx.performed)
         {
             if (Info.grapple.isTethered)
             {
                 isLatched = !isLatched;
 
-                if (isLatched)
+                if (canLatch && !isLatched)
                 {
                     GrabObject();
                 }
@@ -93,6 +93,7 @@ public class Latch : MonoBehaviour
     // GRAB OBJECT =========================================================
     public void GrabObject()
     {
+        isLatched = true;
         joint.connectedBody = GetComponentInParent<Rigidbody2D>();
         objRB.mass = 0.5f;
         joint.enabled = true;
