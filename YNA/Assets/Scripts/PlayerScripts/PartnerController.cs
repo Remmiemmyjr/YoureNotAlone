@@ -94,7 +94,7 @@ public class PartnerController : MonoBehaviour
         //set state
         state_curr = state_next;
 
-        if (!manager.isDead)
+        if (!Info.isDead)
         {
             //partner state machine
             //do actions

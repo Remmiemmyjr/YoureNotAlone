@@ -71,7 +71,7 @@ public class SetPlayerAnimState : MonoBehaviour
 
         state_curr = state_next;
 
-        if (!manager.isDead)
+        if (!Info.isDead)
         {
             //player state machine
             switch (state_curr)

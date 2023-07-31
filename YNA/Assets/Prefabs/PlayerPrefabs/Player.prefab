@@ -133,8 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38dbda957ac02545a4bce822f867ff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDead: 0
-  isPaused: 0
   playerInput: {fileID: 0}
 --- !u!114 &783348941237856850
 MonoBehaviour:
@@ -159,6 +157,10 @@ MonoBehaviour:
   jumpHeight: 16
   smoothDamp: 5
   smoothRange: 0.05
+  footstepSource: {fileID: 4507253564645302088}
+  randClip: {fileID: 887363957510537369}
+  playInterval: 0.3
+  resetTime: 0
 --- !u!114 &436255601252183364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,6 +290,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 4ccc807b-2ab4-417c-bab0-89a0263e9f46
     m_ActionName: Scene/SkipCutscene[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6640841632957439881, guid: 5aea80f51ff0efd4f8b52055ae96ab53, type: 3}
+        m_TargetAssemblyTypeName: Latch, Assembly-CSharp
+        m_MethodName: LatchBox
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d91dce62-585e-4bf3-88de-827cfe491eac
+    m_ActionName: Gameplay/Latch[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -5460,7 +5478,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6153674724854329950}
-  - component: {fileID: 8503721062006722536}
   - component: {fileID: 887363957510537369}
   - component: {fileID: 4507253564645302088}
   - component: {fileID: 7494295596286159181}
@@ -5486,23 +5503,6 @@ Transform:
   m_Father: {fileID: 783348941237856851}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8503721062006722536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5775330145399386333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c24a7940676c97247a549c648079cf2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 783348941237856849}
-  _moveScript: {fileID: 783348941237856850}
-  randClip: {fileID: 887363957510537369}
-  playInterval: 0.3
-  resetTime: 0
 --- !u!114 &887363957510537369
 MonoBehaviour:
   m_ObjectHideFlags: 0

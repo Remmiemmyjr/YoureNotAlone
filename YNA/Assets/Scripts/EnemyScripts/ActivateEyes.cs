@@ -295,7 +295,7 @@ public class ActivateEyes : MonoBehaviour
             // If timeInSight has depleted the gracePeriod, kill the player.
             if(timeInSight <= 0)
             {
-                GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>().isDead = true;
+                Info.isDead = true;
             }
             else
             {

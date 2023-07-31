@@ -14,10 +14,13 @@
 //*************************************************
 
 using System;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using static Unity.VisualScripting.Member;
 
 public class PlayerController : MonoBehaviour
 {
@@ -44,6 +47,11 @@ public class PlayerController : MonoBehaviour
 
     private float cTime = 0.2f;
     private float cTimeCounter;
+
+    public AudioSource footstepSource;
+    public PlayAudio randClip;
+    public float playInterval = 0.3f;
+    public float resetTime = 0.0f;
     // *********************************************************************
 
 
@@ -58,11 +66,28 @@ public class PlayerController : MonoBehaviour
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>();
     }
 
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
+    void Start()
+    {
+        resetTime = playInterval;
+    }
 
     ////////////////////////////////////////////////////////////////////////
     // FIXED UPDATE ========================================================
     void FixedUpdate()
     {
+        if (IsGrounded() && dir.x != 0.0f)
+        {
+            resetTime -= Time.deltaTime;
+
+            if (resetTime <= 0)
+            {
+                footstepSource.PlayOneShot(randClip.GetRandomClip());
+                resetTime = playInterval;
+            }
+        }
+
         // slow-stop
         if (Mathf.Abs(dir.x) > 0.65)
         {
@@ -106,7 +131,7 @@ public class PlayerController : MonoBehaviour
     // MOVEMENT ============================================================
     public void Movement(InputAction.CallbackContext ctx)
     {
-        if (!manager.isDead)
+        if (!Info.isDead)
         {
             dir.x = ctx.ReadValue<float>();
 
@@ -121,9 +146,9 @@ public class PlayerController : MonoBehaviour
     // JUMP ================================================================
     public void Jump(InputAction.CallbackContext ctx)
     {
-        if (!manager.isDead)
+        if (!Info.isDead)
         {
-            if (ctx.performed && cTimeCounter > 0 && !manager.isPaused)
+            if (ctx.performed && cTimeCounter > 0 && !Info.isPaused)
             {
                 rb.velocity = Vector2.up * jumpHeight;
 
@@ -144,7 +169,7 @@ public class PlayerController : MonoBehaviour
     // COYOTE TIME =========================================================
     void CoyoteTime()
     {
-        if(IsGrounded())
+        if (IsGrounded())
         {
             cTimeCounter = cTime;
         }

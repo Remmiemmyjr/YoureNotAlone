@@ -20,12 +20,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.InputSystem;
 
 public class CutsceneManager : MonoBehaviour
 {
-////////////////////////////////////////////////////////////////////////
-// VARIABLES ===========================================================
-    
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
+
     // Cutscene Items
     public Cutscene[] cutscenes;
     private Cutscene activeCutscene;
@@ -40,11 +41,21 @@ public class CutsceneManager : MonoBehaviour
 
     private bool isStartCutscene = false;
 
+    private PlayerInput inputManager;
+
     // *********************************************************************
 
 
-////////////////////////////////////////////////////////////////////////
-// START ===============================================================
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
+    void Awake()
+    {
+        inputManager = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         // Get the canvas to play cutscenes on
@@ -72,8 +83,8 @@ public class CutsceneManager : MonoBehaviour
     }
 
 
-////////////////////////////////////////////////////////////////////////
-// UPDATE ==============================================================
+    ////////////////////////////////////////////////////////////////////////
+    // UPDATE ==============================================================
     void Update()
     {
         // Make sure something is playing
@@ -106,7 +117,7 @@ public class CutsceneManager : MonoBehaviour
             else
             {
                 // Update the timer UI
-                if(cutsceneCanvasTimer)
+                if (cutsceneCanvasTimer)
                 {
                     cutsceneCanvasTimer.fillAmount = 1.0f - (cutsceneTimer / activeCutscene.timeBetween);
                 }
@@ -115,14 +126,17 @@ public class CutsceneManager : MonoBehaviour
     }
 
 
-//-------------------------------------------------------------------------------------------------
-// PRIVATE FUNCTIONS
-//-------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------
+    // PRIVATE FUNCTIONS
+    //-------------------------------------------------------------------------------------------------
 
-////////////////////////////////////////////////////////////////////////
-// START CUTSCENE ======================================================
+    ////////////////////////////////////////////////////////////////////////
+    // START CUTSCENE ======================================================
     private void StartCutscene()
     {
+        // No player input allowed
+        inputManager.actions.Disable();
+
         // Update sprite
         cutsceneCanvasFrame.sprite = activeCutscene.frames[currentFrameIndex].frameImage;
 
@@ -139,18 +153,21 @@ public class CutsceneManager : MonoBehaviour
     }
 
 
-////////////////////////////////////////////////////////////////////////
-// PROCESS CUTSCENE ====================================================
+    ////////////////////////////////////////////////////////////////////////
+    // PROCESS CUTSCENE ====================================================
     private void ProcessCutsceneEffects()
     {
-        
+
     }
 
 
-////////////////////////////////////////////////////////////////////////
-// FINISH CUTSCENE =====================================================
+    ////////////////////////////////////////////////////////////////////////
+    // FINISH CUTSCENE =====================================================
     private void FinishCutscene()
     {
+        // Re-enable player input
+        inputManager.actions.Enable();
+
         // Update variables
         isCurrentlyPlaying = false;
 
@@ -185,12 +202,12 @@ public class CutsceneManager : MonoBehaviour
     }
 
 
-//-------------------------------------------------------------------------------------------------
-// PUBLIC FUNCTIONS
-//-------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------
+    // PUBLIC FUNCTIONS
+    //-------------------------------------------------------------------------------------------------
 
-////////////////////////////////////////////////////////////////////////
-// TRIGGER CUTSCENE ====================================================
+    ////////////////////////////////////////////////////////////////////////
+    // TRIGGER CUTSCENE ====================================================
     public void TriggerCutscene(string name)
     {
         //--- Function for use with cutscene trigger areas ---//
@@ -209,8 +226,8 @@ public class CutsceneManager : MonoBehaviour
     }
 
 
-////////////////////////////////////////////////////////////////////////
-// SKIP CUTSCENE FRAME =================================================
+    ////////////////////////////////////////////////////////////////////////
+    // SKIP CUTSCENE FRAME =================================================
     public void SkipCutsceneFrame()
     {
         // Make sure a cutscene is playing
@@ -221,8 +238,8 @@ public class CutsceneManager : MonoBehaviour
     }
 
 
-////////////////////////////////////////////////////////////////////////
-// GET IS PLAYING ======================================================
+    ////////////////////////////////////////////////////////////////////////
+    // GET IS PLAYING ======================================================
     public bool GetIsCurrentlyPlaying()
     {
         return isCurrentlyPlaying;

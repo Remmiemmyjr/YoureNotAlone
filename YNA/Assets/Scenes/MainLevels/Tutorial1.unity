@@ -684,7 +684,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b879c5e98dd28c4e9d64187ea6f8fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 641146639}
   parallaxEffect: -0.3
 --- !u!1 &257170585
 GameObject:
@@ -6468,11 +6467,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &641146639 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6948772921942046764, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
-  m_PrefabInstance: {fileID: 1007958250}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &770906645
 GameObject:
   m_ObjectHideFlags: 0
@@ -12017,6 +12011,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 831778317614402799, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 856128791974182335, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -12181,9 +12179,29 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5668030895183259398, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668030895183259398, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668030895183259398, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6074864054777640102, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291623563729707964, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291623563729707964, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6403169059861241253, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Layer
@@ -12332,6 +12350,10 @@ PrefabInstance:
     - target: {fileID: 8330828259330412297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_TagString
       value: SettingsCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395175400243638218, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9014207573852194119, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Layer
@@ -13669,7 +13691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b879c5e98dd28c4e9d64187ea6f8fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 641146639}
   parallaxEffect: 0.2
 --- !u!212 &1858568615
 SpriteRenderer:

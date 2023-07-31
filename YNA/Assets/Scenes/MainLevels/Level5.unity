@@ -274,6 +274,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 831778317614402799, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3299341754297055072, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.879563
@@ -288,7 +292,7 @@ PrefabInstance:
       objectReference: {fileID: 1032628017}
     - target: {fileID: 3299341754297055075, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 2.0290055
+      value: 1.7866666
       objectReference: {fileID: 0}
     - target: {fileID: 3299341754297055075, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Lens.OrthographicSize
@@ -446,6 +450,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5668030895183259398, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668030895183259398, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668030895183259398, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5917178604487817234, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.660004
@@ -526,9 +542,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.03
       objectReference: {fileID: 0}
+    - target: {fileID: 6291623563729707964, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291623563729707964, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.4580817
+      value: 1.1373343
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.y
@@ -541,6 +565,10 @@ PrefabInstance:
     - target: {fileID: 6948772921942046767, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: orthographic size
       value: 5.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395175400243638218, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9175478669483909337, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: max
@@ -32603,7 +32631,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b879c5e98dd28c4e9d64187ea6f8fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 141793897}
   parallaxEffect: -0.4
 --- !u!212 &2112879673
 SpriteRenderer:

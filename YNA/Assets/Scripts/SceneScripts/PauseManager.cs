@@ -25,6 +25,8 @@ public class PauseManager : MonoBehaviour
     private Animator transitionCanvas;
     private GameObject settingsCanvas;
 
+    private bool inSettings = false;
+
     ////////////////////////////////////////////////////////////////////////
     // AWAKE ===============================================================
     void Awake()
@@ -81,6 +83,7 @@ public class PauseManager : MonoBehaviour
     public void SettingsButton()
     {
         settingsCanvas.SetActive(true);
+        inSettings = true;
     }
 
 
@@ -88,7 +91,11 @@ public class PauseManager : MonoBehaviour
     // RETURN BUTTON =======================================================
     public void ReturnMenu()
     {
-        settingsCanvas.SetActive(false);
+        if (inSettings)
+        {
+            settingsCanvas.SetActive(false);
+            inSettings = false;
+        }
     }
 
 
@@ -116,5 +123,10 @@ public class PauseManager : MonoBehaviour
         }
 
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public bool GetInSettings()
+    {
+        return inSettings;
     }
 }
