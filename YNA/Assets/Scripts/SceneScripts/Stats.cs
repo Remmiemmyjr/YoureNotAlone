@@ -103,7 +103,7 @@ public class Stats : MonoBehaviour
 
 
             // Paused -> Unpaused
-            if (isPaused)
+            if (isPaused && !pauseUI.GetComponent<PauseManager>().GetInSettings())
             {
                 isPaused = false;
 
@@ -118,7 +118,7 @@ public class Stats : MonoBehaviour
             }
 
             // Unpaused -> Paused
-            else
+            else if (!isPaused)
             {
                 isPaused = true;
 
