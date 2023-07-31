@@ -32,8 +32,10 @@ public class Grapple : MonoBehaviour
     public float minTetherDist = 0.35f;
     public float ropeSpeed = 3f;
 
-    float minRopeLimit = 0.25f;
-    float maxRopeLimit = 10f;
+    [HideInInspector]
+    public float minRopeLimit = 0.25f;
+    [HideInInspector]
+    public float maxRopeLimit = 10f;
     float currMaxRopeLimit;
 
     float currDistFromPartner;

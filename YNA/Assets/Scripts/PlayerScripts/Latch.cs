@@ -25,6 +25,7 @@ public class Latch : MonoBehaviour
     Rigidbody2D objRB;
     HingeJoint2D joint;
     float ogMass;
+    float ogMinLimit;
     public bool isLatched;
     bool canLatch;
     // *********************************************************************
@@ -34,14 +35,9 @@ public class Latch : MonoBehaviour
     // AWAKE ===============================================================
     void Awake()
     {
-        DontDestroyOnLoad(this);
         isLatched = false;
+        ogMinLimit = Info.grapple.minRopeLimit;
     }
-
-    void Update()
-    {
-    }
-
 
     public void LatchBox(InputAction.CallbackContext ctx)
     {
@@ -59,7 +55,6 @@ public class Latch : MonoBehaviour
                     isLatched = false;
                     ReleaseObject();
                 }
-
             }
         }
     }
@@ -72,8 +67,10 @@ public class Latch : MonoBehaviour
         if (collision.gameObject.tag == "Grabbable")
         {
             canLatch = true;
+
             joint = collision.gameObject.GetComponent<HingeJoint2D>();
             objRB = collision.GetComponent<Rigidbody2D>();
+
             ogMass = objRB.mass;
         }
     }
@@ -82,9 +79,7 @@ public class Latch : MonoBehaviour
     {
         if (collision.gameObject.tag == "Grabbable" && !isLatched)
         {
-            canLatch = false;
-            joint = null;
-            objRB = null;
+            ReleaseObject();
         }
     }
 
@@ -94,8 +89,12 @@ public class Latch : MonoBehaviour
     public void GrabObject()
     {
         joint.connectedBody = GetComponentInParent<Rigidbody2D>();
-        objRB.mass = 0.5f;
         joint.enabled = true;
+
+        objRB.mass = 0.5f;
+        objRB.freezeRotation = true;
+
+        Info.grapple.minRopeLimit += 1.5f;
     }
 
 
@@ -104,9 +103,15 @@ public class Latch : MonoBehaviour
     public void ReleaseObject()
     {
         canLatch = false;
+
         joint.enabled = false;
         joint.connectedBody = null;
+        joint = null;
+
         objRB.mass = ogMass;
+        objRB.freezeRotation = false;
         objRB = null;
+
+        Info.grapple.minRopeLimit = ogMinLimit;
     }
 }
