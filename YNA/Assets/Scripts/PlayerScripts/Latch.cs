@@ -49,16 +49,17 @@ public class Latch : MonoBehaviour
         {
             if (Info.grapple.isTethered)
             {
-                isLatched = !isLatched;
-
-                if (canLatch && !isLatched)
+                if (!isLatched && canLatch)
                 {
+                    isLatched = true;
                     GrabObject();
                 }
                 else
                 {
+                    isLatched = false;
                     ReleaseObject();
                 }
+
             }
         }
     }
@@ -79,12 +80,11 @@ public class Latch : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Grabbable")
+        if (collision.gameObject.tag == "Grabbable" && !isLatched)
         {
             canLatch = false;
             joint = null;
             objRB = null;
-            //objRB.mass = ogMass;
         }
     }
 
@@ -93,7 +93,6 @@ public class Latch : MonoBehaviour
     // GRAB OBJECT =========================================================
     public void GrabObject()
     {
-        isLatched = true;
         joint.connectedBody = GetComponentInParent<Rigidbody2D>();
         objRB.mass = 0.5f;
         joint.enabled = true;
@@ -104,9 +103,8 @@ public class Latch : MonoBehaviour
     // RELEASE OBJECT ======================================================
     public void ReleaseObject()
     {
-        joint.enabled = false;
-        isLatched = false;
         canLatch = false;
+        joint.enabled = false;
         joint.connectedBody = null;
         objRB.mass = ogMass;
         objRB = null;
