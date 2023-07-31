@@ -99,7 +99,7 @@ public class SettingsControl : MonoBehaviour
     public void SetGamma(float gammaVal)
     {
         liftGammaGain.gamma.Override(new Vector4(0, 0, 0, gammaVal));
-        bloom.threshold.value = bloomDefaultThreshold + (gammaVal * 0.1f);
+        bloom.threshold.value = bloomDefaultThreshold + (gammaVal * 0.125f);
 
         PlayerPrefs.SetFloat("Gamma", gammaVal);
         PlayerPrefs.Save();

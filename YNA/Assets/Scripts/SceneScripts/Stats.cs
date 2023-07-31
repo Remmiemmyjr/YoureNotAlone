@@ -172,7 +172,11 @@ public class Stats : MonoBehaviour
     // TRANSITION ==========================================================
     private IEnumerator TransitionSequence()
     {
-        StartCoroutine(stoneShader.Lerp(1));
+        if (stoneShader)
+        {
+            StartCoroutine(stoneShader.Lerp(1));
+        }
+
         yield return new WaitForSeconds(1.5f);
 
         if (transitionCanvas)

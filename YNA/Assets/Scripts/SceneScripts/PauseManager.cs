@@ -52,7 +52,7 @@ public class PauseManager : MonoBehaviour
         }
 
         // If the player wants to use buttons after using the mouse, reset the active object
-        if (EventSystem.current.currentSelectedGameObject == null && Input.anyKey)
+        if (EventSystem.current.currentSelectedGameObject == null && Input.anyKey && !inSettings)
         {
             GameObject resumeButton = transform.Find("Resume").gameObject;
 
@@ -67,14 +67,17 @@ public class PauseManager : MonoBehaviour
     // RESUME BUTTON =======================================================
     public void ResumeButton()
     {
-        // Update variables
-        GameObject.FindWithTag("GameManager").GetComponent<Stats>().TogglePause();
+        if (!inSettings)
+        {
+            // Update variables
+            GameObject.FindWithTag("GameManager").GetComponent<Stats>().TogglePause();
 
-        // Reset timescale
-        Time.timeScale = 1;
+            // Reset timescale
+            Time.timeScale = 1;
 
-        // Hide Pause UI
-        gameObject.SetActive(false);
+            // Hide Pause UI
+            gameObject.SetActive(false);
+        }
     }
 
 
@@ -103,11 +106,14 @@ public class PauseManager : MonoBehaviour
     // QUIT BUTTON =========================================================
     public void QuitButton()
     {
-        // Reset timescale
-        Time.timeScale = 1;
+        if (!inSettings)
+        {
+            // Reset timescale
+            Time.timeScale = 1;
 
-        // Do the animation
-        StartCoroutine(TransitionSequence());
+            // Do the animation
+            StartCoroutine(TransitionSequence());
+        }
     }
 
 
