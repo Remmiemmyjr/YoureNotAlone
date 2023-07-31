@@ -94,19 +94,24 @@ public class Grapple : MonoBehaviour
 
         currDist = (transform.position - partner.transform.position).magnitude;
 
-        if (currDist > breakingPoint)
-        {
-            Tethered(false);
-        }
+        //if (currDist > breakingPoint)
+        //{
+        //    Tethered(false);
+        //}
 
         if (line.enabled && !isReeling)
         {
             Pull();
         }
 
-        if (isExtending)
+        if (isReeling && currLength > 0.5)
         {
-            target.distance += 0.02f;
+            target.distance -= (Time.deltaTime * 2.5f);
+            currLength = target.distance;
+        }
+        else if (isExtending && currLength < 10)
+        {
+            target.distance += (Time.deltaTime * 2.5f);
             currLength = target.distance;
         }
     }
@@ -177,18 +182,18 @@ public class Grapple : MonoBehaviour
         if (ctx.performed && !Info.isDead)
         {
             isExtending = false;
-            target.distance = 0;
-            currLength = maxLimit;
-            maxLimit = 0.95f;
+            //target.distance = 0;
+            //currLength = maxLimit;
+            //maxLimit = 0.95f;
 
-            if (Info.movement && Info.movement.IsGrounded() == false)
-            {
-                target.frequency = airReelSpeed;
-            }
-            else
-            {
-                target.frequency = reelSpeed;
-            }
+            //if (Info.movement && Info.movement.IsGrounded() == false)
+            //{
+            //    target.frequency = airReelSpeed;
+            //}
+            //else
+            //{
+            //    target.frequency = reelSpeed;
+            //}
 
             isReeling = true;
         }
