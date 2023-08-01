@@ -36,12 +36,17 @@ public class Latch : MonoBehaviour
     void Awake()
     {
         isLatched = false;
+        
+    }
+
+    void Start()
+    {
         ogMinLimit = Info.grapple.minRopeLimit;
     }
 
     public void LatchBox(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.performed && canLatch)
         {
             if (Info.grapple.isTethered)
             {
@@ -79,7 +84,9 @@ public class Latch : MonoBehaviour
     {
         if (collision.gameObject.tag == "Grabbable" && !isLatched)
         {
-            ReleaseObject();
+            canLatch = false;
+            joint = null;
+            objRB = null;
         }
     }
 

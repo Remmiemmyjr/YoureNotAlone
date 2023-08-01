@@ -43,10 +43,6 @@ public class Grapple : MonoBehaviour
 
     [HideInInspector]
     public bool isTethered;
-    [HideInInspector]
-    public bool canLatch;
-    [HideInInspector]
-    public bool isLatching;
 
     bool isExtending;
     bool isReeling;

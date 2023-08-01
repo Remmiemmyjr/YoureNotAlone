@@ -323,15 +323,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bad28f8ba0f2504a865bb5867d4ffd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLimit: 1.5
-  minLimit: 1
-  breakingPoint: 8
-  pullSpeed: 1
-  reelSpeed: 1.55
-  airReelSpeed: 1
+  maxTetherDist: 1.5
+  minTetherDist: 0.35
+  ropeSpeed: 3
+  minRopeLimit: 0.25
+  maxRopeLimit: 10
   isTethered: 0
-  canLatch: 0
-  isLatching: 0
   startTethered: 1
 --- !u!114 &7051889565614328847
 MonoBehaviour:
