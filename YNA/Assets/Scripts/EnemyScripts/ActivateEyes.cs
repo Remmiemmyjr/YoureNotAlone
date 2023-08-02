@@ -161,9 +161,6 @@ public class ActivateEyes : MonoBehaviour
             iseeyou.Stop();
 
             sleepEvent.Invoke();
-
-            // Restart level music.
-            GameObject.Find("MusicController").GetComponent<AudioSource>().Play();
         }
 
         timeToHide = false;
@@ -229,9 +226,6 @@ public class ActivateEyes : MonoBehaviour
             // Play both sounds.
             iamwatching.Play();
             iseeyou.Play();
-
-            // Stop the level music.
-            GameObject.Find("MusicController").GetComponent<AudioSource>().Stop();
 
             // Set the iamwatching mixer group level to 1.
             AudioMixer iamwatchingMG = iamwatching.outputAudioMixerGroup.audioMixer;
