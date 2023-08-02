@@ -38,6 +38,13 @@ public class Stats : MonoBehaviour
 
     GameObject pauseUI;
     private GameObject settingsCanvas;
+
+    // Eye Manager for pause fx
+    GameObject eyeManager;
+
+    // Music controller for pause fx
+    GameObject musicController;
+
     // *********************************************************************
     private void Awake()
     {
@@ -45,6 +52,8 @@ public class Stats : MonoBehaviour
 
         pauseUI = GameObject.FindWithTag("Pause");
         settingsCanvas = GameObject.FindWithTag("SettingsCanvas");
+        eyeManager = GameObject.FindWithTag("EyeManager");
+        musicController = GameObject.FindWithTag("MusicController");
         stoneShader = gameObject.GetComponent<DeathShader>();
 
         Info.isDead = false;
@@ -115,6 +124,16 @@ public class Stats : MonoBehaviour
                     pauseUI.SetActive(false);
                 }
 
+                if(eyeManager)
+                {
+                    eyeManager.GetComponent<ActivateEyes>().PauseEyeAudio(false);
+                }
+
+                if(musicController)
+                {
+                    musicController.GetComponent<PersistantMusic>().ApplyPauseEffects(false);
+                }
+
                 // Reset timescale
                 Time.timeScale = 1;
             }
@@ -136,6 +155,16 @@ public class Stats : MonoBehaviour
                     {
                         EventSystem.current.SetSelectedGameObject(resumeButton);
                     }
+                }
+
+                if (eyeManager)
+                {
+                    eyeManager.GetComponent<ActivateEyes>().PauseEyeAudio(true);
+                }
+
+                if (musicController)
+                {
+                    musicController.GetComponent<PersistantMusic>().ApplyPauseEffects(true);
                 }
 
                 // Set paused timescale

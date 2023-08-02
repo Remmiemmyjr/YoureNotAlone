@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 6737288363201554026}
   - component: {fileID: 6737288363201554030}
   - component: {fileID: 6737288363201554029}
+  - component: {fileID: 7303393091940808083}
+  - component: {fileID: 369530113410815059}
   m_Layer: 0
   m_Name: MusicController
   m_TagString: MusicController
@@ -452,3 +454,38 @@ MonoBehaviour:
   audioSlow: {fileID: 6737288363201554026}
   audioWin: {fileID: 6737288363201554027}
   audioMixer: {fileID: 24100000, guid: e5d0227de5a9271419919cc779c91cea, type: 2}
+--- !u!165 &7303393091940808083
+AudioHighPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6737288363201554017}
+  m_Enabled: 0
+  m_CutoffFrequency: 800
+  m_HighpassResonanceQ: 1
+--- !u!169 &369530113410815059
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6737288363201554017}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.035925422
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

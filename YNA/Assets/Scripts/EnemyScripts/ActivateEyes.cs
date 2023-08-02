@@ -123,7 +123,7 @@ public class ActivateEyes : MonoBehaviour
     void Update()
     {
         // Closed
-        if (currTime >= 0)
+        if (currTime >= 0 && !playerSpotted)
         {
             Sleep();
             status = EyeStates.SLEEPING;
@@ -255,7 +255,6 @@ public class ActivateEyes : MonoBehaviour
         }
 
         prevStatus = status;
-        StartCoroutine(LookAround());
     }
 
 
@@ -333,9 +332,9 @@ public class ActivateEyes : MonoBehaviour
                 status = EyeStates.ACTIVE;
 
                 // Fade out iseeyou
-                StartCoroutine(FadeMixerGroup.StartFade(iseeyou.outputAudioMixerGroup.audioMixer, iseeyouMGEP, 0.5f, 0.0f));
+                StartCoroutine(FadeMixerGroup.StartFade(iseeyou.outputAudioMixerGroup.audioMixer, iseeyouMGEP, 0.25f, 0.0f));
                 // Fade in iamwatching
-                StartCoroutine(FadeMixerGroup.StartFade(iamwatching.outputAudioMixerGroup.audioMixer, iamwatchingMGEP, 0.5f, 1.0f));
+                StartCoroutine(FadeMixerGroup.StartFade(iamwatching.outputAudioMixerGroup.audioMixer, iamwatchingMGEP, 0.25f, 1.0f));
 
                 // Go back to active fx
                 rehiddenEvent.Invoke();
@@ -346,8 +345,20 @@ public class ActivateEyes : MonoBehaviour
                     Animator eyeAnim = Eyes[i].GetComponent<Animator>();
                     eyeAnim.Play("EyeballOpen", -1, Random.Range(0.0f, 1.0f));
                 }
+
+                // Reset grace period
+                timeInSight = gracePeriod;
+            }
+
+            // Only reset while player is not visible
+            if (seekTime <= 0)
+            {
+                SelectNewTime();
             }
         }
+
+        seekTime -= Time.deltaTime;
+
         return false;
     }
 
@@ -395,19 +406,45 @@ public class ActivateEyes : MonoBehaviour
         }
     }
 
-
-    ////////////////////////////////////////////////////////////////////////
-    // LOOK AROUND =========================================================
-    // Loop for specified time duration
-    IEnumerator LookAround()
+    public void PauseEyeAudio(bool pause)
     {
-        while (playerSpotted)
+        if (pause) // Paused
         {
-            yield return new WaitForSeconds(1.5f);
+            switch(status)
+            {
+                case EyeStates.SLEEPING:
+                    break;
+                case EyeStates.WAKING:
+                    goodmorning.Pause();
+                    break;
+                case EyeStates.ACTIVE:
+                    iamawake.Pause();
+                    iamwatching.Pause();
+                    break;
+                case EyeStates.SEEN:
+                    ifoundyou.Pause();
+                    iseeyou.Pause();
+                    break;
+            }
         }
-
-        yield return new WaitForSeconds(seekTime);
-
-        SelectNewTime();
+        else // Unpaused
+        {
+            switch (status)
+            {
+                case EyeStates.SLEEPING:
+                    break;
+                case EyeStates.WAKING:
+                    goodmorning.UnPause();
+                    break;
+                case EyeStates.ACTIVE:
+                    iamawake.UnPause();
+                    iamwatching.UnPause();
+                    break;
+                case EyeStates.SEEN:
+                    ifoundyou.UnPause();
+                    iseeyou.UnPause();
+                    break;
+            }
+        }
     }
 }

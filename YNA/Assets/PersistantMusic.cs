@@ -29,6 +29,8 @@ public class PersistantMusic : MonoBehaviour
     private MusicFiles currentFile;
     public AudioMixer audioMixer;
 
+    private float storedPauseVolume;
+
     private void Start()
     {
         // Check if we have a persistant music player
@@ -125,7 +127,6 @@ public class PersistantMusic : MonoBehaviour
         }
     }
 
-
     void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode load_scene_mode)
     {
         // Reset Audio Volumes
@@ -187,6 +188,27 @@ public class PersistantMusic : MonoBehaviour
             timeElapsed += Time.deltaTime;
 
             yield return null;
+        }
+    }
+
+    public void ApplyPauseEffects(bool isPaused)
+    {
+        if (isPaused)
+        {
+            // Store the volume and lay music over pause menu
+            storedPauseVolume = currentSource.volume;
+            currentSource.volume = 1.0f;
+
+            GetComponent<AudioLowPassFilter>().enabled = true;
+            GetComponent<AudioHighPassFilter>().enabled = true;
+        }
+        else
+        {
+            // Restore music levels after pause
+            currentSource.volume = storedPauseVolume;
+
+            GetComponent<AudioLowPassFilter>().enabled = false;
+            GetComponent<AudioHighPassFilter>().enabled = false;
         }
     }
 }
