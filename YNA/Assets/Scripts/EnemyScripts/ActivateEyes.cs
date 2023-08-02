@@ -71,6 +71,8 @@ public class ActivateEyes : MonoBehaviour
     public AudioSource ifoundyou;
     public AudioSource iseeyou;
 
+    private PersistantMusic musicController;
+
     public string iamwatchingMGEP;
     public string iseeyouMGEP;
 
@@ -95,6 +97,8 @@ public class ActivateEyes : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         Partner = GameObject.FindGameObjectWithTag("Partner");
+
+        musicController = GameObject.FindWithTag("MusicController").GetComponent<PersistantMusic>();
 
         impulse = GetComponent<CinemachineImpulseSource>();
     }
@@ -161,6 +165,9 @@ public class ActivateEyes : MonoBehaviour
             iseeyou.Stop();
 
             sleepEvent.Invoke();
+
+            // Restart level music.
+            StartCoroutine(musicController.LerpAudioIn(0.1f));
         }
 
         timeToHide = false;
@@ -182,6 +189,9 @@ public class ActivateEyes : MonoBehaviour
         // If we just entered this state...
         if (currTime > 3.4f)
         {
+            // Stop the level music.
+            StartCoroutine(musicController.LerpAudioOut(wakingTime));
+
             // Set the iamwatching mixer group level to 1.
             AudioMixer mg = iamwatching.outputAudioMixerGroup.audioMixer;
             mg.SetFloat(iamwatchingMGEP, 0.0f);

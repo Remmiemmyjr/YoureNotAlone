@@ -630,7 +630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b879c5e98dd28c4e9d64187ea6f8fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 844285150}
   parallaxEffect: -0.3
 --- !u!1001 &232458695
 PrefabInstance:
@@ -6158,7 +6157,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0068307, y: 1}
+    m_SensorSize: {x: 1.6847521, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -17606,6 +17605,63 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0.1, y: 0.1, z: 0}
+--- !u!1001 &673411616
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6737288363201554017, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
+      propertyPath: m_Name
+      value: MusicController
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737288363201554028, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737288363201554028, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737288363201554028, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737288363201554028, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737288363201554028, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737288363201554028, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737288363201554028, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737288363201554028, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737288363201554028, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737288363201554028, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737288363201554028, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
 --- !u!1001 &690936036
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18041,6 +18097,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+    - target: {fileID: 2756919997156349513, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3192129793942268091, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -18079,7 +18139,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460430, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.434154
+      value: -0.17623758
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460430, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18121,16 +18181,35 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 169.48712
       objectReference: {fileID: 0}
+    - target: {fileID: 6433456201886152044, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161138790763724192, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161138790763724192, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161138790763724192, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834315978859723034, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834315978859723034, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
 --- !u!1 &844285149 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5753667553952596588, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
-  m_PrefabInstance: {fileID: 844285148}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &844285150 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5595333242864460426, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
   m_PrefabInstance: {fileID: 844285148}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &844285151 stripped
@@ -25878,7 +25957,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b879c5e98dd28c4e9d64187ea6f8fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 844285150}
   parallaxEffect: 0.2
 --- !u!212 &1858568615
 SpriteRenderer:
