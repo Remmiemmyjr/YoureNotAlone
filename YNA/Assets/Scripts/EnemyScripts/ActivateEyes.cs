@@ -206,6 +206,7 @@ public class ActivateEyes : MonoBehaviour
             profile = Eyes[i].GetComponent<EyeProfile>();
             profile.SetStatusWaking();
         }
+
         // Set the iamwatching mixer group level to 1.
         AudioMixer iamwatchingMG = iamwatching.outputAudioMixerGroup.audioMixer;
         iamwatchingMG.SetFloat(iamwatchingMGEP, 0.0f);

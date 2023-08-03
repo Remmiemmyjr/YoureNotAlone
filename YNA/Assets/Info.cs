@@ -28,4 +28,15 @@ public class Info : MonoBehaviour
 
         stats = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>();
     }
+
+    private void Start()
+    {
+        isDead = false;
+        player.GetComponent<SpriteRenderer>().enabled = true;
+
+        if (partner)
+        {
+            partner.GetComponent<SpriteRenderer>().enabled = true;
+        }
+    }
 }

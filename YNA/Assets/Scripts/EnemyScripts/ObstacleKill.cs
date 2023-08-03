@@ -43,6 +43,17 @@ public class ObstacleKill : MonoBehaviour
 // TRANSITION SEQUENCE =================================================
     private IEnumerator TransitionSequence()
     {
+        if(Info.partner)
+        {
+            Info.partner.GetComponent<ParticleSystem>().Play();
+            Info.partner.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        Info.player.GetComponent<ParticleSystem>().Play();
+        Info.player.GetComponent<SpriteRenderer>().enabled = false;
+
+        yield return new WaitForSeconds(1.5f);
+
+
         if (transitionCanvas)
         {
             transitionCanvas.SetTrigger("EyeDeath");
