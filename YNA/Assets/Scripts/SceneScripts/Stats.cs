@@ -57,6 +57,7 @@ public class Stats : MonoBehaviour
         stoneShader = gameObject.GetComponent<DeathShader>();
 
         Info.isDead = false;
+        Info.isPaused = false;
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -92,9 +93,11 @@ public class Stats : MonoBehaviour
     public void ResetLevel(InputAction.CallbackContext ctx)
     {
         // Action performed and not in a cutscene
-        if (ctx.performed && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
+        if (ctx.performed && !Info.isDead && 
+            !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
         {
             Info.isDead = true;
+            Info.eyeDeath = true;
         }
     }
 
@@ -201,7 +204,7 @@ public class Stats : MonoBehaviour
     // TRANSITION ==========================================================
     private IEnumerator TransitionSequence()
     {
-        if (stoneShader)
+        if (stoneShader && Info.eyeDeath)
         {
             StartCoroutine(stoneShader.Lerp(1));
         }

@@ -7,7 +7,6 @@ public class StoneProfile : MonoBehaviour
     SpriteRenderer spr;
     GameObject owner;
     Animator ownerAnim;
-    Stats manager;
     bool shouldDoThis;
 
     void Awake()
@@ -16,7 +15,6 @@ public class StoneProfile : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
         owner = transform.parent.gameObject;
         ownerAnim = owner.GetComponent<Animator>();
-        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>();
     }
 
     void Update()

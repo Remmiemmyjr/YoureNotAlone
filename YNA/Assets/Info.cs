@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.TextCore.Text;
 using UnityEngine;
 
 public class Info : MonoBehaviour
@@ -15,6 +16,7 @@ public class Info : MonoBehaviour
 
     public static bool isDead;
     public static bool isPaused;
+    public static bool eyeDeath;
 
     private void Awake()
     {
@@ -32,6 +34,7 @@ public class Info : MonoBehaviour
     private void Start()
     {
         isDead = false;
+        isPaused = false;
         player.GetComponent<SpriteRenderer>().enabled = true;
 
         if (partner)

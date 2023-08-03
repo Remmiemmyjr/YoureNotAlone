@@ -22,20 +22,24 @@ public class ObstacleKill : MonoBehaviour
 {
     // Transitions
     private Animator transitionCanvas;
+    static bool dontRepeat;
 
 ////////////////////////////////////////////////////////////////////////
 // AWAKE ===============================================================
     void Awake()
     {
         transitionCanvas = GameObject.FindWithTag("Transition").GetComponentInChildren<Animator>();
+        dontRepeat = false;
     }
 
 ////////////////////////////////////////////////////////////////////////
 // TRIGGER ENTER =======================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player" || collision.tag == "Partner")
+        if (collision.tag == "Player" || collision.tag == "Partner")
+        {
             StartCoroutine(TransitionSequence());
+        }
     }
 
 
@@ -43,25 +47,34 @@ public class ObstacleKill : MonoBehaviour
 // TRANSITION SEQUENCE =================================================
     private IEnumerator TransitionSequence()
     {
-        if(Info.partner)
+        Info.isDead = true;
+        Info.eyeDeath = false;
+
+        if (!dontRepeat)
         {
-            Info.partner.GetComponent<ParticleSystem>().Play();
-            Info.partner.GetComponent<SpriteRenderer>().enabled = false;
+            dontRepeat = true;
+
+            if (Info.partner)
+            {
+                Info.partner.GetComponent<ParticleSystem>().Play();
+                Info.partner.GetComponent<SpriteRenderer>().enabled = false;
+            }
+            Info.player.GetComponent<ParticleSystem>().Play();
+            Info.player.GetComponent<SpriteRenderer>().enabled = false;
+            Info.player.GetComponent<LineRenderer>().enabled = false;
+
+            yield return new WaitForSeconds(1.5f);
+
+
+            if (transitionCanvas)
+            {
+                transitionCanvas.SetTrigger("EyeDeath");
+
+                yield return new WaitForSeconds(transitionCanvas.GetCurrentAnimatorClipInfo(0).Length);
+            }
+
+            // Could change back to using levelname if needed
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        Info.player.GetComponent<ParticleSystem>().Play();
-        Info.player.GetComponent<SpriteRenderer>().enabled = false;
-
-        yield return new WaitForSeconds(1.5f);
-
-
-        if (transitionCanvas)
-        {
-            transitionCanvas.SetTrigger("EyeDeath");
-
-            yield return new WaitForSeconds(transitionCanvas.GetCurrentAnimatorClipInfo(0).Length);
-        }
-
-        // Could change back to using levelname if needed
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -73,10 +73,13 @@ public class PlayerController : MonoBehaviour
         resetTime = playInterval;
     }
 
+
     ////////////////////////////////////////////////////////////////////////
     // FIXED UPDATE ========================================================
     void FixedUpdate()
     {
+        if(Info.isDead) return;
+
         if (IsGrounded() && dir.x != 0.0f)
         {
             resetTime -= Time.deltaTime;
@@ -131,14 +134,13 @@ public class PlayerController : MonoBehaviour
     // MOVEMENT ============================================================
     public void Movement(InputAction.CallbackContext ctx)
     {
-        if (!Info.isDead)
-        {
-            dir.x = ctx.ReadValue<float>();
+        if(Info.isDead) return;
 
-            animState.SetNextState(SetPlayerAnimState.PlayerStates.cWalk);
+        dir.x = ctx.ReadValue<float>();
 
-            EmitParticles(dir);
-        }
+        animState.SetNextState(SetPlayerAnimState.PlayerStates.cWalk);
+
+        EmitParticles(dir);
     }
 
 
@@ -146,22 +148,22 @@ public class PlayerController : MonoBehaviour
     // JUMP ================================================================
     public void Jump(InputAction.CallbackContext ctx)
     {
-        if (!Info.isDead)
+        if (Info.isDead) return;
+
+        if (ctx.performed && cTimeCounter > 0 && !Info.isPaused)
         {
-            if (ctx.performed && cTimeCounter > 0 && !Info.isPaused)
-            {
-                rb.velocity = Vector2.up * jumpHeight;
+            rb.velocity = Vector2.up * jumpHeight;
 
-                animState.SetNextState(SetPlayerAnimState.PlayerStates.cJump);
-            }
-
-
-            if (ctx.canceled && rb.velocity.y > 0)
-            {
-                cTimeCounter = 0;
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-            }
+            animState.SetNextState(SetPlayerAnimState.PlayerStates.cJump);
         }
+
+
+        if (ctx.canceled && rb.velocity.y > 0)
+        {
+            cTimeCounter = 0;
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
+        
     }
 
 
@@ -200,7 +202,7 @@ public class PlayerController : MonoBehaviour
     // PARTICLES ===========================================================
     void EmitParticles(Vector2 vec)
     {
-        if (IsGrounded() && Mathf.Abs(vec.x) > 0)
+        if (IsGrounded() && Mathf.Abs(vec.x) > 0 && !Info.isDead)
             CreateDustParticles();
         else
             StopDustParticles();

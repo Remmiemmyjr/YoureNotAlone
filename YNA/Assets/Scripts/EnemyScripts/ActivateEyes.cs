@@ -300,6 +300,7 @@ public class ActivateEyes : MonoBehaviour
             if(timeInSight <= 0)
             {
                 Info.isDead = true;
+                Info.eyeDeath = true;
             }
             else
             {

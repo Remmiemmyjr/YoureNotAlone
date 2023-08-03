@@ -79,6 +79,8 @@ public class PartnerController : MonoBehaviour
     // FIXED UPDATE ========================================================
     void Update()
     {
+        if (Info.isDead) return;
+
         velocity = rb.velocity;        
 
         //TODO:
