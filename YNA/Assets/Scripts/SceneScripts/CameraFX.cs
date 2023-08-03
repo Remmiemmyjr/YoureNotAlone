@@ -256,10 +256,12 @@ public class CameraFX : MonoBehaviour
     IEnumerator Lerp(object param, float start, float end, float time)
     {
         float timeElapsed = 0;
+        float valueToLerp = 0.0f;
 
         while (timeElapsed <= time)
         {
-            float valueToLerp = Mathf.Lerp(start, end, timeElapsed / time);
+            if (!Info.isPaused)
+                valueToLerp = Mathf.Lerp(start, end, timeElapsed / time);
 
             switch (param)
             {
@@ -271,7 +273,8 @@ public class CameraFX : MonoBehaviour
                     break;
             }
 
-            timeElapsed += Time.unscaledDeltaTime;
+            if (!Info.isPaused)
+                timeElapsed += Time.unscaledDeltaTime;
 
             yield return null;
         }

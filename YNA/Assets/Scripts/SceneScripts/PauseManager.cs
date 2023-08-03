@@ -27,11 +27,19 @@ public class PauseManager : MonoBehaviour
 
     private bool inSettings = false;
 
+    // Eye Manager for pause fx
+    GameObject eyeManager;
+
+    // Music controller for pause fx
+    GameObject musicController;
+
     ////////////////////////////////////////////////////////////////////////
     // AWAKE ===============================================================
     void Awake()
     {
         settingsCanvas = GameObject.FindWithTag("SettingsCanvas");
+        eyeManager = GameObject.FindWithTag("EyeManager");
+        musicController = GameObject.FindWithTag("MusicController");
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -72,6 +80,16 @@ public class PauseManager : MonoBehaviour
             // Update variables
             GameObject.FindWithTag("GameManager").GetComponent<Stats>().TogglePause();
 
+            if (eyeManager)
+            {
+                eyeManager.GetComponent<ActivateEyes>().PauseEyeAudio(false);
+            }
+
+            if (musicController)
+            {
+                musicController.GetComponent<PersistantMusic>().ApplyPauseEffects(false);
+            }
+
             // Reset timescale
             Time.timeScale = 1;
 
@@ -87,6 +105,8 @@ public class PauseManager : MonoBehaviour
     {
         settingsCanvas.SetActive(true);
         inSettings = true;
+
+        GetComponent<Canvas>().enabled = false;
     }
 
 
@@ -97,6 +117,7 @@ public class PauseManager : MonoBehaviour
         if (inSettings)
         {
             settingsCanvas.SetActive(false);
+            GetComponent<Canvas>().enabled = true;
             inSettings = false;
         }
     }
