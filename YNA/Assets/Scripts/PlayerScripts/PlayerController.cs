@@ -30,8 +30,6 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public ParticleSystem dustParticles;
 
-    Stats manager;
-
     private SetPlayerAnimState animState;
 
     [HideInInspector]
@@ -62,8 +60,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         animState = GetComponent<SetPlayerAnimState>();
-
-        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>();
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -71,6 +67,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         resetTime = playInterval;
+        dustParticles.gameObject.SetActive(true);
     }
 
 
@@ -78,7 +75,11 @@ public class PlayerController : MonoBehaviour
     // FIXED UPDATE ========================================================
     void FixedUpdate()
     {
-        if(Info.isDead) return;
+        if(Info.isDead)
+        {
+            dustParticles.gameObject.SetActive(false);
+            return;
+        }
 
         if (IsGrounded() && dir.x != 0.0f)
         {
