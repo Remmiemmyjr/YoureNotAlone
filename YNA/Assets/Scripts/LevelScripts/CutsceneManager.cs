@@ -67,6 +67,9 @@ public class CutsceneManager : MonoBehaviour
         {
             if (currCutscene.playOnSceneStart)
             {
+                // Hide transition
+                GameObject.FindGameObjectWithTag("Transition").GetComponentInChildren<Image>().enabled = false;
+
                 isStartCutscene = true;
 
                 activeCutscene = currCutscene;
@@ -193,6 +196,10 @@ public class CutsceneManager : MonoBehaviour
             // If coming from cutscene into the level, transition
             if (activeCutscene.playOnSceneStart)
             {
+                // Re-show transition
+                GameObject.FindGameObjectWithTag("Transition").GetComponentInChildren<Image>().enabled = true;
+
+                // Play animation
                 GameObject.FindGameObjectWithTag("Transition").GetComponentInChildren<Animator>().SetTrigger("SceneStart");
             }
 
