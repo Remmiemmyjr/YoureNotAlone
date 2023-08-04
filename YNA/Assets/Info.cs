@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.TextCore.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Info : MonoBehaviour
 {
@@ -35,11 +36,15 @@ public class Info : MonoBehaviour
     {
         isDead = false;
         isPaused = false;
-        player.GetComponent<SpriteRenderer>().enabled = true;
 
-        if (partner)
+        if (SceneManager.GetActiveScene().name != "MainMenu")
         {
-            partner.GetComponent<SpriteRenderer>().enabled = true;
+            player.GetComponent<SpriteRenderer>().enabled = true;
+
+            if (partner)
+            {
+                partner.GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
     }
 }
