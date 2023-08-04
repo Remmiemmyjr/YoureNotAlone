@@ -126,8 +126,9 @@ public class CutsceneManager : MonoBehaviour
                 }
                 else
                 {
-                    FinishCutscene();
-                    FadeBackIn.Invoke();
+                    //FinishCutscene();
+                    //FadeBackIn.Invoke();
+                    StartCoroutine(Load());
                 }
             }
             else
@@ -141,6 +142,13 @@ public class CutsceneManager : MonoBehaviour
         }
     }
 
+
+    public IEnumerator Load()
+    {
+        yield return new WaitForSeconds(1.5f);
+        FadeBackIn.Invoke(); 
+        FinishCutscene();
+    }
 
     //-------------------------------------------------------------------------------------------------
     // PRIVATE FUNCTIONS
@@ -221,11 +229,6 @@ public class CutsceneManager : MonoBehaviour
         }
     }
 
-    public IEnumerator UnFade()
-    {
-        yield return new WaitForSeconds(0.5f);
-        FadeBackIn.Invoke();
-    }
 
     //-------------------------------------------------------------------------------------------------
     // PUBLIC FUNCTIONS
