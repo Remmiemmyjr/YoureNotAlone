@@ -21,6 +21,8 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.InputSystem;
+using System.Collections;
+using UnityEngine.Events;
 
 public class CutsceneManager : MonoBehaviour
 {
@@ -42,6 +44,11 @@ public class CutsceneManager : MonoBehaviour
     private bool isStartCutscene = false;
 
     private PlayerInput inputManager;
+
+    [SerializeField]
+    private UnityEvent FadeToBlack;
+    [SerializeField]
+    private UnityEvent FadeBackIn;
 
     // *********************************************************************
 
@@ -93,6 +100,11 @@ public class CutsceneManager : MonoBehaviour
             // Update cutscene time
             cutsceneTimer += Time.deltaTime;
 
+            if(cutsceneTimer > 2 && cutsceneTimer < activeCutscene.timeBetween - 1)
+            {
+                FadeToBlack.Invoke();
+            }
+
             // Check if the timer has elapsed
             if (cutsceneTimer >= activeCutscene.timeBetween || skipFrame)
             {
@@ -107,11 +119,12 @@ public class CutsceneManager : MonoBehaviour
 
                     cutsceneCanvasFrame.sprite = activeCutscene.frames[currentFrameIndex].frameImage;
 
-                    ProcessCutsceneEffects();
+                    FadeBackIn.Invoke();
                 }
                 else
                 {
                     FinishCutscene();
+                    FadeBackIn.Invoke();
                 }
             }
             else
@@ -201,6 +214,11 @@ public class CutsceneManager : MonoBehaviour
         }
     }
 
+    public IEnumerator UnFade()
+    {
+        yield return new WaitForSeconds(0.5f);
+        FadeBackIn.Invoke();
+    }
 
     //-------------------------------------------------------------------------------------------------
     // PUBLIC FUNCTIONS

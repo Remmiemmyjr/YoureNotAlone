@@ -12147,6 +12147,30 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
       value: 0.625
       objectReference: {fileID: 0}
+    - target: {fileID: 3305757128656385640, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FX_List._keys.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3305757128656385640, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FX_List._values.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3305757128656385640, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FX_List._keys.Array.data[5]
+      value: FadeToBlack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3305757128656385640, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FX_List._keyValues.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3305757128656385640, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FX_List._values.Array.data[5]
+      value: 
+      objectReference: {fileID: 1007958252}
+    - target: {fileID: 3305757128656385640, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FX_List._keyValues.Array.data[5]
+      value: FadeToBlack
+      objectReference: {fileID: 0}
     - target: {fileID: 3673998566871959150, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -12227,13 +12251,29 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6948772921895521172, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.17623758
+      value: 0.2867446
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.90625
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166291, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166296, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1040757715}
+    - target: {fileID: 6948772922295166296, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.size
@@ -12256,6 +12296,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeBackIn.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeToBlack.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].frames.Array.data[0].frameImage
       value: 
       objectReference: {fileID: 21300000, guid: 226192f9f7d498b42b70a622fda3fb3c, type: 3}
@@ -12275,6 +12323,70 @@ PrefabInstance:
       propertyPath: cutscenes.Array.data[0].frames.Array.data[4].frameImage
       value: 
       objectReference: {fileID: 21300000, guid: f734f604e32b0414eb49a319c895f87e, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeBackIn.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeToBlack.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeBackIn.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1007958256}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeToBlack.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1007958256}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeBackIn.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeBackIn.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InvokeCameraFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeToBlack.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeToBlack.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InvokeCameraFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeBackIn.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PostProcessingManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeToBlack.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PostProcessingManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeBackIn.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: FadeBackIn
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeToBlack.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: FadeToBlack
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeBackIn.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: FadeToBlack.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166302, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772923933673234, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6948772923933673235, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -12361,6 +12473,168 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+--- !u!1 &1007958251 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6948772922295166291, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+  m_PrefabInstance: {fileID: 1007958250}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1007958252 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3299341755013604438, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+  m_PrefabInstance: {fileID: 1007958250}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1007958253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007958251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comment: FadeToBlack
+  vignette_toggle: 1
+  vignette_instant: 0
+  vignette_start_val: 0
+  vignette_goal_val: 1
+  vignette_lerp_time: 0.75
+  bloom_toggle: 0
+  bloom_instant: 0
+  bloom_start_val: 0
+  bloom_goal_val: 0
+  bloom_lerp_time: 0
+  chromab_toggle: 0
+  chromab_instant: 0
+  chromab_start_val: 0
+  chromab_goal_val: 0
+  chromab_lerp_time: 0
+  flmgrn_toggle: 0
+  flmgrn_instant: 0
+  flmgrn_start_val: 0
+  flmgrn_goal_val: 0
+  flmgrn_lerp_time: 0
+  lift_toggle: 0
+  lift_instant: 0
+  lift_start_val: 0
+  lift_goal_val: 0
+  lift_lerp_time: 0
+  gamma_toggle: 0
+  gamma_instant: 0
+  gamma_start_val: 0
+  gamma_goal_val: 0
+  gamma_lerp_time: 0
+  gain_toggle: 0
+  gain_instant: 0
+  gain_start_val: 0
+  gain_goal_val: 0
+  gain_lerp_time: 0
+--- !u!114 &1007958254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007958251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comment: FadeBackIn
+  vignette_toggle: 1
+  vignette_instant: 0
+  vignette_start_val: 1
+  vignette_goal_val: 0
+  vignette_lerp_time: 0.75
+  bloom_toggle: 0
+  bloom_instant: 0
+  bloom_start_val: 0
+  bloom_goal_val: 0
+  bloom_lerp_time: 0
+  chromab_toggle: 0
+  chromab_instant: 0
+  chromab_start_val: 0
+  chromab_goal_val: 0
+  chromab_lerp_time: 0
+  flmgrn_toggle: 0
+  flmgrn_instant: 0
+  flmgrn_start_val: 0
+  flmgrn_goal_val: 0
+  flmgrn_lerp_time: 0
+  lift_toggle: 0
+  lift_instant: 0
+  lift_start_val: 0
+  lift_goal_val: 0
+  lift_lerp_time: 0
+  gamma_toggle: 0
+  gamma_instant: 0
+  gamma_start_val: 0
+  gamma_goal_val: 0
+  gamma_lerp_time: 0
+  gain_toggle: 0
+  gain_instant: 0
+  gain_start_val: 0
+  gain_goal_val: 0
+  gain_lerp_time: 0
+--- !u!1 &1007958255 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3299341753577214571, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+  m_PrefabInstance: {fileID: 1007958250}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1007958256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007958251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1051f9473835def4694fc018380784e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalVolume: {fileID: 1007958255}
+  FX_List:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues:
+    - FadeToBlack
+    - FadeBackIn
+    _keys:
+    - FadeToBlack
+    - FadeBackIn
+    _values:
+    - {fileID: 1007958253}
+    - {fileID: 1007958254}
 --- !u!1 &1037724797
 GameObject:
   m_ObjectHideFlags: 0
@@ -12445,6 +12719,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!20 &1040757715 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 9076067023762847920, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+  m_PrefabInstance: {fileID: 1007958250}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1109294020
 GameObject:
   m_ObjectHideFlags: 0
