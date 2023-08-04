@@ -46,9 +46,9 @@ public class CutsceneManager : MonoBehaviour
     private PlayerInput inputManager;
 
     [SerializeField]
-    private UnityEvent FadeToBlack;
+    public UnityEvent FadeToBlack;
     [SerializeField]
-    private UnityEvent FadeBackIn;
+    public UnityEvent FadeBackIn;
 
     // *********************************************************************
 
