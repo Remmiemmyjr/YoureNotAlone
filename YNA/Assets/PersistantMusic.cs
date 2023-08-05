@@ -79,7 +79,7 @@ public class PersistantMusic : MonoBehaviour
         }
         else if (music_file == MusicFiles.musicBasicLoop)
         {
-            currentFile = MusicFiles.musicMenuLoop;
+            currentFile = MusicFiles.musicBasicLoop;
 
             // Stop other sources
             audioMenu.Stop();
@@ -129,11 +129,13 @@ public class PersistantMusic : MonoBehaviour
 
     void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode load_scene_mode)
     {
-        // Reset Audio Volumes
+        // Reset Audio Volumes and pause effects
         audioMenu.volume = 1.0f;
         audioBasic.volume = 1.0f;
         audioSlow.volume = 1.0f;
         audioWin.volume = 1.0f;
+
+        ApplyPauseEffects(false);
 
         // Check the name of the scene for music play changes
         if (scene.name == "MainMenu")
