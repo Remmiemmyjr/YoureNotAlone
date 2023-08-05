@@ -47,6 +47,9 @@ public class PersistantMusic : MonoBehaviour
 
             // Play menu on first load
             Start_Stop_Music(MusicFiles.musicMenuLoop);
+
+            // Store the pause volume for later use
+            storedPauseVolume = currentSource.volume;
         }
         else
         {

@@ -46,7 +46,8 @@ public class MenuManager : MonoBehaviour
         }
 
         // If the player wants to use buttons after using the mouse, reset the active object
-        if (EventSystem.current.currentSelectedGameObject == null && Input.anyKey)
+        if (EventSystem.current.currentSelectedGameObject == null && (Input.anyKeyDown && !(Input.GetMouseButtonDown(0)
+            || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))))
         {
             GameObject resumeButton = transform.Find("StartButton").gameObject;
 
