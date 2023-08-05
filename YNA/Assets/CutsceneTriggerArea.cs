@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CutsceneTriggerArea : MonoBehaviour
 {
     [SerializeField]
     private string cutsceneName;
+
+    CutsceneManager csm;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,8 +17,17 @@ public class CutsceneTriggerArea : MonoBehaviour
         {
             if (GameObject.FindGameObjectWithTag("CutsceneCanvas"))
             {
-                GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().TriggerCutscene(cutsceneName);
+                csm = GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>();
+                StartCoroutine(Load());
             }
         }
+    }
+
+    public IEnumerator Load()
+    {
+        csm.FadeToBlack.Invoke();
+        yield return new WaitForSeconds(0.75f);
+        csm.FadeBackIn.Invoke();
+        csm.TriggerCutscene(cutsceneName);
     }
 }
