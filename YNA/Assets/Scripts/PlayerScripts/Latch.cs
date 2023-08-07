@@ -101,7 +101,7 @@ public class Latch : MonoBehaviour
         objRB.mass = 0.5f;
         objRB.freezeRotation = true;
 
-        Info.grapple.minRopeLimit += 1.5f;
+        Info.grapple.minRopeLimit = 1.75f;
     }
 
 

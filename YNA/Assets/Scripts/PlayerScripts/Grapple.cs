@@ -23,21 +23,20 @@ public class Grapple : MonoBehaviour
     // VARIABLES ===========================================================
     GameObject topSolidMap;
     LineRenderer line;
-    SpringJoint2D target;
+    SpringJoint2D joint;
 
     Vector2 playerLinePos;
     Vector2 partnerLinePos;
 
     public float maxTetherDist = 1.5f;
-    public float minTetherDist = 0.35f;
     public float ropeSpeed = 3f;
 
     [HideInInspector]
     public float minRopeLimit = 0.25f;
     [HideInInspector]
-    public float maxRopeLimit = 10f;
+    public float maxRopeLimit = 7f;
+    
     float currMaxRopeLimit;
-
     float currDistFromPartner;
     float currRopeLength;
 
@@ -64,9 +63,9 @@ public class Grapple : MonoBehaviour
     // START ===============================================================
     void Start()
     {
-        target = Info.partner?.GetComponent<SpringJoint2D>();
+        joint = Info.partner?.GetComponent<SpringJoint2D>();
 
-        if (target != null && startTethered)
+        if (joint != null && startTethered)
         {
             Tethered(true);
         }
@@ -76,6 +75,8 @@ public class Grapple : MonoBehaviour
         }
 
         isExtending = false;
+        isReeling = false;
+
         currRopeLength = maxTetherDist;
         currMaxRopeLimit = currRopeLength;
     }
@@ -101,14 +102,14 @@ public class Grapple : MonoBehaviour
 
         if (isReeling && currRopeLength > minRopeLimit)
         {
-            target.distance -= (Time.deltaTime * ropeSpeed);
-            currRopeLength = target.distance;
+            joint.distance -= (Time.deltaTime * ropeSpeed);
+            currRopeLength = joint.distance;
             currMaxRopeLimit = currRopeLength;
         }
         else if (isExtending && currRopeLength < maxRopeLimit)
         {
-            target.distance += (Time.deltaTime * ropeSpeed);
-            currRopeLength = target.distance;
+            joint.distance += (Time.deltaTime * ropeSpeed);
+            currRopeLength = joint.distance;
             currMaxRopeLimit = currRopeLength;
         }
     }
@@ -124,7 +125,7 @@ public class Grapple : MonoBehaviour
         line.SetPosition(0, playerLinePos);
         line.SetPosition(1, partnerLinePos);
 
-        target.connectedAnchor = transform.position;
+        joint.connectedAnchor = transform.position;
     }
 
 
@@ -132,7 +133,7 @@ public class Grapple : MonoBehaviour
     {
         if (ctx.performed && !Info.isDead)
         {
-            if (currDistFromPartner <= (maxTetherDist + 1) && !target.enabled)
+            if (currDistFromPartner <= (maxTetherDist + 1) && !joint.enabled)
             {
                 Tethered(true);
             }
@@ -153,21 +154,31 @@ public class Grapple : MonoBehaviour
     // PULL ================================================================
     void Pull()
     {
-        target.frequency = ropeSpeed;
+        if(GetComponent<PlayerController>().IsGrounded())
+        {
+            joint.frequency = ropeSpeed;
+        }
+        else
+        {
+            joint.frequency = ropeSpeed - 1.25f;
+        }
 
         if ((isExtending == false) && (isReeling == false))
         {
-            if (currDistFromPartner < minTetherDist)
+            if (currDistFromPartner < minRopeLimit)
             {
-                target.distance = minTetherDist;
+                joint.distance = minRopeLimit;
             }
+            // This is where tension/sqrting needs to happen
             else if (currDistFromPartner >= currMaxRopeLimit)
             {
-                target.distance = currMaxRopeLimit;
+                joint.distance = currMaxRopeLimit;
             }
             else
             {
-                target.distance = currDistFromPartner;
+                // if the curr distance between the characters is within the limit, set the joint's
+                // distance to match their distance, so the player can walk through the partner
+                joint.distance = currDistFromPartner;
             }
         }
     }
@@ -199,7 +210,7 @@ public class Grapple : MonoBehaviour
     // EXTEND ==============================================================
     public void Extend(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.performed && !Info.isDead)
         {
             isExtending = true;
             isReeling = false;
@@ -222,8 +233,8 @@ public class Grapple : MonoBehaviour
     void Tethered(bool tethered)
     {
         isTethered = tethered;
-        if(target)
-            target.enabled = tethered;
+        if(joint)
+            joint.enabled = tethered;
         line.enabled = tethered;
     }
 }

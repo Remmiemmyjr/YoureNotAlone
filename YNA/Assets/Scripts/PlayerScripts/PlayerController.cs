@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     public Transform groundObject;
     public LayerMask layer;
 
+    float currSpeed; 
+
     public float speed = 7f;
     public float jumpHeight = 16f;
     public float smoothDamp = 5f;
