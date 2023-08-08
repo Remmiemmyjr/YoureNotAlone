@@ -38,9 +38,10 @@ public class PlayerController : MonoBehaviour
     public Transform groundObject;
     public LayerMask layer;
 
-    float currSpeed; 
+    [HideInInspector]
+    public float currSpeed; 
 
-    public float speed = 7f;
+    public float speed = 5.25f;
     public float jumpHeight = 16f;
     public float smoothDamp = 5f;
     public float smoothRange = 0.05f;
@@ -70,6 +71,7 @@ public class PlayerController : MonoBehaviour
     {
         resetTime = playInterval;
         dustParticles.gameObject.SetActive(true);
+        currSpeed = speed;
     }
 
 
@@ -97,7 +99,7 @@ public class PlayerController : MonoBehaviour
         // slow-stop
         if (Mathf.Abs(dir.x) > 0.65)
         {
-            rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
+            rb.velocity = new Vector2(dir.x * currSpeed, rb.velocity.y);
         }
 
         else
