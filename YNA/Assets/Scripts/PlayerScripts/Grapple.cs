@@ -243,7 +243,7 @@ public class Grapple : MonoBehaviour
         }
 
         // Logic for topsolid and partner
-        if (topSolidMap)
+        if (topSolidMap && Info.partner)
         {
             topSolidMap.GetComponent<PlatformEffector2D>().colliderMask &= ~(1 << Info.partner.layer);
         }
