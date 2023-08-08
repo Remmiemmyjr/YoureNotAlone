@@ -49,6 +49,8 @@ public class Grapple : MonoBehaviour
     bool isReeling;
 
     public bool startTethered = true;
+
+    public bool isMenu = false;
     // *********************************************************************
 
 
@@ -163,7 +165,7 @@ public class Grapple : MonoBehaviour
     // PULL ================================================================
     void Pull()
     {
-        if(playerController.IsGrounded())
+        if(!isMenu && playerController.IsGrounded())
         {
             joint.frequency = ropeSpeed;
         }
