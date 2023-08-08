@@ -146,7 +146,6 @@ public class CutsceneManager : MonoBehaviour
     public IEnumerator Load()
     {
         yield return new WaitForSeconds(1.5f);
-        FadeBackIn.Invoke(); 
         FinishCutscene();
     }
 
@@ -156,7 +155,7 @@ public class CutsceneManager : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // START CUTSCENE ======================================================
-    private void StartCutscene()
+    public void StartCutscene()
     {
         // No player input allowed
         inputManager.actions.Disable();
@@ -179,7 +178,7 @@ public class CutsceneManager : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // PROCESS CUTSCENE ====================================================
-    private void ProcessCutsceneEffects()
+    public void ProcessCutsceneEffects()
     {
 
     }
@@ -187,8 +186,10 @@ public class CutsceneManager : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // FINISH CUTSCENE =====================================================
-    private void FinishCutscene()
+    public void FinishCutscene()
     {
+        // Fade back in
+        FadeBackIn.Invoke();
         // Re-enable player input
         inputManager.actions.Enable();
 
@@ -227,6 +228,7 @@ public class CutsceneManager : MonoBehaviour
             // Reset active cutscene
             activeCutscene = null;
         }
+
     }
 
 
