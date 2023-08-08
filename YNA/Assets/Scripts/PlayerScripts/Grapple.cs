@@ -24,12 +24,15 @@ public class Grapple : MonoBehaviour
     GameObject topSolidMap;
     LineRenderer line;
     SpringJoint2D joint;
+    PlayerController playerController;
 
     Vector2 playerLinePos;
     Vector2 partnerLinePos;
+    Vector2 currDistFromPartner;
 
     public float maxTetherDist = 1.5f;
     public float ropeSpeed = 3f;
+    public float tensionScalar = 100f;
 
     [HideInInspector]
     public float minRopeLimit = 0.25f;
@@ -37,7 +40,6 @@ public class Grapple : MonoBehaviour
     public float maxRopeLimit = 7f;
     
     float currMaxRopeLimit;
-    float currDistFromPartner;
     float currRopeLength;
 
     [HideInInspector]
@@ -64,6 +66,9 @@ public class Grapple : MonoBehaviour
     void Start()
     {
         joint = Info.partner?.GetComponent<SpringJoint2D>();
+        playerController = Info.player?.GetComponent<PlayerController>();
+
+        tensionScalar *= (maxRopeLimit * 100);
 
         if (joint != null && startTethered)
         {
@@ -78,7 +83,7 @@ public class Grapple : MonoBehaviour
         isReeling = false;
 
         currRopeLength = maxTetherDist;
-        currMaxRopeLimit = currRopeLength;
+        currMaxRopeLimit = minRopeLimit;
     }
 
 
@@ -93,11 +98,15 @@ public class Grapple : MonoBehaviour
 
         SetRope();
 
-        currDistFromPartner = (transform.position - Info.partner.transform.position).magnitude;
+        currDistFromPartner = (Info.partner.transform.position - transform.position);
 
         if (isTethered)
         {
             Pull();
+        }
+        else
+        {
+            playerController.currSpeed = playerController.speed;
         }
 
         if (isReeling && currRopeLength > minRopeLimit)
@@ -133,7 +142,7 @@ public class Grapple : MonoBehaviour
     {
         if (ctx.performed && !Info.isDead)
         {
-            if (currDistFromPartner <= (maxTetherDist + 1) && !joint.enabled)
+            if (currDistFromPartner.magnitude <= (maxTetherDist + 1) && !joint.enabled)
             {
                 Tethered(true);
             }
@@ -154,7 +163,7 @@ public class Grapple : MonoBehaviour
     // PULL ================================================================
     void Pull()
     {
-        if(GetComponent<PlayerController>().IsGrounded())
+        if(playerController.IsGrounded())
         {
             joint.frequency = ropeSpeed;
         }
@@ -165,20 +174,31 @@ public class Grapple : MonoBehaviour
 
         if ((isExtending == false) && (isReeling == false))
         {
-            if (currDistFromPartner < minRopeLimit)
+            if (currDistFromPartner.magnitude < minRopeLimit)
             {
                 joint.distance = minRopeLimit;
             }
             // This is where tension/sqrting needs to happen
-            else if (currDistFromPartner >= currMaxRopeLimit)
+            else if (currDistFromPartner.magnitude >= currMaxRopeLimit)
             {
                 joint.distance = currMaxRopeLimit;
+
+                // Check if the player is trying to move away from the partner by evaluating the signs of their direction
+                if (Mathf.Sign(currDistFromPartner.x) != Mathf.Sign(playerController.dir.x) && currDistFromPartner.magnitude > currMaxRopeLimit + 1)
+                {
+                    // If players moving away, apply a force of tension using the inverse exponential formula
+                    playerController.currSpeed = playerController.currSpeed / (1 + (Mathf.Pow(currDistFromPartner.magnitude, 2) / tensionScalar));
+                }
+                // Otherwise, they are trying to move towards the partner and should experience no tension
+                else
+                {
+                    playerController.currSpeed = playerController.speed;
+                }
             }
             else
             {
-                // if the curr distance between the characters is within the limit, set the joint's
-                // distance to match their distance, so the player can walk through the partner
-                joint.distance = currDistFromPartner;
+                joint.distance = currDistFromPartner.magnitude;
+                playerController.currSpeed = playerController.speed;
             }
         }
     }
