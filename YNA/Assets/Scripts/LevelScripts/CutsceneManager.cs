@@ -39,7 +39,12 @@ public class CutsceneManager : MonoBehaviour
     private bool isCurrentlyPlaying = false;
     private int currentFrameIndex = 0;
     private float cutsceneTimer = 0.0f;
-    private bool skipFrame = false;
+
+    private bool skipHold = false;
+    private const float skipTheshold = 1.5f;
+    private float skipTimer = 0.0f;
+
+    private const float fadeTime = 2.0f;
 
     private bool isStartCutscene = false;
 
@@ -100,43 +105,60 @@ public class CutsceneManager : MonoBehaviour
         // Make sure something is playing
         if (isCurrentlyPlaying && activeCutscene != null)
         {
-            // Update cutscene time
-            cutsceneTimer += Time.deltaTime;
-
-            if(cutsceneTimer > 2 && cutsceneTimer < activeCutscene.timeBetween - 1)
+            // Check for skip
+            if (skipHold)
             {
-                FadeToBlack.Invoke();
-            }
+                // Update Timer
+                skipTimer += Time.deltaTime;
 
-            // Check if the timer has elapsed
-            if (cutsceneTimer >= activeCutscene.timeBetween || skipFrame)
-            {
-                // Reset timer and possible frame skip
-                cutsceneTimer = 0.0f;
-                skipFrame = false;
-
-                // Advance or end cutscene
-                if (currentFrameIndex < activeCutscene.frames.Length - 1)
+                // Update the skip timer UI
+                if (cutsceneCanvasTimer)
                 {
-                    currentFrameIndex++;
-
-                    cutsceneCanvasFrame.sprite = activeCutscene.frames[currentFrameIndex].frameImage;
-
-                    FadeBackIn.Invoke();
+                    cutsceneCanvasTimer.fillAmount = skipTimer / skipTheshold;
                 }
-                else
+
+                // Check for skip end
+                if (skipTimer > skipTheshold)
                 {
-                    //FinishCutscene();
-                    //FadeBackIn.Invoke();
-                    StartCoroutine(Load());
+                    // Reset timer
+                    skipTimer = 0.0f;
+
+                    // Finish and return
+                    FinishCutscene();
                 }
             }
             else
             {
-                // Update the timer UI
-                if (cutsceneCanvasTimer)
+
+                // Update cutscene time
+                cutsceneTimer += Time.deltaTime;
+
+                if (cutsceneTimer > fadeTime && cutsceneTimer < activeCutscene.timeBetween - 1)
                 {
-                    cutsceneCanvasTimer.fillAmount = 1.0f - (cutsceneTimer / activeCutscene.timeBetween);
+                    FadeToBlack.Invoke();
+                }
+
+                // Check if the timer has elapsed
+                if (cutsceneTimer >= activeCutscene.timeBetween)
+                {
+                    // Reset timer
+                    cutsceneTimer = 0.0f;
+
+                    // Advance or end cutscene
+                    if (currentFrameIndex < activeCutscene.frames.Length - 1)
+                    {
+                        currentFrameIndex++;
+
+                        cutsceneCanvasFrame.sprite = activeCutscene.frames[currentFrameIndex].frameImage;
+
+                        FadeBackIn.Invoke();
+                    }
+                    else
+                    {
+                        //FinishCutscene();
+                        //FadeBackIn.Invoke();
+                        StartCoroutine(Load());
+                    }
                 }
             }
         }
@@ -257,13 +279,32 @@ public class CutsceneManager : MonoBehaviour
 
 
     ////////////////////////////////////////////////////////////////////////
-    // SKIP CUTSCENE FRAME =================================================
-    public void SkipCutsceneFrame()
+    // START SKIP CUTSCENE =================================================
+    public void StartSkipCutscene()
     {
         // Make sure a cutscene is playing
         if (isCurrentlyPlaying)
         {
-            skipFrame = true;
+            skipHold = true;
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // INTERUPT SKIP CUTSCENE ==============================================
+    public void InterruptSkipCutscene()
+    {
+        // Make sure a cutscene is playing
+        if (isCurrentlyPlaying)
+        {
+            skipTimer = 0.0f;
+            skipHold = false;
+
+            // Update the skip timer UI
+            if (cutsceneCanvasTimer)
+            {
+                cutsceneCanvasTimer.fillAmount = 0.0f;
+            }
         }
     }
 

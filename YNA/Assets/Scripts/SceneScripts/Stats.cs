@@ -186,8 +186,17 @@ public class Stats : MonoBehaviour
 
             if (cutCanv)
             {
-                //cutCanv.GetComponent<CutsceneManager>().SkipCutsceneFrame();
-                cutCanv.GetComponent<CutsceneManager>().FinishCutscene();
+                cutCanv.GetComponent<CutsceneManager>().StartSkipCutscene();
+            }
+        }
+
+        if (ctx.canceled)
+        {
+            GameObject cutCanv = GameObject.FindGameObjectWithTag("CutsceneCanvas");
+
+            if (cutCanv)
+            {
+                cutCanv.GetComponent<CutsceneManager>().InterruptSkipCutscene();
             }
         }
     }
