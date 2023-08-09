@@ -108,7 +108,8 @@ public class Grapple : MonoBehaviour
         }
         else
         {
-            playerController.currSpeed = playerController.speed;
+            if(!isMenu)
+                playerController.currSpeed = playerController.speed;
         }
 
         if (isReeling && currRopeLength > minRopeLimit)
@@ -174,7 +175,7 @@ public class Grapple : MonoBehaviour
             joint.frequency = ropeSpeed - 1.25f;
         }
 
-        if ((isExtending == false) && (isReeling == false))
+        if (!isMenu && (isExtending == false) && (isReeling == false))
         {
             if (currDistFromPartner.magnitude < minRopeLimit)
             {
