@@ -27,8 +27,10 @@ public class Stats : MonoBehaviour
     // VARIABLES ===========================================================
     //[HideInInspector]
     //public bool isDead;
-    [HideInInspector]
     //public bool isPaused = false;
+
+    [SerializeField]
+    private bool isMainMenu = false;
 
     public PlayerInput playerInput;
     DeathShader stoneShader;
@@ -37,6 +39,7 @@ public class Stats : MonoBehaviour
     private Animator transitionCanvas;
 
     GameObject pauseUI;
+    GameObject pauseMan;
     private GameObject settingsCanvas;
 
     // Eye Manager for pause fx
@@ -51,6 +54,7 @@ public class Stats : MonoBehaviour
         transitionCanvas = GameObject.FindWithTag("Transition")?.GetComponentInChildren<Animator>();
 
         pauseUI = GameObject.FindWithTag("Pause");
+        pauseMan = GameObject.FindWithTag("PauseManager");
         settingsCanvas = GameObject.FindWithTag("SettingsCanvas");
         eyeManager = GameObject.FindWithTag("EyeManager");
         musicController = GameObject.FindWithTag("MusicController");
@@ -107,17 +111,10 @@ public class Stats : MonoBehaviour
     public void Pause(InputAction.CallbackContext ctx)
     {
         // Action performed and not in a cutscene
-        if (ctx.performed && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
+        if (!isMainMenu && ctx.performed && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
         {
-            // If the Pause menu isn't there, try to find it
-            if(!pauseUI)
-            {
-                pauseUI = GameObject.FindWithTag("Pause");
-            }
-
-
             // Paused -> Unpaused
-            if (Info.isPaused && !pauseUI.GetComponent<PauseManager>().GetInSettings())
+            if (Info.isPaused && !pauseMan.GetComponent<PauseManager>().GetInSubMenu())
             {
                 Info.isPaused = false;
 

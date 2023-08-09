@@ -23,9 +23,12 @@ public class PauseManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES FOR FANCY STUFF ===========================================
     private Animator transitionCanvas;
+    private GameObject pauseCanvas;
     private GameObject settingsCanvas;
+    private GameObject confirmationCanvas;
 
     private bool inSettings = false;
+    private bool inConfirmation = false;
 
     // Eye Manager for pause fx
     GameObject eyeManager;
@@ -37,9 +40,14 @@ public class PauseManager : MonoBehaviour
     // AWAKE ===============================================================
     void Awake()
     {
+        pauseCanvas = GameObject.FindWithTag("Pause");
         settingsCanvas = GameObject.FindWithTag("SettingsCanvas");
+        confirmationCanvas = GameObject.FindWithTag("ConfirmationCanvas");
         eyeManager = GameObject.FindWithTag("EyeManager");
         musicController = GameObject.FindWithTag("MusicController");
+
+        settingsCanvas.SetActive(false);
+        confirmationCanvas.SetActive(false);
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -62,11 +70,24 @@ public class PauseManager : MonoBehaviour
         // If the player wants to use buttons after using the mouse, reset the active object
         if (EventSystem.current.currentSelectedGameObject == null && Input.anyKey && !inSettings)
         {
-            GameObject resumeButton = transform.Find("Resume").gameObject;
+            GameObject activeButton = null;
 
-            if (resumeButton)
+            if (inSettings)
             {
-                EventSystem.current.SetSelectedGameObject(resumeButton);
+                activeButton = settingsCanvas.transform.Find("Menu").gameObject;
+            }
+            else if (inConfirmation)
+            {
+                activeButton = confirmationCanvas.transform.Find("NoConfirmButton").gameObject;
+            }
+            else
+            {
+                activeButton = pauseCanvas.transform.Find("Resume").gameObject;
+            }
+
+            if (activeButton)
+            {
+                EventSystem.current.SetSelectedGameObject(activeButton);
             }
         }
     }
@@ -75,7 +96,7 @@ public class PauseManager : MonoBehaviour
     // RESUME BUTTON =======================================================
     public void ResumeButton()
     {
-        if (!inSettings)
+        if (!inSettings && !inConfirmation)
         {
             // Update variables
             GameObject.FindWithTag("GameManager").GetComponent<Stats>().TogglePause();
@@ -94,7 +115,7 @@ public class PauseManager : MonoBehaviour
             Time.timeScale = 1;
 
             // Hide Pause UI
-            gameObject.SetActive(false);
+            pauseCanvas.SetActive(false);
         }
     }
 
@@ -103,10 +124,18 @@ public class PauseManager : MonoBehaviour
     // SETTINGS BUTTON =====================================================
     public void SettingsButton()
     {
-        settingsCanvas.SetActive(true);
-        inSettings = true;
+        if (!inSettings && !inConfirmation)
+        {
+            settingsCanvas.SetActive(true);
+            inSettings = true;
 
-        GetComponent<Canvas>().enabled = false;
+            GameObject activeButton = settingsCanvas.transform.Find("Menu").gameObject;
+
+            if (activeButton)
+            {
+                EventSystem.current.SetSelectedGameObject(activeButton);
+            }
+        }
     }
 
 
@@ -117,8 +146,21 @@ public class PauseManager : MonoBehaviour
         if (inSettings)
         {
             settingsCanvas.SetActive(false);
-            GetComponent<Canvas>().enabled = true;
             inSettings = false;
+        }
+        if (inConfirmation)
+        {
+            confirmationCanvas.SetActive(false);
+            inConfirmation = false;
+        }
+
+        pauseCanvas.SetActive(true);
+
+        GameObject activeButton = pauseCanvas.transform.Find("Resume").gameObject;
+
+        if (activeButton)
+        {
+            EventSystem.current.SetSelectedGameObject(activeButton);
         }
     }
 
@@ -127,14 +169,33 @@ public class PauseManager : MonoBehaviour
     // QUIT BUTTON =========================================================
     public void QuitButton()
     {
-        if (!inSettings)
+        if (!inSettings && !inConfirmation)
         {
-            // Reset timescale
-            Time.timeScale = 1;
+            pauseCanvas.SetActive(false);
+            confirmationCanvas.SetActive(true);
+            inConfirmation = true;
 
-            // Do the animation
-            StartCoroutine(TransitionSequence());
+            GameObject activeButton = confirmationCanvas.transform.Find("NoConfirmButton").gameObject;
+
+            if (activeButton)
+            {
+                EventSystem.current.SetSelectedGameObject(activeButton);
+            }
         }
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    // CONFIRM BUTTON ======================================================
+    public void ConfirmButton()
+    {
+        // Show Scene
+        confirmationCanvas.SetActive(false);
+
+        // Reset timescale
+        Time.timeScale = 1;
+
+        // Do the animation
+        StartCoroutine(TransitionSequence());
     }
 
 
@@ -152,8 +213,8 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public bool GetInSettings()
+    public bool GetInSubMenu()
     {
-        return inSettings;
+        return (inSettings || inConfirmation);
     }
 }
