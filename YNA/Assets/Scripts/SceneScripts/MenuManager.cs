@@ -23,7 +23,7 @@ public class MenuManager : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
-    public GameObject menu, options;
+    public GameObject menu, options, confirmation;
     // *********************************************************************
 
 
@@ -33,6 +33,7 @@ public class MenuManager : MonoBehaviour
     {
         options.SetActive(false);
         menu.SetActive(true);
+        confirmation.SetActive(false);
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -49,11 +50,24 @@ public class MenuManager : MonoBehaviour
         if (EventSystem.current.currentSelectedGameObject == null && (Input.anyKeyDown && !(Input.GetMouseButtonDown(0)
             || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))))
         {
-            GameObject resumeButton = transform.Find("StartButton").gameObject;
+            GameObject activeButton = null;
 
-            if (resumeButton)
+            if (confirmation.activeSelf)
             {
-                EventSystem.current.SetSelectedGameObject(resumeButton);
+                activeButton = confirmation.transform.Find("NoConfirmButton").gameObject;
+            }
+            else if (options.activeSelf)
+            {
+                activeButton = options.transform.Find("Menu").gameObject;
+            }
+            else
+            {
+                activeButton = menu.transform.Find("MenuCanvasButtons").Find("StartButton").gameObject;
+            }
+
+            if (activeButton)
+            {
+                EventSystem.current.SetSelectedGameObject(activeButton);
             }
         }
     }
@@ -73,6 +87,11 @@ public class MenuManager : MonoBehaviour
     {
         options.SetActive(true);
         menu.SetActive(false);
+
+        GameObject activeButton = options.transform.Find("Menu").gameObject;
+
+        if (activeButton)
+            EventSystem.current.SetSelectedGameObject(activeButton);
     }
 
 
@@ -81,7 +100,13 @@ public class MenuManager : MonoBehaviour
     public void ReturnMenu()
     {
         options.SetActive(false);
+        confirmation.SetActive(false);
         menu.SetActive(true);
+
+        GameObject activeButton = menu.transform.Find("MenuCanvasButtons").Find("StartButton").gameObject;
+
+        if (activeButton)
+            EventSystem.current.SetSelectedGameObject(activeButton);
     }
 
 
@@ -89,16 +114,21 @@ public class MenuManager : MonoBehaviour
     // QUIT BUTTON =========================================================
     public void QuitButton()
     {
-        Application.Quit();
+        menu.SetActive(false);
+        confirmation.SetActive(true);
+
+        GameObject activeButton = confirmation.transform.Find("NoConfirmButton").gameObject;
+
+        if(activeButton)
+            EventSystem.current.SetSelectedGameObject(activeButton);
     }
 
-
     ////////////////////////////////////////////////////////////////////////
-    // RESTART BUTTON ======================================================
-    //public void RestartButton()
-    //{
-    //    SceneManager.LoadScene(Stats.currLevel);
-    //}
+    // CONFIRM BUTTON ======================================================
+    public void ConfirmButton()
+    {
+        Application.Quit();
+    }
 
 
     ////////////////////////////////////////////////////////////////////////
