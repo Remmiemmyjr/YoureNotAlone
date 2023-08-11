@@ -45,6 +45,7 @@ public class CutsceneManager : MonoBehaviour
     private float skipTimer = 0.0f;
 
     private const float fadeTime = 2.0f;
+    private bool inFade = false;
 
     private bool isStartCutscene = false;
 
@@ -106,7 +107,7 @@ public class CutsceneManager : MonoBehaviour
         if (isCurrentlyPlaying && activeCutscene != null)
         {
             // Check for skip
-            if (skipHold)
+            if (skipHold && !inFade)
             {
                 // Update Timer
                 skipTimer += Time.deltaTime;
@@ -136,6 +137,8 @@ public class CutsceneManager : MonoBehaviour
                 if (cutsceneTimer > fadeTime && cutsceneTimer < activeCutscene.timeBetween - 1)
                 {
                     FadeToBlack.Invoke();
+
+                    inFade = true;
                 }
 
                 // Check if the timer has elapsed
@@ -152,6 +155,8 @@ public class CutsceneManager : MonoBehaviour
                         cutsceneCanvasFrame.sprite = activeCutscene.frames[currentFrameIndex].frameImage;
 
                         FadeBackIn.Invoke();
+
+                        inFade = false;
                     }
                     else
                     {
