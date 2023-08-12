@@ -330,6 +330,11 @@ public class CutsceneManager : MonoBehaviour
     {
         return isCurrentlyPlaying;
     }
+
+    public void DisableInput()
+    {
+        inputManager.actions.Disable();
+    }
 }
 
 
