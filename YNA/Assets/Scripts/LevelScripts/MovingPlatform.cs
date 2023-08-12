@@ -4,42 +4,49 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    Rigidbody2D rb;
     Vector2 movement;
-
-    public GameObject leftBlock;
-    public GameObject rightBlock;
     public float speed = 3f;
 
-    [SerializeField]
-    private bool isHorizontal = true;
+    public Transform[] wayPoints;
+    public int startingPoint;
+
+    int i;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-
-        if(isHorizontal)
-        {
-            movement = new Vector2(1, 0);
-            //rb.constraints = RigidbodyConstraints2D.FreezePosition;
-        }
-        else
-        {
-            movement = new Vector2(0, 1);
-        }
+        transform.position = wayPoints[startingPoint].position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(movement * (speed * Time.deltaTime));
+        if (Vector2.Distance(transform.position, wayPoints[i].position) < 0.02f)
+        {
+            i++;
+
+            if(i == wayPoints.Length)
+            {
+                i = 0;
+            }
+        }
+
+        transform.position = Vector2.MoveTowards(transform.position, wayPoints[i].position, speed * Time.deltaTime);
+
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "PlatformBarrier")
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Partner")
         {
-            speed *= -1;
+            collision.transform.SetParent(transform);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Partner")
+        {
+            collision.transform.SetParent(null);
         }
     }
 }
