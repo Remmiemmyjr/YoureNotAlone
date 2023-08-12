@@ -25,6 +25,7 @@ public class CutsceneTriggerArea : MonoBehaviour
 
     public IEnumerator Load()
     {
+        yield return new WaitForSeconds(0.5f);
         csm.FadeToBlack.Invoke();
         yield return new WaitForSeconds(0.75f);
         csm.FadeBackIn.Invoke();
