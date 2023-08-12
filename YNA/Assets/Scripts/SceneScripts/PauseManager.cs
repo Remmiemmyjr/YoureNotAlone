@@ -25,9 +25,11 @@ public class PauseManager : MonoBehaviour
     private Animator transitionCanvas;
     private GameObject pauseCanvas;
     private GameObject settingsCanvas;
+    private GameObject controlsCanvas;
     private GameObject confirmationCanvas;
 
     private bool inSettings = false;
+    private bool inControls = false;
     private bool inConfirmation = false;
 
     // Eye Manager for pause fx
@@ -42,11 +44,13 @@ public class PauseManager : MonoBehaviour
     {
         pauseCanvas = GameObject.FindWithTag("Pause");
         settingsCanvas = GameObject.FindWithTag("SettingsCanvas");
+        controlsCanvas = GameObject.FindWithTag("ControlsCanvas");
         confirmationCanvas = GameObject.FindWithTag("ConfirmationCanvas");
         eyeManager = GameObject.FindWithTag("EyeManager");
         musicController = GameObject.FindWithTag("MusicController");
 
         settingsCanvas.SetActive(false);
+        controlsCanvas.SetActive(false);
         confirmationCanvas.SetActive(false);
     }
 
@@ -76,6 +80,10 @@ public class PauseManager : MonoBehaviour
             {
                 activeButton = settingsCanvas.transform.Find("Menu").gameObject;
             }
+            else if (inControls)
+            {
+                activeButton = settingsCanvas.transform.Find("Menu").gameObject;
+            }
             else if (inConfirmation)
             {
                 activeButton = confirmationCanvas.transform.Find("NoConfirmButton").gameObject;
@@ -96,7 +104,7 @@ public class PauseManager : MonoBehaviour
     // RESUME BUTTON =======================================================
     public void ResumeButton()
     {
-        if (!inSettings && !inConfirmation)
+        if (!inSettings && !inControls && !inConfirmation)
         {
             // Update variables
             GameObject.FindWithTag("GameManager").GetComponent<Stats>().TogglePause();
@@ -124,12 +132,31 @@ public class PauseManager : MonoBehaviour
     // SETTINGS BUTTON =====================================================
     public void SettingsButton()
     {
-        if (!inSettings && !inConfirmation)
+        if (!inSettings && !inControls && !inConfirmation)
         {
             settingsCanvas.SetActive(true);
             inSettings = true;
 
             GameObject activeButton = settingsCanvas.transform.Find("Menu").gameObject;
+
+            if (activeButton)
+            {
+                EventSystem.current.SetSelectedGameObject(activeButton);
+            }
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // CONTROLS BUTTON =====================================================
+    public void ControlsButton()
+    {
+        if (!inSettings && !inControls && !inConfirmation)
+        {
+            controlsCanvas.SetActive(true);
+            inControls = true;
+
+            GameObject activeButton = controlsCanvas.transform.Find("Menu").gameObject;
 
             if (activeButton)
             {
@@ -147,6 +174,11 @@ public class PauseManager : MonoBehaviour
         {
             settingsCanvas.SetActive(false);
             inSettings = false;
+        }
+        if (inControls)
+        {
+            controlsCanvas.SetActive(false);
+            inControls = false;
         }
         if (inConfirmation)
         {
@@ -169,7 +201,7 @@ public class PauseManager : MonoBehaviour
     // QUIT BUTTON =========================================================
     public void QuitButton()
     {
-        if (!inSettings && !inConfirmation)
+        if (!inSettings && !inControls && !inConfirmation)
         {
             pauseCanvas.SetActive(false);
             confirmationCanvas.SetActive(true);
@@ -215,6 +247,6 @@ public class PauseManager : MonoBehaviour
 
     public bool GetInSubMenu()
     {
-        return (inSettings || inConfirmation);
+        return (inSettings || inConfirmation || inControls);
     }
 }
