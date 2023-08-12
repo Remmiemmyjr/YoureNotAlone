@@ -21,7 +21,6 @@ public class SetPlayerAnimState : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
     PlayerController pc;
-    Stats manager;
 
     public enum PlayerStates
     {
@@ -60,7 +59,6 @@ public class SetPlayerAnimState : MonoBehaviour
     void Awake()
     {
         pc = GetComponent<PlayerController>();
-        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>();
     }
 
     ////////////////////////////////////////////////////////////////////////

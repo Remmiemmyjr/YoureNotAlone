@@ -26,11 +26,12 @@ public class AnimationManager : MonoBehaviour
         Player, Partner
     }
 
+    public float animSpeed = 1;
+
     private Character currChar;
 
     private Animator animator;
 
-    Stats manager;
     // *********************************************************************
 
 
@@ -54,6 +55,8 @@ public class AnimationManager : MonoBehaviour
         {
             currChar = Character.Partner;
         }
+
+        animator.speed = animSpeed;
     }
 
 

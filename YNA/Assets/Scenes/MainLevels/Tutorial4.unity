@@ -19581,6 +19581,14 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 783348941237856850, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
+      propertyPath: speed
+      value: 2.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 783348941237856850, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
+      propertyPath: playInterval
+      value: 0.575
+      objectReference: {fileID: 0}
+    - target: {fileID: 783348941237856850, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
       propertyPath: dontSpawnPartner
       value: 1
       objectReference: {fileID: 0}
@@ -19712,6 +19720,10 @@ PrefabInstance:
       propertyPath: _animationManager
       value: 
       objectReference: {fileID: 604386859}
+    - target: {fileID: 4514524465222421462, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
+      propertyPath: animSpeed
+      value: 0.55
+      objectReference: {fileID: 0}
     - target: {fileID: 8503721062006722536, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
       propertyPath: randClip
       value: 
@@ -20477,7 +20489,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017700991}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.05, y: -0.22, z: 0}
+  m_LocalPosition: {x: 13.88, y: -0.22, z: 0}
   m_LocalScale: {x: 1, y: 9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21362,15 +21374,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3299341755088921604, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
-      value: -0.477911
+      value: -0.47876093
       objectReference: {fileID: 0}
     - target: {fileID: 3299341755088921604, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
-      value: -0.4894675
+      value: -0.38471836
       objectReference: {fileID: 0}
     - target: {fileID: 3299341755088921604, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
       value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299341755088921604, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
+      value: -0.3897378
       objectReference: {fileID: 0}
     - target: {fileID: 3299341755088921604, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
@@ -21426,7 +21442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 31.875002
+      value: 31.874998
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046765, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Cameras.Array.size
