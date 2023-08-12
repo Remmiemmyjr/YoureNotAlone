@@ -74,6 +74,8 @@ public class CutsceneManager : MonoBehaviour
 
         if (PreviousLevel == gameObject.scene.name)
             sameSceneReload = true;
+        else
+            sameSceneReload = false;
     }
 
 
@@ -281,7 +283,7 @@ public class CutsceneManager : MonoBehaviour
 
         foreach (Cutscene currCutscene in cutscenes)
         {
-            if (currCutscene.name == name && !sameSceneReload)
+            if (currCutscene.name == name)
             {
                 activeCutscene = currCutscene;
 
