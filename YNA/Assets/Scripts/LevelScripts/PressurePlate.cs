@@ -25,7 +25,14 @@ public class PressurePlate : MonoBehaviour
     Vector2 ogPosDoor;
     Color ogColor;
 
+    public Color activeColor;
+
     public GameObject door;
+    public GameObject gem;
+    public GameObject gemLight;
+
+    SpriteRenderer gemSR;
+    PuzzleDoorProfile doorProfile;
 
     [SerializeField]
     private bool isHorizontal = false;
@@ -37,8 +44,15 @@ public class PressurePlate : MonoBehaviour
 // START ===============================================================
     void Start()
     {
-        ogColor = gameObject.GetComponent<SpriteRenderer>().color;
         ogPosDoor = door.GetComponent<Transform>().position;
+        doorProfile = door.GetComponent<PuzzleDoorProfile>();
+
+        gemSR = gem.GetComponent<SpriteRenderer>();
+        ogColor = gemSR.color;
+        doorProfile.DisableGem(ogColor);
+        
+        gemLight.GetComponent<UnityEngine.Rendering.Universal.Light2D>().color = activeColor;
+        gemLight.SetActive(false);
     }
 
 
@@ -50,11 +64,11 @@ public class PressurePlate : MonoBehaviour
         {
             if(!isHorizontal && door.GetComponent<Transform>().position.y > ogPosDoor.y)
             {
-                door.GetComponent<Transform>().Translate(0, -7f * Time.deltaTime, 0);
+                door.GetComponent<Transform>().Translate(0, -9f * Time.deltaTime, 0);
             }
             else if(isHorizontal && door.GetComponent<Transform>().position.x > ogPosDoor.x)
             {
-                door.GetComponent<Transform>().Translate(0, 7f * Time.deltaTime, 0);
+                door.GetComponent<Transform>().Translate(0, 9f * Time.deltaTime, 0);
             }
             else
             {
@@ -68,16 +82,18 @@ public class PressurePlate : MonoBehaviour
 // TRIGGER STAY ========================================================
     private void OnTriggerStay2D(Collider2D collision)
     {
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(0.35f, 0.51f, 0.39f);
+        gemSR.color = activeColor;
+        gemLight.SetActive(true);
+        doorProfile.EnableGem(activeColor);
 
         timeToReturn = false;
         if (!isHorizontal && door.GetComponent<Transform>().position.y < ogPosDoor.y + ((door.GetComponent<Transform>().localScale.y * 2.0f) - (door.GetComponent<Transform>().localScale.y * 0.2f)))
         {
-            door.GetComponent<Transform>().Translate(0, 7f * Time.deltaTime, 0);
+            door.GetComponent<Transform>().Translate(0, 3f * Time.deltaTime, 0);
         }
         else if (isHorizontal && door.GetComponent<Transform>().position.x < ogPosDoor.x + ((door.GetComponent<Transform>().localScale.y * 2.0f) - (door.GetComponent<Transform>().localScale.y * 0.2f)))
         {
-            door.GetComponent<Transform>().Translate(0, -7f * Time.deltaTime, 0);
+            door.GetComponent<Transform>().Translate(0, -3f * Time.deltaTime, 0);
         }
     }
 
@@ -87,6 +103,8 @@ public class PressurePlate : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         timeToReturn = true;
-        gameObject.GetComponent<SpriteRenderer>().color = ogColor;
+        gemSR.color = ogColor;
+        gemLight.SetActive(false);
+        doorProfile.DisableGem(ogColor);
     }
 }
