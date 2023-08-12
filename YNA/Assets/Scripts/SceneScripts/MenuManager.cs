@@ -23,7 +23,7 @@ public class MenuManager : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
-    public GameObject menu, options, confirmation;
+    public GameObject menu, settings, controls, confirmation;
     // *********************************************************************
 
 
@@ -31,7 +31,8 @@ public class MenuManager : MonoBehaviour
     // START ===============================================================
     void Start()
     {
-        options.SetActive(false);
+        settings.SetActive(false);
+        controls.SetActive(false);
         menu.SetActive(true);
         confirmation.SetActive(false);
     }
@@ -56,9 +57,13 @@ public class MenuManager : MonoBehaviour
             {
                 activeButton = confirmation.transform.Find("NoConfirmButton").gameObject;
             }
-            else if (options.activeSelf)
+            else if (settings.activeSelf)
             {
-                activeButton = options.transform.Find("Menu").gameObject;
+                activeButton = settings.transform.Find("Menu").gameObject;
+            }
+            else if (controls.activeSelf)
+            {
+                activeButton = controls.transform.Find("Menu").gameObject;
             }
             else
             {
@@ -85,10 +90,24 @@ public class MenuManager : MonoBehaviour
     // SETTINGS BUTTON =====================================================
     public void SettingsButton()
     {
-        options.SetActive(true);
+        settings.SetActive(true);
         menu.SetActive(false);
 
-        GameObject activeButton = options.transform.Find("Menu").gameObject;
+        GameObject activeButton = settings.transform.Find("Menu").gameObject;
+
+        if (activeButton)
+            EventSystem.current.SetSelectedGameObject(activeButton);
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // CONTROLS BUTTON =====================================================
+    public void ControlsButton()
+    {
+        controls.SetActive(true);
+        menu.SetActive(false);
+
+        GameObject activeButton = controls.transform.Find("Menu").gameObject;
 
         if (activeButton)
             EventSystem.current.SetSelectedGameObject(activeButton);
@@ -99,7 +118,8 @@ public class MenuManager : MonoBehaviour
     // RETURN BUTTON =======================================================
     public void ReturnMenu()
     {
-        options.SetActive(false);
+        settings.SetActive(false);
+        controls.SetActive(false);
         confirmation.SetActive(false);
         menu.SetActive(true);
 

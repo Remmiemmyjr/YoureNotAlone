@@ -22,13 +22,6 @@ public class InstructionsManager : MonoBehaviour
         if (controllers.Length != 0)
             keyboardMouseUsed = false;
 
-        // Ensure they exist
-        if (!keyboardText || !controllerText)
-        {
-            Debug.Log("Instructions text have not been set");
-            return;
-        }
-
         // Update instructions accordingly
         if (keyboardMouseUsed)
         {
