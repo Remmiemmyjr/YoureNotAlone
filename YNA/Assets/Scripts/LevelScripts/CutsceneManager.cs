@@ -49,6 +49,8 @@ public class CutsceneManager : MonoBehaviour
 
     private bool isStartCutscene = false;
 
+    private bool sameSceneReload = false;
+
     private PlayerInput inputManager;
 
     [SerializeField]
@@ -58,12 +60,20 @@ public class CutsceneManager : MonoBehaviour
 
     // *********************************************************************
 
+    public static string PreviousLevel { get; private set; }
+    private void OnDestroy()
+    {
+        PreviousLevel = gameObject.scene.name;
+    }
 
     ////////////////////////////////////////////////////////////////////////
     // AWAKE ===============================================================
     void Awake()
     {
         inputManager = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
+
+        if (PreviousLevel == gameObject.scene.name)
+            sameSceneReload = true;
     }
 
 
@@ -78,7 +88,7 @@ public class CutsceneManager : MonoBehaviour
         // If a cutscene is to play when the scene is loaded, then trigger it
         foreach (Cutscene currCutscene in cutscenes)
         {
-            if (currCutscene.playOnSceneStart)
+            if (currCutscene.playOnSceneStart && !sameSceneReload)
             {
                 // Hide transition
                 GameObject.FindGameObjectWithTag("Transition").GetComponentInChildren<Image>().enabled = false;
@@ -271,7 +281,7 @@ public class CutsceneManager : MonoBehaviour
 
         foreach (Cutscene currCutscene in cutscenes)
         {
-            if (currCutscene.name == name)
+            if (currCutscene.name == name && !sameSceneReload)
             {
                 activeCutscene = currCutscene;
 
