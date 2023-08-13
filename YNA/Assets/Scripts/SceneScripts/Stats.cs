@@ -97,7 +97,7 @@ public class Stats : MonoBehaviour
     public void ResetLevel(InputAction.CallbackContext ctx)
     {
         // Action performed and not in a cutscene
-        if (ctx.performed && !Info.isDead && 
+        if (!isMainMenu && ctx.performed && !Info.isDead && 
             !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
         {
             Info.isDead = true;
