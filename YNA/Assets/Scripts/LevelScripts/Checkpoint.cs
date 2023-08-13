@@ -131,7 +131,8 @@ public class Checkpoint : MonoBehaviour
                     checkReached = true;
 
                     // Play Sound
-                    lanternAS.PlayOneShot(lanternSFX[Random.Range(0, lanternSFX.Length)]);
+                    if (lanternSFX.Length > 0)
+                        lanternAS.PlayOneShot(lanternSFX[Random.Range(0, lanternSFX.Length)]);
                 }
             }
         }
@@ -157,7 +158,8 @@ public class Checkpoint : MonoBehaviour
                     checkReached = true;
 
                     // Play Sound
-                    lanternAS.PlayOneShot(lanternSFX[Random.Range(0, lanternSFX.Length)]);
+                    if(lanternSFX.Length > 0)
+                        lanternAS.PlayOneShot(lanternSFX[Random.Range(0, lanternSFX.Length)]);
                 }
                 else if (EmberPlayer && !sparkPlayed && !isSpawn)
                 {
@@ -165,7 +167,8 @@ public class Checkpoint : MonoBehaviour
                     EmberPlayer.Play();
 
                     // Play Sound
-                    lanternAS.PlayOneShot(lanternSFX[Random.Range(0, lanternSFX.Length)]);
+                    if (lanternSFX.Length > 0)
+                        lanternAS.PlayOneShot(lanternSFX[Random.Range(0, lanternSFX.Length)]);
 
                     // Avoid spam
                     sparkPlayed = true;
