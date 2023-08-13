@@ -17,6 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -27,8 +29,21 @@ public class MenuManager : MonoBehaviour
     // VARIABLES ===========================================================
     public GameObject menu, settings, controls, confirmation;
     GameObject activeButton;
+
+    VolumeProfile volProf;
+    LiftGammaGain liftGammaGain;
+    Bloom bloom;
+    public float bloomDefaultThreshold = 0.725f;
     // *********************************************************************
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
+    void Awake()
+    {
+        settings.SetActive(true);
+        settings.SetActive(false);
+    }
 
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
@@ -142,7 +157,7 @@ public class MenuManager : MonoBehaviour
 
         activeButton = confirmation.transform.Find("NoConfirmButton").gameObject;
 
-        if(activeButton)
+        if (activeButton)
             EventSystem.current.SetSelectedGameObject(activeButton);
     }
 
