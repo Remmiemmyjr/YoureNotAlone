@@ -5107,6 +5107,10 @@ MonoBehaviour:
   CheckOn: {fileID: 595365473, guid: 13ec76afb40eaa747bdc249c8cd47497, type: 3}
   lightGrowRate: 0
   startLit: 0
+  isSpawn: 0
+  lanternSFX:
+  - {fileID: 8300000, guid: 72e246afc943e5f4c81d61c9ecb1c3f7, type: 3}
+  - {fileID: 8300000, guid: ce52184a02061384ea974fa678f0ce30, type: 3}
 --- !u!212 &4250352
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5356,7 +5360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.34129143
+      value: 0.15589237
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.y
@@ -14789,7 +14793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2277467395215038058, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
       propertyPath: m_FlipX
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2277467395215038062, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
       propertyPath: m_Frequency
