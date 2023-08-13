@@ -18,12 +18,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class MenuManager : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
     public GameObject menu, settings, controls, confirmation;
+    GameObject activeButton;
     // *********************************************************************
 
 
@@ -51,7 +54,7 @@ public class MenuManager : MonoBehaviour
         if (EventSystem.current.currentSelectedGameObject == null && (Input.anyKeyDown && !(Input.GetMouseButtonDown(0)
             || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))))
         {
-            GameObject activeButton = null;
+            activeButton = null;
 
             if (confirmation.activeSelf)
             {
@@ -82,7 +85,7 @@ public class MenuManager : MonoBehaviour
     // START BUTTON ========================================================
     public void StartButton()
     {
-        SceneManager.LoadScene("Tutorial1");
+        SceneManager.LoadScene("Tutorial-1 Revised");
     }
 
 
@@ -93,7 +96,7 @@ public class MenuManager : MonoBehaviour
         settings.SetActive(true);
         menu.SetActive(false);
 
-        GameObject activeButton = settings.transform.Find("Menu").gameObject;
+        activeButton = settings.transform.Find("Menu").gameObject;
 
         if (activeButton)
             EventSystem.current.SetSelectedGameObject(activeButton);
@@ -107,7 +110,7 @@ public class MenuManager : MonoBehaviour
         controls.SetActive(true);
         menu.SetActive(false);
 
-        GameObject activeButton = controls.transform.Find("Menu").gameObject;
+        activeButton = controls.transform.Find("Menu").gameObject;
 
         if (activeButton)
             EventSystem.current.SetSelectedGameObject(activeButton);
@@ -123,7 +126,7 @@ public class MenuManager : MonoBehaviour
         confirmation.SetActive(false);
         menu.SetActive(true);
 
-        GameObject activeButton = menu.transform.Find("MenuCanvasButtons").Find("StartButton").gameObject;
+        activeButton = menu.transform.Find("MenuCanvasButtons").Find("StartButton").gameObject;
 
         if (activeButton)
             EventSystem.current.SetSelectedGameObject(activeButton);
@@ -137,7 +140,7 @@ public class MenuManager : MonoBehaviour
         menu.SetActive(false);
         confirmation.SetActive(true);
 
-        GameObject activeButton = confirmation.transform.Find("NoConfirmButton").gameObject;
+        activeButton = confirmation.transform.Find("NoConfirmButton").gameObject;
 
         if(activeButton)
             EventSystem.current.SetSelectedGameObject(activeButton);
