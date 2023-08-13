@@ -31,12 +31,12 @@ public class Parallax : MonoBehaviour
     }
 
 
-        ////////////////////////////////////////////////////////////////////////
-        // START ===============================================================
-        void Start()
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
+    void Start()
     {
         camPos = cam.transform.position.x;
-        
+
         length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
@@ -47,7 +47,7 @@ public class Parallax : MonoBehaviour
     {
         float temp = (cam.transform.position.x * (1 - parallaxEffect));
         float deltaDist = (cam.transform.position.x - camPos) * parallaxEffect;
-        
+
 
         startpos = transform.position.x;
         float camDist = (cam.transform.position.x - transform.position.x);
