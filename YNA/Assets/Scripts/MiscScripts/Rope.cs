@@ -8,7 +8,7 @@ public class Rope : MonoBehaviour
     private LineRenderer lineRenderer;
     private List<RopeSegment> ropeSegments = new List<RopeSegment>();
     private float segmentLength = 0.25f;
-    //private int numSegments = 35;
+    private int numSegments = 35;
 
     [SerializeField]
     private float lineWidth = 0.1f;
@@ -32,11 +32,11 @@ public class Rope : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         Vector3 ropeStartPoint = transform.position;
 
-        //for (int i = 0; i < numSegments; ++i) 
-        //{
-        //    ropeSegments.Add(new RopeSegment(ropeStartPoint));
-        //    ropeStartPoint.y -= segmentLength; // Avoid overlap
-        //}
+        for (int i = 0; i < numSegments; ++i) 
+        {
+            ropeSegments.Add(new RopeSegment(ropeStartPoint));
+            ropeStartPoint.y -= segmentLength; // Avoid overlap
+        }
     }
 
     // Update is called once per frame
