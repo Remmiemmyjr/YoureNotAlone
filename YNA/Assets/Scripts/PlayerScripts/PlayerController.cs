@@ -14,13 +14,11 @@
 //*************************************************
 
 using System;
-//using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
-using static Unity.VisualScripting.Member;
 
 public class PlayerController : MonoBehaviour
 {
