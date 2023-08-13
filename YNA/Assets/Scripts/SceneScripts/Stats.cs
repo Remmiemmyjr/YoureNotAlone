@@ -111,7 +111,7 @@ public class Stats : MonoBehaviour
     public void Pause(InputAction.CallbackContext ctx)
     {
         // Action performed and not in a cutscene
-        if (!isMainMenu && ctx.performed && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
+        if (ctx.performed && !isMainMenu && !Info.isDead && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
         {
             // Paused -> Unpaused
             if (Info.isPaused && !pauseMan.GetComponent<PauseManager>().GetInSubMenu())
