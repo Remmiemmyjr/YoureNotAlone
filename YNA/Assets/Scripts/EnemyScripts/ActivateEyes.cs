@@ -71,6 +71,11 @@ public class ActivateEyes : MonoBehaviour
     public AudioSource ifoundyou;
     public AudioSource iseeyou;
 
+    public AudioSource iamhere;
+
+    [SerializeField]
+    private AudioClip[] eyembiance;
+
     private PersistantMusic musicController;
 
     public string iamwatchingMGEP;
@@ -108,6 +113,9 @@ public class ActivateEyes : MonoBehaviour
  // START ===============================================================
     void Start()
     {
+        // Eye am here >:)
+        iamhere.PlayOneShot(eyembiance[Random.Range(0, eyembiance.Length)]);
+
         SelectNewTime();
 
         for (int i = 0; i < Eyes.Length; i++)
@@ -415,17 +423,22 @@ public class ActivateEyes : MonoBehaviour
             switch(status)
             {
                 case EyeStates.SLEEPING:
+                    iamhere.Pause();
                     break;
                 case EyeStates.WAKING:
                     goodmorning.Pause();
+                    iamhere.Pause();
                     break;
                 case EyeStates.ACTIVE:
                     iamawake.Pause();
                     iamwatching.Pause();
+                    iamhere.Pause();
+                    iamhere.Pause();
                     break;
                 case EyeStates.SEEN:
                     ifoundyou.Pause();
                     iseeyou.Pause();
+                    iamhere.Pause();
                     break;
             }
         }
@@ -434,15 +447,19 @@ public class ActivateEyes : MonoBehaviour
             switch (status)
             {
                 case EyeStates.SLEEPING:
+                    iamhere.UnPause();
                     break;
                 case EyeStates.WAKING:
+                    iamhere.UnPause();
                     goodmorning.UnPause();
                     break;
                 case EyeStates.ACTIVE:
+                    iamhere.UnPause();
                     iamawake.UnPause();
                     iamwatching.UnPause();
                     break;
                 case EyeStates.SEEN:
+                    iamhere.UnPause();
                     ifoundyou.UnPause();
                     iseeyou.UnPause();
                     break;
