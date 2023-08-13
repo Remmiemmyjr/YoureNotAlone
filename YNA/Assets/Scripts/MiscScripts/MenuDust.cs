@@ -6,6 +6,7 @@ using UnityEngine;
 public class MenuDust : MonoBehaviour
 {
     private ParticleSystem particleSys;
+    private bool isUsed = false;
 
     void Start()
     {
@@ -14,9 +15,10 @@ public class MenuDust : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.collider.tag == "MenuFloor")
+        if(other.collider.tag == "MenuFloor" && !isUsed)
         {
             particleSys.Play();
+            isUsed = true;
         }
     }
 }

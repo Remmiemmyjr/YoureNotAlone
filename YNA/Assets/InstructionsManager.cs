@@ -49,7 +49,7 @@ public class InstructionsManager : MonoBehaviour
         // Ensure they exist
         if(!keyboardText || !controllerText)
         {
-            Debug.Log("Instructions text have not been set");
+              //Debug.Log("Instructions text have not been set");
             return;
         }
 
