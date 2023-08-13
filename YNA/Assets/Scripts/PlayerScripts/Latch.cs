@@ -22,10 +22,11 @@ public class Latch : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
-    Rigidbody2D objRB;
+    GameObject obj;
     HingeJoint2D joint;
     float ogMass;
     float ogMinLimit;
+    [HideInInspector]
     public bool isLatched;
     bool canLatch;
     // *********************************************************************
@@ -36,7 +37,6 @@ public class Latch : MonoBehaviour
     void Awake()
     {
         isLatched = false;
-        
     }
 
     void Start()
@@ -74,9 +74,11 @@ public class Latch : MonoBehaviour
             canLatch = true;
 
             joint = collision.gameObject.GetComponent<HingeJoint2D>();
-            objRB = collision.GetComponent<Rigidbody2D>();
+            obj = collision.gameObject;
 
-            ogMass = objRB.mass;
+            ogMass = obj.GetComponent<Rigidbody2D>().mass;
+
+            obj.GetComponent<BoxStats>().SetOutlineMat(false);
         }
     }
 
@@ -84,9 +86,10 @@ public class Latch : MonoBehaviour
     {
         if (collision.gameObject.tag == "Grabbable" && !isLatched)
         {
+            obj?.GetComponent<BoxStats>().SetNormalMat();
             canLatch = false;
             joint = null;
-            objRB = null;
+            obj = null;
         }
     }
 
@@ -98,10 +101,13 @@ public class Latch : MonoBehaviour
         joint.connectedBody = GetComponentInParent<Rigidbody2D>();
         joint.enabled = true;
 
-        objRB.mass = 0.5f;
-        objRB.freezeRotation = true;
+        obj.GetComponent<Rigidbody2D>().mass = 0.5f;
+        obj.GetComponent<Rigidbody2D>().freezeRotation = true;
 
-        Info.grapple.minRopeLimit = 1.75f;
+        Info.grapple.minRopeLimit += 1.5f;
+
+        // TODO - CHANGE SHADER MATERIAL TO SOMETHING UNIQUE WHILE GRABBED
+        obj.GetComponent<BoxStats>().SetOutlineMat(true);
     }
 
 
@@ -115,10 +121,11 @@ public class Latch : MonoBehaviour
         joint.connectedBody = null;
         joint = null;
 
-        objRB.mass = ogMass;
-        objRB.freezeRotation = false;
-        objRB = null;
+        obj.GetComponent<Rigidbody2D>().mass = ogMass;
+        obj.GetComponent<Rigidbody2D>().freezeRotation = false;
 
         Info.grapple.minRopeLimit = ogMinLimit;
+        obj.GetComponent<BoxStats>().SetNormalMat();
+        obj = null;
     }
 }
