@@ -21,7 +21,7 @@ public class Grapple : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
-    GameObject topSolidMap;
+    GameObject[] topSolidMap;
     LineRenderer line;
     SpringJoint2D joint;
     PlayerController playerController;
@@ -58,7 +58,7 @@ public class Grapple : MonoBehaviour
     // AWAKE ===============================================================
     private void Awake()
     {
-        topSolidMap = GameObject.FindGameObjectWithTag("TopSolidMap");
+        topSolidMap = GameObject.FindGameObjectsWithTag("TopSolidMap");
         line = GetComponent<LineRenderer>();
     }
 
@@ -222,9 +222,12 @@ public class Grapple : MonoBehaviour
         }
 
         // Logic for topsolid and partner
-        if (topSolidMap && Info.partner)
+        if (topSolidMap.Length > 0 && Info.partner)
         {
-            topSolidMap.GetComponent<PlatformEffector2D>().colliderMask |= (1 << Info.partner.layer);
+            foreach (GameObject topSolid in topSolidMap)
+            {
+                topSolid.GetComponent<PlatformEffector2D>().colliderMask |= (1 << Info.partner.layer);
+            }
         }
     }
 
@@ -244,9 +247,12 @@ public class Grapple : MonoBehaviour
         }
 
         // Logic for topsolid and partner
-        if (topSolidMap && Info.partner)
+        if (topSolidMap.Length > 0 && Info.partner)
         {
-            topSolidMap.GetComponent<PlatformEffector2D>().colliderMask &= ~(1 << Info.partner.layer);
+            foreach (GameObject topSolid in topSolidMap)
+            {
+                topSolid.GetComponent<PlatformEffector2D>().colliderMask &= ~(1 << Info.partner.layer);
+            }
         }
     }
 
