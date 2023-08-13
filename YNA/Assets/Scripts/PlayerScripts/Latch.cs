@@ -44,6 +44,14 @@ public class Latch : MonoBehaviour
         ogMinLimit = Info.grapple.minRopeLimit;
     }
 
+    private void Update()
+    {
+        if(!canLatch && !isLatched)
+        {
+            obj?.GetComponent<BoxStats>().SetNormalMat();
+        }
+    }
+
     public void LatchBox(InputAction.CallbackContext ctx)
     {
         if (ctx.performed && canLatch)
@@ -100,14 +108,12 @@ public class Latch : MonoBehaviour
     {
         joint.connectedBody = GetComponentInParent<Rigidbody2D>();
         joint.enabled = true;
+        obj.GetComponent<BoxStats>().SetOutlineMat(true);
 
         obj.GetComponent<Rigidbody2D>().mass = 0.5f;
         obj.GetComponent<Rigidbody2D>().freezeRotation = true;
 
-        Info.grapple.minRopeLimit += 1.5f;
-
-        // TODO - CHANGE SHADER MATERIAL TO SOMETHING UNIQUE WHILE GRABBED
-        obj.GetComponent<BoxStats>().SetOutlineMat(true);
+        Info.grapple.minRopeLimit += 1f;
     }
 
 

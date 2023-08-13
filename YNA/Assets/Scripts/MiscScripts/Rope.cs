@@ -8,7 +8,7 @@ public class Rope : MonoBehaviour
     private LineRenderer lineRenderer;
     private List<RopeSegment> ropeSegments = new List<RopeSegment>();
     private float segmentLength = 0.25f;
-    private int numSegments = 35;
+    //private int numSegments = 35;
 
     [SerializeField]
     private float lineWidth = 0.1f;

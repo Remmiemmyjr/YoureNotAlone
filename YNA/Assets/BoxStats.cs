@@ -37,6 +37,7 @@ public class BoxStats : MonoBehaviour
     public void SetNormalMat()
     {
         sr.material = boxMat;
+        outlineMat.SetColor("_Color_Outline", Color.clear);
     }
 
     public void SetOutlineMat(bool colorSwap)
