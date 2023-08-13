@@ -22,7 +22,8 @@ public class LevelProgression : MonoBehaviour
     public GameObject instructions;
     GameObject displayMessage;
 
-    public string nextLevel;
+    [SerializeField]
+    private string nextLevel;
 
     public bool requiresPartner;
 

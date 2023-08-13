@@ -100,7 +100,7 @@ public class MenuManager : MonoBehaviour
     // START BUTTON ========================================================
     public void StartButton()
     {
-        SceneManager.LoadScene("Tutorial-1 Revised");
+        SceneManager.LoadScene("Tutorial-1");
     }
 
 
