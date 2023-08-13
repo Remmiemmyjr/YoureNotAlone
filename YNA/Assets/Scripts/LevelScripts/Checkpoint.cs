@@ -44,6 +44,13 @@ public class Checkpoint : MonoBehaviour
 
     [SerializeField]
     private bool startLit = false;
+    [SerializeField]
+    private bool isSpawn = false;
+
+    [SerializeField]
+    private AudioClip[] lanternSFX;
+
+    private AudioSource lanternAS;
 
     private bool sparkPlayed = false;
 
@@ -58,8 +65,9 @@ public class Checkpoint : MonoBehaviour
     {
         EmberPlayer = GetComponent<ParticleSystem>();
         CheckpointLight = GetComponent<UnityEngine.Rendering.Universal.Light2D>();
+        lanternAS = GetComponent<AudioSource>();
 
-        if(GameObject.FindWithTag("Partner"))
+        if (GameObject.FindWithTag("Partner"))
         {
             usePlayer = false;
         }
@@ -111,7 +119,7 @@ public class Checkpoint : MonoBehaviour
                 GetComponent<SpriteRenderer>().sprite = CheckOn;
 
                 // Make sure extra items exist
-                if (EmberPlayer && CheckpointLight && !checkReached)
+                if (EmberPlayer && CheckpointLight && lanternAS && !checkReached)
                 {
                     // Play Particles
                     EmberPlayer.Play();
@@ -121,6 +129,9 @@ public class Checkpoint : MonoBehaviour
 
                     // Update value
                     checkReached = true;
+
+                    // Play Sound
+                    lanternAS.PlayOneShot(lanternSFX[Random.Range(0, lanternSFX.Length)]);
                 }
             }
         }
@@ -144,11 +155,17 @@ public class Checkpoint : MonoBehaviour
 
                     // Update value
                     checkReached = true;
+
+                    // Play Sound
+                    lanternAS.PlayOneShot(lanternSFX[Random.Range(0, lanternSFX.Length)]);
                 }
-                else if (EmberPlayer && !sparkPlayed)
+                else if (EmberPlayer && !sparkPlayed && !isSpawn)
                 {
                     // Play Particles
                     EmberPlayer.Play();
+
+                    // Play Sound
+                    lanternAS.PlayOneShot(lanternSFX[Random.Range(0, lanternSFX.Length)]);
 
                     // Avoid spam
                     sparkPlayed = true;
