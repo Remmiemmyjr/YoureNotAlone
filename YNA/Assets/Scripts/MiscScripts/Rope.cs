@@ -32,11 +32,11 @@ public class Rope : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         Vector3 ropeStartPoint = transform.position;
 
-        for (int i = 0; i < numSegments; ++i) 
-        {
-            ropeSegments.Add(new RopeSegment(ropeStartPoint));
-            ropeStartPoint.y -= segmentLength; // Avoid overlap
-        }
+        //for (int i = 0; i < numSegments; ++i) 
+        //{
+        //    ropeSegments.Add(new RopeSegment(ropeStartPoint));
+        //    ropeStartPoint.y -= segmentLength; // Avoid overlap
+        //}
     }
 
     // Update is called once per frame
