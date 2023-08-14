@@ -86,7 +86,10 @@ public class Latch : MonoBehaviour
 
             ogMass = obj.GetComponent<Rigidbody2D>().mass;
 
-            obj.GetComponent<BoxStats>().SetOutlineMat(false);
+            if (obj)
+            {
+                obj.GetComponent<BoxStats>().SetOutlineMat(false);
+            }
         }
     }
 
@@ -95,6 +98,7 @@ public class Latch : MonoBehaviour
         if (collision.gameObject.tag == "Grabbable" && !isLatched)
         {
             obj?.GetComponent<BoxStats>().SetNormalMat();
+
             canLatch = false;
             joint = null;
             obj = null;
@@ -108,10 +112,21 @@ public class Latch : MonoBehaviour
     {
         joint.connectedBody = GetComponentInParent<Rigidbody2D>();
         joint.enabled = true;
-        obj.GetComponent<BoxStats>().SetOutlineMat(true);
 
-        obj.GetComponent<Rigidbody2D>().mass = 0.5f;
-        obj.GetComponent<Rigidbody2D>().freezeRotation = true;
+        if (obj)
+        {
+            obj.GetComponent<BoxStats>().SetOutlineMat(true);
+            obj.GetComponent<PlatformEffector2D>().colliderMask &= ~(1 << Info.player.layer);
+            obj.GetComponent<PlatformEffector2D>().colliderMask &= ~(1 << Info.partner.layer);
+
+            Vector3 partnerPos = Info.partner.transform.position;
+            partnerPos.z = 1;
+            obj.transform.position = partnerPos;
+
+
+            obj.GetComponent<Rigidbody2D>().mass = 0.5f;
+            obj.GetComponent<Rigidbody2D>().freezeRotation = true;
+        }
 
         Info.grapple.minRopeLimit += 1f;
     }
@@ -122,16 +137,23 @@ public class Latch : MonoBehaviour
     public void ReleaseObject()
     {
         canLatch = false;
+        isLatched = false;
 
         joint.enabled = false;
         joint.connectedBody = null;
         joint = null;
 
-        obj.GetComponent<Rigidbody2D>().mass = ogMass;
-        obj.GetComponent<Rigidbody2D>().freezeRotation = false;
+        if (obj)
+        {
+            obj.GetComponent<Rigidbody2D>().mass = ogMass;
+            obj.GetComponent<Rigidbody2D>().freezeRotation = false;
 
-        Info.grapple.minRopeLimit = ogMinLimit;
-        obj.GetComponent<BoxStats>().SetNormalMat();
+            Info.grapple.minRopeLimit = ogMinLimit;
+            obj.GetComponent<BoxStats>().SetNormalMat();
+            obj.GetComponent<PlatformEffector2D>().colliderMask |= (1 << Info.player.layer);
+            obj.GetComponent<PlatformEffector2D>().colliderMask |= (1 << Info.partner.layer);
+        }
+
         obj = null;
     }
 }
