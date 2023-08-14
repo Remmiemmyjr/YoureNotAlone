@@ -5,16 +5,6 @@ using static Rope;
 
 public class Rope : MonoBehaviour
 {
-    private LineRenderer lineRenderer;
-    private List<RopeSegment> ropeSegments = new List<RopeSegment>();
-    private float segmentLength = 0.25f;
-    private int numSegments = 35;
-
-    [SerializeField]
-    private float lineWidth = 0.1f;
-
-    [SerializeField]
-    float gravityScale = 5.0f;
     public struct RopeSegment
     {
         public Vector2 posNow;
@@ -26,17 +16,48 @@ public class Rope : MonoBehaviour
             posOld = pos;
         }
     }
+
+    // Number of segments = Total distance / Segment size
+    float distance;
+
+    private LineRenderer lineRenderer;
+    private List<RopeSegment> ropeSegments = new List<RopeSegment>();
+    [HideInInspector]
+    public float segmentLength = 0.25f;
+    [HideInInspector]
+    public int numSegments = 0; // 35
+
+    [SerializeField]
+    private float lineWidth = 0.1f;
+
+    [SerializeField]
+    float gravityScale = 5.0f;
+
+    [SerializeField]
+    private Transform playerPos;
+
+    [SerializeField]
+    private Transform partnerPos;
+
     // Start is called before the first frame update
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
         Vector3 ropeStartPoint = transform.position;
 
-        for (int i = 0; i < numSegments; ++i) 
+        distance = Vector2.Distance(playerPos.position, partnerPos.position);
+        numSegments = (int)(distance / segmentLength);
+
+        for (int i = 0; i < numSegments; ++i)
         {
             ropeSegments.Add(new RopeSegment(ropeStartPoint));
             ropeStartPoint.y -= segmentLength; // Avoid overlap
         }
+    }
+
+    private void Start()
+    {
+
     }
 
     // Update is called once per frame
@@ -57,12 +78,12 @@ public class Rope : MonoBehaviour
 
         for (int i = 0; i < numSegments; ++i) 
         {
-            RopeSegment firstSegment = ropeSegments[i];
-            Vector2 velocity = firstSegment.posNow - firstSegment.posOld;
-            firstSegment.posOld = firstSegment.posNow;
-            firstSegment.posNow += velocity;
-            firstSegment.posNow += forceGravity * Time.deltaTime;
-            ropeSegments[i] = firstSegment;
+            RopeSegment currSegment = ropeSegments[i];
+            Vector2 velocity = currSegment.posNow - currSegment.posOld;
+            currSegment.posOld = currSegment.posNow;
+            currSegment.posNow += velocity;
+            currSegment.posNow += forceGravity * Time.deltaTime;
+            ropeSegments[i] = currSegment;
         }
         for (int i = 0; i < 50; ++i)
             ApplyConstraint();
@@ -71,36 +92,40 @@ public class Rope : MonoBehaviour
     private void ApplyConstraint()
     {
         RopeSegment firstSegment = ropeSegments[0];
-        firstSegment.posNow = transform.position;
+        firstSegment.posNow = playerPos.position;
         ropeSegments[0] = firstSegment;
+
+        RopeSegment endSegment = ropeSegments[numSegments -1];
+        endSegment.posNow = partnerPos.position;
+        ropeSegments[numSegments -1] = endSegment;
 
         for (int i = 0; i < numSegments - 1; ++i)
         {
-            RopeSegment firstSeg = ropeSegments[i];
-            RopeSegment secondSeg = ropeSegments[i + 1];
+            RopeSegment currSegment = ropeSegments[i];
+            RopeSegment nextSegment = ropeSegments[i + 1];
 
-            float dist = (firstSeg.posNow - secondSeg.posNow).magnitude;
+            float dist = (currSegment.posNow - nextSegment.posNow).magnitude;
             float error = Mathf.Abs(dist - segmentLength);
             Vector2 changeDir = Vector2.zero;
 
             if (dist > segmentLength)
-                changeDir = (firstSeg.posNow - secondSeg.posNow).normalized;
+                changeDir = (currSegment.posNow - nextSegment.posNow).normalized;
            
             else if (dist < segmentLength)
-                changeDir = (secondSeg.posNow - firstSeg.posNow).normalized;
+                changeDir = (nextSegment.posNow - currSegment.posNow).normalized;
 
             Vector2 changeAmount = changeDir * error;
             if (i != 0)
             {
-                firstSeg.posNow -= changeAmount * 0.5f;
-                ropeSegments[i] = firstSeg;
-                secondSeg.posNow += changeAmount * 0.5f;
-                ropeSegments[i + 1] = secondSeg;
+                currSegment.posNow -= changeAmount * 0.5f;
+                ropeSegments[i] = currSegment;
+                nextSegment.posNow += changeAmount * 0.5f;
+                ropeSegments[i + 1] = nextSegment;
             }
             else
             {
-                secondSeg.posNow += changeAmount;
-                ropeSegments[i + 1] = secondSeg;
+                nextSegment.posNow += changeAmount;
+                ropeSegments[i + 1] = nextSegment;
             }
         }
     }
