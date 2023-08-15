@@ -70,6 +70,7 @@ public class Rope : MonoBehaviour
     // Runs at a fixed rate per frame
     private void FixedUpdate()
     {
+        // Update then draw
         Simulate();
         DrawRope();
     }
