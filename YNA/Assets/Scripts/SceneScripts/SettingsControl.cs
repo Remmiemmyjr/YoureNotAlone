@@ -41,6 +41,8 @@ public class SettingsControl : MonoBehaviour
 
         volumeSlider.value = masterVol;
         brightnessSlider.value = gammaVal;
+
+        gameObject.SetActive(false);
     }
 
     void Start()

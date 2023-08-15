@@ -49,7 +49,6 @@ public class PauseManager : MonoBehaviour
         eyeManager = GameObject.FindWithTag("EyeManager");
         musicController = GameObject.FindWithTag("MusicController");
 
-        settingsCanvas.SetActive(false);
         controlsCanvas.SetActive(false);
         confirmationCanvas.SetActive(false);
     }
