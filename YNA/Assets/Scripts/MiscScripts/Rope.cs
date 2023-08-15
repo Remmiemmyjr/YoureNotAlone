@@ -39,6 +39,9 @@ public class Rope : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(Info.partner == null)
+            return;
+
         // Get the line renderer
         lineRenderer = GetComponent<LineRenderer>();
         Vector3 ropeStartPoint = transform.position; // Start at player position
@@ -58,6 +61,9 @@ public class Rope : MonoBehaviour
     // Runs at a fixed rate per frame
     private void FixedUpdate()
     {
+        if (Info.partner == null)
+            return;
+
         // Update then draw
         Simulate();
         DrawRope();
