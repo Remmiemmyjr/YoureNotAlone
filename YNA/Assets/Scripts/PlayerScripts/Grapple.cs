@@ -130,12 +130,6 @@ public class Grapple : MonoBehaviour
     // SET ROPE ============================================================
     void SetRope()
     {
-        //playerLinePos = new Vector2(transform.position.x, transform.position.y - 0.235f);
-        //partnerLinePos = new Vector2(Info.partner.transform.position.x, Info.partner.transform.position.y - 0.235f);
-
-        //line.SetPosition(0, playerLinePos);
-        //line.SetPosition(1, partnerLinePos);
-
         if (rope.currRopeSize <= rope.maxRopeSize && currDistFromPartner.magnitude > 1)
         {
             rope.currRopeSize = (int)(currDistFromPartner.magnitude / rope.segmentLength);

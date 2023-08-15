@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Rope;
 
 public class Rope : MonoBehaviour
 {
@@ -36,21 +35,16 @@ public class Rope : MonoBehaviour
     [SerializeField]
     float gravityScale = 5.0f;
 
-    [SerializeField]
-    private Transform playerPos;
-
-    [SerializeField]
-    private Transform partnerPos;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         // Get the line renderer
         lineRenderer = GetComponent<LineRenderer>();
         Vector3 ropeStartPoint = transform.position; // Start at player position
 
         // Calculate the number of segments
-        distance = Vector2.Distance(playerPos.position, partnerPos.position);
+        distance = Vector2.Distance(Info.player.transform.position, Info.partner.transform.position);
         currRopeSize = (int)(distance / segmentLength);
 
         // Create and add segments to list
@@ -59,12 +53,6 @@ public class Rope : MonoBehaviour
             ropeSegments.Add(new RopeSegment(ropeStartPoint));
             ropeStartPoint.y -= segmentLength; // Avoid overlap
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     // Runs at a fixed rate per frame
@@ -89,19 +77,16 @@ public class Rope : MonoBehaviour
             ropeSegments[i] = currSegment;
             ApplyConstraint();
         }
-
-        //for (int i = 0; i < 50; ++i)
-            //ApplyConstraint();
     }
 
     private void ApplyConstraint()
     {
         RopeSegment firstSegment = ropeSegments[0];
-        firstSegment.posNow = playerPos.position;
+        firstSegment.posNow = Info.player.transform.position;
         ropeSegments[0] = firstSegment;
 
         RopeSegment endSegment = ropeSegments[currRopeSize -1];
-        endSegment.posNow = partnerPos.position;
+        endSegment.posNow = Info.partner.transform.position;
         ropeSegments[currRopeSize -1] = endSegment;
 
         for (int i = 0; i < currRopeSize - 1; ++i)
