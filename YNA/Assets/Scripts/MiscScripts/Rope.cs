@@ -5,11 +5,13 @@ using static Rope;
 
 public class Rope : MonoBehaviour
 {
+    // Struct representing one segment of the rope
     public struct RopeSegment
     {
         public Vector2 posNow;
         public Vector2 posOld;
 
+        // Constructor for the segment
         public RopeSegment(Vector2 pos)
         {
             posNow = pos;
@@ -25,8 +27,8 @@ public class Rope : MonoBehaviour
     [HideInInspector]
     public float segmentLength = 0.25f;
     [HideInInspector]
-    public int currSegmentCount = 0; // 35
-    public int maxSegments = 28;
+    public int currRopeSize = 0;
+    public int maxRopeSize = 28;
 
     [SerializeField]
     private float lineWidth = 0.1f;
@@ -43,13 +45,16 @@ public class Rope : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        // Get the line renderer
         lineRenderer = GetComponent<LineRenderer>();
-        Vector3 ropeStartPoint = transform.position;
+        Vector3 ropeStartPoint = transform.position; // Start at player position
 
+        // Calculate the number of segments
         distance = Vector2.Distance(playerPos.position, partnerPos.position);
-        currSegmentCount = (int)(distance / segmentLength);
+        currRopeSize = (int)(distance / segmentLength);
 
-        for (int i = 0; i < maxSegments; ++i)
+        // Create and add segments to list
+        for (int i = 0; i < maxRopeSize; ++i)
         {
             ropeSegments.Add(new RopeSegment(ropeStartPoint));
             ropeStartPoint.y -= segmentLength; // Avoid overlap
@@ -59,20 +64,21 @@ public class Rope : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DrawRope();
+        
     }
 
     // Runs at a fixed rate per frame
     private void FixedUpdate()
     {
         Simulate();
+        DrawRope();
     }
 
     private void Simulate()
     {
         Vector2 forceGravity = new Vector2(0.0f, -gravityScale);
 
-        for (int i = 0; i < currSegmentCount; ++i) 
+        for (int i = 0; i < currRopeSize; ++i) 
         {
             RopeSegment currSegment = ropeSegments[i];
             Vector2 velocity = currSegment.posNow - currSegment.posOld;
@@ -93,11 +99,11 @@ public class Rope : MonoBehaviour
         firstSegment.posNow = playerPos.position;
         ropeSegments[0] = firstSegment;
 
-        RopeSegment endSegment = ropeSegments[currSegmentCount -1];
+        RopeSegment endSegment = ropeSegments[currRopeSize -1];
         endSegment.posNow = partnerPos.position;
-        ropeSegments[currSegmentCount -1] = endSegment;
+        ropeSegments[currRopeSize -1] = endSegment;
 
-        for (int i = 0; i < currSegmentCount - 1; ++i)
+        for (int i = 0; i < currRopeSize - 1; ++i)
         {
             RopeSegment currSegment = ropeSegments[i];
             RopeSegment nextSegment = ropeSegments[i + 1];
@@ -134,12 +140,12 @@ public class Rope : MonoBehaviour
         lineRenderer.startWidth = width;
         lineRenderer.endWidth = width;
 
-        Vector3[] ropePositions = new Vector3[maxSegments];
+        Vector3[] ropePositions = new Vector3[maxRopeSize];
         
-        for (int i = 0; i < currSegmentCount; ++i)
+        for (int i = 0; i < currRopeSize; ++i)
             ropePositions[i] = ropeSegments[i].posNow;
 
-        lineRenderer.positionCount = currSegmentCount;
+        lineRenderer.positionCount = currRopeSize;
         lineRenderer.SetPositions(ropePositions);
     }
 }

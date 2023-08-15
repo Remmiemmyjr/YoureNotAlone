@@ -136,12 +136,12 @@ public class Grapple : MonoBehaviour
         //line.SetPosition(0, playerLinePos);
         //line.SetPosition(1, partnerLinePos);
 
-        if (rope.currSegmentCount <= rope.maxSegments && currDistFromPartner.magnitude > 1)
+        if (rope.currRopeSize <= rope.maxRopeSize && currDistFromPartner.magnitude > 1)
         {
-            rope.currSegmentCount = (int)(currDistFromPartner.magnitude / rope.segmentLength);
+            rope.currRopeSize = (int)(currDistFromPartner.magnitude / rope.segmentLength);
 
-            if (rope.currSegmentCount > rope.maxSegments)
-                rope.currSegmentCount = rope.maxSegments;           
+            if (rope.currRopeSize > rope.maxRopeSize)
+                rope.currRopeSize = rope.maxRopeSize;           
         }
 
         joint.connectedAnchor = transform.position;
