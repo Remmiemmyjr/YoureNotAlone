@@ -5364,7 +5364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.15589237
+      value: 0.28622913
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6182,6 +6182,11 @@ RectTransform:
   m_AnchoredPosition: {x: -1.75, y: -1.5}
   m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &277472661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 783348941237856849, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
+  m_PrefabInstance: {fileID: 2030767262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &289845186
 GameObject:
   m_ObjectHideFlags: 0
@@ -14695,6 +14700,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d06e6a3c08f031747aa31d82b742404f, type: 3}
+--- !u!4 &1258180975 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2277467395215038057, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
+  m_PrefabInstance: {fileID: 1325640305}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1323402541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27707,12 +27717,31 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4514524465222421462, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
   m_PrefabInstance: {fileID: 2030767262}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 277472661}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 856292c9d52fa704f864f60151eeccb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2030767277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277472661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e618aa5a668f1ee449078b2285c98f75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  segmentLength: 0.25
+  numSegments: 0
+  maxSegments: 28
+  lineWidth: 0.1
+  gravityScale: 5
+  playerPos: {fileID: 1956435625}
+  partnerPos: {fileID: 1258180975}
 --- !u!1001 &2106521171
 PrefabInstance:
   m_ObjectHideFlags: 0

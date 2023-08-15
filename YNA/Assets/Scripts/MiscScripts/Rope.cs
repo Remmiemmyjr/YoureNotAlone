@@ -26,6 +26,7 @@ public class Rope : MonoBehaviour
     public float segmentLength = 0.25f;
     [HideInInspector]
     public int numSegments = 0; // 35
+    public int maxSegments = 28;
 
     [SerializeField]
     private float lineWidth = 0.1f;
@@ -48,16 +49,11 @@ public class Rope : MonoBehaviour
         distance = Vector2.Distance(playerPos.position, partnerPos.position);
         numSegments = (int)(distance / segmentLength);
 
-        for (int i = 0; i < numSegments; ++i)
+        for (int i = 0; i < maxSegments; ++i)
         {
             ropeSegments.Add(new RopeSegment(ropeStartPoint));
             ropeStartPoint.y -= segmentLength; // Avoid overlap
         }
-    }
-
-    private void Start()
-    {
-
     }
 
     // Update is called once per frame
@@ -136,12 +132,12 @@ public class Rope : MonoBehaviour
         lineRenderer.startWidth = width;
         lineRenderer.endWidth = width;
 
-        Vector3[] ropePositions = new Vector3[numSegments];
+        Vector3[] ropePositions = new Vector3[maxSegments];
         
         for (int i = 0; i < numSegments; ++i)
             ropePositions[i] = ropeSegments[i].posNow;
 
-        lineRenderer.positionCount = ropePositions.Length;
+        lineRenderer.positionCount = numSegments;
         lineRenderer.SetPositions(ropePositions);
     }
 }

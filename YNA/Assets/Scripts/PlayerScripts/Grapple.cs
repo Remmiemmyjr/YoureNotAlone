@@ -25,6 +25,7 @@ public class Grapple : MonoBehaviour
     LineRenderer line;
     SpringJoint2D joint;
     PlayerController playerController;
+    Rope rope;
 
     Vector2 playerLinePos;
     Vector2 partnerLinePos;
@@ -62,11 +63,11 @@ public class Grapple : MonoBehaviour
         line = GetComponent<LineRenderer>();
     }
 
-
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
     void Start()
     {
+        rope = GetComponent<Rope>();
         joint = Info.partner?.GetComponent<SpringJoint2D>();
         playerController = Info.player?.GetComponent<PlayerController>();
 
@@ -85,7 +86,7 @@ public class Grapple : MonoBehaviour
         isReeling = false;
 
         currRopeLength = maxTetherDist;
-        currMaxRopeLimit = minRopeLimit;
+        currMaxRopeLimit = currRopeLength;
     }
 
 
@@ -98,9 +99,8 @@ public class Grapple : MonoBehaviour
             return;
         }
 
-        SetRope();
-
         currDistFromPartner = (Info.partner.transform.position - transform.position);
+        SetRope();
 
         if (isTethered)
         {
@@ -126,7 +126,6 @@ public class Grapple : MonoBehaviour
         }
     }
 
-
     ////////////////////////////////////////////////////////////////////////
     // SET ROPE ============================================================
     void SetRope()
@@ -137,7 +136,13 @@ public class Grapple : MonoBehaviour
         //line.SetPosition(0, playerLinePos);
         //line.SetPosition(1, partnerLinePos);
 
-        GetComponent<Rope>().numSegments = (int)(currDistFromPartner.magnitude / GetComponent<Rope>().segmentLength);
+        if (rope.numSegments <= rope.maxSegments && currDistFromPartner.magnitude > 1)
+        {
+            rope.numSegments = (int)(currDistFromPartner.magnitude / rope.segmentLength);
+
+            if (rope.numSegments > rope.maxSegments)
+                rope.numSegments = rope.maxSegments;           
+        }
 
         joint.connectedAnchor = transform.position;
     }
