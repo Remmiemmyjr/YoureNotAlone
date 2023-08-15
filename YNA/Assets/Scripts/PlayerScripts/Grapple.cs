@@ -108,7 +108,7 @@ public class Grapple : MonoBehaviour
         }
         else
         {
-            if(!isMenu)
+            if (!isMenu)
                 playerController.currSpeed = playerController.speed;
         }
 
@@ -136,12 +136,12 @@ public class Grapple : MonoBehaviour
         //line.SetPosition(0, playerLinePos);
         //line.SetPosition(1, partnerLinePos);
 
-        if (rope.numSegments <= rope.maxSegments && currDistFromPartner.magnitude > 1)
+        if (rope.currSegmentCount <= rope.maxSegments && currDistFromPartner.magnitude > 1)
         {
-            rope.numSegments = (int)(currDistFromPartner.magnitude / rope.segmentLength);
+            rope.currSegmentCount = (int)(currDistFromPartner.magnitude / rope.segmentLength);
 
-            if (rope.numSegments > rope.maxSegments)
-                rope.numSegments = rope.maxSegments;           
+            if (rope.currSegmentCount > rope.maxSegments)
+                rope.currSegmentCount = rope.maxSegments;           
         }
 
         joint.connectedAnchor = transform.position;
@@ -159,7 +159,7 @@ public class Grapple : MonoBehaviour
             {
                 Tethered(false);
 
-                if(Info.latch.isLatched)
+                if (Info.latch.isLatched)
                 {
                     Info.latch.ReleaseObject();
                 }
