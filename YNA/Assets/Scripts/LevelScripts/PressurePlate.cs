@@ -46,6 +46,7 @@ public class PressurePlate : MonoBehaviour
     {
         ogPosDoor = door.GetComponent<Transform>().position;
         doorProfile = door.GetComponent<PuzzleDoorProfile>();
+        door.GetComponent<SpriteRenderer>().color = activeColor;
 
         gemSR = gem.GetComponent<SpriteRenderer>();
         ogColor = gemSR.color;
