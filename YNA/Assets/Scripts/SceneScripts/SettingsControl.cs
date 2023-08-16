@@ -1,10 +1,10 @@
 //*************************************************
 // Project: We're Tethered Together
-// File: Stats.cs
+// File: SettingsControl.cs
 // Author/s: Corbyn LaMar
 //           Mike Doeren
 //
-// Desc: Manage control navigation and options
+// Desc: Manage option modifiers
 //
 // Notes:
 // -
@@ -24,6 +24,8 @@ using UnityEngine.Rendering.Universal;
 
 public class SettingsControl : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     public AudioMixer audioMixer;
     Resolution[] resolutions;
     public TMP_Dropdown resolutionDropdown;
@@ -37,8 +39,11 @@ public class SettingsControl : MonoBehaviour
 
     public Slider volumeSlider;
     public Slider brightnessSlider;
+    // *********************************************************************
 
 
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
     private void Awake()
     {
         // Update volume and brightness for scene
@@ -60,6 +65,9 @@ public class SettingsControl : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         List<string> options = new List<string>();
@@ -69,7 +77,6 @@ public class SettingsControl : MonoBehaviour
         int currentResolutionIndex = 0;
         resolutions = Screen.resolutions;
 
-        //
         for (int i = 0; i < resolutions.Length; ++i)
         {
             if (resolutions[i].refreshRate == currentRefreshRate)
@@ -99,20 +106,36 @@ public class SettingsControl : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
     }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // SET RESOLUTION ======================================================
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = filteredResolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // SET VOLUME ==========================================================
     public void SetVolume(float volume)
     {
         audioMixer.SetFloat("MasterVolume", volume);
     }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // SET FULLSCREEN ======================================================
     public void SetFullScreen(bool isFullScreen)
     {
         Screen.fullScreen = isFullScreen;
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // SET GAMMA ===========================================================
+    // Currently used to set the brightness value
     public void SetGamma(float gammaVal)
     {
         liftGammaGain.gamma.Override(new Vector4(0, 0, 0, gammaVal));
@@ -121,5 +144,4 @@ public class SettingsControl : MonoBehaviour
         PlayerPrefs.SetFloat("Gamma", gammaVal);
         PlayerPrefs.Save();
     }
-
 }
