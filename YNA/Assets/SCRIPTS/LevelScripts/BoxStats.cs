@@ -1,14 +1,15 @@
 //*************************************************
 // Project: We're Tethered Together
 // File: BoxStats.cs
-// Author/s: Emmy Berg, Mike Doeren
+// Author/s: Emmy Berg
+//           Mike Doeren
 //
 // Desc: Keeps track of box info
 //
 // Notes:
-// - 
+// good gamer internet???- 
 //
-// Last Edit: 8/4/2023
+// Last Edit: 8/15/2023
 //
 //*************************************************
 
@@ -27,6 +28,9 @@ public class BoxStats : MonoBehaviour
     SpriteRenderer sr;
     // *********************************************************************
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
     void Awake()
     {
         GetComponent<HingeJoint2D>().enabled = false;
@@ -34,12 +38,21 @@ public class BoxStats : MonoBehaviour
         SetNormalMat();
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // SET NORMAL MAT ======================================================
+    // Reset the box back to its normal material, and clear outline color
     public void SetNormalMat()
     {
         sr.material = boxMat;
         outlineMat.SetColor("_Color_Outline", Color.clear);
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // SET OUTLINE MAT =====================================================
+    // Turn on the outline material for box. "colorSwap" dictates whether
+    // the outline color should change (if partner is near box VS holding it)
     public void SetOutlineMat(bool colorSwap)
     {
         sr.material = outlineMat;

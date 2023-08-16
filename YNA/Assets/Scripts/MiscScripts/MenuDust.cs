@@ -1,3 +1,17 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: MenuDust.cs
+// Author/s: Corbyn LaMar
+//
+// Desc: Make a little poof for menu text falling
+//
+// Notes:
+// -
+//
+// Last Edit: 8/01/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;

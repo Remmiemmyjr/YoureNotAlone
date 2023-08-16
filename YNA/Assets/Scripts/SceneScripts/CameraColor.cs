@@ -20,10 +20,4 @@ public class CameraColor : MonoBehaviour
     {
         this.GetComponent<Camera>().backgroundColor = Color.black;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

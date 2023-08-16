@@ -18,19 +18,19 @@ using UnityEngine;
 
 public class PlayerFootstepAudio : MonoBehaviour
 {
-////////////////////////////////////////////////////////////////////////
-// VARIABLES ===========================================================
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     public GameObject player;
     public PlayerController _moveScript;
     public PlayAudio randClip;
     public float playInterval;
     private AudioSource source;
     public float resetTime;
-// *********************************************************************
+    // *********************************************************************
 
 
-////////////////////////////////////////////////////////////////////////
-// START ===============================================================
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         source = GetComponent<AudioSource>();
@@ -38,12 +38,11 @@ public class PlayerFootstepAudio : MonoBehaviour
     }
 
 
-////////////////////////////////////////////////////////////////////////
-// UPDATE ==============================================================
+    ////////////////////////////////////////////////////////////////////////
+    // UPDATE ==============================================================
     void Update()
     {
-        // TODO: If the player is not walking, reset the sound timer. 
-
+        // If the player is not walking, reset the sound timer. 
         if ((Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D) |
             Input.GetKey(KeyCode.LeftArrow) | Input.GetKey(KeyCode.RightArrow)) & _moveScript.IsGrounded())
         {

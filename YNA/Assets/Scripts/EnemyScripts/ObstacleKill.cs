@@ -4,10 +4,11 @@
 // Author/s: Emmy Berg
 //           Corbyn LaMar
 //
-// Desc: Restarts level on death
+// Desc: Triggers particles on spike death and
+//       restarts from last checkpoint
 //
 // Notes:
-//  + Add death effects / better transition
+//  -
 //
 // Last Edit: 5/4/2023
 //
@@ -24,16 +25,16 @@ public class ObstacleKill : MonoBehaviour
     private Animator transitionCanvas;
     static bool dontRepeat;
 
-////////////////////////////////////////////////////////////////////////
-// AWAKE ===============================================================
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
     void Awake()
     {
         transitionCanvas = GameObject.FindWithTag("Transition").GetComponentInChildren<Animator>();
         dontRepeat = false;
     }
 
-////////////////////////////////////////////////////////////////////////
-// TRIGGER ENTER =======================================================
+    ////////////////////////////////////////////////////////////////////////
+    // TRIGGER ENTER =======================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player" || collision.tag == "Partner")
@@ -43,8 +44,8 @@ public class ObstacleKill : MonoBehaviour
     }
 
 
-////////////////////////////////////////////////////////////////////////
-// TRANSITION SEQUENCE =================================================
+    ////////////////////////////////////////////////////////////////////////
+    // TRANSITION SEQUENCE =================================================
     private IEnumerator TransitionSequence()
     {
         Info.isDead = true;

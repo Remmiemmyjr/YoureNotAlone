@@ -3,6 +3,7 @@
 // File: PlayerController.cs
 // Author/s: Emmy Berg
 //           Cameron Myers
+//           Mike Doeren
 //
 // Desc: Manage player actions
 //

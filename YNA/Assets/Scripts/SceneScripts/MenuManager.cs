@@ -1,7 +1,8 @@
 //*************************************************
 // Project: We're Tethered Together
 // File: MenuManager.cs
-// Author/s: Emmy Berg, Corbyn LaMar
+// Author/s: Emmy Berg
+//           Corbyn LaMar
 //
 // Desc: Manage the states of the main menu.
 //
@@ -45,6 +46,7 @@ public class MenuManager : MonoBehaviour
         settings.SetActive(false);
     }
 
+
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
     void Start()
@@ -54,6 +56,7 @@ public class MenuManager : MonoBehaviour
         menu.SetActive(true);
         confirmation.SetActive(false);
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // UPDATE ==============================================================
@@ -160,6 +163,7 @@ public class MenuManager : MonoBehaviour
         if (activeButton)
             EventSystem.current.SetSelectedGameObject(activeButton);
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // CONFIRM BUTTON ======================================================

@@ -1,3 +1,16 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: CutsceneTriggerArea.cs
+// Author/s: Corbyn LaMar
+//           Emmy Berg
+//
+// Desc: Play cutscene when player walks through
+//       this trigger area
+//
+// Last Edit: 8/11/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -11,6 +24,9 @@ public class CutsceneTriggerArea : MonoBehaviour
 
     CutsceneManager csm;
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // TRIGGER ENTER =======================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -23,6 +39,9 @@ public class CutsceneTriggerArea : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // LOAD ================================================================
     public IEnumerator Load()
     {
         csm.DisableInput();

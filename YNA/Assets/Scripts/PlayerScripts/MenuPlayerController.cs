@@ -77,6 +77,7 @@ public class MenuPlayerController : MonoBehaviour
         }
     }
 
+
     ////////////////////////////////////////////////////////////////////////
     // MOVEMENT ============================================================
     public void Movement(InputAction.CallbackContext ctx)

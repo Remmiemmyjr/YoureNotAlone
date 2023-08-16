@@ -38,6 +38,7 @@ public class PauseManager : MonoBehaviour
     // Music controller for pause fx
     GameObject musicController;
 
+
     ////////////////////////////////////////////////////////////////////////
     // AWAKE ===============================================================
     void Awake()
@@ -53,12 +54,14 @@ public class PauseManager : MonoBehaviour
         confirmationCanvas.SetActive(false);
     }
 
+
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
     void Start()
     {
         transitionCanvas = GameObject.FindWithTag("Transition").GetComponentInChildren<Animator>();
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // UPDATE ==============================================================
@@ -98,6 +101,7 @@ public class PauseManager : MonoBehaviour
             }
         }
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // RESUME BUTTON =======================================================
@@ -215,6 +219,7 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+
     ////////////////////////////////////////////////////////////////////////
     // CONFIRM BUTTON ======================================================
     public void ConfirmButton()
@@ -244,6 +249,9 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // GET IN SUB MENU =====================================================
     public bool GetInSubMenu()
     {
         return (inSettings || inConfirmation || inControls);

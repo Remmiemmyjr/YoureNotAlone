@@ -1,3 +1,18 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: InstructionsManager.cs
+// Author/s: Corbyn LaMar
+//
+// Desc: Change controls displayed on instructions
+//       depending on player input
+//
+// Notes:
+// -
+//
+// Last Edit: 8/03/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +27,9 @@ public class InstructionsManager : MonoBehaviour
 
     private bool keyboardMouseUsed = true;
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     private void Start()
     {
         // Add input callback
@@ -35,6 +53,11 @@ public class InstructionsManager : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // INPUT ACTION CHANGE =================================================
+    // Detect if input has been changed from one type to another, then
+    // update instruction images accordingly
     private void InputActionChangeCallback(object obj, InputActionChange change)
     {
         // Detect Changes
@@ -49,7 +72,7 @@ public class InstructionsManager : MonoBehaviour
         // Ensure they exist
         if(!keyboardText || !controllerText)
         {
-              //Debug.Log("Instructions text have not been set");
+            //Debug.Log("Instructions text have not been set");
             return;
         }
 

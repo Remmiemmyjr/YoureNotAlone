@@ -1,9 +1,26 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: Rope.cs
+// Author/s: Emmy Berg
+//           Mike Doeren
+//
+// Desc: Manage player actions
+//
+// Notes:
+// -
+//
+// Last Edit: 8/14/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Rope : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     // Struct representing one segment of the rope
     public struct RopeSegment
     {
@@ -34,9 +51,11 @@ public class Rope : MonoBehaviour
 
     [SerializeField]
     float gravityScale = 5.0f;
+    // *********************************************************************
 
 
-    // Start is called before the first frame update
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         if(Info.partner == null)
@@ -58,17 +77,24 @@ public class Rope : MonoBehaviour
         }
     }
 
-    // Runs at a fixed rate per frame
+
+    ////////////////////////////////////////////////////////////////////////
+    // FIXED UPDATE ========================================================
     private void FixedUpdate()
     {
         if (Info.partner == null)
             return;
 
         // Update then draw
+        // ORDER MATTERS!!!
         Simulate();
         DrawRope();
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // SIMULATE ============================================================
+    // Simulate physics/gravity for each rope segment
     private void Simulate()
     {
         Vector2 forceGravity = new Vector2(0.0f, -gravityScale);
@@ -85,6 +111,11 @@ public class Rope : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // APPLY CONSTRAINT ====================================================
+    // Apply physical contraints to the rope, to keep each end tethered to
+    // the partner/player
     private void ApplyConstraint()
     {
         RopeSegment firstSegment = ropeSegments[0];
@@ -126,6 +157,9 @@ public class Rope : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // DRAW ROPE ===============================================================
     private void DrawRope()
     {
         float width = lineWidth;

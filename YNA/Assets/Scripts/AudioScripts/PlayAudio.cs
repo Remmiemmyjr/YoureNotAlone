@@ -3,7 +3,7 @@
 // File: PlayAudio.cs
 // Author/s: K Preston
 //
-// Desc: Audio manager
+// Desc: Play the audio clips
 //
 // Last Edit: 5/4/2023
 //
@@ -15,16 +15,16 @@ using UnityEngine;
 
 public class PlayAudio : MonoBehaviour
 {
-////////////////////////////////////////////////////////////////////////
-// VARIABLES ===========================================================
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     public AudioSource audioSource;
     public AudioClip[] audioClipArray;
     AudioClip lastClip;
-// *********************************************************************
+    // *********************************************************************
 
 
-////////////////////////////////////////////////////////////////////////
-// GET RANDOM CLIP =====================================================
+    ////////////////////////////////////////////////////////////////////////
+    // GET RANDOM CLIP =====================================================
     public AudioClip GetRandomClip()
     {
         AudioClip clipToPlay = audioClipArray[Random.Range(0, audioClipArray.Length)];

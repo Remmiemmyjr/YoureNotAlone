@@ -1,3 +1,13 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: Info.cs
+// Author/s: Emmy Berg
+//
+// Desc: Store a reference to all important objects
+//
+// Last Edit: 8/11/2023
+//
+//*************************************************
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +15,8 @@ using UnityEngine.SceneManagement;
 
 public class Info : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     static public GameObject player;
     static public GameObject partner;
     static public GameObject mainCam;
@@ -17,7 +29,11 @@ public class Info : MonoBehaviour
     public static bool isDead;
     public static bool isPaused;
     public static bool eyeDeath;
+    // *********************************************************************
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -31,6 +47,9 @@ public class Info : MonoBehaviour
         stats = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>();
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     private void Start()
     {
         isDead = false;

@@ -1,3 +1,14 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: Credits.cs
+// Author/s: Emmy Berg
+//
+// Desc: Credit scroll up to specific location
+//
+// Last Edit: 8/13/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +25,7 @@ public class Credits : MonoBehaviour
         credits = GetComponent<RectTransform>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if(credits.position.y < destination.position.y && !done)

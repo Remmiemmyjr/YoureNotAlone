@@ -1,3 +1,19 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: DeathShader.cs
+// Author/s: Emmy Berg
+//
+// Desc: Gradually make stone overlay visible by
+//       modifying the clipping value of the
+//       "dissolve" (stone) shader
+//
+// Notes:
+// -
+//
+// Last Edit: 8/05/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

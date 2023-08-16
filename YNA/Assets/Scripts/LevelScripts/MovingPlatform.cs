@@ -1,11 +1,24 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: MovingPlatform.cs
+// Author/s: Emmy Berg
+//           Corbyn LaMar
+//
+// Desc: Moving platform that can travel to
+//       mulitple waypoints
+//
+// Last Edit: 8/11/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    Vector2 movement;
-
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     [SerializeField]
     private bool startOnAwake = false;
     private bool allowMovement = false;
@@ -16,7 +29,11 @@ public class MovingPlatform : MonoBehaviour
     public int startingPoint;
 
     int i;
+    // *********************************************************************
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         if (startOnAwake)
@@ -27,7 +44,9 @@ public class MovingPlatform : MonoBehaviour
         transform.position = wayPoints[startingPoint].position;
     }
 
-    // Update is called once per frame
+
+    ////////////////////////////////////////////////////////////////////////
+    // UPDATE ==============================================================
     void Update()
     {
         if (allowMovement)
@@ -46,6 +65,9 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // COLLISION ENTER =====================================================
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Partner")
@@ -55,6 +77,9 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // COLLISION STAY ======================================================
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Partner")
@@ -63,6 +88,9 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // COLLISION EXIT ======================================================
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Partner")

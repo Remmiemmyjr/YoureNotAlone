@@ -1,3 +1,18 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: PuzzleDoorProfile.cs
+// Author/s: Emmy Berg
+//
+// Desc: Manage lighting and coloring of puzzle
+//       door components
+//
+// Notes:
+// -
+//
+// Last Edit: 8/11/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +28,7 @@ public class PuzzleDoorProfile : MonoBehaviour
         gemLight.SetActive(false);
         gem.GetComponent<SpriteRenderer>().color = c;
     }    
-    
+
 
     public void EnableGem(Color c)
     {

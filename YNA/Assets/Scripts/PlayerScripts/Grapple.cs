@@ -3,10 +3,11 @@
 // File: Grapple.cs
 // Author/s: Emmy Berg
 //           Corbyn Lamar
+//           Mike Doeren
 //
-// Desc: Rope controls & actions for player
+// Desc: Tethering controls & actions for player
 //
-// Last Edit: 5/4/2023
+// Last Edit: 8/14/2023
 //
 //*************************************************
 
@@ -27,8 +28,6 @@ public class Grapple : MonoBehaviour
     PlayerController playerController;
     Rope rope;
 
-    Vector2 playerLinePos;
-    Vector2 partnerLinePos;
     Vector2 currDistFromPartner;
 
     public float maxTetherDist = 1.5f;
@@ -126,6 +125,7 @@ public class Grapple : MonoBehaviour
         }
     }
 
+
     ////////////////////////////////////////////////////////////////////////
     // SET ROPE ============================================================
     void SetRope()
@@ -141,6 +141,9 @@ public class Grapple : MonoBehaviour
         joint.connectedAnchor = transform.position;
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // ENABLE ROPE =========================================================
     public void EnableRope(InputAction.CallbackContext ctx)
     {
         if (ctx.performed && !Info.isDead)

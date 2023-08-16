@@ -1,8 +1,8 @@
 //*************************************************
 // Project: We're Tethered Together
 // File: Checkpoint.cs
-// Author/s: Emmy Berg
-//           Cameron Myers
+// Author/s: Cameron Myers
+//           Emmy Berg
 //           Corbyn LaMar
 //
 // Desc: Functionality for checkpoint objects
@@ -19,16 +19,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-// README ***********************************************************************
+// README ******************************************************************
 // Create a sprite/gameobject and add this script, tag it with "Spawn"
 // for every checkpoint after, repeat but tag with "Checkpoint"
 // NOTE: the checkpoint tag doesnt actually do anything rn
-// ******************************************************************************
+// *************************************************************************
 
 public class Checkpoint : MonoBehaviour
 {
-////////////////////////////////////////////////////////////////////////
-// VARIABLES ===========================================================
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     //private CheckpointController cc;
     public Sprite CheckOn;
 
@@ -56,11 +56,11 @@ public class Checkpoint : MonoBehaviour
 
     // Boolean to keep track of reached or not
     private bool checkReached = false;
-// *********************************************************************
+    // *********************************************************************
 
 
-////////////////////////////////////////////////////////////////////////
-// START ===============================================================
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         EmberPlayer = GetComponent<ParticleSystem>();
@@ -93,8 +93,8 @@ public class Checkpoint : MonoBehaviour
     }
 
 
-////////////////////////////////////////////////////////////////////////
-// UPDATE ==============================================================
+    ////////////////////////////////////////////////////////////////////////
+    // UPDATE ==============================================================
     void Update()
     {
         // If the checkpoint has been activated and the light is less than intended, grow it
@@ -105,8 +105,8 @@ public class Checkpoint : MonoBehaviour
     }
 
 
-////////////////////////////////////////////////////////////////////////
-// TRIGGER ENTER =======================================================
+    ////////////////////////////////////////////////////////////////////////
+    // TRIGGER ENTER =======================================================
     void OnTriggerEnter2D(Collider2D other)
     {
         if (!usePlayer)

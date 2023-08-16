@@ -58,10 +58,8 @@ public class PartnerController : MonoBehaviour
     [SerializeField]
     private UnityEvent partner_dead;
 
-
     //partner data
     private Vector2 velocity;
-
     // *********************************************************************
 
 
@@ -72,7 +70,6 @@ public class PartnerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>();
     }
-
 
 
     ////////////////////////////////////////////////////////////////////////

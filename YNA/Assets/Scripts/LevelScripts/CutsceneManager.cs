@@ -2,6 +2,7 @@
 // Project: We're Tethered Together
 // File: CutsceneManager.cs
 // Author/s: Corbyn LaMar
+//           Emmy Berg
 //
 // Desc: Manages the cutscenes associated with the
 //       current scene.
@@ -57,14 +58,19 @@ public class CutsceneManager : MonoBehaviour
     public UnityEvent FadeToBlack;
     [SerializeField]
     public UnityEvent FadeBackIn;
-
     // *********************************************************************
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // ON DESTROY ==========================================================
+    // When this is destroyed, store what the "previous scene" was to avoid
+    // cutscene repeats
     public static string PreviousLevel { get; private set; }
     private void OnDestroy()
     {
         PreviousLevel = gameObject.scene.name;
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // AWAKE ===============================================================
@@ -172,8 +178,6 @@ public class CutsceneManager : MonoBehaviour
                     }
                     else
                     {
-                        //FinishCutscene();
-                        //FadeBackIn.Invoke();
                         StartCoroutine(Load());
                     }
                 }
@@ -182,15 +186,15 @@ public class CutsceneManager : MonoBehaviour
     }
 
 
+    ////////////////////////////////////////////////////////////////////////
+    // LOAD ================================================================
+    // Start FinishCutscene after delay...  :/
     public IEnumerator Load()
     {
         yield return new WaitForSeconds(1.5f);
         FinishCutscene();
     }
 
-    //-------------------------------------------------------------------------------------------------
-    // PRIVATE FUNCTIONS
-    //-------------------------------------------------------------------------------------------------
 
     ////////////////////////////////////////////////////////////////////////
     // START CUTSCENE ======================================================
@@ -219,7 +223,7 @@ public class CutsceneManager : MonoBehaviour
     // PROCESS CUTSCENE ====================================================
     public void ProcessCutsceneEffects()
     {
-
+        // one day...
     }
 
 
@@ -271,16 +275,11 @@ public class CutsceneManager : MonoBehaviour
     }
 
 
-    //-------------------------------------------------------------------------------------------------
-    // PUBLIC FUNCTIONS
-    //-------------------------------------------------------------------------------------------------
-
     ////////////////////////////////////////////////////////////////////////
     // TRIGGER CUTSCENE ====================================================
+    // Function for use with cutscene trigger areas (triggered during level)
     public void TriggerCutscene(string name)
     {
-        //--- Function for use with cutscene trigger areas ---//
-
         foreach (Cutscene currCutscene in cutscenes)
         {
             if (currCutscene.name == name)
@@ -333,6 +332,9 @@ public class CutsceneManager : MonoBehaviour
         return isCurrentlyPlaying;
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // DISABLE INPUT =======================================================
     public void DisableInput()
     {
         inputManager.actions.Disable();

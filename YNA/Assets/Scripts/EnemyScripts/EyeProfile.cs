@@ -1,10 +1,10 @@
 //*************************************************
 // Project: We're Tethered Together
-// File: ActivateEyes.cs
+// File: EyeProfile.cs
 // Author/s: Emmy Berg
-//           K Preston
 //
-// Desc: Controls the Eyes three states
+// Desc: Control what the eye assets do during each
+//       state/phase
 //
 // Notes:
 //  -
@@ -21,8 +21,8 @@ using UnityEngine.Rendering.Universal;
 
 public class EyeProfile : MonoBehaviour
 {
-////////////////////////////////////////////////////////////////////////
-// VARIABLES ===========================================================
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     ActivateEyes manager;
     Animator eyeAnim;
     SpriteRenderer eyeRenderer;
@@ -33,11 +33,11 @@ public class EyeProfile : MonoBehaviour
     private float eyeIntenstityHalf = 0.25f;
     [SerializeField]
     private float eyeIntenstityClosed = 0.0f;
-// *********************************************************************
+    // *********************************************************************
 
 
-////////////////////////////////////////////////////////////////////////
-// AWAKE ===============================================================
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
     void Awake()
     {
         manager = GameObject.FindGameObjectWithTag("EyeManager")?.GetComponent<ActivateEyes>();
@@ -49,8 +49,8 @@ public class EyeProfile : MonoBehaviour
     }
 
 
-////////////////////////////////////////////////////////////////////////
-// STATUS SLEEPING =====================================================
+    ////////////////////////////////////////////////////////////////////////
+    // STATUS SLEEPING =====================================================
     public void SetStatusSleeping()
     {
         eyeRenderer.sprite = manager.closed;
@@ -60,8 +60,8 @@ public class EyeProfile : MonoBehaviour
     }
 
 
-////////////////////////////////////////////////////////////////////////
-// STATUS WAKING =======================================================
+    ////////////////////////////////////////////////////////////////////////
+    // STATUS WAKING =======================================================
     public void SetStatusWaking()
     {
         eyeRenderer.sprite = manager.halfway;
@@ -70,8 +70,8 @@ public class EyeProfile : MonoBehaviour
     }
 
 
-////////////////////////////////////////////////////////////////////////
-// STATUS ACTIVE =======================================================
+    ////////////////////////////////////////////////////////////////////////
+    // STATUS ACTIVE =======================================================
     public void SetStatusActive()
     {
         eyeRenderer.sprite = manager.open;

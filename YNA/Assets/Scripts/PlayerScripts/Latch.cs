@@ -2,6 +2,7 @@
 // Project: We're Tethered Together
 // File: Latch.cs
 // Author/s: Emmy Berg
+//           Corbyn LaMar
 //
 // Desc:  Manages the mechanic that allows boxes
 //        to be latched to partner when in range
@@ -9,7 +10,7 @@
 // Notes:
 // - 
 //
-// Last Edit: 7/16/2023
+// Last Edit: 8/13/2023
 //
 //*************************************************
 
@@ -39,11 +40,17 @@ public class Latch : MonoBehaviour
         isLatched = false;
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     void Start()
     {
         ogMinLimit = Info.grapple.minRopeLimit;
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // UPDATE ==============================================================
     private void Update()
     {
         if(!canLatch && !isLatched)
@@ -52,6 +59,9 @@ public class Latch : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // LATCH BOX ===========================================================
     public void LatchBox(InputAction.CallbackContext ctx)
     {
         if (ctx.performed && canLatch)
@@ -93,6 +103,9 @@ public class Latch : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // TRIGGER EXIT ========================================================
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Grabbable" && !isLatched)

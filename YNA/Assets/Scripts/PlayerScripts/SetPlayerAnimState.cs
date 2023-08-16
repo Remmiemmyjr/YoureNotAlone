@@ -61,6 +61,7 @@ public class SetPlayerAnimState : MonoBehaviour
         pc = GetComponent<PlayerController>();
     }
 
+
     ////////////////////////////////////////////////////////////////////////
     // FIXED UPDATE ========================================================
     void FixedUpdate()
@@ -122,12 +123,14 @@ public class SetPlayerAnimState : MonoBehaviour
         //CheckHide();
     }
 
+
     ////////////////////////////////////////////////////////////////////////
     // SET NEXT STATE ======================================================
     public void SetNextState(PlayerStates newState)
     {
         state_next = newState;
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // CHECK HIDING ========================================================

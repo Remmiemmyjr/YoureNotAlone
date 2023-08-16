@@ -1,3 +1,18 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: Stats.cs
+// Author/s: Corbyn LaMar
+//           Mike Doeren
+//
+// Desc: Manage control navigation and options
+//
+// Notes:
+// -
+//
+// Last Edit: 7/23/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

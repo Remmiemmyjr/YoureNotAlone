@@ -1,3 +1,18 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: PersistantMusic.cs
+// Author/s: Corbyn LaMar
+//
+// Desc: Manage persistant music through level
+//       transitions
+//
+// Notes:
+// -
+//
+// Last Edit: 8/15/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +31,8 @@ public enum MusicFiles
 
 public class PersistantMusic : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////
+    // VARIABLES ===========================================================
     // Static instance of the PersistantMusic to check if we should keep or delete new instances
     static PersistantMusic playerInstance;
     
@@ -30,7 +47,11 @@ public class PersistantMusic : MonoBehaviour
     public AudioMixer audioMixer;
 
     private float storedPauseVolume;
+    // *********************************************************************
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // START ===============================================================
     private void Start()
     {
         // Check if we have a persistant music player
@@ -59,6 +80,8 @@ public class PersistantMusic : MonoBehaviour
     }
 
 
+    ////////////////////////////////////////////////////////////////////////
+    // START STOP MUSIC ====================================================
     void Start_Stop_Music(MusicFiles music_file)
     {
         if (music_file == currentFile)
@@ -130,6 +153,9 @@ public class PersistantMusic : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // ON SCENE LOADED =====================================================
     void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode load_scene_mode)
     {
         // Reset Audio Volumes and pause effects
@@ -159,6 +185,9 @@ public class PersistantMusic : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // LERP AUDIO OUT ======================================================
     public IEnumerator LerpAudioOut(float time)
     {
         float timeElapsed = 0;
@@ -178,6 +207,9 @@ public class PersistantMusic : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // LERP AUDIO IN =======================================================
     public IEnumerator LerpAudioIn(float time)
     {
         float timeElapsed = 0;
@@ -196,6 +228,9 @@ public class PersistantMusic : MonoBehaviour
         }
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // APPLY PAUSE FX ======================================================
     public void ApplyPauseEffects(bool isPaused)
     {
         if (isPaused)
