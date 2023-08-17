@@ -176,15 +176,15 @@ public class ActivateEyes : MonoBehaviour
 
             // Restart level music.
             StartCoroutine(musicController.LerpAudioIn(0.1f));
+
+            for (int i = 0; i < Eyes.Length; i++)
+            {
+                profile = Eyes[i].GetComponent<EyeProfile>();
+                profile.SetStatusSleeping();
+            }
         }
 
         timeToHide = false;
-
-        for (int i = 0; i < Eyes.Length; i++)
-        {
-            profile = Eyes[i].GetComponent<EyeProfile>();
-            profile.SetStatusSleeping();
-        }
 
         currTime -= Time.deltaTime;
     }
@@ -207,12 +207,12 @@ public class ActivateEyes : MonoBehaviour
             // Play goodmorning
             goodmorning.Play();
             wakeEvent.Invoke();
-        }
 
-        for (int i = 0; i < Eyes.Length; i++)
-        {
-            profile = Eyes[i].GetComponent<EyeProfile>();
-            profile.SetStatusWaking();
+            for (int i = 0; i < Eyes.Length; i++)
+            {
+                profile = Eyes[i].GetComponent<EyeProfile>();
+                profile.SetStatusWaking();
+            }
         }
 
         // Set the iamwatching mixer group level to 1.
@@ -353,7 +353,9 @@ public class ActivateEyes : MonoBehaviour
                 for (int i = 0; i < Eyes.Length; i++)
                 {
                     Animator eyeAnim = Eyes[i].GetComponent<Animator>();
-                    eyeAnim.Play("EyeballOpen", -1, Random.Range(0.0f, 1.0f));
+                    eyeAnim.SetTrigger("Open");
+                    eyeAnim.SetFloat("CycleOffset", Random.Range(0.0f, 1.0f));
+                    // eyeAnim.Play("Eyeball_1_Open", -1, Random.Range(0.0f, 1.0f));
                 }
 
                 // Reset grace period
@@ -395,11 +397,13 @@ public class ActivateEyes : MonoBehaviour
             // Top
             if (target.transform.position.y >= eye.transform.position.y)
             {
-                anim.Play("EyeballTopLeft");
+                // anim.Play("Eyeball_1_TopL");
+                anim.SetTrigger("TopL");
             }
             else // Bottom
             {
-                anim.Play("EyeballBottomLeft");
+                // anim.Play("Eyeball_1_BotL");
+                anim.SetTrigger("BotL");
             }
         }
         else // Right
@@ -407,11 +411,13 @@ public class ActivateEyes : MonoBehaviour
             // Top
             if (target.transform.position.y >= eye.transform.position.y)
             {
-                anim.Play("EyeballTopRight");
+                // anim.Play("Eyeball_1_TopR");
+                anim.SetTrigger("TopR");
             }
             else // Bottom
             {
-                anim.Play("EyeballBottomRight");
+                // anim.Play("Eyeball_1_BotR");
+                anim.SetTrigger("BotR");
             }
         }
     }
