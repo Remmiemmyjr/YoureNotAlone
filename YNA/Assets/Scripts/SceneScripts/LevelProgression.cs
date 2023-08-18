@@ -27,8 +27,6 @@ public class LevelProgression : MonoBehaviour
 
     public bool requiresPartner;
 
-    private GameObject cutsceneCanvas;
-
     // Transitions
     private Animator transitionCanvas;
     // *********************************************************************
@@ -38,8 +36,6 @@ public class LevelProgression : MonoBehaviour
     void Awake()
     {
         displayMessage = GameObject.FindWithTag("ProceedCanvas")?.transform.GetChild(0).gameObject;
-
-        cutsceneCanvas = GameObject.FindWithTag("CutsceneCanvas");
     }
 
 
@@ -62,8 +58,6 @@ public class LevelProgression : MonoBehaviour
         {
             if (!requiresPartner || (collision.GetComponent<Grapple>().isTethered))
             {
-                cutsceneCanvas.GetComponent<CutsceneManager>().ResetCutscenesPlayed();
-
                 StartCoroutine(TransitionSequence());
             }
             else

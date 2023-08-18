@@ -61,10 +61,13 @@ public class CutsceneManager : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // ON DESTROY ==========================================================
+    // When this is destroyed, store what the "previous scene" was to avoid
+    // cutscene repeats
+    public static string PreviousLevel { get; private set; }
     // When this is destroyed, reset all cutscene play values
     private void OnDestroy()
     {
-        ResetCutscenesPlayed();
+        PreviousLevel = gameObject.scene.name;
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -72,6 +75,9 @@ public class CutsceneManager : MonoBehaviour
     void Awake()
     {
         inputManager = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
+
+        if (PreviousLevel != gameObject.scene.name)
+            ResetCutscenesPlayed();
     }
 
 
@@ -215,7 +221,7 @@ public class CutsceneManager : MonoBehaviour
     // PROCESS CUTSCENE ====================================================
     public void ProcessCutscenePreEffects()
     {
-        // one day...
+        activeCutscene.PreEvent.Invoke();
     }
 
 
@@ -223,7 +229,7 @@ public class CutsceneManager : MonoBehaviour
     // PROCESS CUTSCENE ====================================================
     public void ProcessCutscenePostEffects()
     {
-        // one day...
+        activeCutscene.PostEvent.Invoke();
     }
 
 
