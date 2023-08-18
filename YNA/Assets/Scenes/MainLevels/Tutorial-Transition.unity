@@ -1295,7 +1295,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 6
-      m_TileSpriteIndex: 6
+      m_TileSpriteIndex: 10
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1545,7 +1545,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 2
+      m_TileSpriteIndex: 9
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1555,7 +1555,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileSpriteIndex: 6
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1662,12 +1662,12 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 80841ef821e8ff443b4852c951aa0009, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 1
-    m_Data: {fileID: -1940366872, guid: 9196d01a51055ae48b057a3d5ea01a01, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 17
     m_Data: {fileID: -870806381, guid: f3c28e23cb6329e45aa2d98397c66756, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 468690260, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 3
     m_Data: {fileID: -1586585046, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
   - m_RefCount: 2
@@ -1675,15 +1675,15 @@ Tilemap:
   - m_RefCount: 4
     m_Data: {fileID: -2041894165, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 1680301004, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
+    m_Data: {fileID: -1940366872, guid: 9196d01a51055ae48b057a3d5ea01a01, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: -2019763777, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: -550968500, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 468690260, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 1680301004, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 1572963966, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
   - m_RefCount: 3
@@ -19772,6 +19772,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 783348941237856857, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
       propertyPath: startTethered
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2490353511416955577, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2627523571463243477, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
