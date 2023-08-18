@@ -50,8 +50,6 @@ public class CutsceneManager : MonoBehaviour
 
     private bool isStartCutscene = false;
 
-    private bool sameSceneReload = false;
-
     private PlayerInput inputManager;
 
     [SerializeField]
@@ -63,25 +61,17 @@ public class CutsceneManager : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // ON DESTROY ==========================================================
-    // When this is destroyed, store what the "previous scene" was to avoid
-    // cutscene repeats
-    public static string PreviousLevel { get; private set; }
+    // When this is destroyed, reset all cutscene play values
     private void OnDestroy()
     {
-        PreviousLevel = gameObject.scene.name;
+        ResetCutscenesPlayed();
     }
-
 
     ////////////////////////////////////////////////////////////////////////
     // AWAKE ===============================================================
     void Awake()
     {
         inputManager = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
-
-        if (PreviousLevel == gameObject.scene.name)
-            sameSceneReload = true;
-        else
-            sameSceneReload = false;
     }
 
 
@@ -96,7 +86,7 @@ public class CutsceneManager : MonoBehaviour
         // If a cutscene is to play when the scene is loaded, then trigger it
         foreach (Cutscene currCutscene in cutscenes)
         {
-            if (currCutscene.playOnSceneStart && !sameSceneReload)
+            if (currCutscene.playOnSceneStart && PlayerPrefs.GetInt("CutPlayed_" + currCutscene.name) != 1)
             {
                 // Hide transition
                 GameObject.FindGameObjectWithTag("Transition").GetComponentInChildren<Image>().enabled = false;
@@ -105,8 +95,10 @@ public class CutsceneManager : MonoBehaviour
 
                 activeCutscene = currCutscene;
 
+                PlayerPrefs.SetInt("CutPlayed_" + currCutscene.name, 1);
+
                 StartCutscene();
-                ProcessCutsceneEffects();
+                ProcessCutscenePreEffects();
             }
         }
 
@@ -188,7 +180,7 @@ public class CutsceneManager : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // LOAD ================================================================
-    // Start FinishCutscene after delay...  :/
+    // Start FinishCutscene after delay...
     public IEnumerator Load()
     {
         yield return new WaitForSeconds(1.5f);
@@ -221,7 +213,15 @@ public class CutsceneManager : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // PROCESS CUTSCENE ====================================================
-    public void ProcessCutsceneEffects()
+    public void ProcessCutscenePreEffects()
+    {
+        // one day...
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // PROCESS CUTSCENE ====================================================
+    public void ProcessCutscenePostEffects()
     {
         // one day...
     }
@@ -235,6 +235,9 @@ public class CutsceneManager : MonoBehaviour
         FadeBackIn.Invoke();
         // Re-enable player input
         inputManager.actions.Enable();
+
+        // Process events
+        ProcessCutscenePostEffects();
 
         // Update variables
         isCurrentlyPlaying = false;
@@ -276,17 +279,36 @@ public class CutsceneManager : MonoBehaviour
 
 
     ////////////////////////////////////////////////////////////////////////
+    // CHECK PLAYED ========================================================
+    public bool IsCutscenePlayed(string name)
+    {
+        foreach (Cutscene currCutscene in cutscenes)
+        {
+            if (currCutscene.name == name)
+            {
+                return PlayerPrefs.GetInt("CutPlayed_" + currCutscene.name) == 1;
+            }
+        }
+
+        return true;
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
     // TRIGGER CUTSCENE ====================================================
     // Function for use with cutscene trigger areas (triggered during level)
     public void TriggerCutscene(string name)
     {
         foreach (Cutscene currCutscene in cutscenes)
         {
-            if (currCutscene.name == name)
+            if (currCutscene.name == name && PlayerPrefs.GetInt("CutPlayed_" + currCutscene.name) != 1)
             {
                 activeCutscene = currCutscene;
 
+                PlayerPrefs.SetInt("CutPlayed_" + currCutscene.name, 1);
+
                 StartCutscene();
+                ProcessCutscenePreEffects();
 
                 break;
             }
@@ -339,6 +361,17 @@ public class CutsceneManager : MonoBehaviour
     {
         inputManager.actions.Disable();
     }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // RESET CUTSCENES =====================================================
+    public void ResetCutscenesPlayed()
+    {
+        foreach (Cutscene currCutscene in cutscenes)
+        {
+            PlayerPrefs.SetInt("CutPlayed_" + currCutscene.name, 0);
+        }
+    }
 }
 
 
@@ -362,6 +395,12 @@ public class Cutscene
 
     [SerializeField]
     public float timeBetween = 5.0f;
+
+    [SerializeField]
+    public UnityEvent PreEvent;
+
+    [SerializeField]
+    public UnityEvent PostEvent;
 }
 
 
@@ -373,7 +412,4 @@ public class FrameData
 {
     [SerializeField]
     public Sprite frameImage;
-
-    [SerializeField]
-    public CameraFX camFX;
 }

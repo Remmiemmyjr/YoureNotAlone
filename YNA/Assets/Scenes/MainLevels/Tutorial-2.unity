@@ -4703,7 +4703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 274562930649632396, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 831778317614402799, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4999,11 +4999,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.012689
+      value: -12.741625
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.010798
+      value: -2.0539348
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5025,6 +5025,38 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[0].name
+      value: Eyes
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[0].timeBetween
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[0].frames.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[0].frames.Array.data[0].frameImage
+      value: 
+      objectReference: {fileID: 21300000, guid: cebee28567a919d4d90e77efb163ad91, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[0].frames.Array.data[1].frameImage
+      value: 
+      objectReference: {fileID: 21300000, guid: afd86151b8dcc0e429f6e217f5363015, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[0].frames.Array.data[2].frameImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 238a037a8cf78d94ab9477bf795da384, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[0].frames.Array.data[3].frameImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 16f1c41d355e09847870544a2f0a26e1, type: 3}
     - target: {fileID: 7411389590629331609, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -24012,6 +24044,78 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d06e6a3c08f031747aa31d82b742404f, type: 3}
+--- !u!1 &2147343208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2147343211}
+  - component: {fileID: 2147343210}
+  - component: {fileID: 2147343209}
+  m_Layer: 0
+  m_Name: CutsceneTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2147343209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147343208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122e8f84b329c6340ab9a41d148f33ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutsceneName: Eyes
+--- !u!61 &2147343210
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147343208}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.20474, y: -0.013172403}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.9252863, y: 0.76289725}
+  m_EdgeRadius: 0
+--- !u!4 &2147343211
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147343208}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.6499996, y: -1.97, z: 0}
+  m_LocalScale: {x: 1, y: 9, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 34
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1981337167328344967 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4655362627433669698, guid: 396e318ca1aaa1c4ea67f1d7bcd58b45, type: 3}

@@ -21374,6 +21374,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 604386857}
+    - target: {fileID: 3299341754297055075, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_Lens.m_SensorSize.x
+      value: 1.7780784
+      objectReference: {fileID: 0}
     - target: {fileID: 3299341754306146513, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.25
@@ -21528,11 +21532,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.2806835
+      value: 2.2821865
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 31.874998
+      value: 31.875002
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046765, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Cameras.Array.size
@@ -21585,11 +21589,11 @@ PrefabInstance:
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: FadeBackIn.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1553282305}
+      objectReference: {fileID: 1553282308}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: FadeToBlack.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1553282305}
+      objectReference: {fileID: 1553282308}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: FadeBackIn.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -21637,157 +21641,17 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 3299341754941544885, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
---- !u!1 &1553282301 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6948772922295166291, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+--- !u!114 &1553282308 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3167630802398598619, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
   m_PrefabInstance: {fileID: 1553282300}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1553282302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553282301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  comment: FadeBackIn
-  vignette_toggle: 1
-  vignette_instant: 0
-  vignette_start_val: 1
-  vignette_goal_val: 0.2
-  vignette_lerp_time: 0.5
-  bloom_toggle: 0
-  bloom_instant: 0
-  bloom_start_val: 0
-  bloom_goal_val: 0
-  bloom_lerp_time: 0
-  chromab_toggle: 0
-  chromab_instant: 0
-  chromab_start_val: 0
-  chromab_goal_val: 0
-  chromab_lerp_time: 0
-  flmgrn_toggle: 0
-  flmgrn_instant: 0
-  flmgrn_start_val: 0
-  flmgrn_goal_val: 0
-  flmgrn_lerp_time: 0
-  lift_toggle: 0
-  lift_instant: 0
-  lift_start_val: 0
-  lift_goal_val: 0
-  lift_lerp_time: 0
-  gamma_toggle: 0
-  gamma_instant: 0
-  gamma_start_val: 0
-  gamma_goal_val: 0
-  gamma_lerp_time: 0
-  gain_toggle: 1
-  gain_instant: 0
-  gain_start_val: 1
-  gain_goal_val: 0
-  gain_lerp_time: 0.75
---- !u!114 &1553282303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553282301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  comment: FadeToBlack
-  vignette_toggle: 1
-  vignette_instant: 0
-  vignette_start_val: 0.2
-  vignette_goal_val: 1
-  vignette_lerp_time: 0.5
-  bloom_toggle: 0
-  bloom_instant: 0
-  bloom_start_val: 0
-  bloom_goal_val: 0
-  bloom_lerp_time: 0
-  chromab_toggle: 0
-  chromab_instant: 0
-  chromab_start_val: 0
-  chromab_goal_val: 0
-  chromab_lerp_time: 0
-  flmgrn_toggle: 0
-  flmgrn_instant: 0
-  flmgrn_start_val: 0
-  flmgrn_goal_val: 0
-  flmgrn_lerp_time: 0
-  lift_toggle: 0
-  lift_instant: 0
-  lift_start_val: 0
-  lift_goal_val: 0
-  lift_lerp_time: 0
-  gamma_toggle: 0
-  gamma_instant: 0
-  gamma_start_val: 0
-  gamma_goal_val: 0
-  gamma_lerp_time: 0
-  gain_toggle: 1
-  gain_instant: 0
-  gain_start_val: 0
-  gain_goal_val: 1
-  gain_lerp_time: 0.75
---- !u!1 &1553282304 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3299341753577214571, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
-  m_PrefabInstance: {fileID: 1553282300}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1553282305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553282301}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1051f9473835def4694fc018380784e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalVolume: {fileID: 1553282304}
-  FX_List:
-    reorderableList:
-      canAdd: 1
-      canRemove: 1
-      draggable: 1
-      expandable: 1
-      multipleSelection: 1
-      isExpanded: 1
-      label:
-        m_Text: Keys
-        m_Image: {fileID: 0}
-        m_Tooltip: 
-      headerHeight: 18
-      footerHeight: 13
-      slideEasing: 0.15
-      verticalSpacing: 2
-      showDefaultBackground: 1
-      elementDisplayType: 0
-      elementNameProperty: 
-      elementNameOverride: 
-      elementIcon: {fileID: 0}
-    reqReferences: {fileID: 0}
-    isExpanded: 1
-    _keyValues:
-    - FadeToBlack
-    - FadeBackIn
-    _keys:
-    - FadeToBlack
-    - FadeBackIn
-    _values:
-    - {fileID: 1553282303}
-    - {fileID: 1553282302}
 --- !u!1 &1573639859
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,7 +34,11 @@ public class CutsceneTriggerArea : MonoBehaviour
             if (GameObject.FindGameObjectWithTag("CutsceneCanvas"))
             {
                 csm = GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>();
-                StartCoroutine(Load());
+
+                if (!csm.IsCutscenePlayed(cutsceneName))
+                {
+                    StartCoroutine(Load());
+                }
             }
         }
     }

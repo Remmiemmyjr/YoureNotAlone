@@ -11473,7 +11473,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5595333242864460426}
   m_LocalRotation: {x: -9.494824e-16, y: -0.0000000234804, z: -2.2294227e-23, w: 1}
-  m_LocalPosition: {x: 0.2629285, y: -1.7750278, z: -10}
+  m_LocalPosition: {x: 2.2821865, y: 31.875002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12172,6 +12172,9 @@ GameObject:
   - component: {fileID: 5595333243246886905}
   - component: {fileID: 5595333243246886904}
   - component: {fileID: 5595333243246886911}
+  - component: {fileID: 5022546861733667807}
+  - component: {fileID: 4479527476893108385}
+  - component: {fileID: 449289824212766589}
   m_Layer: 0
   m_Name: CutsceneCanvas
   m_TagString: CutsceneCanvas
@@ -12277,10 +12280,175 @@ MonoBehaviour:
   cutscenes: []
   FadeToBlack:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 449289824212766589}
+        m_TargetAssemblyTypeName: PostProcessingManager, Assembly-CSharp
+        m_MethodName: InvokeCameraFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: FadeToBlack
+          m_BoolArgument: 0
+        m_CallState: 2
   FadeBackIn:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 449289824212766589}
+        m_TargetAssemblyTypeName: PostProcessingManager, Assembly-CSharp
+        m_MethodName: InvokeCameraFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: FadeBackIn
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5022546861733667807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5595333243246886901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comment: FadeBackIn
+  vignette_toggle: 1
+  vignette_instant: 0
+  vignette_start_val: 1
+  vignette_goal_val: 0.2
+  vignette_lerp_time: 0.5
+  bloom_toggle: 0
+  bloom_instant: 0
+  bloom_start_val: 0
+  bloom_goal_val: 0
+  bloom_lerp_time: 0
+  chromab_toggle: 0
+  chromab_instant: 0
+  chromab_start_val: 0
+  chromab_goal_val: 0
+  chromab_lerp_time: 0
+  flmgrn_toggle: 0
+  flmgrn_instant: 0
+  flmgrn_start_val: 0
+  flmgrn_goal_val: 0
+  flmgrn_lerp_time: 0
+  lift_toggle: 0
+  lift_instant: 0
+  lift_start_val: 0
+  lift_goal_val: 0
+  lift_lerp_time: 0
+  gamma_toggle: 0
+  gamma_instant: 0
+  gamma_start_val: 0
+  gamma_goal_val: 0
+  gamma_lerp_time: 0
+  gain_toggle: 1
+  gain_instant: 0
+  gain_start_val: 1
+  gain_goal_val: 0
+  gain_lerp_time: 0.75
+--- !u!114 &4479527476893108385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5595333243246886901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e28230475562534faa649392214254c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comment: FadeToBlack
+  vignette_toggle: 1
+  vignette_instant: 0
+  vignette_start_val: 0.2
+  vignette_goal_val: 1
+  vignette_lerp_time: 0.5
+  bloom_toggle: 0
+  bloom_instant: 0
+  bloom_start_val: 0
+  bloom_goal_val: 0
+  bloom_lerp_time: 0
+  chromab_toggle: 0
+  chromab_instant: 0
+  chromab_start_val: 0
+  chromab_goal_val: 0
+  chromab_lerp_time: 0
+  flmgrn_toggle: 0
+  flmgrn_instant: 0
+  flmgrn_start_val: 0
+  flmgrn_goal_val: 0
+  flmgrn_lerp_time: 0
+  lift_toggle: 0
+  lift_instant: 0
+  lift_start_val: 0
+  lift_goal_val: 0
+  lift_lerp_time: 0
+  gamma_toggle: 0
+  gamma_instant: 0
+  gamma_start_val: 0
+  gamma_goal_val: 0
+  gamma_lerp_time: 0
+  gain_toggle: 1
+  gain_instant: 0
+  gain_start_val: 0
+  gain_goal_val: 1
+  gain_lerp_time: 0.75
+--- !u!114 &449289824212766589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5595333243246886901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1051f9473835def4694fc018380784e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalVolume: {fileID: 0}
+  FX_List:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues:
+    - FadeToBlack
+    - FadeBackIn
+    _keys:
+    - FadeToBlack
+    - FadeBackIn
+    _values:
+    - {fileID: 4479527476893108385}
+    - {fileID: 5022546861733667807}
 --- !u!1 &5595333243287918640
 GameObject:
   m_ObjectHideFlags: 0
