@@ -87,7 +87,7 @@ public class Latch : MonoBehaviour
     // TRIGGER ENTER =======================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Grabbable")
+        if (collision.gameObject.tag == "Grabbable" && !Info.isDead)
         {
             canLatch = true;
 
@@ -129,13 +129,13 @@ public class Latch : MonoBehaviour
         if (obj)
         {
             obj.GetComponent<BoxStats>().SetOutlineMat(true);
-            obj.GetComponent<PlatformEffector2D>().colliderMask &= ~(1 << Info.player.layer);
-            obj.GetComponent<PlatformEffector2D>().colliderMask &= ~(1 << Info.partner.layer);
+            obj.GetComponent<PlatformEffector2D>().colliderMask = 0;
 
             Vector3 partnerPos = Info.partner.transform.position;
             partnerPos.z = 1;
             obj.transform.position = partnerPos;
 
+            obj.transform.SetParent(Info.partner.transform);
 
             obj.GetComponent<Rigidbody2D>().mass = 0.5f;
             obj.GetComponent<Rigidbody2D>().freezeRotation = true;
@@ -152,8 +152,11 @@ public class Latch : MonoBehaviour
         canLatch = false;
         isLatched = false;
 
-        joint.enabled = false;
-        joint.connectedBody = null;
+        if (joint)
+        {
+            joint.enabled = false;
+            joint.connectedBody = null;
+        }
         joint = null;
 
         if (obj)
@@ -163,8 +166,9 @@ public class Latch : MonoBehaviour
 
             Info.grapple.minRopeLimit = ogMinLimit;
             obj.GetComponent<BoxStats>().SetNormalMat();
-            obj.GetComponent<PlatformEffector2D>().colliderMask |= (1 << Info.player.layer);
-            obj.GetComponent<PlatformEffector2D>().colliderMask |= (1 << Info.partner.layer);
+            obj.GetComponent<PlatformEffector2D>().colliderMask = ~0;
+
+            obj.transform.SetParent(null);
         }
 
         obj = null;

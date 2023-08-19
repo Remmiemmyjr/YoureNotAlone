@@ -57,9 +57,15 @@ public class ObstacleKill : MonoBehaviour
 
             if (Info.partner)
             {
+                Info.partner.transform.SetParent(null);
+
                 Info.partner.GetComponent<ParticleSystem>().Play();
                 Info.partner.GetComponent<SpriteRenderer>().enabled = false;
+                Info.partner.GetComponentInChildren<Latch>().ReleaseObject();
             }
+
+            Info.player.transform.SetParent(null);
+
             Info.player.GetComponent<ParticleSystem>().Play();
             Info.player.GetComponent<SpriteRenderer>().enabled = false;
             Info.player.GetComponent<LineRenderer>().enabled = false;

@@ -247,7 +247,7 @@ MonoBehaviour:
   groundObject: {fileID: 2277467395821205536}
   layer:
     serializedVersion: 2
-    m_Bits: 4104
+    m_Bits: 5128
   partner_idle:
     m_PersistentCalls:
       m_Calls:
@@ -5500,6 +5500,10 @@ PrefabInstance:
     - target: {fileID: 1159996816870447167, guid: 5aea80f51ff0efd4f8b52055ae96ab53, type: 3}
       propertyPath: m_Name
       value: LatchRadius
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640841632957439881, guid: 5aea80f51ff0efd4f8b52055ae96ab53, type: 3}
+      propertyPath: topSolid.m_Bits
+      value: 1024
       objectReference: {fileID: 0}
     - target: {fileID: 6827436741094474417, guid: 5aea80f51ff0efd4f8b52055ae96ab53, type: 3}
       propertyPath: m_RootOrder

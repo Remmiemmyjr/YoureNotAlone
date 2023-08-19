@@ -21,7 +21,14 @@ public class MovingPlatform : MonoBehaviour
     // VARIABLES ===========================================================
     [SerializeField]
     private bool startOnAwake = false;
+
+    [SerializeField]
+    private bool loopPoints = false;
+    private bool canLoop = true;
+
     private bool allowMovement = false;
+
+    private LineRenderer lineRend;
 
     public float speed = 3f;
 
@@ -33,6 +40,13 @@ public class MovingPlatform : MonoBehaviour
 
 
     ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
+    void Awake()
+    {
+        lineRend = GetComponent<LineRenderer>();
+    }
+
+    ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
     void Start()
     {
@@ -42,6 +56,8 @@ public class MovingPlatform : MonoBehaviour
         }
 
         transform.position = wayPoints[startingPoint].position;
+
+        lineRend.positionCount = wayPoints.Length;
     }
 
 
@@ -49,7 +65,13 @@ public class MovingPlatform : MonoBehaviour
     // UPDATE ==============================================================
     void Update()
     {
-        if (allowMovement)
+        // Draw the line
+        for(int i = 0; i < wayPoints.Length; ++i)
+        {
+            lineRend.SetPosition(i, wayPoints[i].position);
+        }
+
+        if (allowMovement && canLoop)
         {
             if (Vector2.Distance(transform.position, wayPoints[i].position) < 0.02f)
             {
@@ -58,6 +80,9 @@ public class MovingPlatform : MonoBehaviour
                 if (i == wayPoints.Length)
                 {
                     i = 0;
+
+                    if(!loopPoints)
+                        canLoop = false;
                 }
             }
 
@@ -70,6 +95,9 @@ public class MovingPlatform : MonoBehaviour
     // COLLISION ENTER =====================================================
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (Info.isDead)
+            return;
+
         if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Partner")
         {
             if (!startOnAwake)
@@ -82,9 +110,24 @@ public class MovingPlatform : MonoBehaviour
     // COLLISION STAY ======================================================
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Partner")
+        if (Info.isDead)
+            return;
+
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Grabbable")
         {
             collision.transform.SetParent(transform);
+        }
+
+        if(collision.gameObject.tag == "Partner")
+        {
+            if(Info.partner.GetComponentInChildren<Latch>().isLatched)
+            {
+                collision.transform.SetParent(null);
+            }
+            else
+            {
+                collision.transform.SetParent(transform);
+            }
         }
     }
 
@@ -93,9 +136,22 @@ public class MovingPlatform : MonoBehaviour
     // COLLISION EXIT ======================================================
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Partner")
+        if (Info.isDead)
+            return;
+
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Partner" || collision.gameObject.tag == "Grabbable")
         {
             collision.transform.SetParent(null);
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+
+        for (int i = 0; i < wayPoints.Length - 1; ++i)
+        {
+            Gizmos.DrawLine(wayPoints[i].position, wayPoints[i + 1].position);
         }
     }
 }
