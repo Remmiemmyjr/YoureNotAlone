@@ -16,12 +16,9 @@
 
 using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
-using static Unity.VisualScripting.Metadata;
 
 public enum EyeStates
 {
