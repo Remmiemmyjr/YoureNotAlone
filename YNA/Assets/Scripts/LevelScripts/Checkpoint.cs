@@ -49,6 +49,8 @@ public class Checkpoint : MonoBehaviour
 
     [SerializeField]
     private AudioClip[] lanternSFX;
+    [SerializeField]
+    private AudioClip[] checkpointSFX;
 
     private AudioSource lanternAS;
 
@@ -104,6 +106,19 @@ public class Checkpoint : MonoBehaviour
         }
     }
 
+    void PlayLanternFX()
+    {
+        // Play Particles
+        EmberPlayer.Play();
+
+        // Play Audio
+        if (lanternSFX.Length > 0 && checkpointSFX.Length > 0)
+        {
+            lanternAS.PlayOneShot(lanternSFX[Random.Range(0, lanternSFX.Length)]);
+            lanternAS.PlayOneShot(checkpointSFX[Random.Range(0, checkpointSFX.Length)]);
+        }
+    }
+
 
     ////////////////////////////////////////////////////////////////////////
     // TRIGGER ENTER =======================================================
@@ -121,18 +136,14 @@ public class Checkpoint : MonoBehaviour
                 // Make sure extra items exist
                 if (EmberPlayer && CheckpointLight && lanternAS && !checkReached)
                 {
-                    // Play Particles
-                    EmberPlayer.Play();
-
                     // Enable the light
                     CheckpointLight.enabled = true;
 
                     // Update value
                     checkReached = true;
 
-                    // Play Sound
-                    if (lanternSFX.Length > 0)
-                        lanternAS.PlayOneShot(lanternSFX[Random.Range(0, lanternSFX.Length)]);
+                    // Do effects
+                    PlayLanternFX();
                 }
             }
         }
@@ -148,27 +159,19 @@ public class Checkpoint : MonoBehaviour
                 // Make sure extra items exist
                 if (EmberPlayer && CheckpointLight && !checkReached)
                 {
-                    // Play Particles
-                    EmberPlayer.Play();
-
                     // Enable the light
                     CheckpointLight.enabled = true;
 
                     // Update value
                     checkReached = true;
 
-                    // Play Sound
-                    if(lanternSFX.Length > 0)
-                        lanternAS.PlayOneShot(lanternSFX[Random.Range(0, lanternSFX.Length)]);
+                    // Do effects
+                    PlayLanternFX();
                 }
                 else if (EmberPlayer && !sparkPlayed && !isSpawn)
                 {
-                    // Play Particles
-                    EmberPlayer.Play();
-
-                    // Play Sound
-                    if (lanternSFX.Length > 0)
-                        lanternAS.PlayOneShot(lanternSFX[Random.Range(0, lanternSFX.Length)]);
+                    // Do effects
+                    PlayLanternFX();
 
                     // Avoid spam
                     sparkPlayed = true;
