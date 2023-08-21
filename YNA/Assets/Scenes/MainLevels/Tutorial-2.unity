@@ -5295,11 +5295,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.743133
+      value: -11.201867
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.054024
+      value: -1.9628162
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19167,6 +19167,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 774494047595350987, guid: 05d6340eb045f8e489cde80d3acf6fc0, type: 3}
+      propertyPath: m_Flip.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 774494047595350987, guid: 05d6340eb045f8e489cde80d3acf6fc0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cb58aa0cfd9bb8c47bdccf0f4e56fa65, type: 2}
+    - target: {fileID: 3500640914839161014, guid: 05d6340eb045f8e489cde80d3acf6fc0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cb58aa0cfd9bb8c47bdccf0f4e56fa65, type: 2}
     - target: {fileID: 3701046404224317496, guid: 05d6340eb045f8e489cde80d3acf6fc0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.57
@@ -24471,6 +24483,7 @@ MonoBehaviour:
   lanternSFX:
   - {fileID: 8300000, guid: 72e246afc943e5f4c81d61c9ecb1c3f7, type: 3}
   - {fileID: 8300000, guid: ce52184a02061384ea974fa678f0ce30, type: 3}
+  checkpointSFX: []
 --- !u!212 &1944303405
 SpriteRenderer:
   m_ObjectHideFlags: 0
