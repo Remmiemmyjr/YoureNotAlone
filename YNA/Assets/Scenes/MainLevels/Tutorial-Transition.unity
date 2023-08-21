@@ -1921,7 +1921,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2277467396454445420, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38422fab66c304e43bb7e98e792bde35, type: 3}
@@ -20559,7 +20559,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017700991}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.35, y: -0.22, z: 0}
+  m_LocalPosition: {x: 13.74, y: -0.22, z: 0}
   m_LocalScale: {x: 1, y: 9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21532,11 +21532,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.2821865
+      value: 2.2806835
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 31.875002
+      value: 31.874998
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046765, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Cameras.Array.size
@@ -21556,7 +21556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].frames.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].nextSceneOnFinish
@@ -21573,11 +21573,19 @@ PrefabInstance:
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].frames.Array.data[0].frameImage
       value: 
-      objectReference: {fileID: 21300000, guid: 16abe90f045471f429d8a16e5541a629, type: 3}
+      objectReference: {fileID: 21300000, guid: fa8596f3da438144ea6cf3b86c66227f, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].frames.Array.data[1].frameImage
       value: 
-      objectReference: {fileID: 21300000, guid: 16450163911c0f94897496c548b7783b, type: 3}
+      objectReference: {fileID: 21300000, guid: 1d1ee533d04243c469a0daf1a4a58f17, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[0].frames.Array.data[2].frameImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 783d66e82d5276f4e8553d52481ef0af, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[0].frames.Array.data[3].frameImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 9ddbc0cbf22cdca48bbb7c3bf5cc83d5, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: FadeBackIn.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 5
