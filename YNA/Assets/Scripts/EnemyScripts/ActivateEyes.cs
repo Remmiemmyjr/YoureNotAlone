@@ -21,6 +21,7 @@ using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
+using static Unity.VisualScripting.Metadata;
 
 public enum EyeStates
 {
@@ -43,10 +44,12 @@ public class ActivateEyes : MonoBehaviour
     GameObject Partner;
     EyeProfile profile;
 
-    public GameObject[] Eyes;
-    public Sprite closed;
-    public Sprite halfway;
-    public Sprite open;
+    // Eyes are to be assigned through the children
+    private GameObject[] Eyes;
+
+    //public Sprite closed;
+    //public Sprite halfway;
+    //public Sprite open;
 
     public bool timeToHide = false;
 
@@ -113,6 +116,15 @@ public class ActivateEyes : MonoBehaviour
     // START ===============================================================
     void Start()
     {
+        // Get all of the eyes from the children of this Gameobject
+        Eyes = new GameObject[transform.childCount];
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Eyes[i] = transform.GetChild(i).gameObject;
+        }
+
+
         // Eye am here >:)
         iamhere.PlayOneShot(eyembiance[Random.Range(0, eyembiance.Length)]);
 

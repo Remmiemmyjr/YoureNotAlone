@@ -32,7 +32,8 @@ public class MovingPlatform : MonoBehaviour
 
     public float speed = 3f;
 
-    public Transform[] wayPoints;
+    private Transform[] wayPointsGizmo;
+    private Transform[] wayPoints;
     public int startingPoint;
 
     int i;
@@ -50,6 +51,18 @@ public class MovingPlatform : MonoBehaviour
     // START ===============================================================
     void Start()
     {
+        // Get all of the waypoints from the children of the parent of this Gameobject
+        Transform wpContainer = transform.parent.Find("WayPoints");
+        int waypointCount = wpContainer.childCount;
+
+        wayPoints = new Transform[waypointCount];
+
+        for (int i = 0; i < waypointCount; i++)
+        {
+            wayPoints[i] = wpContainer.GetChild(i);
+        }
+
+        // Other stuff
         if (startOnAwake)
         {
             allowMovement = true;
@@ -147,11 +160,22 @@ public class MovingPlatform : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        // Get all of the waypoints from the children of the parent of this Gameobject
+        Transform wpContainer = transform.parent.Find("WayPoints");
+        int waypointCount = wpContainer.childCount;
+
+        wayPointsGizmo = new Transform[waypointCount];
+
+        for (int i = 0; i < waypointCount; i++)
+        {
+            wayPointsGizmo[i] = wpContainer.GetChild(i);
+        }
+
         Gizmos.color = Color.blue;
 
-        for (int i = 0; i < wayPoints.Length - 1; ++i)
+        for (int i = 0; i < wayPointsGizmo.Length - 1; ++i)
         {
-            Gizmos.DrawLine(wayPoints[i].position, wayPoints[i + 1].position);
+            Gizmos.DrawLine(wayPointsGizmo[i].position, wayPointsGizmo[i + 1].position);
         }
     }
 }

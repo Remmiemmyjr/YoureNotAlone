@@ -53,7 +53,7 @@ public class EyeProfile : MonoBehaviour
     // STATUS SLEEPING =====================================================
     public void SetStatusSleeping()
     {
-        eyeRenderer.sprite = manager.closed;
+          // eyeRenderer.sprite = manager.closed;
         eyeAnim.SetTrigger("Close");
         eyeLight.intensity = eyeIntenstityClosed;
     }
@@ -63,7 +63,7 @@ public class EyeProfile : MonoBehaviour
     // STATUS WAKING =======================================================
     public void SetStatusWaking()
     {
-        eyeRenderer.sprite = manager.halfway;
+          // eyeRenderer.sprite = manager.halfway;
         eyeAnim.SetTrigger("Half");
         eyeLight.intensity = eyeIntenstityHalf;
     }
@@ -73,9 +73,8 @@ public class EyeProfile : MonoBehaviour
     // STATUS ACTIVE =======================================================
     public void SetStatusActive()
     {
-        eyeRenderer.sprite = manager.open;
-
-        // eyeAnim.Play("Eyeball_1_Open", -1, Random.Range(0.0f, 1.0f));
+          // eyeRenderer.sprite = manager.open;
+          // eyeAnim.Play("Eyeball_1_Open", -1, Random.Range(0.0f, 1.0f));
         eyeAnim.SetTrigger("Open");
         eyeAnim.SetFloat("CycleOffset", Random.Range(0.0f, 1.0f));
 
