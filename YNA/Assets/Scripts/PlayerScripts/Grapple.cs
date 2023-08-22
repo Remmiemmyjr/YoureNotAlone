@@ -32,7 +32,8 @@ public class Grapple : MonoBehaviour
 
     public float maxTetherDist = 1.5f;
     public float ropeSpeed = 3f;
-    public float tensionScalar = 50f;
+    public float tensionScalar = 10f;
+    private float tension;
 
     [HideInInspector]
     public float minRopeLimit = 0.25f;
@@ -70,8 +71,6 @@ public class Grapple : MonoBehaviour
         joint = Info.partner?.GetComponent<SpringJoint2D>();
         playerController = Info.player?.GetComponent<PlayerController>();
 
-        tensionScalar *= (maxRopeLimit * 100);
-
         if (joint != null && startTethered)
         {
             Tethered(true);
@@ -84,8 +83,9 @@ public class Grapple : MonoBehaviour
         isExtending = false;
         isReeling = false;
 
-        currRopeLength = maxTetherDist;
+        currRopeLength = minRopeLimit;
         currMaxRopeLimit = currRopeLength;
+        joint.distance = currMaxRopeLimit;
     }
 
 
@@ -97,6 +97,8 @@ public class Grapple : MonoBehaviour
         {
             return;
         }
+
+        tension = tensionScalar * (1/maxRopeLimit) * 1000;
 
         currDistFromPartner = (Info.partner.transform.position - transform.position);
         SetRope();
@@ -151,6 +153,9 @@ public class Grapple : MonoBehaviour
             if (currDistFromPartner.magnitude <= (maxTetherDist + 1) && !joint.enabled)
             {
                 Tethered(true);
+
+                currRopeLength = maxTetherDist;
+                currMaxRopeLimit = currRopeLength;
             }
             else
             {
@@ -183,6 +188,7 @@ public class Grapple : MonoBehaviour
             if (currDistFromPartner.magnitude < minRopeLimit)
             {
                 joint.distance = minRopeLimit;
+                currMaxRopeLimit = minRopeLimit;
             }
             // This is where tension/sqrting needs to happen
             else if (currDistFromPartner.magnitude >= currMaxRopeLimit)
@@ -193,7 +199,7 @@ public class Grapple : MonoBehaviour
                 if (Mathf.Sign(currDistFromPartner.x) != Mathf.Sign(playerController.dir.x) && currDistFromPartner.magnitude > currMaxRopeLimit + 1)
                 {
                     // If players moving away, apply a force of tension using the inverse exponential formula
-                    playerController.currSpeed = playerController.currSpeed / (1 + (Mathf.Pow(currDistFromPartner.magnitude, 2) / tensionScalar));
+                    playerController.currSpeed = playerController.currSpeed / (1 + (Mathf.Pow(currDistFromPartner.magnitude, 2) / tension));
                 }
                 // Otherwise, they are trying to move towards the partner and should experience no tension
                 else
