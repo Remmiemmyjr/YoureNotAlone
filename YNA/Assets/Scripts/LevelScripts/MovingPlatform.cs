@@ -121,7 +121,7 @@ public class MovingPlatform : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // COLLISION STAY ======================================================
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (Info.isDead)
             return;
@@ -146,13 +146,18 @@ public class MovingPlatform : MonoBehaviour
 
 
     ////////////////////////////////////////////////////////////////////////
-    // COLLISION EXIT ======================================================
-    private void OnCollisionExit2D(Collision2D collision)
+    // TRIGGER EXIT ========================================================
+    private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Grabbable")
+        {
+            collision.transform.SetParent(null);
+        }
+
         if (Info.isDead)
             return;
 
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Partner" || collision.gameObject.tag == "Grabbable")
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Partner")
         {
             collision.transform.SetParent(null);
         }

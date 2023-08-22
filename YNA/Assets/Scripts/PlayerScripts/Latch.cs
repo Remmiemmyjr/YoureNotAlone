@@ -129,10 +129,10 @@ public class Latch : MonoBehaviour
         if (obj)
         {
             obj.GetComponent<BoxStats>().SetOutlineMat(true);
-            obj.GetComponent<PlatformEffector2D>().colliderMask = 0;
+            obj.GetComponent<BoxCollider2D>().enabled = false;
 
             Vector3 partnerPos = Info.partner.transform.position;
-            partnerPos.z = 1;
+            partnerPos.z = -1;
             obj.transform.position = partnerPos;
 
             obj.transform.SetParent(Info.partner.transform);
@@ -166,7 +166,7 @@ public class Latch : MonoBehaviour
 
             Info.grapple.minRopeLimit = ogMinLimit;
             obj.GetComponent<BoxStats>().SetNormalMat();
-            obj.GetComponent<PlatformEffector2D>().colliderMask = ~0;
+            obj.GetComponent<BoxCollider2D>().enabled = true;
 
             obj.transform.SetParent(null);
         }
