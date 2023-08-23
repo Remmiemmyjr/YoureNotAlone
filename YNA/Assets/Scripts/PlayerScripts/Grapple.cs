@@ -85,7 +85,9 @@ public class Grapple : MonoBehaviour
 
         currRopeLength = minRopeLimit;
         currMaxRopeLimit = currRopeLength;
-        joint.distance = currMaxRopeLimit;
+
+        if(joint)
+            joint.distance = currMaxRopeLimit;
     }
 
 
