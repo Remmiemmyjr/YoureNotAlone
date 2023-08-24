@@ -157,7 +157,6 @@ public class Rope : MonoBehaviour
         }
     }
 
-
     ////////////////////////////////////////////////////////////////////////
     // DRAW ROPE ===============================================================
     private void DrawRope()
@@ -168,7 +167,7 @@ public class Rope : MonoBehaviour
 
         Vector3[] ropePositions = new Vector3[maxRopeSize];
         
-        for (int i = 0; i < currRopeSize; ++i)
+        for (int i = 0; i <= (currRopeSize + 1); ++i)
             ropePositions[i] = ropeSegments[i].posNow;
 
         lineRenderer.positionCount = currRopeSize;

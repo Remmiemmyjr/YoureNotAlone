@@ -32,11 +32,11 @@ public class Grapple : MonoBehaviour
 
     public float maxTetherDist = 1.5f;
     public float ropeSpeed = 3f;
-    public float tensionScalar = 10f;
+    public float tensionScalar = 100f;
     private float tension;
 
     [HideInInspector]
-    public float minRopeLimit = 0.25f;
+    public float minRopeLimit = 1f;
     float ogMinLimit;
     [HideInInspector]
     public float maxRopeLimit = 7f;
@@ -62,6 +62,7 @@ public class Grapple : MonoBehaviour
     {
         topSolidMap = GameObject.FindGameObjectsWithTag("TopSolidMap");
         line = GetComponent<LineRenderer>();
+        minRopeLimit = 1;
         ogMinLimit = minRopeLimit;
     }
 
@@ -72,6 +73,10 @@ public class Grapple : MonoBehaviour
         rope = GetComponent<Rope>();
         joint = Info.partner?.GetComponent<SpringJoint2D>();
         playerController = Info.player?.GetComponent<PlayerController>();
+
+
+        // Apply taension
+        tension = tensionScalar * maxRopeLimit * 100;
 
         if (joint != null && startTethered)
         {
@@ -85,8 +90,9 @@ public class Grapple : MonoBehaviour
         isExtending = false;
         isReeling = false;
 
-        currRopeLength = minRopeLimit;
+        currRopeLength = maxTetherDist;
         currMaxRopeLimit = currRopeLength;
+        SetRope();
 
         if(joint)
             joint.distance = currMaxRopeLimit;
@@ -101,8 +107,6 @@ public class Grapple : MonoBehaviour
         {
             return;
         }
-
-        tension = tensionScalar * (1/maxRopeLimit) * 1000;
 
         currDistFromPartner = (Info.partner.transform.position - transform.position);
         SetRope();
@@ -136,9 +140,10 @@ public class Grapple : MonoBehaviour
     // SET ROPE ============================================================
     void SetRope()
     {
-        if (rope.currRopeSize <= rope.maxRopeSize && currDistFromPartner.magnitude > 1)
+        if (rope.currRopeSize <= rope.maxRopeSize)
         {
-            rope.currRopeSize = (int)(currDistFromPartner.magnitude / rope.segmentLength);
+            // rope.currRopeSize = (int)(currDistFromPartner.magnitude / rope.segmentLength);
+            rope.currRopeSize = (int)(currMaxRopeLimit / rope.segmentLength);
 
             if (rope.currRopeSize > rope.maxRopeSize)
                 rope.currRopeSize = rope.maxRopeSize;           
@@ -160,6 +165,7 @@ public class Grapple : MonoBehaviour
 
                 currRopeLength = maxTetherDist;
                 currMaxRopeLimit = currRopeLength;
+                joint.distance = currMaxRopeLimit; 
             }
             else
             {
@@ -192,7 +198,6 @@ public class Grapple : MonoBehaviour
             minRopeLimit = ogMinLimit;
         }
 
-
         if (!isMenu && playerController.IsGrounded())
         {
             joint.frequency = ropeSpeed;
@@ -204,13 +209,13 @@ public class Grapple : MonoBehaviour
 
         if (!isMenu && (isExtending == false) && (isReeling == false))
         {
-            if (currDistFromPartner.magnitude < minRopeLimit)
-            {
-                joint.distance = minRopeLimit;
-                currMaxRopeLimit = minRopeLimit;
-            }
+            //if (currDistFromPartner.magnitude < minRopeLimit)
+            //{
+            //    joint.distance = minRopeLimit;
+            //    currMaxRopeLimit = minRopeLimit;
+            //}
             // This is where tension/sqrting needs to happen
-            else if (currDistFromPartner.magnitude >= currMaxRopeLimit)
+            if (currDistFromPartner.magnitude >= currMaxRopeLimit)
             {
                 joint.distance = currMaxRopeLimit;
 
