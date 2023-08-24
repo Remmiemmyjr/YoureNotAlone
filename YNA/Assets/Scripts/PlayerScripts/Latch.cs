@@ -132,7 +132,7 @@ public class Latch : MonoBehaviour
             obj.GetComponent<BoxCollider2D>().enabled = false;
 
             Vector3 partnerPos = Info.partner.transform.position;
-            partnerPos.z = -1;
+            partnerPos.z = 1;
             obj.transform.position = partnerPos;
 
             obj.transform.SetParent(Info.partner.transform);

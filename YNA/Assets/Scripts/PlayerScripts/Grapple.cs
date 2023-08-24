@@ -37,6 +37,7 @@ public class Grapple : MonoBehaviour
 
     [HideInInspector]
     public float minRopeLimit = 0.25f;
+    float ogMinLimit;
     [HideInInspector]
     public float maxRopeLimit = 7f;
     
@@ -61,6 +62,7 @@ public class Grapple : MonoBehaviour
     {
         topSolidMap = GameObject.FindGameObjectsWithTag("TopSolidMap");
         line = GetComponent<LineRenderer>();
+        ogMinLimit = minRopeLimit;
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -95,7 +97,7 @@ public class Grapple : MonoBehaviour
     // UPDATE ==============================================================
     void Update()
     {
-        if (Info.partner == null)
+        if (Info.partner == null || Info.isDead)
         {
             return;
         }
@@ -176,7 +178,22 @@ public class Grapple : MonoBehaviour
     // PULL ================================================================
     void Pull()
     {
-        if(!isMenu && playerController.IsGrounded())
+        RaycastHit2D hitPlayer = Physics2D.Linecast(Info.player.transform.position, Info.partner.transform.position, 1 << LayerMask.NameToLayer("Ground"));
+        RaycastHit2D hitPartner = Physics2D.Linecast(Info.partner.transform.position, Info.player.transform.position, 1 << LayerMask.NameToLayer("Ground"));
+
+        // Sent out a ray between the player and the partner in both directions and set the minimum rope distance to the distance between the raycasts
+        if (hitPlayer && hitPartner)
+        {
+            float distance = Vector3.Distance(hitPlayer.point, hitPartner.point);
+            minRopeLimit = distance + ogMinLimit;
+        }
+        else
+        {
+            minRopeLimit = ogMinLimit;
+        }
+
+
+        if (!isMenu && playerController.IsGrounded())
         {
             joint.frequency = ropeSpeed;
         }
