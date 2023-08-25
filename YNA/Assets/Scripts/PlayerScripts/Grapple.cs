@@ -149,7 +149,8 @@ public class Grapple : MonoBehaviour
                 rope.currRopeSize = rope.maxRopeSize;           
         }
 
-        joint.connectedAnchor = transform.position;
+        if (joint)
+            joint.connectedAnchor = transform.position;
     }
 
 
