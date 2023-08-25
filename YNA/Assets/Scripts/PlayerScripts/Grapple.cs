@@ -158,7 +158,7 @@ public class Grapple : MonoBehaviour
     // ENABLE ROPE =========================================================
     public void EnableRope(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !Info.isDead)
+        if (ctx.performed && !Info.isDead && Info.partner)
         {
             if (currDistFromPartner.magnitude <= (maxTetherDist + 1) && !joint.enabled)
             {

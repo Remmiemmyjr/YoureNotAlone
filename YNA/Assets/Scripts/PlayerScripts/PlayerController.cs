@@ -142,7 +142,8 @@ public class PlayerController : MonoBehaviour
 
         dir.x = ctx.ReadValue<float>();
 
-        animState.SetNextState(SetPlayerAnimState.PlayerStates.cWalk);
+        if (Mathf.Abs(dir.x) > 0.125)
+            animState.SetNextState(SetPlayerAnimState.PlayerStates.cWalk);
 
         EmitParticles(dir);
     }
