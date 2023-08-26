@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3299341753577214574}
   - component: {fileID: 3299341753577214569}
+  - component: {fileID: 161171828251387768}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: GlobalVolume
@@ -49,6 +50,19 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 03803fa8be92a55468ffd64b1e68e99d, type: 2}
+--- !u!114 &161171828251387768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3299341753577214571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 760eb74d222f51a42a80c31767b807f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grainStartVal: 0
 --- !u!1 &3299341754297055085
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +127,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7780784, y: 1}
+    m_SensorSize: {x: 1.7774763, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5493,7 +5507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460430, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.29039335
+      value: 0.28738356
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460430, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_LocalPosition.y

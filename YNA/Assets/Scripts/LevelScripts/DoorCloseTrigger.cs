@@ -18,9 +18,16 @@ public class DoorCloseTrigger : MonoBehaviour
     public GameObject door;
     bool closeTime = false;
 
+    [SerializeField]
+    private AudioClip audioDoorClosed;
+
+    private AudioSource doorAS;
+
     // Start is called before the first frame update
     void Start()
     {
+        doorAS = door.GetComponent<AudioSource>();
+
         ogPosDoor = door.GetComponent<Transform>().position;
         doorProfile = door.GetComponent<PuzzleDoorProfile>();
         door.GetComponent<SpriteRenderer>().color = activeColor;
@@ -46,9 +53,11 @@ public class DoorCloseTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if(collision.tag == "Player" && closeTime == false)
         {
             closeTime = true;
+
+            doorAS.PlayOneShot(audioDoorClosed);
 
             doorProfile.EnableGem(activeColor);
         }

@@ -37,6 +37,16 @@ public class PressurePlate : MonoBehaviour
     [SerializeField]
     private bool isHorizontal = false;
     bool timeToReturn = false;
+
+    [SerializeField]
+    private AudioClip audioDoorOpened;
+    [SerializeField]
+    private AudioClip audioDoorClosed;
+
+    private bool playedOpenAudio = false;
+    private bool playedClosedAudio = false;
+
+    private AudioSource doorAS;
     // *********************************************************************
 
 
@@ -44,6 +54,8 @@ public class PressurePlate : MonoBehaviour
     // START ===============================================================
     void Start()
     {
+        doorAS = door.GetComponent<AudioSource>();
+
         ogPosDoor = door.GetComponent<Transform>().position;
         doorProfile = door.GetComponent<PuzzleDoorProfile>();
         door.GetComponent<SpriteRenderer>().color = activeColor;
@@ -63,7 +75,14 @@ public class PressurePlate : MonoBehaviour
     {
         if(timeToReturn)
         {
-            if(!isHorizontal && door.GetComponent<Transform>().position.y > ogPosDoor.y)
+            if (!playedClosedAudio)
+            {
+                doorAS.PlayOneShot(audioDoorClosed);
+                playedOpenAudio = false;
+                playedClosedAudio = true;
+            }
+
+            if (!isHorizontal && door.GetComponent<Transform>().position.y > ogPosDoor.y)
             {
                 door.GetComponent<Transform>().Translate(0, -9f * Time.deltaTime, 0);
             }
@@ -78,7 +97,7 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
-
+    
     ////////////////////////////////////////////////////////////////////////
     // TRIGGER STAY ========================================================
     private void OnTriggerStay2D(Collider2D collision)
@@ -86,6 +105,13 @@ public class PressurePlate : MonoBehaviour
         gemSR.color = activeColor;
         gemLight.SetActive(true);
         doorProfile.EnableGem(activeColor);
+
+        if (!playedOpenAudio)
+        {
+            doorAS.PlayOneShot(audioDoorOpened);
+            playedClosedAudio = false;
+            playedOpenAudio = true;
+        }
 
         timeToReturn = false;
         if (!isHorizontal && door.GetComponent<Transform>().position.y < ogPosDoor.y + ((door.GetComponent<Transform>().localScale.y * 2.0f) - (door.GetComponent<Transform>().localScale.y * 0.2f)))

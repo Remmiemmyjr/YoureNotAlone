@@ -23,6 +23,8 @@ public enum MusicFiles
 {
     musicNone,
     musicMenuLoop,
+    musicAlone1Loop,
+    musicAlone2Loop,
     musicBasicLoop,
     musicSlowLoop,
     musicWinLoop,
@@ -39,6 +41,8 @@ public class PersistantMusic : MonoBehaviour
     // The tracks of the music player within different audio sources
     public AudioSource audioMenu;
     public AudioSource audioBasic;
+    public AudioSource audioAlone1;
+    public AudioSource audioAlone2;
     public AudioSource audioSlow;
     public AudioSource audioWin;
 
@@ -87,11 +91,16 @@ public class PersistantMusic : MonoBehaviour
         if (music_file == currentFile)
             return;
 
+        // Start transition
+        LerpAudioOut(0.25f);
+
         if (music_file == MusicFiles.musicMenuLoop)
         {
             currentFile = MusicFiles.musicMenuLoop;
 
             // Stop other sources
+            audioAlone1.Stop();
+            audioAlone2.Stop();
             audioBasic.Stop();
             audioSlow.Stop();
             audioWin.Stop();
@@ -103,11 +112,49 @@ public class PersistantMusic : MonoBehaviour
                 currentSource = audioMenu;
             }
         }
+        else if (music_file == MusicFiles.musicAlone1Loop)
+        {
+            currentFile = MusicFiles.musicAlone1Loop;
+
+            // Stop other sources
+            audioAlone2.Stop();
+            audioBasic.Stop();
+            audioMenu.Stop();
+            audioSlow.Stop();
+            audioWin.Stop();
+
+            // Start if not already playing
+            if (audioAlone1.isPlaying == false)
+            {
+                audioAlone1.Play();
+                currentSource = audioAlone1;
+            }
+        }
+        else if (music_file == MusicFiles.musicAlone2Loop)
+        {
+            currentFile = MusicFiles.musicAlone2Loop;
+
+            // Stop other sources
+            audioAlone1.Stop();
+            audioBasic.Stop();
+            audioMenu.Stop();
+            audioSlow.Stop();
+            audioWin.Stop();
+
+            // Start if not already playing
+            if (audioAlone2.isPlaying == false)
+            {
+                audioAlone2.Play();
+                currentSource = audioAlone2;
+            }
+        }
         else if (music_file == MusicFiles.musicBasicLoop)
         {
             currentFile = MusicFiles.musicBasicLoop;
 
             // Stop other sources
+            audioAlone1.Stop();
+            audioAlone2.Stop();
             audioMenu.Stop();
             audioSlow.Stop();
             audioWin.Stop();
@@ -124,6 +171,8 @@ public class PersistantMusic : MonoBehaviour
             currentFile = MusicFiles.musicSlowLoop;
 
             // Stop other sources
+            audioAlone1.Stop();
+            audioAlone2.Stop();
             audioBasic.Stop();
             audioMenu.Stop();
             audioWin.Stop();
@@ -140,6 +189,8 @@ public class PersistantMusic : MonoBehaviour
             currentFile = MusicFiles.musicWinLoop;
 
             // Stop other sources
+            audioAlone1.Stop();
+            audioAlone2.Stop();
             audioBasic.Stop();
             audioMenu.Stop();
             audioSlow.Stop();
@@ -151,6 +202,9 @@ public class PersistantMusic : MonoBehaviour
                 currentSource = audioWin;
             }
         }
+
+        // End transition
+        LerpAudioIn(0.25f);
     }
 
 
@@ -159,6 +213,8 @@ public class PersistantMusic : MonoBehaviour
     void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode load_scene_mode)
     {
         // Reset Audio Volumes and pause effects
+        audioAlone1.volume = 1.0f;
+        audioAlone2.volume = 1.0f;
         audioMenu.volume = 1.0f;
         audioBasic.volume = 1.0f;
         audioSlow.volume = 1.0f;
@@ -167,21 +223,29 @@ public class PersistantMusic : MonoBehaviour
         ApplyPauseEffects(false);
 
         // Check the name of the scene for music play changes
-        if (scene.name == "MainMenu")
+        switch (scene.name)
         {
-            Start_Stop_Music(MusicFiles.musicMenuLoop);
-        }
-        else if (scene.name == "ShadowBox")
-        {
-            Start_Stop_Music(MusicFiles.musicSlowLoop);
-        }
-        else if (scene.name == "GameOver")
-        {
-            Start_Stop_Music(MusicFiles.musicWinLoop);
-        }
-        else
-        {
-            Start_Stop_Music(MusicFiles.musicBasicLoop);
+            case ("MainMenu"):
+                Start_Stop_Music(MusicFiles.musicMenuLoop);
+                break;
+            case ("Tutorial-1"):
+                Start_Stop_Music(MusicFiles.musicAlone1Loop);
+                break;
+            case ("Tutorial-2"):
+                Start_Stop_Music(MusicFiles.musicAlone1Loop);
+                break;
+            case ("Tutorial-Transition"):
+                Start_Stop_Music(MusicFiles.musicAlone1Loop);
+                break;
+            case ("Level-5"):
+                Start_Stop_Music(MusicFiles.musicAlone2Loop);
+                break;
+            case ("GameOver"):
+                Start_Stop_Music(MusicFiles.musicWinLoop);
+                break;
+            default:
+                Start_Stop_Music(MusicFiles.musicBasicLoop);
+                break;
         }
     }
 
