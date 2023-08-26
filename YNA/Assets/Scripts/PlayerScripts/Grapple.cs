@@ -36,7 +36,7 @@ public class Grapple : MonoBehaviour
     private float tension;
 
     [HideInInspector]
-    public float minRopeLimit = 1f;
+    public float minRopeLimit;
     float ogMinLimit;
     [HideInInspector]
     public float maxRopeLimit = 7f;
@@ -60,10 +60,11 @@ public class Grapple : MonoBehaviour
     // AWAKE ===============================================================
     private void Awake()
     {
+        minRopeLimit = 0.25f;
+        ogMinLimit = minRopeLimit;
+
         topSolidMap = GameObject.FindGameObjectsWithTag("TopSolidMap");
         line = GetComponent<LineRenderer>();
-        minRopeLimit = 1;
-        ogMinLimit = minRopeLimit;
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -140,13 +141,15 @@ public class Grapple : MonoBehaviour
     // SET ROPE ============================================================
     void SetRope()
     {
-        if (rope.currRopeSize <= rope.maxRopeSize)
+        if (rope.currRopeListSize <= rope.maxRopeListSize)
         {
-            // rope.currRopeSize = (int)(currDistFromPartner.magnitude / rope.segmentLength);
-            rope.currRopeSize = (int)(currMaxRopeLimit / rope.segmentLength);
+            rope.currRopeListSize = (int)(currMaxRopeLimit / rope.segmentLength);
 
-            if (rope.currRopeSize > rope.maxRopeSize)
-                rope.currRopeSize = rope.maxRopeSize;           
+            if (rope.currRopeListSize > rope.maxRopeListSize)
+                rope.currRopeListSize = rope.maxRopeListSize; 
+
+            else if (rope.currRopeListSize < rope.minRopeListSize)
+                rope.currRopeListSize = rope.minRopeListSize;
         }
 
         if (joint)
