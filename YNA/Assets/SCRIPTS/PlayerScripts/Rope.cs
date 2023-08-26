@@ -9,7 +9,7 @@
 // Notes:
 // -
 //
-// Last Edit: 8/14/2023
+// Last Edit: 8/24/2023
 //
 //*************************************************
 
@@ -41,16 +41,16 @@ public class Rope : MonoBehaviour
     private LineRenderer lineRenderer;
     private List<RopeSegment> ropeSegments = new List<RopeSegment>();
     [HideInInspector]
-    public float segmentLength = 0.25f;
+    public float segmentLength;
     [HideInInspector]
     public int currRopeSize = 0;
-    public int maxRopeSize = 28;
+    public int maxRopeSize = 70;
 
     [SerializeField]
     private float lineWidth = 0.1f;
 
     [SerializeField]
-    float gravityScale = 5.0f;
+    float gravityScale = 2.0f;
     // *********************************************************************
 
 
@@ -58,6 +58,8 @@ public class Rope : MonoBehaviour
     // START ===============================================================
     void Start()
     {
+        segmentLength = 0.1f;
+
         if(Info.partner == null)
             return;
 
@@ -167,7 +169,7 @@ public class Rope : MonoBehaviour
 
         Vector3[] ropePositions = new Vector3[maxRopeSize];
         
-        for (int i = 0; i <= (currRopeSize + 1); ++i)
+        for (int i = 0; i < currRopeSize; ++i)
             ropePositions[i] = ropeSegments[i].posNow;
 
         lineRenderer.positionCount = currRopeSize;
