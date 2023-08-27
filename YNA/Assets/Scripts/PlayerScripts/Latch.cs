@@ -169,19 +169,19 @@ public class Latch : MonoBehaviour
 
             obj.transform.SetParent(null);
 
-            RaycastHit2D hitPlayer = Physics2D.Linecast(Info.player.transform.position, Info.partner.transform.position, 1 << LayerMask.NameToLayer("Ground"));
-            RaycastHit2D hitPartner = Physics2D.Linecast(Info.partner.transform.position, Info.player.transform.position, 1 << LayerMask.NameToLayer("Ground"));
+            //RaycastHit2D hitPlayer = Physics2D.Linecast(Info.player.transform.position, Info.partner.transform.position, 1 << LayerMask.NameToLayer("Ground"));
+            //RaycastHit2D hitPartner = Physics2D.Linecast(Info.partner.transform.position, Info.player.transform.position, 1 << LayerMask.NameToLayer("Ground"));
 
-            // Sent out a ray between the player and the partner in both directions and set the minimum rope distance to the distance between the raycasts
-            if (hitPlayer && hitPartner)
-            {
-                float distance = Vector3.Distance(hitPlayer.point, hitPartner.point);
-                Info.grapple.minRopeLimit = distance + ogMinLimit;
-            }
-            else
-            {
-                Info.grapple.minRopeLimit = ogMinLimit;
-            }
+            //// Sent out a ray between the player and the partner in both directions and set the minimum rope distance to the distance between the raycasts
+            //if (hitPlayer && hitPartner)
+            //{
+            //    float distance = Vector3.Distance(hitPlayer.point, hitPartner.point);
+            //    Info.grapple.minRopeLimit = distance + ogMinLimit;
+            //}
+            //else
+            //{
+            //    Info.grapple.minRopeLimit = ogMinLimit;
+            //}
         }
 
         obj = null;
