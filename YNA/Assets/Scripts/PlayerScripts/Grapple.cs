@@ -213,11 +213,6 @@ public class Grapple : MonoBehaviour
 
         if (!isMenu && (isExtending == false) && (isReeling == false))
         {
-            //if (currDistFromPartner.magnitude < minRopeLimit)
-            //{
-            //    joint.distance = minRopeLimit;
-            //    currMaxRopeLimit = minRopeLimit;
-            //}
             // This is where tension/sqrting needs to happen
             if (currDistFromPartner.magnitude >= currMaxRopeLimit)
             {
@@ -240,6 +235,14 @@ public class Grapple : MonoBehaviour
                 joint.distance = currDistFromPartner.magnitude;
                 playerController.currSpeed = playerController.speed;
             }
+
+            // Check the new joint distance
+            if (joint.distance < minRopeLimit)
+            {
+                joint.distance = minRopeLimit;
+                currMaxRopeLimit = minRopeLimit;
+            }
+
         }
     }
 
