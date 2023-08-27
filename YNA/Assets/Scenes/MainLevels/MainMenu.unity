@@ -4137,8 +4137,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.6862745, g: 0.34901962, b: 0.15686275, a: 1}
+      key1: {r: 0.745283, g: 0.40865377, b: 0.21444462, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4270,8 +4270,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segmentLength: 0.25
-  currRopeSize: 0
-  maxRopeSize: 28
+  currRopeListSize: 0
+  maxRopeListSize: 70
+  minRopeListSize: 5
   lineWidth: 5
   gravityScale: 5
 --- !u!1 &846380624
