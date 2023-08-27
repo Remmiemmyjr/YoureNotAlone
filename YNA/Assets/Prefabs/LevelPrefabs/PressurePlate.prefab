@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f936edf276d1ea7489d297a1db91cf37, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -130,6 +130,8 @@ MonoBehaviour:
   gem: {fileID: 5457391067698371654}
   gemLight: {fileID: 4411097901519247361}
   isHorizontal: 0
+  audioDoorOpened: {fileID: 0}
+  audioDoorClosed: {fileID: 0}
 --- !u!1 &4411097901519247361
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5457391067698371654}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -314,7 +316,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 4288372cd795a0a4285811d2166d4a79, type: 3}
   m_Color: {r: 0.3718883, g: 0.21112692, b: 0.4716981, a: 1}
   m_FlipX: 0
