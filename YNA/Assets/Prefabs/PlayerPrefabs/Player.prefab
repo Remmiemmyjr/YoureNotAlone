@@ -90,7 +90,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 1424639959, guid: a1ea9aabee4ff8340bc96ba93d57a67d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -386,7 +386,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 14b863ccd20b40e44b4f9d3a33efe58b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -430,7 +430,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.745283, g: 0.40865377, b: 0.21444462, a: 1}
+      key0: {r: 0.6862745, g: 0.34901962, b: 0.15686275, a: 1}
       key1: {r: 0.745283, g: 0.40865377, b: 0.21444462, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -460,7 +460,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 1
-    textureMode: 0
+    textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
@@ -5407,8 +5407,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segmentLength: 0.25
-  currRopeSize: 0
-  maxRopeSize: 28
+  currRopeListSize: 0
+  maxRopeListSize: 70
+  minRopeListSize: 5
   lineWidth: 0.1
   gravityScale: 2
 --- !u!1 &783348942485166086

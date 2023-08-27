@@ -3,6 +3,7 @@
 // File: Rope.cs
 // Author/s: Emmy Berg
 //           Mike Doeren
+//           Corbyn LaMar
 //
 // Desc: Manage player actions
 //
