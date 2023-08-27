@@ -30,12 +30,13 @@ public class MovingPlatform : MonoBehaviour
 
     private LineRenderer lineRend;
 
+    private static float width = 0.1f;
     public float speed = 3f;
 
     private Transform[] wayPointsGizmo;
     private Transform[] wayPoints;
+    
     public int startingPoint;
-
     int i;
     // *********************************************************************
 
@@ -45,6 +46,8 @@ public class MovingPlatform : MonoBehaviour
     void Awake()
     {
         lineRend = GetComponent<LineRenderer>();
+        lineRend.startWidth = width;
+        lineRend.endWidth = width;
     }
 
     ////////////////////////////////////////////////////////////////////////
