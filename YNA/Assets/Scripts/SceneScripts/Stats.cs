@@ -213,6 +213,15 @@ public class Stats : MonoBehaviour
     {
         if (stoneShader && Info.eyeDeath)
         {
+            if (Info.partner)
+            {
+                Info.partner.transform.SetParent(null);
+
+                Info.partner.GetComponentInChildren<ParticleSystem>().Play();
+                Info.partner.GetComponent<SpriteRenderer>().enabled = false;
+                Info.partner.GetComponentInChildren<Latch>().ReleaseObject();
+            }
+
             StartCoroutine(stoneShader.Lerp(1));
         }
 

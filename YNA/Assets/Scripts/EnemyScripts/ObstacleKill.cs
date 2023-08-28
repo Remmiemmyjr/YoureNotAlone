@@ -59,7 +59,7 @@ public class ObstacleKill : MonoBehaviour
             {
                 Info.partner.transform.SetParent(null);
 
-                Info.partner.GetComponent<ParticleSystem>().Play();
+                Info.partner.GetComponentInChildren<ParticleSystem>().Play();
                 Info.partner.GetComponent<SpriteRenderer>().enabled = false;
                 Info.partner.GetComponentInChildren<Latch>().ReleaseObject();
             }
