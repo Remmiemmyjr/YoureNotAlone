@@ -91,7 +91,7 @@ public class Grapple : MonoBehaviour
         isExtending = false;
         isReeling = false;
 
-        currRopeLength = maxTetherDist;
+        currRopeLength = minRopeLimit;
         currMaxRopeLimit = currRopeLength;
         SetRope();
 
