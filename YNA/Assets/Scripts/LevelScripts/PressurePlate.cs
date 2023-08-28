@@ -16,6 +16,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
@@ -47,6 +48,10 @@ public class PressurePlate : MonoBehaviour
     private bool playedClosedAudio = false;
 
     private AudioSource doorAS;
+
+    //The list of colliders currently inside the trigger
+     List<Collider2D> TriggerList = new List<Collider2D>();
+
     // *********************************************************************
 
 
@@ -102,15 +107,25 @@ public class PressurePlate : MonoBehaviour
     // TRIGGER STAY ========================================================
     private void OnTriggerStay2D(Collider2D collision)
     {
-        gemSR.color = activeColor;
-        gemLight.SetActive(true);
-        doorProfile.EnableGem(activeColor);
-
-        if (!playedOpenAudio)
+        // If the object is not already in the list
+        if (!TriggerList.Contains(collision))
         {
-            doorAS.PlayOneShot(audioDoorOpened);
-            playedClosedAudio = false;
-            playedOpenAudio = true;
+            // Add the object to the list
+            TriggerList.Add(collision);
+
+            if (TriggerList.Count == 1)
+            {
+                gemSR.color = activeColor;
+                gemLight.SetActive(true);
+                doorProfile.EnableGem(activeColor);
+
+                if (!playedOpenAudio)
+                {
+                    doorAS.PlayOneShot(audioDoorOpened);
+                    playedClosedAudio = false;
+                    playedOpenAudio = true;
+                }
+            }
         }
 
         timeToReturn = false;
@@ -129,9 +144,19 @@ public class PressurePlate : MonoBehaviour
     // TRIGGER EXIT ========================================================
     private void OnTriggerExit2D(Collider2D collision)
     {
-        timeToReturn = true;
-        gemSR.color = ogColor;
-        gemLight.SetActive(false);
-        doorProfile.DisableGem(ogColor);
+        // If the object is in the list
+        if (TriggerList.Contains(collision))
+        {
+            // Remove it from the list
+            TriggerList.Remove(collision);
+
+            if (TriggerList.Count == 0)
+            {
+                timeToReturn = true;
+                gemSR.color = ogColor;
+                gemLight.SetActive(false);
+                doorProfile.DisableGem(ogColor);
+            }
+        }
     }
 }
