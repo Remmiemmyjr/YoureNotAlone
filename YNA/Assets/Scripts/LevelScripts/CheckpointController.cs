@@ -25,30 +25,67 @@ public class CheckpointController : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
-    private static bool levelRestart = true;
-
     public static Vector2 lastCheckpointPos;
+
+    GameObject player, partner;
+    Vector3 checkpointPos;
+    public bool startWithPartner = true;
     // *********************************************************************
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // ON DESTROY ==========================================================
+    // When this is destroyed, store what the "previous scene" was to avoid
+    // cutscene repeats
+    public static string PreviousLevel { get; private set; }
+    // When this is destroyed, reset all cutscene play values
+    private void OnDestroy()
+    {
+        PreviousLevel = gameObject.scene.name;
+    }
 
 
     ////////////////////////////////////////////////////////////////////////
     // AWAKE ===============================================================
     void Awake()
     {
-        if(levelRestart)
+        player = GameObject.FindGameObjectWithTag("Player");
+        partner = GameObject.FindGameObjectWithTag("Partner");
+
+        if (PreviousLevel != gameObject.scene.name)
         {
             //look for initial Spawn
-            lastCheckpointPos = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+            ResetCheckpoints();
         }
-
-        levelRestart = false;
     }
 
 
     ////////////////////////////////////////////////////////////////////////
-    // RESTART LEVEL =======================================================
-    internal static void ResetLevel()
+    // START ===============================================================
+    void Start()
     {
-        levelRestart = true;
+        checkpointPos = lastCheckpointPos;
+        SetPos(player, new Vector3(0, 0, 0));
+
+        // Make sure there is a partner in this level
+        if (partner && startWithPartner)
+            SetPos(partner, new Vector3(-0.5f, 0, 0));
     }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // SET POS =============================================================
+    public void SetPos(GameObject entity, Vector3 offset)
+    {
+        entity.transform.position = checkpointPos + offset;
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // RESET CHECKPOINT ====================================================
+    public void ResetCheckpoints()
+    {
+        lastCheckpointPos = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+    }
+
 }
