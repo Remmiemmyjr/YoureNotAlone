@@ -90,7 +90,6 @@ public class LevelProgression : MonoBehaviour
             yield return new WaitForSeconds(transitionCanvas.GetCurrentAnimatorClipInfo(0).Length);
         }
 
-        CheckpointController.ResetLevel();
         SceneManager.LoadScene(nextLevel);
     }
 }

@@ -28,6 +28,9 @@ public class PauseManager : MonoBehaviour
     private GameObject controlsCanvas;
     private GameObject confirmationCanvas;
 
+    private GameObject cutsceneCanvas;
+    private GameObject checkpointController;
+
     private bool inSettings = false;
     private bool inControls = false;
     private bool inConfirmation = false;
@@ -50,6 +53,9 @@ public class PauseManager : MonoBehaviour
         confirmationCanvas = GameObject.FindWithTag("ConfirmationCanvas");
         eyeManager = GameObject.FindWithTag("EyeManager");
         musicController = GameObject.FindWithTag("MusicController");
+
+        cutsceneCanvas = GameObject.FindWithTag("CutsceneCanvas");
+        checkpointController = GameObject.FindWithTag("CC");
 
         controlsCanvas.SetActive(false);
         confirmationCanvas.SetActive(false);
@@ -230,6 +236,10 @@ public class PauseManager : MonoBehaviour
 
         // Reset timescale
         Time.timeScale = 1;
+
+        // Reset Level Data
+        cutsceneCanvas.GetComponent<CutsceneManager>().ResetCutscenesPlayed();
+        checkpointController.GetComponent<CheckpointController>().ResetCheckpoints();
 
         // Do the animation
         StartCoroutine(TransitionSequence());

@@ -262,7 +262,6 @@ public class CutsceneManager : MonoBehaviour
             // Reset active cutscene
             activeCutscene = null;
 
-            CheckpointController.ResetLevel();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
         }
         else
