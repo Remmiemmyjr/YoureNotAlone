@@ -21817,7 +21817,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 24
-      m_TileSpriteIndex: 24
+      m_TileSpriteIndex: 39
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -24517,7 +24517,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 22
+      m_TileSpriteIndex: 24
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -32540,12 +32540,12 @@ Tilemap:
     m_Data: {fileID: 540629180, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 238898611, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -311145340, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 1
-    m_Data: {fileID: 2025642910, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
+    m_Data: {fileID: -311145340, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
   - m_RefCount: 1073
     m_Data: {fileID: 1851066758, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
   - m_RefCount: 4
@@ -32574,8 +32574,8 @@ Tilemap:
     m_Data: {fileID: -356769676, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
   - m_RefCount: 58
     m_Data: {fileID: -288794174, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 2025642910, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -189170440, guid: 81e331a62089f2c4c830b846f94ec276, type: 3}
   - m_RefCount: 1
@@ -34227,6 +34227,10 @@ PrefabInstance:
       propertyPath: _animationManager
       value: 
       objectReference: {fileID: 2030767263}
+    - target: {fileID: 6697592896519079500, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8430895359532670629, guid: 7f4075b908128bb42956814e4190cca7, type: 3}
       propertyPath: m_IsActive
       value: 1
