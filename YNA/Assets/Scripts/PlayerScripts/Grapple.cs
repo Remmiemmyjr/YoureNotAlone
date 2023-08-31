@@ -76,7 +76,7 @@ public class Grapple : MonoBehaviour
         playerController = Info.player?.GetComponent<PlayerController>();
 
 
-        // Apply taension
+        // Apply tension
         tension = tensionScalar * maxRopeLimit * 100;
 
         if (joint != null && startTethered)
@@ -110,7 +110,6 @@ public class Grapple : MonoBehaviour
         }
 
         currDistFromPartner = (Info.partner.transform.position - transform.position);
-        SetRope();
 
         if (isTethered)
         {
@@ -134,6 +133,7 @@ public class Grapple : MonoBehaviour
             currRopeLength = joint.distance;
             currMaxRopeLimit = currRopeLength;
         }
+        SetRope();
     }
 
 
@@ -143,13 +143,15 @@ public class Grapple : MonoBehaviour
     {
         if (rope.currRopeListSize <= rope.maxRopeListSize)
         {
-            rope.currRopeListSize = (int)(currMaxRopeLimit / rope.segmentLength);
+            int newRopeListSize = (int)(currMaxRopeLimit / rope.segmentLength);
 
-            if (rope.currRopeListSize > rope.maxRopeListSize)
-                rope.currRopeListSize = rope.maxRopeListSize; 
+            if (newRopeListSize > rope.maxRopeListSize)
+                newRopeListSize = rope.maxRopeListSize; 
 
-            else if (rope.currRopeListSize < rope.minRopeListSize)
-                rope.currRopeListSize = rope.minRopeListSize;
+            else if (newRopeListSize < rope.minRopeListSize)
+                newRopeListSize = rope.minRopeListSize;
+
+            rope.currRopeListSize = newRopeListSize;
         }
 
         if (joint)
@@ -244,6 +246,7 @@ public class Grapple : MonoBehaviour
             }
 
         }
+        Debug.Log($"Pull: Min = {minRopeLimit}, Max = {currMaxRopeLimit}, Joint = {joint.distance}");
     }
 
 

@@ -105,6 +105,8 @@ public class Rope : MonoBehaviour
     {
         Vector2 forceGravity = new Vector2(0.0f, -gravityScale);
 
+        ApplyConstraint(); // Ensure proper rope setup before applying physics
+
         for (int i = 0; i < currRopeListSize; ++i) 
         {
             RopeSegment currSegment = ropeSegments[i];
@@ -113,8 +115,8 @@ public class Rope : MonoBehaviour
             currSegment.posNow += velocity;
             currSegment.posNow += forceGravity * Time.fixedDeltaTime;
             ropeSegments[i] = currSegment;
-            ApplyConstraint();
         }
+        ApplyConstraint(); // Ensure physics didn't detach rope or move it past constraints
     }
 
 
@@ -122,6 +124,69 @@ public class Rope : MonoBehaviour
     // APPLY CONSTRAINT ====================================================
     // Apply physical contraints to the rope, to keep each end tethered to
     // the partner/player
+    private void ApplyConstraint2()
+    {
+        RopeSegment firstSegment = ropeSegments[0];
+        firstSegment.posNow = Info.player.transform.position;
+        ropeSegments[0] = firstSegment;
+
+        RopeSegment endSegment = ropeSegments[currRopeListSize -1];
+        endSegment.posNow = Info.partner.transform.position;
+        ropeSegments[currRopeListSize -1] = endSegment;
+
+        float totalXdist = firstSegment.posNow.x - endSegment.posNow.x;
+        float totalYdist = firstSegment.posNow.y - endSegment.posNow.y;
+
+        // Total up the distances so we can compute an overall error factor and then apply uniformly
+        float[] distances = new float[currRopeListSize];
+        float totalDistance = 0;
+
+        for (int i = 0; i < currRopeListSize - 1; ++i)
+        {
+            float dist = (ropeSegments[i].posNow - ropeSegments[i + 1].posNow).magnitude;
+            distances[i] = dist;
+            totalDistance += dist;
+        }
+
+        float totalError = totalDistance - segmentLength * currRopeListSize;
+        if (totalDistance != 0 && totalError != 0)
+        {
+            float adjustment = 1 / (totalError - totalDistance);
+
+            int midPoint = (currRopeListSize - 1) / 2;
+
+            float baseX = firstSegment.posNow.x;
+            float baseY = firstSegment.posNow.y;
+            for (int i = 1; i < midPoint; ++i)
+            {
+                RopeSegment currSegment = ropeSegments[i];
+                //RopeSegment nextSegment = ropeSegments[i + 1];
+
+                float newX = (currSegment.posNow.x - baseX) * adjustment + baseX; // approx...
+                float newY = (currSegment.posNow.y - baseY) * adjustment + baseY; // approx...
+
+                currSegment.posNow.x = newX;
+                currSegment.posNow.y = newY;
+                ropeSegments[i] = currSegment;
+            }
+            baseY = endSegment.posNow.y;
+            for (int i = midPoint; i < currRopeListSize - 1; ++i)
+            {
+                RopeSegment currSegment = ropeSegments[i];
+                //RopeSegment nextSegment = ropeSegments[i + 1];
+
+                float newX = (currSegment.posNow.x - baseX) * adjustment + baseX; // approx...
+                float newY = (currSegment.posNow.y - baseY) * adjustment + baseY; // approx...
+
+                currSegment.posNow.x = newX;
+                currSegment.posNow.y = newY;
+                ropeSegments[i] = currSegment;
+            }
+        }
+
+        CheckConstraint(); // debug
+    }
+
     private void ApplyConstraint()
     {
         RopeSegment firstSegment = ropeSegments[0];
@@ -161,6 +226,32 @@ public class Rope : MonoBehaviour
                 ropeSegments[i + 1] = nextSegment;
             }
         }
+        CheckConstraint(); // debug
+    }
+
+    private void CheckConstraint()
+    {
+        RopeSegment firstSegment = ropeSegments[0];
+        if (firstSegment.posNow != (Vector2)Info.player.transform.position)
+            Debug.LogWarning($"First segment not positioned on player");
+
+        RopeSegment endSegment = ropeSegments[currRopeListSize -1];
+        endSegment.posNow = Info.partner.transform.position;
+        if (endSegment.posNow != (Vector2)Info.partner.transform.position)
+            Debug.LogWarning($"End segment not positioned on partner");
+
+        for (int i = 0; i < currRopeListSize - 1; ++i)
+        {
+            RopeSegment currSegment = ropeSegments[i];
+            RopeSegment nextSegment = ropeSegments[i + 1];
+
+            float dist = (currSegment.posNow - nextSegment.posNow).magnitude;
+            float error = Mathf.Abs(dist - segmentLength);
+
+            if (error >= 0.05 || error <= -0.05)
+                Debug.LogWarning($"Segment {i} length {dist} not segment length {segmentLength} (error: {error}");
+        }
+        Debug.Log($"Checked {currRopeListSize} rope segments");
     }
 
     ////////////////////////////////////////////////////////////////////////
