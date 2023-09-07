@@ -5411,11 +5411,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.743876
+      value: -12.745071
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.054068
+      value: -2.0541387
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5524,6 +5524,10 @@ PrefabInstance:
     - target: {fileID: 9175478669483909337, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175478669483909337, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: gracePeriod
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 9175478669483909337, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: Eyes.Array.size
@@ -19481,11 +19485,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8972399690009672766, guid: 05d6340eb045f8e489cde80d3acf6fc0, type: 3}
       propertyPath: m_Size.x
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8972399690009672766, guid: 05d6340eb045f8e489cde80d3acf6fc0, type: 3}
       propertyPath: m_Offset.x
-      value: 0.12
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972399690009672766, guid: 05d6340eb045f8e489cde80d3acf6fc0, type: 3}
+      propertyPath: m_EdgeRadius
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8972399690009672767, guid: 05d6340eb045f8e489cde80d3acf6fc0, type: 3}
       propertyPath: m_Layer
