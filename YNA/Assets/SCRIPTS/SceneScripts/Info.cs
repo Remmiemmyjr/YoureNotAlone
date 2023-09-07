@@ -20,6 +20,7 @@ public class Info : MonoBehaviour
     static public GameObject player;
     static public GameObject partner;
     static public GameObject mainCam;
+    static public PersistantMusic musicManager;
 
     static public Stats stats;
     static public PlayerController movement;

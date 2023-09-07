@@ -50,8 +50,6 @@ public class Grapple : MonoBehaviour
     bool isExtending;
     bool isReeling;
 
-    public bool startTethered = true;
-
     public bool isMenu = false;
     // *********************************************************************
 
@@ -79,13 +77,9 @@ public class Grapple : MonoBehaviour
         // Apply taension
         tension = tensionScalar * maxRopeLimit * 100;
 
-        if (joint != null && startTethered)
+        if (joint != null)
         {
             Tethered(true);
-        }
-        else
-        {
-            Tethered(false);
         }
 
         isExtending = false;
@@ -299,7 +293,7 @@ public class Grapple : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // TETHERED ============================================================
-    void Tethered(bool tethered)
+    public void Tethered(bool tethered)
     {
         isTethered = tethered;
         if(joint)

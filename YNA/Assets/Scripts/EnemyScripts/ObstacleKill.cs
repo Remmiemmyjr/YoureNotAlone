@@ -57,6 +57,15 @@ public class ObstacleKill : MonoBehaviour
 
             if (Info.partner)
             {
+                // Ensure rope detatch
+                Info.player.GetComponent<Grapple>().Tethered(false);
+
+                if (Info.latch.isLatched)
+                {
+                    Info.latch.ReleaseObject();
+                }
+
+                // Partner stuff
                 Info.partner.transform.SetParent(null);
 
                 Info.partner.GetComponentInChildren<ParticleSystem>().Play();
