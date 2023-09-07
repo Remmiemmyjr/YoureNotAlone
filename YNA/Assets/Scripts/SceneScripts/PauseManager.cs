@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
@@ -81,7 +82,7 @@ public class PauseManager : MonoBehaviour
         }
 
         // If the player wants to use buttons after using the mouse, reset the active object
-        if (EventSystem.current.currentSelectedGameObject == null && Input.anyKey && !inSettings)
+        if (EventSystem.current.currentSelectedGameObject == null && (Input.anyKey || (Input.GetAxis("Horizontal") != 0) || Input.GetAxis("Vertical") != 0) && !inSettings)
         {
             GameObject activeButton = null;
 
