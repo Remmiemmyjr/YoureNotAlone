@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2397178101623528949}
   - component: {fileID: 2397178101623528950}
-  - component: {fileID: 2397178101623528948}
   - component: {fileID: 2397178101623528947}
   m_Layer: 0
   m_Name: Hiding_Wall_1
@@ -86,19 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2397178101623528948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2397178101623528951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17a27fda235540a44803bdf84d44033a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHidden: 0
 --- !u!61 &2397178101623528947
 BoxCollider2D:
   m_ObjectHideFlags: 0
