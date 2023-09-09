@@ -62,6 +62,7 @@ public class Rope : MonoBehaviour
     // START ===============================================================
     void Start()
     {
+        maxRopeListSize = (int)(Info.grapple.maxRopeLimit / segmentLength);
         segmentLength = 0.1f;
 
         if(Info.partner == null)
