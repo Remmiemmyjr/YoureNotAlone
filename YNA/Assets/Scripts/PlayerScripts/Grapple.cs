@@ -38,7 +38,6 @@ public class Grapple : MonoBehaviour
     [HideInInspector]
     public float minRopeLimit;
     float ogMinLimit;
-    [HideInInspector]
     public float maxRopeLimit = 5f;
     
     float currMaxRopeLimit;
@@ -59,7 +58,7 @@ public class Grapple : MonoBehaviour
     private void Awake()
     {
         minRopeLimit = 0.25f;
-        maxRopeLimit = 5f;
+        //maxRopeLimit = 5f;
         ogMinLimit = minRopeLimit;
 
         topSolidMap = GameObject.FindGameObjectsWithTag("TopSolidMap");
