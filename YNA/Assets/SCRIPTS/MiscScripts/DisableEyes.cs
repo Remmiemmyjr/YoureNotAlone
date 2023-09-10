@@ -6,12 +6,17 @@ public class DisableEyes : MonoBehaviour
 {
     public ActivateEyes eyeManager;
 
+    [SerializeField]
+    private bool enableEyes = false;
+
+    [SerializeField]
+    private string targetTag = "Player";
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == targetTag)
         {
-            eyeManager.enabled = false;
+            eyeManager.enabled = enableEyes;
         }
     }
 }
