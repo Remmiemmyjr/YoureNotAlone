@@ -8,13 +8,13 @@ public class Untether : MonoBehaviour
     public AudioSource iamhere;
     CinemachineImpulseSource impulse;
 
+    [SerializeField]
+    private AudioClip eyembiance;
+
     private void Awake()
     {
         impulse = GetComponent<CinemachineImpulseSource>();
     }
-
-    [SerializeField]
-    private AudioClip eyembiance;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
