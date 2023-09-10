@@ -143,15 +143,7 @@ public class Grapple : MonoBehaviour
     {
         if (rope.currRopeListSize <= rope.maxRopeListSize)
         {
-            int newRopeListSize = (int)(currMaxRopeLimit / rope.segmentLength);
-
-            if (newRopeListSize > rope.maxRopeListSize)
-                newRopeListSize = rope.maxRopeListSize; 
-
-            else if (newRopeListSize < rope.minRopeListSize)
-                newRopeListSize = rope.minRopeListSize;
-
-            rope.currRopeListSize = newRopeListSize;
+            rope.SetSize(currMaxRopeLimit);
         }
 
         if (joint)
@@ -242,11 +234,11 @@ public class Grapple : MonoBehaviour
             if (joint.distance < minRopeLimit)
             {
                 joint.distance = minRopeLimit;
-                currMaxRopeLimit = minRopeLimit;
+                // currMaxRopeLimit = minRopeLimit;
             }
 
         }
-        Debug.Log($"Pull: Min = {minRopeLimit}, Max = {currMaxRopeLimit}, Joint = {joint.distance}");
+        //Debug.Log($"Pull: Min = {minRopeLimit}, Max = {currMaxRopeLimit}, Joint = {joint.distance}");
     }
 
 
