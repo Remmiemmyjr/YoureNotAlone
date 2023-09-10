@@ -76,6 +76,12 @@ public class Rope : MonoBehaviour
         distance = Vector2.Distance(Info.player.transform.position, Info.partner.transform.position);
         currRopeListSize = (int)(distance / segmentLength);
 
+        // Make sure we don't go over max
+        if (currRopeListSize > maxRopeListSize)
+        {
+            currRopeListSize = maxRopeListSize;
+        }
+
         // Create and add segments to list
         for (int i = 0; i < maxRopeListSize; ++i)
         {

@@ -50,6 +50,10 @@ public class Grapple : MonoBehaviour
     bool isReeling;
 
     public bool isMenu = false;
+
+    [SerializeField]
+    bool startTetheredTogether = true;
+
     // *********************************************************************
 
 
@@ -77,9 +81,9 @@ public class Grapple : MonoBehaviour
         // Apply taension
         tension = tensionScalar * maxRopeLimit * 100;
 
-        if (joint != null)
+        if (joint && startTetheredTogether)
         {
-            Tethered(true);
+            Tethered(false);
         }
 
         isExtending = false;
