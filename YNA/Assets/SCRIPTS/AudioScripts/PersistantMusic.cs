@@ -243,6 +243,9 @@ public class PersistantMusic : MonoBehaviour
             case ("Level-6"):
                 Start_Stop_Music(MusicFiles.musicSlowLoop);
                 break;
+            case ("Level-6-2"):
+                Start_Stop_Music(MusicFiles.musicWinLoop);
+                break;
             case ("GameOver"):
                 Start_Stop_Music(MusicFiles.musicWinLoop);
                 break;
