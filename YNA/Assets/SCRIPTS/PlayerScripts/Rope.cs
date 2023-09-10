@@ -79,7 +79,7 @@ public class Rope : MonoBehaviour
         // Make sure we don't go over max
         if (currRopeListSize > maxRopeListSize)
         {
-            currRopeListSize = maxRopeListSize;
+            maxRopeListSize = currRopeListSize;
         }
 
         // Create and add segments to list

@@ -83,7 +83,7 @@ public class Grapple : MonoBehaviour
 
         if (joint && startTetheredTogether)
         {
-            Tethered(false);
+            Tethered(true);
         }
 
         isExtending = false;
