@@ -21729,11 +21729,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.279935
+      value: 2.2806835
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 31.875002
+      value: 31.874998
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046765, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_Cameras.Array.size
@@ -21744,6 +21744,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: holdFrame
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -21752,19 +21756,39 @@ PrefabInstance:
       value: Introduction
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[1].name
+      value: Instructions
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].timeBetween
-      value: 5
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[1].timeBetween
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].cutsceneTrack
       value: 
       objectReference: {fileID: 8300000, guid: ecda5122347874b46822379bdf16505e, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[1].cutsceneTrack
+      value: 
+      objectReference: {fileID: 8300000, guid: ecda5122347874b46822379bdf16505e, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].frames.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].nextSceneOnFinish
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[1].frames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[1].nextSceneOnFinish
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
@@ -21778,19 +21802,47 @@ PrefabInstance:
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].frames.Array.data[0].frameImage
       value: 
-      objectReference: {fileID: 21300000, guid: fa8596f3da438144ea6cf3b86c66227f, type: 3}
+      objectReference: {fileID: 21300000, guid: 7b5b88269becb2f4db2e1c91646587f1, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].frames.Array.data[1].frameImage
       value: 
-      objectReference: {fileID: 21300000, guid: 1d1ee533d04243c469a0daf1a4a58f17, type: 3}
+      objectReference: {fileID: 21300000, guid: fa8596f3da438144ea6cf3b86c66227f, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].frames.Array.data[2].frameImage
       value: 
-      objectReference: {fileID: 21300000, guid: 783d66e82d5276f4e8553d52481ef0af, type: 3}
+      objectReference: {fileID: 21300000, guid: 1d1ee533d04243c469a0daf1a4a58f17, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].frames.Array.data[3].frameImage
       value: 
+      objectReference: {fileID: 21300000, guid: 783d66e82d5276f4e8553d52481ef0af, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[0].frames.Array.data[4].frameImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 449fd9c15efa7cc42acd80979546cabd, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[0].frames.Array.data[5].frameImage
+      value: 
       objectReference: {fileID: 21300000, guid: 9ddbc0cbf22cdca48bbb7c3bf5cc83d5, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[1].frames.Array.data[0].frameImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 7b5b88269becb2f4db2e1c91646587f1, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[1].frames.Array.data[1].frameImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 7b5b88269becb2f4db2e1c91646587f1, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[1].frames.Array.data[2].frameImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 1d1ee533d04243c469a0daf1a4a58f17, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[1].frames.Array.data[3].frameImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 783d66e82d5276f4e8553d52481ef0af, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[1].frames.Array.data[4].frameImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 449fd9c15efa7cc42acd80979546cabd, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: FadeBackIn.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 5

@@ -40,9 +40,10 @@ public class CutsceneManager : MonoBehaviour
     private bool isCurrentlyPlaying = false;
     private int currentFrameIndex = 0;
     private float cutsceneTimer = 0.0f;
+    public float holdFrame = 1.5f;
 
     private bool skipHold = false;
-    private const float skipTheshold = 1.5f;
+    private const float skipTheshold = 1f;
     private float skipTimer = 0.0f;
 
     private const float fadeTime = 2.0f;
@@ -194,7 +195,7 @@ public class CutsceneManager : MonoBehaviour
     // Start FinishCutscene after delay...
     public IEnumerator Load()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(holdFrame);
         FinishCutscene();
     }
 
