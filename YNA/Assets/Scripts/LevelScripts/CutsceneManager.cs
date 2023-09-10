@@ -30,6 +30,8 @@ public class CutsceneManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
 
+    public Component[] componentsToDisable;
+
     // Cutscene Items
     public Cutscene[] cutscenes;
     private Cutscene activeCutscene;
@@ -204,6 +206,12 @@ public class CutsceneManager : MonoBehaviour
     // START CUTSCENE ======================================================
     public void StartCutscene()
     {
+        // Disable any components that are interfering with the cutscene
+        for(int i = 0; i < componentsToDisable.Length; i++) 
+        {
+            componentsToDisable[i].gameObject.SetActive(false);
+        }
+
         // No player input allowed
         inputManager.actions.Disable();
 
@@ -271,6 +279,12 @@ public class CutsceneManager : MonoBehaviour
             // Turn off canvas image for cutscene
             cutsceneCanvasFrame.enabled = false;
             cutsceneCanvasTimer.enabled = false;
+        }
+
+        // Re-enable any components that were interfering with the cutscene
+        for (int i = 0; i < componentsToDisable.Length; i++)
+        {
+            componentsToDisable[i].gameObject.SetActive(true);
         }
 
         // Stop Audio Source and fade music back in
