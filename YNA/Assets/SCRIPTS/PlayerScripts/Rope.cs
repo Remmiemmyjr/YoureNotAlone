@@ -44,11 +44,11 @@ public class Rope : MonoBehaviour
 
     private LineRenderer lineRenderer;
     private List<RopeSegment> ropeSegments = new List<RopeSegment>();
-    [HideInInspector]
-    public float segmentLength;
+    //[HideInInspector]
+    public float segmentLength = 0.2f; // 0.1 is too close...;
     [HideInInspector]
     public int currRopeListSize = 0;
-    [HideInInspector]
+    //[HideInInspector]
     public int maxRopeListSize = 70;
     [HideInInspector]
     public int minRopeListSize = 5;
@@ -59,6 +59,12 @@ public class Rope : MonoBehaviour
     [SerializeField]
     float gravityScale = 2.0f;
 
+    [SerializeField]
+    float frictionFactor = 2.0f;  // 0 = no friction, > 0 = friction, < 0 = accelerate
+
+    [SerializeField]
+    float ropePullForceMultiplier = 40f; // Higher numbers = straighter rope, lower numbers = sining rope
+
     float extraDistanceFactor = 1.5f;
     // *********************************************************************
 
@@ -67,7 +73,7 @@ public class Rope : MonoBehaviour
     // START ===============================================================
     void Start()
     {
-        segmentLength = 0.2f; // 0.1 is too close...
+        //segmentLength = 0.2f; // 0.1 is too close...
 
         if(Info.partner == null) // too soon!
             return;
@@ -114,38 +120,39 @@ public class Rope : MonoBehaviour
         RopeSegment firstSegment, endSegment;
         AttachTether(out firstSegment, out endSegment);
 
-        Vector2 forceGravity = new Vector2(0.0f, -gravityScale/4.0f);
+        Vector2 forceGravity = new Vector2(0.0f, -gravityScale); // /4.0f);
         float distPlayerPartner = (firstSegment.posNow - endSegment.posNow).magnitude;
         float forceSegmentLength = distPlayerPartner / currRopeListSize;
 
         for (int i = 0; i < currRopeListSize; ++i)
         {
             RopeSegment currSegment = ropeSegments[i];
-            Vector2 velocity = (currSegment.posNow - currSegment.posOld) / 2.0f;  // divide by 4 for friction and debouncing...
+            Vector2 velocity = (currSegment.posNow - currSegment.posOld) / (1f + frictionFactor);  // divide for friction and debouncing...
             currSegment.posOld = currSegment.posNow;
-            if (i == 0)
+            if (i == 0) // Rope Segment is locked to Player
             {
                 ropeSegments[i] = currSegment;
                 Debug.Log($"Segment {i}: player: {currSegment.posOld}");
                 continue;
             }
-            if (i == currRopeListSize-1)
+            if (i == currRopeListSize-1) // Rope Segment is locked to Partner
             {
                 ropeSegments[i] = currSegment;
                 Debug.Log($"Segment {i}: partner: {currSegment.posOld}");
                 continue;
             }
-            currSegment.posNow += velocity;
+
+            currSegment.posNow += velocity; // Apply old velocity (reduced by friction, considder applying portion of velocity of adjacent sections...)
 
             Vector2 totalForce = forceGravity;
             Vector2 playerForce = Vector2.zero;
             Vector2 partnerForce = Vector2.zero;
 
-            float playerDist = (firstSegment.posNow - currSegment.posNow).magnitude;
-            float maxPlayerDist = (i - 1) * forceSegmentLength;
+            float playerDist = (firstSegment.posNow - currSegment.posNow).magnitude; // how far is the player from this segment
+            float maxPlayerDist = (i - 1) * forceSegmentLength; // If we're closer than our stretchd out distance, then there's no rope pull force applied
             if (playerDist > maxPlayerDist)
             {
-                playerForce = (firstSegment.posNow - currSegment.posNow) * (playerDist - maxPlayerDist) * 20 / i; // create force to pull back toward player if we exceed partial rope distance
+                playerForce = (firstSegment.posNow - currSegment.posNow) * (playerDist - maxPlayerDist) * ropePullForceMultiplier / i; // create force to pull back toward player if we exceed partial rope distance
                 totalForce += playerForce;
             }
 
@@ -153,7 +160,7 @@ public class Rope : MonoBehaviour
             float maxPartnerDist = (currRopeListSize - i + 0) * forceSegmentLength;
             if (partnerDist > maxPartnerDist)
             {
-                partnerForce = (endSegment.posNow - currSegment.posNow) * (partnerDist - maxPartnerDist) * 20 / (currRopeListSize - i); // create force to pull back toward partner if we exceed partial rope distance
+                partnerForce = (endSegment.posNow - currSegment.posNow) * (partnerDist - maxPartnerDist) * ropePullForceMultiplier / (currRopeListSize - i); // create force to pull back toward partner if we exceed partial rope distance
                 totalForce += partnerForce;
             }
 
