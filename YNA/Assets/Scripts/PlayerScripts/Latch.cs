@@ -87,7 +87,7 @@ public class Latch : MonoBehaviour
     // TRIGGER ENTER =======================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Grabbable" && !Info.isDead)
+        if (collision.gameObject.tag == "Grabbable" && !Info.isDead && !isLatched)
         {
             canLatch = true;
 

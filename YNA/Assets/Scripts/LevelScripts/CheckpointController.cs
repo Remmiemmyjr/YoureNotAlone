@@ -29,14 +29,14 @@ public class CheckpointController : MonoBehaviour
 
     GameObject player, partner;
     Vector3 checkpointPos;
-    public bool startWithPartner = true;
+    public static bool startWithPartner = true;
     // *********************************************************************
 
 
     ////////////////////////////////////////////////////////////////////////
     // ON DESTROY ==========================================================
     // When this is destroyed, store what the "previous scene" was to avoid
-    // cutscene repeats
+    // spawning at spawn
     public static string PreviousLevel { get; private set; }
     // When this is destroyed, reset all cutscene play values
     private void OnDestroy()
@@ -56,6 +56,11 @@ public class CheckpointController : MonoBehaviour
         {
             //look for initial Spawn
             ResetCheckpoints();
+
+            if(gameObject.scene.name == "Level-6")
+            {
+                startWithPartner = false;
+            }
         }
     }
 
