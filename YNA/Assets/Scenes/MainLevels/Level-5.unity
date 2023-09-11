@@ -1612,7 +1612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flickerRadius: 1
-  lightFlickerRadiusRate: 0.01
+  lightFlickerRadiusRate: 1
   radiusBase: 1
   radiusHighEnd: 1.25
   flickerIntensity: 1
@@ -31316,7 +31316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.6300125
+      value: -10.627777
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.y
@@ -37076,6 +37076,7 @@ PrefabInstance:
     - {fileID: 4505479744568465489, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
     - {fileID: 4505479744568465490, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
     - {fileID: 1173813269, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
+    - {fileID: 1312060147562850352, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
 --- !u!1 &1236059239 stripped
 GameObject:
@@ -37174,7 +37175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flickerRadius: 1
-  lightFlickerRadiusRate: 0.01
+  lightFlickerRadiusRate: 1
   radiusBase: 4
   radiusHighEnd: 4.25
   flickerIntensity: 1
@@ -37269,6 +37270,7 @@ PrefabInstance:
     - {fileID: 4505479744568465489, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
     - {fileID: 4505479744568465490, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
     - {fileID: 1173813269, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
+    - {fileID: 1312060147562850352, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
 --- !u!4 &1256396906 stripped
 Transform:
@@ -37372,7 +37374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flickerRadius: 1
-  lightFlickerRadiusRate: 0.01
+  lightFlickerRadiusRate: 1
   radiusBase: 4
   radiusHighEnd: 4.25
   flickerIntensity: 1
@@ -43226,6 +43228,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 72e246afc943e5f4c81d61c9ecb1c3f7, type: 3}
   - {fileID: 8300000, guid: 24740bb9c32b76c468ba663e92a81754, type: 3}
   checkpointSFX: []
+  tetherOnceReached: 0
 --- !u!212 &1396690668
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -51087,6 +51090,7 @@ PrefabInstance:
     - {fileID: 4505479744568465489, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
     - {fileID: 4505479744568465490, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
     - {fileID: 1173813269, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
+    - {fileID: 1312060147562850352, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
 --- !u!4 &1796281000 stripped
 Transform:
@@ -51111,7 +51115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flickerRadius: 1
-  lightFlickerRadiusRate: 0.01
+  lightFlickerRadiusRate: 1
   radiusBase: 4
   radiusHighEnd: 4.25
   flickerIntensity: 1
@@ -51890,6 +51894,7 @@ PrefabInstance:
     - {fileID: 4505479744568465489, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
     - {fileID: 4505479744568465490, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
     - {fileID: 1173813269, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
+    - {fileID: 1312060147562850352, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
 --- !u!1001 &1864495641
 PrefabInstance:
@@ -53776,6 +53781,7 @@ PrefabInstance:
     - {fileID: 4505479744568465489, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
     - {fileID: 4505479744568465490, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
     - {fileID: 1173813269, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
+    - {fileID: 1312060147562850352, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
 --- !u!4 &2044403967 stripped
 Transform:
@@ -53800,7 +53806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flickerRadius: 1
-  lightFlickerRadiusRate: 0.01
+  lightFlickerRadiusRate: 1
   radiusBase: 4
   radiusHighEnd: 4.25
   flickerIntensity: 1
@@ -54155,6 +54161,7 @@ PrefabInstance:
     - {fileID: 4505479744568465489, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
     - {fileID: 4505479744568465490, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
     - {fileID: 1173813269, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
+    - {fileID: 1312060147562850352, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 75b8f6b4c7f9ac54aa26d4e03dc53388, type: 3}
 --- !u!4 &2075376564 stripped
 Transform:
@@ -54179,7 +54186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flickerRadius: 1
-  lightFlickerRadiusRate: 0.01
+  lightFlickerRadiusRate: 1
   radiusBase: 4
   radiusHighEnd: 4.25
   flickerIntensity: 1

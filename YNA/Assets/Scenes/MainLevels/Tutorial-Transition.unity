@@ -19472,6 +19472,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 72e246afc943e5f4c81d61c9ecb1c3f7, type: 3}
   - {fileID: 8300000, guid: ce52184a02061384ea974fa678f0ce30, type: 3}
   checkpointSFX: []
+  tetherOnceReached: 0
 --- !u!212 &568672815
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -21753,7 +21754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: holdFrame
-      value: 0.25
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.size
@@ -21769,7 +21770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].timeBetween
-      value: 4.5
+      value: 4.35
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[1].timeBetween
