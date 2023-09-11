@@ -121,12 +121,23 @@ public class Rope : MonoBehaviour
         AttachTether(out firstSegment, out endSegment);
 
         Vector2 forceGravity = new Vector2(0.0f, -gravityScale); // /4.0f);
-        float distPlayerPartner = (firstSegment.posNow - endSegment.posNow).magnitude;
+        float distPlayerPartner = Mathf.Max((firstSegment.posNow - endSegment.posNow).magnitude, 0.5f); // if we're too close, assume a minimum distance
         float forceSegmentLength = distPlayerPartner / currRopeListSize;
+        LineFormula ropeFixup = null;
 
         for (int i = 0; i < currRopeListSize; ++i)
         {
             RopeSegment currSegment = ropeSegments[i];
+            if (float.IsNaN(currSegment.posNow.x)|| float.IsInfinity(currSegment.posNow.x) ||float.IsNaN(currSegment.posNow.y)|| float.IsInfinity(currSegment.posNow.y))
+            {
+                // Sometimes rope gets messed up (like in respawn, so just fix it up...)
+                if (ropeFixup == null)
+                {
+                    ropeFixup = new LineFormula(firstSegment.posNow, endSegment.posNow);
+                }
+                currSegment.posNow.x = i * forceSegmentLength;
+                currSegment.posNow.y = ropeFixup.Y(currSegment.posNow.x);
+            }
             Vector2 velocity = (currSegment.posNow - currSegment.posOld) / (1f + frictionFactor);  // divide for friction and debouncing...
             currSegment.posOld = currSegment.posNow;
             if (i == 0) // Rope Segment is locked to Player
@@ -240,6 +251,35 @@ public class Rope : MonoBehaviour
         endSegment = ropeSegments[currRopeListSize - 1];
         endSegment.posNow = Info.partner.transform.position;
         ropeSegments[currRopeListSize - 1] = endSegment;
+
+        // Sometimes rope gets messed up (like in respawn, check for it...)
+        bool needFixup = false; 
+        for (int i = 0; i < currRopeListSize; ++i)
+        {
+            RopeSegment currSegment = ropeSegments[i];
+            if (float.IsNaN(currSegment.posNow.x) || float.IsInfinity(currSegment.posNow.x) || float.IsNaN(currSegment.posNow.y) || float.IsInfinity(currSegment.posNow.y))
+            {
+                needFixup = true;
+                break;
+            }
+        }
+
+        if (!needFixup) return;
+
+        // best to fixup entire rope, other points are probably close to going...
+        LineFormula ropeFixup = new LineFormula(firstSegment.posNow, endSegment.posNow);
+        float distPlayerPartner = Mathf.Max((firstSegment.posNow - endSegment.posNow).magnitude,0.5f); // if we're too close, assume a minimum distance
+        float forceSegmentLength = distPlayerPartner / currRopeListSize;
+
+        float baseX = firstSegment.posNow.x;
+        for (int i = 1; i < currRopeListSize-1; ++i)
+        {
+            RopeSegment currSegment = ropeSegments[i];
+            currSegment.posNow.x = baseX + i * forceSegmentLength;
+            currSegment.posNow.y = ropeFixup.Y(currSegment.posNow.x);
+            currSegment.posOld = currSegment.posNow; // ensure no initial velocity
+            ropeSegments[i] = currSegment;
+        }
     }
 
     internal void SetSize(float currMaxRopeLimit)
