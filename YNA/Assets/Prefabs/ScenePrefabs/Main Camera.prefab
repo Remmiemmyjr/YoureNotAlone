@@ -10450,10 +10450,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 8834315978859723034}
   m_HandleRect: {fileID: 7161138790763724192}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -11473,7 +11473,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5595333242864460426}
   m_LocalRotation: {x: -9.494824e-16, y: -0.0000000234804, z: -2.2294227e-23, w: 1}
-  m_LocalPosition: {x: -8.737063, y: 4.698165, z: -13.5}
+  m_LocalPosition: {x: -42.90827, y: 5.824999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11520,7 +11520,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -12278,7 +12278,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4314675f3b92a4595e083a0c419440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  componentsToDisable: []
   cutscenes: []
+  holdFrame: 1.5
   FadeToBlack:
     m_PersistentCalls:
       m_Calls:
@@ -20596,7 +20598,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -1.9945068, y: 57.05287}
-  m_SizeDelta: {x: 567.9, y: 50}
+  m_SizeDelta: {x: 218.59, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1374131146343442734
 CanvasRenderer:

@@ -121,7 +121,7 @@ public class SettingsControl : MonoBehaviour
     // SET VOLUME ==========================================================
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("MasterVolume", volume);
+        audioMixer.SetFloat("MasterVolume", Mathf.Log(volume) * 20);
     }
 
 
