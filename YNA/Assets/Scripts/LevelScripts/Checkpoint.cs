@@ -58,6 +58,9 @@ public class Checkpoint : MonoBehaviour
 
     // Boolean to keep track of reached or not
     private bool checkReached = false;
+
+    [SerializeField]
+    private bool tetherOnceReached = false;
     // *********************************************************************
 
 
@@ -144,6 +147,12 @@ public class Checkpoint : MonoBehaviour
 
                     // Do effects
                     PlayLanternFX();
+                }
+
+                if(tetherOnceReached)
+                {
+                    CheckpointController.startWithPartner = true;
+                    Info.player.GetComponent<Grapple>().startTetheredTogether = true;
                 }
             }
         }

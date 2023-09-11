@@ -52,7 +52,7 @@ public class Grapple : MonoBehaviour
     public bool isMenu = false;
 
     [SerializeField]
-    bool startTetheredTogether = true;
+    public bool startTetheredTogether = true;
 
     // *********************************************************************
 
