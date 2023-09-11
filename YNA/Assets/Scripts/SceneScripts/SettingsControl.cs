@@ -59,6 +59,8 @@ public class SettingsControl : MonoBehaviour
         float masterVol = 0.0f;
         audioMixer.GetFloat("MasterVolume", out masterVol);
 
+        masterVol = Mathf.Pow(10, masterVol / 20);
+
         volumeSlider.value = masterVol;
         brightnessSlider.value = gammaVal;
 
@@ -121,7 +123,12 @@ public class SettingsControl : MonoBehaviour
     // SET VOLUME ==========================================================
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("MasterVolume", Mathf.Log(volume) * 20);
+        float sliderToDB = Mathf.Log10(volume) * 20;
+
+        audioMixer.SetFloat("MasterVolume", sliderToDB);
+
+        PlayerPrefs.SetFloat("MasterVolume", sliderToDB);
+        PlayerPrefs.Save();
     }
 
 
