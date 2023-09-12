@@ -60,13 +60,15 @@ public class Rope : MonoBehaviour
     float gravityScale = 2.0f;
 
     [SerializeField]
-    float frictionFactor = 2.0f;  // 0 = no friction, > 0 = friction, < 0 = accelerate
+    float frictionFactor = 2.0f;  // 0 = no friction, > 0 = friction, < 0 = accelerate (higher friction reduces wobble and vibration)
 
     [SerializeField]
-    float ropePullForceMultiplier = 40f; // Higher numbers = straighter rope, lower numbers = sining rope
+    float CompressionFactor = 1.0f; // 0 = no rope compression as players get closer, 1 = full rope compression as players get closer (0.5 = 50%)
 
-    float extraDistanceFactor = 1.5f;
-    // *********************************************************************
+    [SerializeField]
+    float ropePullForceMultiplier = 40f; // Higher numbers counterbalance gravity = straighter rope, lower numbers let gravity have more impact = stretching and sinking rope
+
+    float extraDistanceFactor = 1.5f; // amount of extra distance to build into rope (so it's not straight across) - no longer used, part of old constraint system.    // *********************************************************************
 
 
     ////////////////////////////////////////////////////////////////////////
@@ -122,7 +124,12 @@ public class Rope : MonoBehaviour
 
         Vector2 forceGravity = new Vector2(0.0f, -gravityScale); // /4.0f);
         float distPlayerPartner = Mathf.Max((firstSegment.posNow - endSegment.posNow).magnitude, 0.5f); // if we're too close, assume a minimum distance
+        // Rather than using the real segment length, we force one based on the distance to partner.  This creates a more balanced set of forces on the rope and keeps it from hanging ridiculously low when the move close to each other.
         float forceSegmentLength = distPlayerPartner / currRopeListSize;
+        if (forceSegmentLength < segmentLength && CompressionFactor >= 0 && CompressionFactor < 1)
+        {
+            forceSegmentLength += (segmentLength - forceSegmentLength) * (1 - CompressionFactor);
+        }
         LineFormula ropeFixup = null;
 
         for (int i = 0; i < currRopeListSize; ++i)
@@ -480,7 +487,7 @@ public class Rope : MonoBehaviour
         }
 
         var targetRopeLength = segmentLength * currRopeListSize;
-        if (targetRopeLength * targetRopeLength < (partnerDist * extraDistanceFactor)) // make sure the rope isn't too tight
+        if (targetRopeLength  < (partnerDist * extraDistanceFactor)) // make sure the rope isn't too tight
         {
             targetRopeLength = (float)(partnerDist * extraDistanceFactor);
         }
