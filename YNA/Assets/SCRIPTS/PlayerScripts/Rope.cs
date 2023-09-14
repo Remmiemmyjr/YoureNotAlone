@@ -21,6 +21,9 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
+/// <summary>
+/// Implements a rope that hangs between the player and partner (when connected)
+/// </summary>
 public class Rope : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
@@ -44,6 +47,7 @@ public class Rope : MonoBehaviour
 
     private LineRenderer lineRenderer;
     private List<RopeSegment> ropeSegments = new List<RopeSegment>();
+
     //[HideInInspector]
     public float segmentLength = 0.2f; // 0.1 is too close...;
     [HideInInspector]
@@ -57,19 +61,29 @@ public class Rope : MonoBehaviour
     private float lineWidth = 0.1f;
 
     [SerializeField]
+    [Tooltip("Amount of gravity applied to rope segments.  0 = no gravity (rope floats), 2 seems to work well.")]
+    [Min(0)]
     float gravityScale = 2.0f;
 
     [SerializeField]
+    [Tooltip("Amount of friction applied to rope segments to slow them down (0+).  0 = no friction, higher values contribute greater friction...")]
+    [Min(0)]
     float frictionFactor = 2.0f;  // 0 = no friction, > 0 = friction, < 0 = accelerate (higher friction reduces wobble and vibration)
 
     [SerializeField]
+    [Tooltip("Amount of compression applied to rope segments when player and partner get closer (0-1).  0 = no compression (long rope hanging down), 1 = full compression (rope stays no matter how close they get), 0.5 = rope hangs down half as much as it would.")]
+    [Range(0,1)]
     float CompressionFactor = 1.0f; // 0 = no rope compression as players get closer, 1 = full rope compression as players get closer (0.5 = 50%)
 
     [SerializeField]
+    [Tooltip("Amount of force applied to pull rope toward the ends (0+).  Counterbalances the pull of gravity and keeps it from stretching rope way out.  Higher for straighter, lower for hanging down more. 40 seems to be a good value.")]
+    [Min(0)]
     float ropePullForceMultiplier = 40f; // Higher numbers counterbalance gravity = straighter rope, lower numbers let gravity have more impact = stretching and sinking rope
 
     float extraDistanceFactor = 1.5f; // amount of extra distance to build into rope (so it's not straight across) - no longer used, part of old constraint system.    // *********************************************************************
 
+    [Tooltip("Turn on debug logging for the rope.")]
+    public bool DebugLogging = false;
 
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
@@ -116,6 +130,12 @@ public class Rope : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////
     // SIMULATE ============================================================
     // Simulate physics/gravity for each rope segment
+    //  ---------------------------------
+    // Earlier versions tried to separate out the constraints from the physics.  That didn't work well (see details on old methods below).
+    // It seems to work much better to apply the constraints and physics at the same time.
+    // The current system only applies one constraint up front: that the rope is attached and valid (handled by AttachTether),
+    // everything else is applied through self balancing forces based on constraints rather than physical constraints.
+    // The result is a very stretchy and well behaved rope that moves smoothly toward a stable, balanced point (although that can be tweaked through varous parameters to the point where the rope is no longer stable).
     private void Simulate()
     {
         if (!Ready()) return;
@@ -130,37 +150,37 @@ public class Rope : MonoBehaviour
         {
             forceSegmentLength += (segmentLength - forceSegmentLength) * (1 - CompressionFactor);
         }
-        LineFormula ropeFixup = null;
+        //LineFormula ropeFixup = null;
 
         for (int i = 0; i < currRopeListSize; ++i)
         {
             RopeSegment currSegment = ropeSegments[i];
-            if (float.IsNaN(currSegment.posNow.x)|| float.IsInfinity(currSegment.posNow.x) ||float.IsNaN(currSegment.posNow.y)|| float.IsInfinity(currSegment.posNow.y))
-            {
-                // Sometimes rope gets messed up (like in respawn, so just fix it up...)
-                if (ropeFixup == null)
-                {
-                    ropeFixup = new LineFormula(firstSegment.posNow, endSegment.posNow);
-                }
-                currSegment.posNow.x = i * forceSegmentLength;
-                currSegment.posNow.y = ropeFixup.Y(currSegment.posNow.x);
-            }
+            //if (float.IsNaN(currSegment.posNow.x)|| float.IsInfinity(currSegment.posNow.x) ||float.IsNaN(currSegment.posNow.y)|| float.IsInfinity(currSegment.posNow.y))
+            //{
+            //    // Sometimes rope gets messed up (like in respawn, so just fix it up...)
+            //    if (ropeFixup == null)
+            //    {
+            //        ropeFixup = new LineFormula(firstSegment.posNow, endSegment.posNow);
+            //    }
+            //    currSegment.posNow.x = i * forceSegmentLength;
+            //    currSegment.posNow.y = ropeFixup.Y(currSegment.posNow.x);
+            //}
             Vector2 velocity = (currSegment.posNow - currSegment.posOld) / (1f + frictionFactor);  // divide for friction and debouncing...
             currSegment.posOld = currSegment.posNow;
-            if (i == 0) // Rope Segment is locked to Player
+            if (i == 0) // First Rope Segment is locked to Player
             {
                 ropeSegments[i] = currSegment;
-                Debug.Log($"Segment {i}: player: {currSegment.posOld}");
+                if (DebugLogging) Debug.Log($"Segment {i}: player: {currSegment.posOld}");
                 continue;
             }
-            if (i == currRopeListSize-1) // Rope Segment is locked to Partner
+            if (i == currRopeListSize-1) // End Rope Segment is locked to Partner
             {
                 ropeSegments[i] = currSegment;
-                Debug.Log($"Segment {i}: partner: {currSegment.posOld}");
+                if (DebugLogging) Debug.Log($"Segment {i}: partner: {currSegment.posOld}");
                 continue;
             }
 
-            currSegment.posNow += velocity; // Apply old velocity (reduced by friction, considder applying portion of velocity of adjacent sections...)
+            currSegment.posNow += velocity; // Apply old velocity (reduced by friction, consider applying portion of velocity of adjacent sections...)
 
             Vector2 totalForce = forceGravity;
             Vector2 playerForce = Vector2.zero;
@@ -184,11 +204,15 @@ public class Rope : MonoBehaviour
 
             currSegment.posNow += totalForce * Time.fixedDeltaTime;
             ropeSegments[i] = currSegment;
-            Debug.Log($"Segment {i}: old: {currSegment.posOld} + Velocity {velocity} + Total Force {totalForce} (Gravity {forceGravity} + Player {playerForce} + Partner {partnerForce}) -> new {currSegment.posNow}");
+            if (DebugLogging) Debug.Log($"Segment {i}: old: {currSegment.posOld} + Velocity {velocity} + Total Force {totalForce} (Gravity {forceGravity} + Player {playerForce} + Partner {partnerForce}) -> new {currSegment.posNow}");
         }
-        CheckConstraint(); // output any issues, point list
+        if (DebugLogging) CheckConstraint(); // output any issues, point list
     }
 
+    // Prior version of the rope physics simulation.
+    // First version to attempt to use balanced forces, but got thrown off by use of squared magnitude instead of actual magnitude.  
+    // After fiddling with this for a while, I decided to take the hit of computing actual magnitude (requires a square root)
+    // So I set this aside and started on the next (latest) version.
     private void Simulate2()
     {
         if (!Ready()) return;
@@ -242,12 +266,17 @@ public class Rope : MonoBehaviour
 
             currSegment.posNow += totalForce * Time.fixedDeltaTime;
             ropeSegments[i] = currSegment;
-            Debug.Log($"Segment {i}: old: {currSegment.posOld} + Velocity {velocity} + Total Force {totalForce} (Gravity {forceGravity} + Player {playerForce} + Partner {partnerForce}) -> new {currSegment.posNow}");
+            if (DebugLogging) Debug.Log($"Segment {i}: old: {currSegment.posOld} + Velocity {velocity} + Total Force {totalForce} (Gravity {forceGravity} + Player {playerForce} + Partner {partnerForce}) -> new {currSegment.posNow}");
         }
         //ApplyConstraint(); // Ensure physics didn't detach rope or move it past constraints
-        CheckConstraint(); // output any issues, point list
+        if (DebugLogging) CheckConstraint(); // output any issues, point list
     }
 
+    /// <summary>
+    /// Attaches the ends of the rope to the player and partner and validates all the intermediate positions are valid.
+    /// </summary>
+    /// <param name="firstSegment">returns the first (player attached) segment</param>
+    /// <param name="endSegment">returns the last (partner attached) segment</param>
     private void AttachTether(out RopeSegment firstSegment, out RopeSegment endSegment)
     {
         // hookup start and end of rope
@@ -266,6 +295,7 @@ public class Rope : MonoBehaviour
             RopeSegment currSegment = ropeSegments[i];
             if (float.IsNaN(currSegment.posNow.x) || float.IsInfinity(currSegment.posNow.x) || float.IsNaN(currSegment.posNow.y) || float.IsInfinity(currSegment.posNow.y))
             {
+                if (DebugLogging) Debug.LogWarning("Rope broken, repairing...");
                 needFixup = true;
                 break;
             }
@@ -289,6 +319,11 @@ public class Rope : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the size of the rope.  Moved here from Grapple to clean it up and improve isolation.
+    /// Key factor was making sure to set both old and new points to avoid adding random velocity to the rope segments.
+    /// </summary>
+    /// <param name="currMaxRopeLimit">The maximum length we want to set the rope to.</param>
     internal void SetSize(float currMaxRopeLimit)
     {
         int newRopeListSize = (int)(currMaxRopeLimit / segmentLength);
@@ -324,6 +359,11 @@ public class Rope : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Used to check if the rope is attached and a valid size before we start trying to manipulate it.
+    /// </summary>
+    /// <param name="newRopeListSize"></param>
+    /// <returns></returns>
     private bool Ready(int newRopeListSize = -1)
     {
         if (Info.partner == null) return false;
@@ -332,6 +372,12 @@ public class Rope : MonoBehaviour
         return ropeSegments.Count > newRopeListSize && newRopeListSize > 0;
     }
 
+    /// <summary>
+    /// First version of physics simulation.  This applies gravity and inertia (maintains velocity)
+    /// Problems were the lack of friction so that rope segments could wiggle for a long time,
+    /// and trying to apply positional constraints before/after (and independently of) the forces: simulate would move the rope into a new position, 
+    /// then applyconstraint would try to move them back (undoing what simulate just did).  Keeping them in sync was painful and didn't work well.
+    /// </summary>
     private void Simulate1()
     {
         Vector2 forceGravity = new Vector2(0.0f, gravityScale);
@@ -350,10 +396,25 @@ public class Rope : MonoBehaviour
         ApplyConstraint(); // Ensure physics didn't detach rope or move it past constraints
     }
 
+    /// <summary>
+    /// At one point I was trying to apply constraints by forcing points into a parabolic shape.  
+    /// This class does the work of figuring out a matching parabola formula and then applying it.
+    /// I started trying to use 3 points to define the parabola.  That worked, but the third point was hard to calculate 
+    /// (I wanted it to approximate the vertex, but it would be too far off and the parabola would hang down further than I expected.)
+    /// 
+    /// Then I realized I'd be better off with 2 points and a line to target the vertex.  I wrote that, but never tested it because by then I'd decided the forces approach was better.
+    /// I thought this might still be useful, so I added code to support other setups.
+    /// </summary>
     public class ParabolaFormula
     {
         public float a, b, c;
 
+        /// <summary>
+        /// Create a Parabola Formula based on three points.
+        /// </summary>
+        /// <param name="p1">First point</param>
+        /// <param name="p2">Second point</param>
+        /// <param name="p3">Third point</param>
         public ParabolaFormula(Vector2 p1, Vector2 p2, Vector2 p3)
         {
             // Calculate the coefficients a, b, and c using the provided points
@@ -391,18 +452,70 @@ public class Rope : MonoBehaviour
             Debug.Log($"The points {p1},{p2},{p3} yielded parabolic equation {a}x^2 + {b}x + {c}.");
         }
 
+        /// <summary>
+        /// Create a Parabola Formula based on two points and a tangent line
+        /// </summary>
+        /// <param name="p1">First point</param>
+        /// <param name="p2">Second point</param>
+        /// <param name="slope">Slope of the line</param>
+        /// <param name="yIntercept">Y intercept of the line</param>
+        public ParabolaFormula(Vector2 p1, Vector2 p2, float slope, float yIntercept)
+        {
+            // Calculate the coefficients a, b, and c using the provided points
+            float x1 = p1.x;
+            float y1 = p1.y;
+            float x2 = p2.x;
+            float y2 = p2.y;
+
+            a = (y1 - yIntercept - slope * x1 * x1 - slope * x2 * x2) / (x1 * x1 - 2 * x1 * x2 + x2 * x2);
+            b = slope * (x1 + x2) - 2 * a * x1 - 2 * a * x2;
+            c = y1 - a * x1 * x1 - b * x1;
+            Debug.Log($"The points {p1} and {p2} and line y={slope}x + {yIntercept} yielded parabolic equation {a}x^2 + {b}x + {c}.");
+        }
+
+        /// <summary>
+        /// Create a Parabola Formula object from it's coefficients (y = ax^2 + bx + c)
+        /// </summary>
+        /// <param name="a">First coefficient (ax^2)</param>
+        /// <param name="b">Second coefficient (bx)</param>
+        /// <param name="c">Third coefficient (c = constant)</param>
+        public ParabolaFormula(float a, float b, float c)
+        {
+            this.a = a;
+            this.b = b;
+            this.c = c;
+        }
+
+        /// <summary>
+        /// Create a Parabola Formula object from it's vertex and scale (y = a(x-h)^2 + k, where (h,k) is the vertex and a is the scale).
+        /// Then convert to standard form by multiplying: y = ax^2 - 2ahx + ah^2 + k
+        /// </summary>
+        /// <param name="a">scale(ax^2)</param>
+        /// <param name="vertex">vertex (h,k))</param>
+        public ParabolaFormula(float a, Vector2 vertex)
+        {
+            this.a = a;
+            this.b = -2 * a * vertex.x; // h = vertex.x
+            this.c = a * vertex.x * vertex.x + vertex.y; // k = vertex.y
+            Debug.Log($"The scale {a} and vertex {vertex} yielded parabolic equation {a}x^2 + {b}x + {c}.");
+        }
+
         public float Y(float X)
         {
             return a * X * X + b * X + c;
         }
     }
+
+    /// <summary>
+    /// Helper class to find and utilize the formula for a line.  
+    /// </summary>
     public class LineFormula
     {
         public float m, b;
 
         public LineFormula(Vector2 p1, Vector2 p2)
         {
-            // Calculate the coefficients a, b, and c using the provided points
+            // Calculate the slope m and y-intercept b using the provided points
             float x1 = p1.x;
             float y1 = p1.y;
             float x2 = p2.x;
@@ -419,6 +532,12 @@ public class Rope : MonoBehaviour
             b = y1 - m * x1;  // Calculate the y-intercept (b) using the slope and one of the points
         }
 
+        public LineFormula(float m, float b)
+        {
+            this.m = m;
+            this.m = b;
+        }
+
         public float Y(float X)
         {
             return m * X + b;
@@ -430,6 +549,7 @@ public class Rope : MonoBehaviour
     // APPLY CONSTRAINT ====================================================
     // Apply physical contraints to the rope, to keep each end tethered to
     // the partner/player
+    // This version also tried to fit it to the parabola, which almost worked, but was ultiately discarded for the balanced force approach.
     private void ApplyConstraintP()
     {
         // Parabolic model
@@ -465,6 +585,7 @@ public class Rope : MonoBehaviour
         CheckConstraint(); // debug
     }
 
+    // Earlier constraint method that tried to apply constraints independently of the rope physics... (didn't work well)
     private void ApplyConstraint()
     {
         // Linear model, doesn't really work well
@@ -502,7 +623,7 @@ public class Rope : MonoBehaviour
             float heightDelta = (firstSegment.posNow.y - endSegment.posNow.y); // allow for player and partner at different heights
             float maxDeltaY = Mathf.Max((targetRopeLength - heightDelta / extraDistanceFactor) / currRopeListSize / 2, 0.01f);
 
-            Debug.Log($"Adjusting {currRopeListSize} rope segments (partner distance = {partnerDist}, target length = {targetRopeLength}, actual = {totalDistance} ({totalXdist},{totalYdist}), heightDelta = {heightDelta}, player maxDeltaY = {maxDeltaY})");
+            if (DebugLogging) Debug.Log($"Adjusting {currRopeListSize} rope segments (partner distance = {partnerDist}, target length = {targetRopeLength}, actual = {totalDistance} ({totalXdist},{totalYdist}), heightDelta = {heightDelta}, player maxDeltaY = {maxDeltaY})");
 
             // Adjust X values (evenly distributed)
             float baseX = firstSegment.posNow.x;
@@ -559,6 +680,7 @@ public class Rope : MonoBehaviour
         CheckConstraint(); // debug
     }
 
+    // Original veroin of constraints method.
     private void ApplyConstraint_Old()
     {
         RopeSegment firstSegment, endSegment;
@@ -596,6 +718,7 @@ public class Rope : MonoBehaviour
         CheckConstraint(); // debug
     }
 
+    // Debug method to ensure constraints are properly applied.  Mostly gave up on this...
     private void CheckConstraint()
     {
         RopeSegment firstSegment = ropeSegments[0];
