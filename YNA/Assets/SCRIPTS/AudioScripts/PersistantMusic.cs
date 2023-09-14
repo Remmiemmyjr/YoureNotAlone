@@ -212,6 +212,8 @@ public class PersistantMusic : MonoBehaviour
     // ON SCENE LOADED =====================================================
     void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode load_scene_mode)
     {
+        ApplyPauseEffects(false);
+
         // Reset Audio Volumes and pause effects
         audioAlone1.volume = 1.0f;
         audioAlone2.volume = 1.0f;
@@ -219,8 +221,6 @@ public class PersistantMusic : MonoBehaviour
         audioBasic.volume = 1.0f;
         audioSlow.volume = 1.0f;
         audioWin.volume = 1.0f;
-
-        ApplyPauseEffects(false);
 
         // Check the name of the scene for music play changes
         switch (scene.name)
@@ -239,6 +239,12 @@ public class PersistantMusic : MonoBehaviour
                 break;
             case ("Level-5"):
                 Start_Stop_Music(MusicFiles.musicAlone2Loop);
+                break;
+            case ("Level-6"):
+                Start_Stop_Music(MusicFiles.musicSlowLoop);
+                break;
+            case ("Level-6-2"):
+                Start_Stop_Music(MusicFiles.musicWinLoop);
                 break;
             case ("GameOver"):
                 Start_Stop_Music(MusicFiles.musicWinLoop);

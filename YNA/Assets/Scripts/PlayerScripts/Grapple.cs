@@ -38,8 +38,7 @@ public class Grapple : MonoBehaviour
     [HideInInspector]
     public float minRopeLimit;
     float ogMinLimit;
-    [HideInInspector]
-    public float maxRopeLimit = 7f;
+    public float maxRopeLimit = 5f;
     
     float currMaxRopeLimit;
     float currRopeLength;
@@ -50,9 +49,11 @@ public class Grapple : MonoBehaviour
     bool isExtending;
     bool isReeling;
 
-    public bool startTethered = true;
-
     public bool isMenu = false;
+
+    [SerializeField]
+    public bool startTetheredTogether = true;
+
     // *********************************************************************
 
 
@@ -61,6 +62,7 @@ public class Grapple : MonoBehaviour
     private void Awake()
     {
         minRopeLimit = 0.25f;
+        //maxRopeLimit = 5f;
         ogMinLimit = minRopeLimit;
 
         topSolidMap = GameObject.FindGameObjectsWithTag("TopSolidMap");
@@ -79,11 +81,11 @@ public class Grapple : MonoBehaviour
         // Apply tension
         tension = tensionScalar * maxRopeLimit * 100;
 
-        if (joint != null && startTethered)
+        if (joint && startTetheredTogether)
         {
             Tethered(true);
         }
-        else
+        else if (joint && !startTetheredTogether)
         {
             Tethered(false);
         }
@@ -294,7 +296,7 @@ public class Grapple : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // TETHERED ============================================================
-    void Tethered(bool tethered)
+    public void Tethered(bool tethered)
     {
         isTethered = tethered;
         if(joint)

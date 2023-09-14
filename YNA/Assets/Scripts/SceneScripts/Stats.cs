@@ -13,6 +13,7 @@
 //
 //*************************************************
 
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,10 +49,24 @@ public class Stats : MonoBehaviour
     // Music controller for pause fx
     GameObject musicController;
 
+    static bool dontRepeat;
+
+    // Music FX
+    [SerializeField]
+    private AudioClip[] killFX;
+    public AudioSource audioKillSRC;
+
+    // Camera FX
+    CinemachineImpulseSource impulse;
     // *********************************************************************
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
     private void Awake()
     {
         transitionCanvas = GameObject.FindWithTag("Transition")?.GetComponentInChildren<Animator>();
+        impulse = GetComponent<CinemachineImpulseSource>();
 
         pauseUI = GameObject.FindWithTag("Pause");
         pauseMan = GameObject.FindWithTag("PauseManager");
@@ -62,7 +77,10 @@ public class Stats : MonoBehaviour
 
         Info.isDead = false;
         Info.isPaused = false;
+
+        dontRepeat = false;
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================
@@ -88,20 +106,23 @@ public class Stats : MonoBehaviour
     {
         if (Info.isDead)
         {
-            StartCoroutine(TransitionSequence());
+            StartCoroutine(EyeDeathSequence());
         }
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // RESET =============================================================
     public void ResetLevel(InputAction.CallbackContext ctx)
     {
         // Action performed and not in a cutscene
-        if (!isMainMenu && ctx.performed && !Info.isDead && 
+        if (!isMainMenu && ctx.performed && !Info.isDead &&
             !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
         {
             Info.isDead = true;
             Info.eyeDeath = true;
+
+            StartCoroutine(EyeDeathSequence());
         }
     }
 
@@ -124,12 +145,12 @@ public class Stats : MonoBehaviour
                     pauseUI.SetActive(false);
                 }
 
-                if(eyeManager)
+                if (eyeManager)
                 {
                     eyeManager.GetComponent<ActivateEyes>().PauseEyeAudio(false);
                 }
 
-                if(musicController)
+                if (musicController)
                 {
                     musicController.GetComponent<PersistantMusic>().ApplyPauseEffects(false);
                 }
@@ -173,6 +194,7 @@ public class Stats : MonoBehaviour
         }
     }
 
+
     ////////////////////////////////////////////////////////////////////////
     // PROGRESS ============================================================
     public void Progress(InputAction.CallbackContext ctx)
@@ -205,16 +227,82 @@ public class Stats : MonoBehaviour
     {
         Info.isPaused = !Info.isPaused;
     }
-    
+
 
     ////////////////////////////////////////////////////////////////////////
-    // TRANSITION ==========================================================
-    private IEnumerator TransitionSequence()
+    // TRANSITION EYES =====================================================
+    private IEnumerator EyeDeathSequence()
     {
-        if (stoneShader && Info.eyeDeath)
+        if (!dontRepeat)
         {
+            dontRepeat = true;
+
+            if (stoneShader && Info.eyeDeath)
+            {
+                if (Info.partner)
+                {
+                    // Ensure rope detatch
+                    Info.player.GetComponent<Grapple>().Tethered(false);
+
+                    if (Info.latch.isLatched)
+                    {
+                        Info.latch.ReleaseObject();
+                    }
+
+                    Info.partner.transform.SetParent(null);
+
+                    Info.partner.GetComponentInChildren<ParticleSystem>().Play();
+                    Info.partner.GetComponent<SpriteRenderer>().enabled = false;
+                    Info.partner.GetComponentInChildren<Latch>().ReleaseObject();
+                }
+
+                StartCoroutine(stoneShader.Lerp(1));
+                CameraShake.manager.Shake(impulse, 0.25f);
+                audioKillSRC.PlayOneShot(killFX[0]);
+            }
+
+            Info.player.transform.SetParent(null);
+
+            yield return new WaitForSeconds(1.5f);
+
+
+            if (transitionCanvas)
+            {
+                transitionCanvas.SetTrigger("EyeDeath");
+
+                yield return new WaitForSeconds(transitionCanvas.GetCurrentAnimatorClipInfo(0).Length);
+            }
+
+            // Could change back to using levelname if needed
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // TRANSITION OBSTACLE =================================================
+    public IEnumerator ObstacleDeathSequence()
+    {
+        Info.isDead = true;
+        Info.eyeDeath = false;
+
+        if (!dontRepeat)
+        {
+            dontRepeat = true;
+            CameraShake.manager.Shake(impulse, 0.25f);
+            audioKillSRC.PlayOneShot(killFX[1]);
+
             if (Info.partner)
             {
+                // Ensure rope detatch
+                Info.player.GetComponent<Grapple>().Tethered(false);
+
+                if (Info.latch.isLatched)
+                {
+                    Info.latch.ReleaseObject();
+                }
+
+                // Partner stuff
                 Info.partner.transform.SetParent(null);
 
                 Info.partner.GetComponentInChildren<ParticleSystem>().Play();
@@ -222,18 +310,24 @@ public class Stats : MonoBehaviour
                 Info.partner.GetComponentInChildren<Latch>().ReleaseObject();
             }
 
-            StartCoroutine(stoneShader.Lerp(1));
+            Info.player.transform.SetParent(null);
+
+            Info.player.GetComponent<ParticleSystem>().Play();
+            Info.player.GetComponent<SpriteRenderer>().enabled = false;
+            Info.player.GetComponent<LineRenderer>().enabled = false;
+
+            yield return new WaitForSeconds(1.5f);
+
+
+            if (transitionCanvas)
+            {
+                transitionCanvas.SetTrigger("EyeDeath");
+
+                yield return new WaitForSeconds(transitionCanvas.GetCurrentAnimatorClipInfo(0).Length);
+            }
+
+            // Could change back to using levelname if needed
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-
-        yield return new WaitForSeconds(1.5f);
-
-        if (transitionCanvas)
-        {
-            transitionCanvas.SetTrigger("EyeDeath");
-
-            yield return new WaitForSeconds(transitionCanvas.GetCurrentAnimatorClipInfo(0).Length);
-        }
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

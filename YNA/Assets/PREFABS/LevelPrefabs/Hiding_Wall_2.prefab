@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4714023423283390917}
   - component: {fileID: 4714023423283390918}
   - component: {fileID: 4714023423283390919}
-  - component: {fileID: 4714023423283390916}
   m_Layer: 0
   m_Name: Hiding_Wall_2
   m_TagString: Hideable
@@ -116,16 +115,3 @@ PolygonCollider2D:
       - {x: 0.5342078, y: 0.6267521}
       - {x: -0.25048035, y: 0.26070487}
       - {x: -0.88085914, y: -1.1543298}
---- !u!114 &4714023423283390916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4714023423283390912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17a27fda235540a44803bdf84d44033a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHidden: 0

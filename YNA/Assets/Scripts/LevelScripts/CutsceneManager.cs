@@ -30,6 +30,8 @@ public class CutsceneManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
 
+    public Component[] componentsToDisable;
+
     // Cutscene Items
     public Cutscene[] cutscenes;
     private Cutscene activeCutscene;
@@ -40,9 +42,10 @@ public class CutsceneManager : MonoBehaviour
     private bool isCurrentlyPlaying = false;
     private int currentFrameIndex = 0;
     private float cutsceneTimer = 0.0f;
+    public float holdFrame = 1.5f;
 
     private bool skipHold = false;
-    private const float skipTheshold = 1.5f;
+    private const float skipTheshold = 1f;
     private float skipTimer = 0.0f;
 
     private const float fadeTime = 2.0f;
@@ -51,6 +54,8 @@ public class CutsceneManager : MonoBehaviour
     private bool isStartCutscene = false;
 
     private PlayerInput inputManager;
+
+    private AudioSource cutsceneAS;
 
     [SerializeField]
     public UnityEvent FadeToBlack;
@@ -88,6 +93,9 @@ public class CutsceneManager : MonoBehaviour
         // Get the canvas to play cutscenes on
         cutsceneCanvasFrame = transform.Find("Frame").GetComponent<Image>();
         cutsceneCanvasTimer = transform.Find("Timer").GetComponent<Image>();
+
+        // Get the audio source to play the sound on
+        cutsceneAS = GetComponent<AudioSource>();
 
         // If a cutscene is to play when the scene is loaded, then trigger it
         foreach (Cutscene currCutscene in cutscenes)
@@ -189,7 +197,7 @@ public class CutsceneManager : MonoBehaviour
     // Start FinishCutscene after delay...
     public IEnumerator Load()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(holdFrame);
         FinishCutscene();
     }
 
@@ -198,11 +206,28 @@ public class CutsceneManager : MonoBehaviour
     // START CUTSCENE ======================================================
     public void StartCutscene()
     {
+        // Disable any components that are interfering with the cutscene
+        for(int i = 0; i < componentsToDisable.Length; i++) 
+        {
+            componentsToDisable[i].gameObject.SetActive(false);
+        }
+
         // No player input allowed
         inputManager.actions.Disable();
 
         // Update sprite
         cutsceneCanvasFrame.sprite = activeCutscene.frames[currentFrameIndex].frameImage;
+
+        // Check if we have a cutscene music track to play
+        if (activeCutscene.cutsceneTrack)
+        {
+            // Fade out normal music
+            StartCoroutine(GameObject.FindWithTag("MusicController").GetComponent<PersistantMusic>().LerpAudioOut(1.5f));
+
+            // Play the cutscene music
+            cutsceneAS.clip = activeCutscene.cutsceneTrack;
+            cutsceneAS.Play();
+        }
 
         // Ensure they exist
         if (cutsceneCanvasFrame && cutsceneCanvasTimer)
@@ -255,6 +280,16 @@ public class CutsceneManager : MonoBehaviour
             cutsceneCanvasFrame.enabled = false;
             cutsceneCanvasTimer.enabled = false;
         }
+
+        // Re-enable any components that were interfering with the cutscene
+        for (int i = 0; i < componentsToDisable.Length; i++)
+        {
+            componentsToDisable[i].gameObject.SetActive(true);
+        }
+
+        // Stop Audio Source and fade music back in
+        cutsceneAS.Stop();
+        StartCoroutine(GameObject.FindWithTag("MusicController").GetComponent<PersistantMusic>().LerpAudioIn(0.1f));
 
         // If marked to be at the end of a scene, advance
         if (activeCutscene.nextSceneOnFinish)
@@ -328,6 +363,7 @@ public class CutsceneManager : MonoBehaviour
         // Make sure a cutscene is playing
         if (isCurrentlyPlaying)
         {
+            cutsceneAS.Pause();
             skipHold = true;
         }
     }
@@ -342,6 +378,9 @@ public class CutsceneManager : MonoBehaviour
         {
             skipTimer = 0.0f;
             skipHold = false;
+
+            // Resume Audio
+            cutsceneAS.Play();
 
             // Update the skip timer UI
             if (cutsceneCanvasTimer)
@@ -406,6 +445,9 @@ public class Cutscene
 
     [SerializeField]
     public UnityEvent PostEvent;
+
+    [SerializeField]
+    public AudioClip cutsceneTrack;
 }
 
 

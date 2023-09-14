@@ -21,16 +21,11 @@ using UnityEngine.SceneManagement;
 
 public class ObstacleKill : MonoBehaviour
 {
-    // Transitions
-    private Animator transitionCanvas;
-    static bool dontRepeat;
+    Stats stats;
 
-    ////////////////////////////////////////////////////////////////////////
-    // AWAKE ===============================================================
-    void Awake()
+    private void Start()
     {
-        transitionCanvas = GameObject.FindWithTag("Transition").GetComponentInChildren<Animator>();
-        dontRepeat = false;
+        stats = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>();
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -39,49 +34,7 @@ public class ObstacleKill : MonoBehaviour
     {
         if (collision.tag == "Player" || collision.tag == "Partner")
         {
-            StartCoroutine(TransitionSequence());
-        }
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////
-    // TRANSITION SEQUENCE =================================================
-    private IEnumerator TransitionSequence()
-    {
-        Info.isDead = true;
-        Info.eyeDeath = false;
-
-        if (!dontRepeat)
-        {
-            dontRepeat = true;
-
-            if (Info.partner)
-            {
-                Info.partner.transform.SetParent(null);
-
-                Info.partner.GetComponentInChildren<ParticleSystem>().Play();
-                Info.partner.GetComponent<SpriteRenderer>().enabled = false;
-                Info.partner.GetComponentInChildren<Latch>().ReleaseObject();
-            }
-
-            Info.player.transform.SetParent(null);
-
-            Info.player.GetComponent<ParticleSystem>().Play();
-            Info.player.GetComponent<SpriteRenderer>().enabled = false;
-            Info.player.GetComponent<LineRenderer>().enabled = false;
-
-            yield return new WaitForSeconds(1.5f);
-
-
-            if (transitionCanvas)
-            {
-                transitionCanvas.SetTrigger("EyeDeath");
-
-                yield return new WaitForSeconds(transitionCanvas.GetCurrentAnimatorClipInfo(0).Length);
-            }
-
-            // Could change back to using levelname if needed
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            StartCoroutine(stats.ObstacleDeathSequence());
         }
     }
 }

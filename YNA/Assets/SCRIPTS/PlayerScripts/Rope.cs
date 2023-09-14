@@ -90,6 +90,7 @@ public class Rope : MonoBehaviour
     void Start()
     {
         //segmentLength = 0.2f; // 0.1 is too close...
+        //maxRopeListSize = (int)(Info.grapple.maxRopeLimit / segmentLength);
 
         if(Info.partner == null) // too soon!
             return;
@@ -97,6 +98,16 @@ public class Rope : MonoBehaviour
         // Get the line renderer
         lineRenderer = GetComponent<LineRenderer>();
         Vector3 ropeStartPoint = transform.position; // Start at player position
+
+        // Calculate the number of segments
+        //distance = Vector2.Distance(Info.player.transform.position, Info.partner.transform.position);
+        //currRopeListSize = (int)(distance / segmentLength);
+
+        // Make sure we don't go over max
+        //if (currRopeListSize > maxRopeListSize)
+        //{
+        //    maxRopeListSize = currRopeListSize;
+        //}
 
         // Create and add segments to list
         for (int i = 0; i < maxRopeListSize; ++i)

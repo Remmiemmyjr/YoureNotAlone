@@ -54,6 +54,12 @@ public class MenuPlayerController : MonoBehaviour
             // Hide Pause UI
             pauseUI.SetActive(false);
         }
+
+    }
+
+    private void Start()
+    {
+        Info.grapple.minRopeLimit = 1;
     }
 
 

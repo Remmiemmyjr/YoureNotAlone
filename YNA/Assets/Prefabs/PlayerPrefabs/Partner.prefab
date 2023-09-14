@@ -47,9 +47,9 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 0.69229287, b: 0.4575472, a: 1}
-  m_Intensity: 1.8
+  m_FalloffIntensity: 0.35
+  m_Color: {r: 1, g: 0.7804556, b: 0.61006284, a: 1}
+  m_Intensity: 1.25
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 20
+  m_PointLightOuterRadius: 5.5
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -528,9 +528,9 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 0.69229287, b: 0.4575472, a: 1}
-  m_Intensity: 0.8
+  m_FalloffIntensity: 0.4
+  m_Color: {r: 1, g: 0.7529395, b: 0.56289303, a: 1}
+  m_Intensity: 1.5
   m_LightVolumeIntensity: 0.05
   m_LightVolumeIntensityEnabled: 1
   m_ApplyToSortingLayers: 00000000
@@ -654,14 +654,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6990264937001354183}
   serializedVersion: 8
-  lengthInSec: 0.1
-  simulationSpeed: 0.2
+  lengthInSec: 0.5
+  simulationSpeed: 0.3
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -728,9 +728,9 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 0.75
-      minScalar: 0.25
+      minMaxState: 0
+      scalar: 0.5
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -839,15 +839,15 @@ ParticleSystem:
       maxColor: {r: 0.990566, g: 0.6977571, b: 0.6977571, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.8980393, g: 0.78823537, b: 0.7803922, a: 1}
-        key1: {r: 0.12941177, g: 0.14509805, b: 0.011764707, a: 1}
+        key0: {r: 0.9060127, g: 0.9137255, b: 0.69803923, a: 1}
+        key1: {r: 1, g: 1, b: 1, a: 1}
         key2: {r: 0.7264151, g: 0.34721723, b: 0.34721723, a: 0}
         key3: {r: 0.7264151, g: 0.34721723, b: 0.34721723, a: 0}
         key4: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
-        ctime0: 22937
+        ctime0: 33731
         ctime1: 65535
         ctime2: 65342
         ctime3: 65342
@@ -1221,7 +1221,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 15
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1282,7 +1282,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: -0.5, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 1}
+    m_Scale: {x: 1.29, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -1751,7 +1751,7 @@ ParticleSystem:
     enabled: 1
     x:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -1804,7 +1804,7 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -1857,9 +1857,9 @@ ParticleSystem:
         m_RotationOrder: 4
     curve:
       serializedVersion: 2
-      minMaxState: 1
-      scalar: 0.7853981
-      minScalar: 0
+      minMaxState: 3
+      scalar: 17.453293
+      minScalar: 1.7453293
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1920,7 +1920,7 @@ ParticleSystem:
         serializedVersion: 2
         key0: {r: 1, g: 0.8862745, b: 0.8784314, a: 1}
         key1: {r: 1, g: 0.8862745, b: 0.8784314, a: 0}
-        key2: {r: 0.94117653, g: 0.5764706, b: 0.18431373, a: 1}
+        key2: {r: 1, g: 0.8862745, b: 0.8784314, a: 1}
         key3: {r: 0.94117653, g: 0.5764706, b: 0.18431373, a: 1}
         key4: {r: 0, g: 0, b: 0, a: 1}
         key5: {r: 0, g: 0, b: 0, a: 1}
@@ -1928,14 +1928,14 @@ ParticleSystem:
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
         ctime1: 65535
-        ctime2: 45682
+        ctime2: 65535
         ctime3: 45682
         ctime4: 0
         ctime5: 0
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 65535
+        atime1: 26214
         atime2: 65535
         atime3: 65535
         atime4: 65535
@@ -2156,7 +2156,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 75
+      scalar: 50
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5374,7 +5374,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9ada55f65b17916468ec878696ceeb25, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5394,7 +5394,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_RenderMode: 3
   m_MeshDistribution: 0
   m_SortMode: 4
@@ -5503,6 +5503,22 @@ PrefabInstance:
     - target: {fileID: 6827436741094474417, guid: 5aea80f51ff0efd4f8b52055ae96ab53, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7111280337407157683, guid: 5aea80f51ff0efd4f8b52055ae96ab53, type: 3}
+      propertyPath: m_Size.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7111280337407157683, guid: 5aea80f51ff0efd4f8b52055ae96ab53, type: 3}
+      propertyPath: m_Size.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7111280337407157683, guid: 5aea80f51ff0efd4f8b52055ae96ab53, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7111280337407157683, guid: 5aea80f51ff0efd4f8b52055ae96ab53, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.375
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5aea80f51ff0efd4f8b52055ae96ab53, type: 3}
