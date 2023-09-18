@@ -5693,7 +5693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460425, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: orthographic size
-      value: 5.75
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460426, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_Name
@@ -5709,11 +5709,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460430, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.127777
+      value: -0.8885999
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460430, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3125
+      value: -2.0606954
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460430, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5839,6 +5839,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: bloom_toggle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: bloom_instant
       value: 0
       objectReference: {fileID: 0}
@@ -5876,6 +5880,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2548714324689700366, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: vignette_start_val
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: bloom_toggle
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3233259910302734354, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
@@ -6091,6 +6099,10 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7059970352525603907, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
+      propertyPath: bloom_toggle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7059970352525603907, guid: 2dafa802b8ac03c4c97c2dd534172425, type: 3}
       propertyPath: bloom_goal_val
       value: 8.3
       objectReference: {fileID: 0}
@@ -6224,7 +6236,7 @@ MonoBehaviour:
   vignette_start_val: 0
   vignette_goal_val: 0
   vignette_lerp_time: 0
-  bloom_toggle: 1
+  bloom_toggle: 0
   bloom_instant: 0
   bloom_start_val: 8.3
   bloom_goal_val: 6

@@ -19,6 +19,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public enum EyeStates
 {
@@ -41,6 +43,10 @@ public class ActivateEyes : MonoBehaviour
     GameObject Partner;
     EyeProfile profile;
 
+    Volume globalVolume;
+    VolumeProfile volProf;
+    Bloom bloom;
+
     // Eyes are to be assigned through the children
     private GameObject[] Eyes;
 
@@ -56,11 +62,14 @@ public class ActivateEyes : MonoBehaviour
     public float maxSeek = 6.5f;
     public float wakingTime = 3.5f;
     public float gracePeriod;
-    
-    float timeInSight;
+
+    [HideInInspector]
+    public float currTime;
+    [HideInInspector]
+    public float seekTime;
+    [HideInInspector]
+    public float timeInSight;
     float maxTime;
-    float currTime;
-    float seekTime;
 
     bool playerSpotted = false;
 
@@ -105,6 +114,10 @@ public class ActivateEyes : MonoBehaviour
 
         musicController = GameObject.FindWithTag("MusicController").GetComponent<PersistantMusic>();
 
+        globalVolume = gameObject.GetComponent<PostProcessingManager>().GetGlobalVolume();
+        volProf = globalVolume.profile;
+        volProf.TryGet<Bloom>(out bloom);
+
         impulse = GetComponent<CinemachineImpulseSource>();
     }
 
@@ -143,6 +156,7 @@ public class ActivateEyes : MonoBehaviour
         if (currTime >= 0 && !playerSpotted)
         {
             Sleep();
+            bloom.intensity.value = SettingsControl.myBloomVal;
             status = EyeStates.SLEEPING;
         }
 
@@ -172,7 +186,7 @@ public class ActivateEyes : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // SLEEP ===============================================================
-    void Sleep()
+    public void Sleep()
     {
         // If the eyes just closed...
         if (timeToHide)

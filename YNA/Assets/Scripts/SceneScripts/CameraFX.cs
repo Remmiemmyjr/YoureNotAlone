@@ -107,7 +107,7 @@ public class CameraFX : MonoBehaviour
     public float gain_goal_val = 0.0f;
     public float gain_lerp_time = 0.0f;
 
-    float bloomDefaultThreshold = 0.725f;
+    float bloomDefaultIntensity = 0.65f;
     // *********************************************************************
 
 
@@ -129,7 +129,7 @@ public class CameraFX : MonoBehaviour
 
         float gammaVal = PlayerPrefs.GetFloat("Gamma");
         liftGammaGain.gamma.Override(new Vector4(0, 0, 0, gammaVal));
-        bloom.threshold.value = bloomDefaultThreshold + (gammaVal * 0.1f);
+        bloom.intensity.value = bloomDefaultIntensity + (gammaVal * 0.1f);
     }
 
 

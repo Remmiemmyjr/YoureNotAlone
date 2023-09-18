@@ -23,9 +23,7 @@ public class EyeProfile : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
-    ActivateEyes manager;
     Animator eyeAnim;
-    SpriteRenderer eyeRenderer;
     Light2D eyeLight;
     [SerializeField]
     private float eyeIntenstityOpen = 1.0f;
@@ -40,11 +38,7 @@ public class EyeProfile : MonoBehaviour
     // AWAKE ===============================================================
     void Awake()
     {
-        manager = GameObject.FindGameObjectWithTag("EyeManager")?.GetComponent<ActivateEyes>();
-        
         eyeAnim = GetComponent<Animator>();
-        eyeRenderer = GetComponent<SpriteRenderer>();
-
         eyeLight = GetComponent<Light2D>();
     }
 

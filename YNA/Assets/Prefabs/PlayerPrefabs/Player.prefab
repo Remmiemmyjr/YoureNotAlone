@@ -320,6 +320,7 @@ MonoBehaviour:
   maxRopeLimit: 10
   isTethered: 0
   isMenu: 0
+  startTetheredTogether: 1
 --- !u!114 &7051889565614328847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5410,7 +5411,11 @@ MonoBehaviour:
   maxRopeListSize: 70
   minRopeListSize: 5
   lineWidth: 0.1
-  gravityScale: 2
+  gravityScale: 5
+  frictionFactor: 2
+  CompressionFactor: 1
+  ropePullForceMultiplier: 40
+  DebugLogging: 0
 --- !u!1 &783348942485166086
 GameObject:
   m_ObjectHideFlags: 0

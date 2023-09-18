@@ -13,14 +13,13 @@
 //
 //*************************************************
 
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
-using TMPro;
-using UnityEngine.UI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class SettingsControl : MonoBehaviour
 {
@@ -35,7 +34,9 @@ public class SettingsControl : MonoBehaviour
     VolumeProfile volProf;
     LiftGammaGain liftGammaGain;
     Bloom bloom;
-    public float bloomDefaultThreshold = 0.725f;
+    public float bloomDefaultIntensity = 0.65f;
+    [HideInInspector]
+    public static float myBloomVal;
 
     public Slider volumeSlider;
     public Slider brightnessSlider;
@@ -53,7 +54,8 @@ public class SettingsControl : MonoBehaviour
 
         float gammaVal = PlayerPrefs.GetFloat("Gamma");
         liftGammaGain.gamma.Override(new Vector4(0, 0, 0, gammaVal));
-        bloom.threshold.value = bloomDefaultThreshold + (gammaVal * 0.1f);
+        bloom.intensity.value = bloomDefaultIntensity + (gammaVal * 0.1f);
+        myBloomVal = bloom.intensity.value;
 
         // Update Slider UI
         float masterVol = 0.0f;
@@ -146,7 +148,8 @@ public class SettingsControl : MonoBehaviour
     public void SetGamma(float gammaVal)
     {
         liftGammaGain.gamma.Override(new Vector4(0, 0, 0, gammaVal));
-        bloom.threshold.value = bloomDefaultThreshold + (gammaVal * 0.125f);
+        bloom.intensity.value = bloomDefaultIntensity + (gammaVal * 0.1f);
+        myBloomVal = bloom.intensity.value;
 
         PlayerPrefs.SetFloat("Gamma", gammaVal);
         PlayerPrefs.Save();
