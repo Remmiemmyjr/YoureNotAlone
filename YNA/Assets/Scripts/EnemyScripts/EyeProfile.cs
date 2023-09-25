@@ -40,6 +40,7 @@ public class EyeProfile : MonoBehaviour
     {
         eyeAnim = GetComponent<Animator>();
         eyeLight = GetComponent<Light2D>();
+        eyeLight.intensity = eyeIntenstityClosed;
     }
 
 
