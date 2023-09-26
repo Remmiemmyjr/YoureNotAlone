@@ -21,6 +21,7 @@ public class DisableEyes : MonoBehaviour
     
     CinemachineImpulseSource impulse;
 
+
     private void Awake()
     {
         impulse = GetComponent<CinemachineImpulseSource>();
@@ -54,7 +55,7 @@ public class DisableEyes : MonoBehaviour
                 eyes.SetActive(false);
 
             if (camShake && impulse)
-                CameraShake.manager.Shake(impulse, 0.25f);
+                CameraShake.manager.Shake(impulse, 0.35f);
         }
     }
 

@@ -3067,6 +3067,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6737288363201554024, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b28d0bbb07fc2fe428ff19de8d90ac3b, type: 3}
+    - target: {fileID: 6737288363201554024, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: 4368215399571266805, guid: e5d0227de5a9271419919cc779c91cea, type: 2}
@@ -3121,6 +3125,14 @@ PrefabInstance:
     - target: {fileID: 6737288363201554030, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
       propertyPath: startingVolume
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737288363201554031, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: aad8b2be5ce51c7449ae0a01bd27f0d6, type: 3}
+    - target: {fileID: 8242680775051632076, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
+      propertyPath: Loop
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7016e500d3357ee40809c0654aedf09a, type: 3}
@@ -16494,7 +16506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: e5d0227de5a9271419919cc779c91cea, type: 2}
   resolutionDropdown: {fileID: 259934942}
-  bloomDefaultThreshold: 0.65
+  bloomDefaultIntensity: 0.65
   volumeSlider: {fileID: 850950203}
   brightnessSlider: {fileID: 1783674435}
 --- !u!114 &2126234173

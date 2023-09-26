@@ -73,12 +73,17 @@ public class Grapple : MonoBehaviour
     // START ===============================================================
     void Start()
     {
+        if(Retether.relink == true)
+        {
+            startTetheredTogether = true;
+        }
+
         rope = GetComponent<Rope>();
         joint = Info.partner?.GetComponent<SpringJoint2D>();
         playerController = Info.player?.GetComponent<PlayerController>();
 
 
-        // Apply taension
+        // Apply tension
         tension = tensionScalar * maxRopeLimit * 100;
 
         if (joint && startTetheredTogether)

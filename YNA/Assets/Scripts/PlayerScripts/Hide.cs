@@ -15,11 +15,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Hide : MonoBehaviour
 {
     [HideInInspector]
     public bool isHidden;
+    bool isPlayer;
+
+    public Light2D myLight;
+    float power;
+
+    private void Start()
+    {
+        if (gameObject.tag == "Player")
+        {
+            isPlayer = true;
+            myLight.enabled = false;
+        }
+        else
+        {
+            isPlayer = false;
+            power = myLight.intensity;
+        }
+    }
 
     ////////////////////////////////////////////////////////////////////////
     // TRIGGER ENTER =======================================================
@@ -28,11 +47,17 @@ public class Hide : MonoBehaviour
         if (collision.gameObject.tag == "Hideable")
         {
             isHidden = true;
-            GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f);
+
+            GetComponent<SpriteRenderer>().color = new Color(0.45f, 0.45f, 0.45f);
+
+            if (isPlayer)
+                myLight.enabled = true;
+            else
+                myLight.intensity = power - 0.5f;
             
             if(gameObject.GetComponent<Rigidbody2D>()?.velocity == Vector2.zero)
             {
-                if (gameObject.tag == "Player")
+                if (isPlayer)
                 {
                     gameObject.GetComponent<SetPlayerAnimState>().SetNextState(SetPlayerAnimState.PlayerStates.cHiding);
                 }
@@ -53,6 +78,10 @@ public class Hide : MonoBehaviour
         {
             isHidden = false;
             GetComponent<SpriteRenderer>().color = Color.white;
+            if (isPlayer)
+                myLight.enabled = false;
+            else
+                myLight.intensity = power;
         }
     }
 }

@@ -28,6 +28,7 @@ public enum MusicFiles
     musicBasicLoop,
     musicSlowLoop,
     musicWinLoop,
+    musicWTF,
     musicCount
 }
 
@@ -45,6 +46,7 @@ public class PersistantMusic : MonoBehaviour
     public AudioSource audioAlone2;
     public AudioSource audioSlow;
     public AudioSource audioWin;
+    public AudioSource audioWTF;
 
     private AudioSource currentSource;
     private MusicFiles currentFile;
@@ -104,6 +106,7 @@ public class PersistantMusic : MonoBehaviour
             audioBasic.Stop();
             audioSlow.Stop();
             audioWin.Stop();
+            audioWTF.Stop();
 
             // Start if not already playing
             if (audioMenu.isPlaying == false)
@@ -122,6 +125,7 @@ public class PersistantMusic : MonoBehaviour
             audioMenu.Stop();
             audioSlow.Stop();
             audioWin.Stop();
+            audioWTF.Stop();
 
             // Start if not already playing
             if (audioAlone1.isPlaying == false)
@@ -140,6 +144,7 @@ public class PersistantMusic : MonoBehaviour
             audioMenu.Stop();
             audioSlow.Stop();
             audioWin.Stop();
+            audioWTF.Stop();
 
             // Start if not already playing
             if (audioAlone2.isPlaying == false)
@@ -158,6 +163,7 @@ public class PersistantMusic : MonoBehaviour
             audioMenu.Stop();
             audioSlow.Stop();
             audioWin.Stop();
+            audioWTF.Stop();
 
             // Start if not already playing
             if (audioBasic.isPlaying == false)
@@ -176,6 +182,7 @@ public class PersistantMusic : MonoBehaviour
             audioBasic.Stop();
             audioMenu.Stop();
             audioWin.Stop();
+            audioWTF.Stop();
 
             // Start if not already playing
             if (audioSlow.isPlaying == false)
@@ -194,12 +201,32 @@ public class PersistantMusic : MonoBehaviour
             audioBasic.Stop();
             audioMenu.Stop();
             audioSlow.Stop();
+            audioWTF.Stop();
 
             // Start if not already playing
             if (audioWin.isPlaying == false)
             {
                 audioWin.Play();
                 currentSource = audioWin;
+            }
+        }
+        else if (music_file == MusicFiles.musicWTF)
+        {
+            currentFile = MusicFiles.musicWTF;
+
+            // Stop other sources
+            audioAlone1.Stop();
+            audioAlone2.Stop();
+            audioBasic.Stop();
+            audioMenu.Stop();
+            audioSlow.Stop();
+            audioWTF.Stop();
+
+            // Start if not already playing
+            if (audioWTF.isPlaying == false)
+            {
+                audioWTF.Play();
+                currentSource = audioWTF;
             }
         }
 
@@ -221,6 +248,7 @@ public class PersistantMusic : MonoBehaviour
         audioBasic.volume = 1.0f;
         audioSlow.volume = 1.0f;
         audioWin.volume = 1.0f;
+        audioWTF.volume = 1.0f;
 
         // Check the name of the scene for music play changes
         switch (scene.name)
@@ -236,6 +264,9 @@ public class PersistantMusic : MonoBehaviour
                 break;
             case ("Tutorial-Transition"):
                 Start_Stop_Music(MusicFiles.musicAlone1Loop);
+                break;
+            case ("Level-4"):
+                Start_Stop_Music(MusicFiles.musicWTF);
                 break;
             case ("Level-5"):
                 Start_Stop_Music(MusicFiles.musicAlone2Loop);
