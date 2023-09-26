@@ -23,6 +23,7 @@ public class BoxStats : MonoBehaviour
     // VARIABLES ===========================================================
     public Material boxMat;
     public Material outlineMat;
+    public Material shimmerMat;
     public Color canGrab;
     public Color isGrabbed;
     SpriteRenderer sr;
@@ -55,10 +56,12 @@ public class BoxStats : MonoBehaviour
     // the outline color should change (if partner is near box VS holding it)
     public void SetOutlineMat(bool colorSwap)
     {
-        sr.material = outlineMat;
         if (colorSwap)
-            outlineMat.SetColor("_Color_Outline", isGrabbed);
+        {
+            sr.material = shimmerMat;
+            //outlineMat.SetColor("_Color_Outline", isGrabbed);
+        }
         else
-            outlineMat.SetColor("_Color_Outline", canGrab);
+            sr.material = shimmerMat;
     }
 }
