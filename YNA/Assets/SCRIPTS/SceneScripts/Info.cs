@@ -66,4 +66,19 @@ public class Info : MonoBehaviour
             }
         }
     }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            if (isPaused)
+            {
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.visible = false;
+            }
+        }
+    }
 }
