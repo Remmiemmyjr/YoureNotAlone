@@ -68,6 +68,9 @@ public class PauseManager : MonoBehaviour
     void Start()
     {
         transitionCanvas = GameObject.FindWithTag("Transition").GetComponentInChildren<Animator>();
+
+        // Add input callback
+        InputSystem.onDeviceChange += InputConnectionChangeCallback;
     }
 
 
@@ -272,6 +275,58 @@ public class PauseManager : MonoBehaviour
     void OnApplicationFocus(bool hasFocus)
     {
         if (!Info.isPaused && !hasFocus && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
+        {
+            Info.isPaused = true;
+
+            if (pauseCanvas)
+            {
+                // Show Pause UI
+                pauseCanvas.SetActive(true);
+
+                // Set first button as being active
+                GameObject resumeButton = pauseCanvas.transform.Find("Resume").gameObject;
+
+                if (resumeButton)
+                {
+                    EventSystem.current.SetSelectedGameObject(resumeButton);
+                }
+            }
+
+            if (eyeManager)
+            {
+                eyeManager.GetComponent<ActivateEyes>().PauseEyeAudio(true);
+            }
+
+            if (musicController)
+            {
+                musicController.GetComponent<PersistantMusic>().ApplyPauseEffects(true);
+            }
+
+            // Set paused timescale
+            Time.timeScale = 0;
+        }
+    }
+
+    private void InputConnectionChangeCallback(object obj, InputDeviceChange change)
+    {
+        bool controllerDC = false;
+        switch (change)
+        {
+            case InputDeviceChange.Disconnected:
+                // Device got unplugged.
+                controllerDC = true;
+                break;
+            case InputDeviceChange.Removed:
+                // Remove from Input System entirely; by default, Devices stay in the system once discovered.
+                controllerDC = true;
+                break;
+            default:
+                // See InputDeviceChange reference for other event types.
+                break;
+        }
+
+        // Pause on controller DC
+        if (controllerDC && !Info.isPaused && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
         {
             Info.isPaused = true;
 
