@@ -82,7 +82,7 @@ public class PauseManager : MonoBehaviour
         }
 
         // If the player wants to use buttons after using the mouse, reset the active object
-        if (EventSystem.current.currentSelectedGameObject == null && (Input.anyKey || (Input.GetAxis("Horizontal") != 0) || Input.GetAxis("Vertical") != 0) && !inSettings)
+        if (EventSystem.current.currentSelectedGameObject == null && (Input.anyKey || Mathf.Abs(Input.GetAxis("Vertical")) > 0 || Mathf.Abs(Input.GetAxis("Horizontal")) > 0))
         {
             GameObject activeButton = null;
 
@@ -267,5 +267,40 @@ public class PauseManager : MonoBehaviour
     public bool GetInSubMenu()
     {
         return (inSettings || inConfirmation || inControls);
+    }
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (!Info.isPaused && !hasFocus && !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
+        {
+            Info.isPaused = true;
+
+            if (pauseCanvas)
+            {
+                // Show Pause UI
+                pauseCanvas.SetActive(true);
+
+                // Set first button as being active
+                GameObject resumeButton = pauseCanvas.transform.Find("Resume").gameObject;
+
+                if (resumeButton)
+                {
+                    EventSystem.current.SetSelectedGameObject(resumeButton);
+                }
+            }
+
+            if (eyeManager)
+            {
+                eyeManager.GetComponent<ActivateEyes>().PauseEyeAudio(true);
+            }
+
+            if (musicController)
+            {
+                musicController.GetComponent<PersistantMusic>().ApplyPauseEffects(true);
+            }
+
+            // Set paused timescale
+            Time.timeScale = 0;
+        }
     }
 }

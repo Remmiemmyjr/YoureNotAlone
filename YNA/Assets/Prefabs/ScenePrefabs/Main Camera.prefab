@@ -2241,6 +2241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 247549287829639426}
   - component: {fileID: 3411533960773899306}
+  - component: {fileID: 5678952755443661823}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -2319,6 +2320,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!114 &5678952755443661823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096112307574659439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdfa3ebcc53bff64e9705be549fca963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2335963127056765613
 GameObject:
   m_ObjectHideFlags: 0
@@ -9768,7 +9781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: e5d0227de5a9271419919cc779c91cea, type: 2}
   resolutionDropdown: {fileID: 8293572820333809612}
-  bloomDefaultThreshold: 0.65
+  bloomDefaultIntensity: 0.65
   volumeSlider: {fileID: 8435330337076286109}
   brightnessSlider: {fileID: 620566265781997135}
 --- !u!1 &5034473582487097896
@@ -11473,7 +11486,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5595333242864460426}
   m_LocalRotation: {x: -9.494824e-16, y: -0.0000000234804, z: -2.2294227e-23, w: 1}
-  m_LocalPosition: {x: 1.1777792, y: -2.3950005, z: -10}
+  m_LocalPosition: {x: 0.26099014, y: -1.7750394, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11520,7 +11533,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.5
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

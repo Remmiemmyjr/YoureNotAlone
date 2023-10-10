@@ -17,6 +17,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR;
 
 public class InstructionsManager : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class InstructionsManager : MonoBehaviour
     private void Start()
     {
         // Add input callback
-        InputSystem.onActionChange += InputActionChangeCallback;
+        InputSystem.onDeviceChange += InputConnectionChangeCallback;
 
         // Check if any gamepads are connected
         var controllers = Input.GetJoystickNames();
@@ -58,19 +59,34 @@ public class InstructionsManager : MonoBehaviour
     // INPUT ACTION CHANGE =================================================
     // Detect if input has been changed from one type to another, then
     // update instruction images accordingly
-    private void InputActionChangeCallback(object obj, InputActionChange change)
+    private void InputConnectionChangeCallback(object obj, InputDeviceChange change)
     {
-        // Detect Changes
-        if (change == InputActionChange.ActionPerformed)
+        switch (change)
         {
-            InputAction receivedInputAction = (InputAction)obj;
-            InputDevice lastDevice = receivedInputAction.activeControl.device;
+            case InputDeviceChange.Added:
+                // New Device.
+                keyboardMouseUsed = false;
+                break;
+            case InputDeviceChange.Disconnected:
+                // Device got unplugged.
+                keyboardMouseUsed = true;
+                break;
+            case InputDeviceChange.Reconnected:
+                // Device Reconnected
+                keyboardMouseUsed = false;
+                break;
+            case InputDeviceChange.Removed:
+                // Remove from Input System entirely; by default, Devices stay in the system once discovered.
+                keyboardMouseUsed = true;
+                break;
 
-            keyboardMouseUsed = lastDevice.name.Equals("Keyboard") || lastDevice.name.Equals("Mouse");
+            default:
+                // See InputDeviceChange reference for other event types.
+                break;
         }
 
         // Ensure they exist
-        if(!keyboardText || !controllerText)
+        if (!keyboardText || !controllerText)
         {
             //Debug.Log("Instructions text have not been set");
             return;
@@ -88,5 +104,4 @@ public class InstructionsManager : MonoBehaviour
             controllerText.SetActive(true);
         }
     }
-
 }
