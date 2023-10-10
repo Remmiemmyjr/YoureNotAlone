@@ -92,7 +92,7 @@ public class PauseManager : MonoBehaviour
             }
             else if (inControls)
             {
-                activeButton = settingsCanvas.transform.Find("Menu").gameObject;
+                activeButton = controlsCanvas.transform.Find("Menu").gameObject;
             }
             else if (inConfirmation)
             {
