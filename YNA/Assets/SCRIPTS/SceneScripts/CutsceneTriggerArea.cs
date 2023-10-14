@@ -22,7 +22,19 @@ public class CutsceneTriggerArea : MonoBehaviour
     [SerializeField]
     private string cutsceneName;
 
+    [SerializeField]
+    private bool requiresPartner;
+
+    GameObject displayMessage;
+
     CutsceneManager csm;
+
+    ////////////////////////////////////////////////////////////////////////
+    // AWAKE ===============================================================
+    private void Awake()
+    {
+        displayMessage = GameObject.FindWithTag("ProceedCanvas")?.transform.GetChild(0).gameObject;
+    }
 
 
     ////////////////////////////////////////////////////////////////////////
@@ -31,15 +43,33 @@ public class CutsceneTriggerArea : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            if (GameObject.FindGameObjectWithTag("CutsceneCanvas"))
+            if (!requiresPartner || (collision.GetComponent<Grapple>().isTethered))
             {
-                csm = GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>();
-
-                if (!csm.IsCutscenePlayed(cutsceneName))
+                if (GameObject.FindGameObjectWithTag("CutsceneCanvas"))
                 {
-                    StartCoroutine(Load());
+                    csm = GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>();
+
+                    if (!csm.IsCutscenePlayed(cutsceneName))
+                    {
+                        StartCoroutine(Load());
+                    }
                 }
             }
+            else
+            {
+                displayMessage?.SetActive(true);
+            }
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // TRIGGER EXIT =======================================================
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            displayMessage?.SetActive(false);
         }
     }
 
