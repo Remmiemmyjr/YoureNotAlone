@@ -197,14 +197,14 @@ public class Grapple : MonoBehaviour
     // PULL ================================================================
     void Pull()
     {
-        RaycastHit2D hitPlayer = Physics2D.Linecast(Info.player.transform.position, Info.partner.transform.position, 1 << LayerMask.NameToLayer("Ground"));
-        RaycastHit2D hitPartner = Physics2D.Linecast(Info.partner.transform.position, Info.player.transform.position, 1 << LayerMask.NameToLayer("Ground"));
+        RaycastHit2D hitPlayer = Physics2D.Linecast(Info.player.transform.position, Info.partner.transform.position, 1 << LayerMask.NameToLayer("Ground") | 1 << LayerMask.NameToLayer("Box"));
+        RaycastHit2D hitPartner = Physics2D.Linecast(Info.partner.transform.position, Info.player.transform.position, 1 << LayerMask.NameToLayer("Ground") | 1 << LayerMask.NameToLayer("Box"));
 
         // Sent out a ray between the player and the partner in both directions and set the minimum rope distance to the distance between the raycasts
         if (hitPlayer && hitPartner)
         {
             float distance = Vector3.Distance(hitPlayer.point, hitPartner.point);
-            minRopeLimit = distance + ogMinLimit;
+            minRopeLimit = distance;
         }
         else
         {
