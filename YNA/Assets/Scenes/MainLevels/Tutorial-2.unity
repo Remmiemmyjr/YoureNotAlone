@@ -5721,6 +5721,10 @@ PrefabInstance:
       propertyPath: orthographic size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6948772921942046767, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 8159
+      objectReference: {fileID: 0}
     - target: {fileID: 6948772922189228494, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_SortingOrder
       value: 8
@@ -25563,6 +25567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutsceneName: Eyes
+  requiresPartner: 0
 --- !u!61 &2147343210
 BoxCollider2D:
   m_ObjectHideFlags: 0
