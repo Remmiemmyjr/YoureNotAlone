@@ -225,7 +225,7 @@ public class ActivateEyes : MonoBehaviour
 
             // Set the iamwatching mixer group level to 1.
             AudioMixer mg = iamwatching.outputAudioMixerGroup.audioMixer;
-            mg.SetFloat(iamwatchingMGEP, 0.0f);
+            mg.SetFloat(iamwatchingMGEP, -6.0f);
 
             // Play goodmorning
             goodmorning.Play();
@@ -240,7 +240,7 @@ public class ActivateEyes : MonoBehaviour
 
         // Set the iamwatching mixer group level to 1.
         AudioMixer iamwatchingMG = iamwatching.outputAudioMixerGroup.audioMixer;
-        iamwatchingMG.SetFloat(iamwatchingMGEP, 0.0f);
+        iamwatchingMG.SetFloat(iamwatchingMGEP, -6.0f);
 
         // Set the iseeyou mixer group level to 0.
         AudioMixer iseeyouMG = iseeyou.outputAudioMixerGroup.audioMixer;
@@ -271,7 +271,7 @@ public class ActivateEyes : MonoBehaviour
 
             // Set the iamwatching mixer group level to 1.
             AudioMixer iamwatchingMG = iamwatching.outputAudioMixerGroup.audioMixer;
-            iamwatchingMG.SetFloat(iamwatchingMGEP, 0.0f);
+            iamwatchingMG.SetFloat(iamwatchingMGEP, -6.0f);
 
             // Set the iseeyou mixer group level to 0.
             AudioMixer iseeyouMG = iseeyou.outputAudioMixerGroup.audioMixer;
@@ -324,7 +324,7 @@ public class ActivateEyes : MonoBehaviour
 
                 // Set the iseeyou mixer group level to 1.
                 AudioMixer iseeyouMG = iseeyou.outputAudioMixerGroup.audioMixer;
-                iseeyouMG.SetFloat(iseeyouMGEP, 0.0f);
+                iseeyouMG.SetFloat(iseeyouMGEP, -6.0f);
             }
 
             // If timeInSight has depleted the gracePeriod, kill the player.
