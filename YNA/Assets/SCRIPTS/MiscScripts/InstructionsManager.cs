@@ -37,8 +37,7 @@ public class InstructionsManager : MonoBehaviour
         InputSystem.onDeviceChange += InputConnectionChangeCallback;
 
         // Check if any gamepads are connected
-        var controllers = Input.GetJoystickNames();
-        if (controllers.Length != 0)
+        if (Gamepad.all.Count > 0)
             keyboardMouseUsed = false;
 
         // Update instructions accordingly
