@@ -179,6 +179,7 @@ public class PauseManager : MonoBehaviour
             inControls = true;
 
             GameObject activeButton = controlsCanvas.transform.Find("Menu").gameObject;
+            GetComponent<SteamForceAwardAchievement>().AwardAchievement();
 
             if (activeButton)
             {

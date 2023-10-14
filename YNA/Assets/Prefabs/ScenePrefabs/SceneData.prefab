@@ -127,7 +127,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7773893, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5693,7 +5693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460425, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: orthographic size
-      value: 5
+      value: 5.75
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460426, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_Name
@@ -5709,11 +5709,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460430, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.26099014
+      value: -12.127777
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460430, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.7750394
+      value: -1.3125
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460430, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5795,6 +5795,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5595333242864460430, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
   m_PrefabInstance: {fileID: 3299341754706926246}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7500629545088764046 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5034473582487097896, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
+  m_PrefabInstance: {fileID: 3299341754706926246}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3499240141615734339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7500629545088764046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aec532013cb8664c8d13cb17bca229a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bAwardOnStart: 0
+  m_AchievementToAward: 7
 --- !u!1001 &3299341755013604453
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -35,8 +35,8 @@ public class SteamForceAwardAchievement : MonoBehaviour
                 SteamAchievementAwarder.AwardWeWereTethered();
                 break;
 
-            case SteamAchievementIDs.ACH_TETHERED_ONCE_MORE:
-                SteamAchievementAwarder.AwardTetheredOnceMore();
+            case SteamAchievementIDs.ACH_TOGETHER_ONCE_MORE:
+                SteamAchievementAwarder.AwardTogetherOnceMore();
                 break;
 
             case SteamAchievementIDs.ACH_FAREWELL_FRIEND:

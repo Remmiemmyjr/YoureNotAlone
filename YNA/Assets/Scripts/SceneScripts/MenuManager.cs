@@ -136,6 +136,7 @@ public class MenuManager : MonoBehaviour
         menu.SetActive(false);
 
         activeButton = controls.transform.Find("Menu").gameObject;
+        GetComponent<SteamForceAwardAchievement>().AwardAchievement();
 
         if (activeButton)
             EventSystem.current.SetSelectedGameObject(activeButton);

@@ -11,7 +11,7 @@ public enum SteamAchievementIDs
     ACH_YOURE_NOT_ALONE,
     ACH_INTO_THE_DEPTHS,
     ACH_WE_WERE_TETHERED,
-    ACH_TETHERED_ONCE_MORE,
+    ACH_TOGETHER_ONCE_MORE,
     ACH_FAREWELL_FRIEND,
     ACH_YOU_FOUND_HIM,
     ACH_CHAMPION_OF_THE_CRYPT,
@@ -49,7 +49,7 @@ public static class SteamAchievementAwarder
         SteamUserStats.StoreStats();
     }
 
-    public static void AwardTetheredOnceMore()
+    public static void AwardTogetherOnceMore()
     {
         if (!CheckIfAwardValid())
             return;
