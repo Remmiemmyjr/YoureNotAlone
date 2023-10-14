@@ -48,6 +48,10 @@ public class Credits : MonoBehaviour
             if (!inTransition)
             {
                 inTransition = true;
+                if(PlayerPrefs.GetInt("eyeDeathCounter") == 0)
+                {
+                    GetComponent<SteamForceAwardAchievement>().AwardAchievement();
+                }
                 StartCoroutine(ReturnToMenu());
             }
         }

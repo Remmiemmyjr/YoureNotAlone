@@ -97,6 +97,13 @@ public class Stats : MonoBehaviour
             // Hide Pause UI
             settingsCanvas.SetActive(false);
         }
+
+        // CHANGE BACK TO T1
+        if (SceneManager.GetActiveScene().name == "Level-5")
+        {
+            // Reset eye deaths on fresh gameplay
+            PlayerPrefs.SetInt("eyeDeathCounter", 0);
+        }
     }
 
 
@@ -239,6 +246,9 @@ public class Stats : MonoBehaviour
 
             if (stoneShader && Info.eyeDeath)
             {
+                PlayerPrefs.SetInt("eyeDeathCounter", PlayerPrefs.GetInt("eyeDeathCounter") + 1);
+                PlayerPrefs.Save();
+
                 if (Info.partner)
                 {
                     // Ensure rope detatch
