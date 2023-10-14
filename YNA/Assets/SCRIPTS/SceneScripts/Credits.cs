@@ -57,7 +57,7 @@ public class Credits : MonoBehaviour
     {
         StartCoroutine(Lerp(2));
         yield return new WaitForSeconds(2.5f);
-
+        Cursor.visible = true;
         SceneManager.LoadScene("MainMenu");
     }
 
