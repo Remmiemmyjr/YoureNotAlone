@@ -18,6 +18,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.VFX;
 
 public class PauseManager : MonoBehaviour
 {
@@ -41,6 +42,11 @@ public class PauseManager : MonoBehaviour
 
     // Music controller for pause fx
     GameObject musicController;
+
+    [SerializeField]
+    private AudioClip[] paperSounds;
+
+    private AudioSource sfxManagerUI;
     // *********************************************************************
 
 
@@ -60,6 +66,8 @@ public class PauseManager : MonoBehaviour
 
         controlsCanvas.SetActive(false);
         confirmationCanvas.SetActive(false);
+
+        sfxManagerUI = GetComponent<AudioSource>();
     }
 
 
@@ -357,5 +365,11 @@ public class PauseManager : MonoBehaviour
             // Set paused timescale
             Time.timeScale = 0;
         }
+    }
+
+    public void PlayPaperSound()
+    {
+        sfxManagerUI.clip = paperSounds[Random.Range(0, paperSounds.Length)];
+        sfxManagerUI.Play();
     }
 }

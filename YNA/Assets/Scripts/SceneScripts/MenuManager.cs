@@ -35,6 +35,11 @@ public class MenuManager : MonoBehaviour
     LiftGammaGain liftGammaGain;
     Bloom bloom;
     public float bloomDefaultThreshold = 0.725f;
+
+    [SerializeField]
+    private AudioClip[] paperSounds;
+
+    private AudioSource sfxManagerUI;
     // *********************************************************************
 
 
@@ -44,6 +49,8 @@ public class MenuManager : MonoBehaviour
     {
         settings.SetActive(true);
         settings.SetActive(false);
+
+        sfxManagerUI = GetComponent<AudioSource>();
     }
 
 
@@ -178,5 +185,11 @@ public class MenuManager : MonoBehaviour
     public void MenuButton()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void PlayPaperSound()
+    {
+        sfxManagerUI.clip = paperSounds[Random.Range(0, paperSounds.Length)];
+        sfxManagerUI.Play();
     }
 }
