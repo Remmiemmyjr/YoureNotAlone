@@ -2337,6 +2337,7 @@ GameObject:
   - component: {fileID: 382519140}
   - component: {fileID: 382519141}
   - component: {fileID: 382519142}
+  - component: {fileID: 382519143}
   m_Layer: 0
   m_Name: UNTETHER_THE_PARTNER->:)
   m_TagString: Untagged
@@ -2560,6 +2561,20 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0.25, y: 0.25, z: 0}
+--- !u!114 &382519143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382519136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aec532013cb8664c8d13cb17bca229a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bAwardOnStart: 0
+  m_AchievementToAward: 0
 --- !u!1001 &384000778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40483,7 +40498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.129601
+      value: -12.127777
       objectReference: {fileID: 0}
     - target: {fileID: 6948772921942046760, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.y
@@ -40615,6 +40630,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+--- !u!1 &1100601743 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 242953214697988299, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+  m_PrefabInstance: {fileID: 1100601742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1100601744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100601743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aec532013cb8664c8d13cb17bca229a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bAwardOnStart: 1
+  m_AchievementToAward: 1
 --- !u!1001 &1105457137
 PrefabInstance:
   m_ObjectHideFlags: 0

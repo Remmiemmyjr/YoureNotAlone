@@ -12,11 +12,11 @@ public enum SteamAchievementIDs
     ACH_INTO_THE_DEPTHS,
     ACH_WE_WERE_TETHERED,
     ACH_TETHERED_ONCE_MORE,
-    ACH_TIL_THE_END_TOGETHER,
+    ACH_FAREWELL_FRIEND,
     ACH_YOU_FOUND_HIM,
     ACH_CHAMPION_OF_THE_CRYPT,
     ACH_LEARNING_THE_ROPES,
-    ACH_INTO_THE_DARKNESS,
+    ACH_AMONG_THE_DARK,
 }
 
 public static class SteamAchievementAwarder
@@ -36,7 +36,7 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_FOUND_HELICOPTER");
+        SteamUserStats.SetAchievement("ACH_INTO_THE_DEPTHS");
         SteamUserStats.StoreStats();
     }
 
@@ -45,7 +45,7 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_FOUND_RECEIVER");
+        SteamUserStats.SetAchievement("ACH_WE_WERE_TETHERED");
         SteamUserStats.StoreStats();
     }
 
@@ -54,16 +54,16 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_FOUND_ALL");
+        SteamUserStats.SetAchievement("ACH_TETHERED_ONCE_MORE");
         SteamUserStats.StoreStats();
     }
 
-    public static void AwardTilTheEndTogether()
+    public static void AwardFarewellFriend()
     {
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_MISSION_ABANDON");
+        SteamUserStats.SetAchievement("ACH_FAREWELL_FRIEND");
         SteamUserStats.StoreStats();
     }
 
@@ -72,7 +72,7 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_NEVER_HIT_WORLD");
+        SteamUserStats.SetAchievement("ACH_YOU_FOUND_HIM");
         SteamUserStats.StoreStats();
     }
 
@@ -81,7 +81,7 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_HIT_WORLD");
+        SteamUserStats.SetAchievement("ACH_CHAMPION_OF_THE_CRYPT");
         SteamUserStats.StoreStats();
     }
 
@@ -90,16 +90,16 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_HIT_WORLD");
+        SteamUserStats.SetAchievement("ACH_LEARNING_THE_ROPES");
         SteamUserStats.StoreStats();
     }
 
-    public static void AwardIntoTheDarkness()
+    public static void AwardAmongTheDark()
     {
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_HIT_WORLD");
+        SteamUserStats.SetAchievement("ACH_AMONG_THE_DARK");
         SteamUserStats.StoreStats();
     }
 

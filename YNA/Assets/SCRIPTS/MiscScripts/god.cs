@@ -27,6 +27,8 @@ public class god : MonoBehaviour
 
             // Steam Achievement
             spr.enabled = false;
+            GetComponent<SteamForceAwardAchievement>().AwardAchievement();
+
         }
     }
 }

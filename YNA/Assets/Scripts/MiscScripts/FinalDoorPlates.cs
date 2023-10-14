@@ -126,6 +126,7 @@ public class FinalDoorPlates : MonoBehaviour
             yield return new WaitForSeconds(3.0f);
 
             FadeToBlack.Invoke();
+            GetComponent<SteamForceAwardAchievement>().AwardAchievement();
 
             yield return new WaitForSeconds(1.0f);
         }

@@ -23,34 +23,44 @@ public class SteamForceAwardAchievement : MonoBehaviour
     {
         switch (m_AchievementToAward)
         {
-            case SteamAchievementIDs.ACH_FOUND_RADIO_TOWER:
-                SteamAchievementAwarder.AwardFoundRadioTowers();
+            case SteamAchievementIDs.ACH_YOURE_NOT_ALONE:
+                SteamAchievementAwarder.AwardYoureNotAlone();
                 break;
 
-            case SteamAchievementIDs.ACH_FOUND_HELICOPTER:
-                SteamAchievementAwarder.AwardFoundHelicopter();
+            case SteamAchievementIDs.ACH_INTO_THE_DEPTHS:
+                SteamAchievementAwarder.AwardIntoTheDepths();
                 break;
 
-            case SteamAchievementIDs.ACH_FOUND_RECEIVER:
-                SteamAchievementAwarder.AwardCompletedGame();
+            case SteamAchievementIDs.ACH_WE_WERE_TETHERED:
+                SteamAchievementAwarder.AwardWeWereTethered();
                 break;
 
-            case SteamAchievementIDs.ACH_FOUND_ALL:
-                SteamAchievementAwarder.AwardFoundAllRadarPoints();
+            case SteamAchievementIDs.ACH_TETHERED_ONCE_MORE:
+                SteamAchievementAwarder.AwardTetheredOnceMore();
                 break;
 
-            case SteamAchievementIDs.ACH_MISSION_ABANDON:
-                SteamAchievementAwarder.AwardAbandonedMission();
+            case SteamAchievementIDs.ACH_FAREWELL_FRIEND:
+                SteamAchievementAwarder.AwardFarewellFriend();
                 break;
 
-            case SteamAchievementIDs.ACH_NEVER_HIT_WORLD:
-                SteamAchievementAwarder.AwardNeverCollidedWithWorld();
+            case SteamAchievementIDs.ACH_YOU_FOUND_HIM:
+                SteamAchievementAwarder.AwardYouFoundHim();
                 break;
 
-            case SteamAchievementIDs.ACH_HIT_WORLD:
-                SteamAchievementAwarder.AwardCollidedWithWorld();
+            case SteamAchievementIDs.ACH_CHAMPION_OF_THE_CRYPT:
+                SteamAchievementAwarder.AwardChampionOfTheCrypt();
+                break;
+
+            case SteamAchievementIDs.ACH_LEARNING_THE_ROPES:
+                SteamAchievementAwarder.AwardLearningTheRopes();
+                break;
+
+            case SteamAchievementIDs.ACH_AMONG_THE_DARK:
+                SteamAchievementAwarder.AwardAmongTheDark();
                 break;
         }
+
+        Debug.Log(m_AchievementToAward);
     }
 #endif
 }

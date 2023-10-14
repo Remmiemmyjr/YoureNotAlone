@@ -23,6 +23,7 @@ public class Untether : MonoBehaviour
             Info.grapple.Tethered(false);
             iamhere.PlayOneShot(eyembiance);
             CameraShake.manager.Shake(impulse, 0.25f);
+            GetComponent<SteamForceAwardAchievement>().AwardAchievement();
         }
     }
 }
