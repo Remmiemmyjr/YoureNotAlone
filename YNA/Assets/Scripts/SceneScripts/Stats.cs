@@ -99,7 +99,7 @@ public class Stats : MonoBehaviour
         }
 
         // CHANGE BACK TO T1
-        if (SceneManager.GetActiveScene().name == "Level-5")
+        if (SceneManager.GetActiveScene().name == "Tutorial-1")
         {
             // Reset eye deaths on fresh gameplay
             PlayerPrefs.SetInt("eyeDeathCounter", 0);
@@ -127,9 +127,9 @@ public class Stats : MonoBehaviour
             !GameObject.FindGameObjectWithTag("CutsceneCanvas").GetComponent<CutsceneManager>().GetIsCurrentlyPlaying())
         {
             Info.isDead = true;
-            Info.eyeDeath = true;
+            Info.eyeDeath = false;
 
-            StartCoroutine(EyeDeathSequence());
+            StartCoroutine(ObstacleDeathSequence());
         }
     }
 
