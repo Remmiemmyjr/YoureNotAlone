@@ -130,6 +130,7 @@ public class Latch : MonoBehaviour
         {
             obj.GetComponent<BoxStats>().SetOutlineMat(true);
             obj.GetComponent<BoxCollider2D>().enabled = false;
+            obj.transform.GetChild(0).GetComponent<BoxCollider2D>().enabled = false;
 
             Vector3 partnerPos = Info.partner.transform.position;
             partnerPos.z = 1;
@@ -166,6 +167,7 @@ public class Latch : MonoBehaviour
             
             obj.GetComponent<BoxStats>().SetNormalMat();
             obj.GetComponent<BoxCollider2D>().enabled = true;
+            obj.transform.GetChild(0).GetComponent<BoxCollider2D>().enabled = true;
 
             obj.transform.SetParent(null);
 
