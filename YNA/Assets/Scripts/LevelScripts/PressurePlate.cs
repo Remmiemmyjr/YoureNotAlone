@@ -133,7 +133,7 @@ public class PressurePlate : MonoBehaviour
         {
             door.GetComponent<Transform>().Translate(0, 3f * Time.deltaTime, 0);
         }
-        else if (isHorizontal && door.GetComponent<Transform>().position.x < ogPosDoor.x + ((door.GetComponent<Transform>().localScale.y * 2.0f) - (door.GetComponent<Transform>().localScale.y * 0.2f)))
+        else if (isHorizontal && door.GetComponent<Transform>().position.x < ogPosDoor.x + ((door.GetComponent<Transform>().localScale.y * 2.0f + 0.25f) - (door.GetComponent<Transform>().localScale.y * 0.2f)))
         {
             door.GetComponent<Transform>().Translate(0, -3f * Time.deltaTime, 0);
         }
