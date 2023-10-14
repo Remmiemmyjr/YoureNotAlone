@@ -15,6 +15,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Credits : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Credits : MonoBehaviour
 
     public RectTransform destination;
     private RectTransform credits;
+    public Image dark;
 
     bool inTransition = false;
 
@@ -41,7 +43,7 @@ public class Credits : MonoBehaviour
             credits.position = Vector2.MoveTowards(credits.position, destination.position, speed * Time.deltaTime);
         }
         
-        if (Vector2.Distance(credits.position, destination.position) < 1.0f)
+        if (Vector2.Distance(credits.position, destination.position) < 0.1f)
         {
             if (!inTransition)
             {
@@ -53,8 +55,25 @@ public class Credits : MonoBehaviour
 
     IEnumerator ReturnToMenu()
     {
+        StartCoroutine(Lerp(2));
         yield return new WaitForSeconds(2.5f);
 
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public IEnumerator Lerp(float time)
+    {
+        float timeElapsed = 0;
+
+        while (timeElapsed <= time)
+        {
+            float valueToLerp = Mathf.Lerp(0, 1f, timeElapsed / time);
+
+            dark.color = new Vector4(0,0,0, valueToLerp);
+
+            timeElapsed += Time.deltaTime;
+
+            yield return null;
+        }
     }
 }
