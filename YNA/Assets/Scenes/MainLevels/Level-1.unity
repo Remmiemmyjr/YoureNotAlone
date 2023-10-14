@@ -26015,6 +26015,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+--- !u!1 &602932070 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 242953214697988299, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+  m_PrefabInstance: {fileID: 602932069}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &602932071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602932070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aec532013cb8664c8d13cb17bca229a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bAwardOnStart: 1
+  m_AchievementToAward: 0
 --- !u!1001 &650547719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30053,6 +30072,7 @@ GameObject:
   - component: {fileID: 790775206}
   - component: {fileID: 790775208}
   - component: {fileID: 790775207}
+  - component: {fileID: 790775209}
   m_Layer: 0
   m_Name: god
   m_TagString: chris onorati
@@ -34944,6 +34964,20 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &790775209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790775202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aec532013cb8664c8d13cb17bca229a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bAwardOnStart: 0
+  m_AchievementToAward: 5
 --- !u!4 &807694489 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1592018933466471533, guid: 8aeae99c4e2302c4280559a2690b8a3c, type: 3}
