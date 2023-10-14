@@ -131,7 +131,7 @@ public class CutsceneManager : MonoBehaviour
         if (isCurrentlyPlaying && activeCutscene != null)
         {
             // Check for skip
-            if (skipHold && !inFade)
+            if (skipHold)
             {
                 // Update Timer
                 skipTimer += Time.deltaTime;
