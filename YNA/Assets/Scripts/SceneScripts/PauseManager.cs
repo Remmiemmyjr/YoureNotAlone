@@ -251,8 +251,10 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1;
 
         // Reset Level Data
-        cutsceneCanvas.GetComponent<CutsceneManager>().ResetCutscenesPlayed();
-        checkpointController.GetComponent<CheckpointController>().ResetCheckpoints();
+        if(cutsceneCanvas)
+            cutsceneCanvas.GetComponent<CutsceneManager>().ResetCutscenesPlayed();
+        if(checkpointController)
+            checkpointController.GetComponent<CheckpointController>().ResetCheckpoints();
 
         if (gameObject.scene.name == "Level-6")
         {
