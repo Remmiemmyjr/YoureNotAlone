@@ -47,6 +47,8 @@ public class LevelProgression : MonoBehaviour
         displayMessage?.SetActive(false);
 
         transitionCanvas = GameObject.FindWithTag("Transition")?.GetComponentInChildren<Animator>();
+
+        PlayerPrefs.SetInt("buildIndex", SceneManager.GetActiveScene().buildIndex);
     }
 
 

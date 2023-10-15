@@ -20,7 +20,6 @@ using UnityEngine.UI;
 public class Credits : MonoBehaviour
 {
     public float speed;
-    private float ogSpeed;
 
     public RectTransform destination;
     private RectTransform credits;
@@ -32,8 +31,9 @@ public class Credits : MonoBehaviour
     {
         credits = GetComponent<RectTransform>();
 
-        ogSpeed = speed; 
+        ogSpeed = speed;
 
+        PlayerPrefs.SetInt("buildIndex", 0);
     }
 
 
