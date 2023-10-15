@@ -33,11 +33,7 @@ public class Credits : MonoBehaviour
         credits = GetComponent<RectTransform>();
 
         ogSpeed = speed; 
-        
-        if (PlayerPrefs.GetInt("eyeDeathCounter") == 0)
-        {
-            GetComponent<SteamForceAwardAchievement>().AwardAchievement();
-        }
+
     }
 
 
@@ -48,12 +44,17 @@ public class Credits : MonoBehaviour
             credits.position = Vector2.MoveTowards(credits.position, destination.position, speed * Time.deltaTime);
         }
         
-        if (Vector2.Distance(credits.position, destination.position) < 0.1f)
+        if (Vector2.Distance(credits.position, destination.position) < 0.5f)
         {
             if (!inTransition)
             {
                 inTransition = true;
- 
+
+                if (PlayerPrefs.GetInt("eyeDeathCounter") == 0)
+                {
+                    GetComponent<SteamForceAwardAchievement>().AwardAchievement();
+                }
+
                 StartCoroutine(ReturnToMenu());
             }
         }
