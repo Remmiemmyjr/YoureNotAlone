@@ -54,7 +54,7 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("TETHERED_ONCE_MORE");
+        SteamUserStats.SetAchievement("TOGETHER_ONCE_MORE");
         SteamUserStats.StoreStats();
     }
 
