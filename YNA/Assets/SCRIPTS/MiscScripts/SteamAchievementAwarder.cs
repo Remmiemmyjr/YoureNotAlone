@@ -27,7 +27,7 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_YOURE_NOT_ALONE");
+        SteamUserStats.SetAchievement("YOURE_NOT_ALONE");
         SteamUserStats.StoreStats();
     }
 
@@ -36,7 +36,7 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_INTO_THE_DEPTHS");
+        SteamUserStats.SetAchievement("INTO_THE_DEPTHS");
         SteamUserStats.StoreStats();
     }
 
@@ -45,7 +45,7 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_WE_WERE_TETHERED");
+        SteamUserStats.SetAchievement("WE_WERE_TETHERED");
         SteamUserStats.StoreStats();
     }
 
@@ -54,7 +54,7 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_TETHERED_ONCE_MORE");
+        SteamUserStats.SetAchievement("TETHERED_ONCE_MORE");
         SteamUserStats.StoreStats();
     }
 
@@ -63,7 +63,7 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_FAREWELL_FRIEND");
+        SteamUserStats.SetAchievement("FAREWELL_FRIEND");
         SteamUserStats.StoreStats();
     }
 
@@ -72,7 +72,7 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_YOU_FOUND_HIM");
+        SteamUserStats.SetAchievement("YOU_FOUND_HIM");
         SteamUserStats.StoreStats();
     }
 
@@ -81,7 +81,7 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_CHAMPION_OF_THE_CRYPT");
+        SteamUserStats.SetAchievement("CHAMPION_OF_THE_CRYPT");
         SteamUserStats.StoreStats();
     }
 
@@ -90,7 +90,7 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_LEARNING_THE_ROPES");
+        SteamUserStats.SetAchievement("LEARNING_THE_ROPES");
         SteamUserStats.StoreStats();
     }
 
@@ -99,7 +99,7 @@ public static class SteamAchievementAwarder
         if (!CheckIfAwardValid())
             return;
 
-        SteamUserStats.SetAchievement("ACH_AMONG_THE_DARK");
+        SteamUserStats.SetAchievement("AMONG_THE_DARK");
         SteamUserStats.StoreStats();
     }
 
