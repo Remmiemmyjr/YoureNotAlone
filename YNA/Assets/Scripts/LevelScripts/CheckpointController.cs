@@ -57,7 +57,7 @@ public class CheckpointController : MonoBehaviour
             //look for initial Spawn
             ResetCheckpoints();
 
-            if(gameObject.scene.name == "Level-6")
+            if (gameObject.scene.name == "Level-6")
             {
                 startWithPartner = false;
             }

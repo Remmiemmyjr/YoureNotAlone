@@ -31,9 +31,7 @@ public class Credits : MonoBehaviour
     {
         credits = GetComponent<RectTransform>();
 
-        ogSpeed = speed;
-
-        PlayerPrefs.SetInt("buildIndex", 0);
+        PlayerPrefs.SetInt("currentLevelBuildIndex", 0);
     }
 
 

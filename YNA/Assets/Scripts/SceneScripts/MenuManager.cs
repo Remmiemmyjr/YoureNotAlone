@@ -28,7 +28,7 @@ public class MenuManager : MonoBehaviour
 {
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES ===========================================================
-    public GameObject menu, settings, controls, confirmation;
+    public GameObject menu, settings, controls, confirmationExit, playProgress, confirmationNG;
     GameObject activeButton;
 
     VolumeProfile volProf;
@@ -61,7 +61,9 @@ public class MenuManager : MonoBehaviour
         settings.SetActive(false);
         controls.SetActive(false);
         menu.SetActive(true);
-        confirmation.SetActive(false);
+        confirmationExit.SetActive(false);
+        playProgress.SetActive(false);
+        confirmationNG.SetActive(false);
     }
 
 
@@ -81,9 +83,9 @@ public class MenuManager : MonoBehaviour
         {
             activeButton = null;
 
-            if (confirmation.activeSelf)
+            if (confirmationExit.activeSelf)
             {
-                activeButton = confirmation.transform.Find("NoConfirmButton").gameObject;
+                activeButton = confirmationExit.transform.Find("NoConfirmButton").gameObject;
             }
             else if (settings.activeSelf)
             {
@@ -92,6 +94,14 @@ public class MenuManager : MonoBehaviour
             else if (controls.activeSelf)
             {
                 activeButton = controls.transform.Find("Menu").gameObject;
+            }
+            else if (playProgress.activeSelf)
+            {
+                activeButton = playProgress.transform.Find("ContinueButton").gameObject;
+            }
+            else if (confirmationNG.activeSelf)
+            {
+                activeButton = controls.transform.Find("NoConfirmButton").gameObject;
             }
             else
             {
@@ -110,7 +120,23 @@ public class MenuManager : MonoBehaviour
     // START BUTTON ========================================================
     public void StartButton()
     {
-        SceneManager.LoadScene("Tutorial-1");
+        int buildIndex = PlayerPrefs.GetInt("currentLevelBuildIndex");
+
+        if (buildIndex == 0)
+        {
+            SceneManager.LoadScene("Tutorial-1");
+        }
+        else
+        {
+
+            playProgress.SetActive(true);
+            menu.SetActive(false);
+
+            activeButton = playProgress.transform.Find("ContinueButton").gameObject;
+
+            if (activeButton)
+                EventSystem.current.SetSelectedGameObject(activeButton);
+        }
     }
 
 
@@ -149,7 +175,9 @@ public class MenuManager : MonoBehaviour
     {
         settings.SetActive(false);
         controls.SetActive(false);
-        confirmation.SetActive(false);
+        confirmationExit.SetActive(false);
+        confirmationNG.SetActive(false);
+        playProgress.SetActive(false);
         menu.SetActive(true);
 
         activeButton = menu.transform.Find("MenuCanvasButtons").Find("StartButton").gameObject;
@@ -164,9 +192,9 @@ public class MenuManager : MonoBehaviour
     public void QuitButton()
     {
         menu.SetActive(false);
-        confirmation.SetActive(true);
+        confirmationExit.SetActive(true);
 
-        activeButton = confirmation.transform.Find("NoConfirmButton").gameObject;
+        activeButton = confirmationExit.transform.Find("NoConfirmButton").gameObject;
 
         if (activeButton)
             EventSystem.current.SetSelectedGameObject(activeButton);
@@ -178,6 +206,36 @@ public class MenuManager : MonoBehaviour
     public void ConfirmButton()
     {
         Application.Quit();
+    }
+
+
+    public void ConfirmNewGameButton()
+    {
+        // Update the level progression tracker
+        PlayerPrefs.SetInt("currentLevelBuildIndex", SceneManager.GetSceneByName("Tutorial-1").buildIndex);
+
+        // Load the first level
+        SceneManager.LoadScene("Tutorial-1");
+    }
+
+    public void ContinueGameButton()
+    {
+        // Get the level progression tracker
+        int buildIndex = PlayerPrefs.GetInt("currentLevelBuildIndex");
+
+        // Load the level
+        SceneManager.LoadScene(buildIndex);
+    }
+
+    public void NewGameButton()
+    {
+        playProgress.SetActive(false);
+        confirmationNG.SetActive(true);
+
+        activeButton = confirmationNG.transform.Find("NoConfirmButton").gameObject;
+
+        if (activeButton)
+            EventSystem.current.SetSelectedGameObject(activeButton);
     }
 
 

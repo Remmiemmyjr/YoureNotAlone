@@ -254,6 +254,11 @@ public class PauseManager : MonoBehaviour
         cutsceneCanvas.GetComponent<CutsceneManager>().ResetCutscenesPlayed();
         checkpointController.GetComponent<CheckpointController>().ResetCheckpoints();
 
+        if (gameObject.scene.name == "Level-6")
+        {
+            CheckpointController.startWithPartner = false;
+        }
+
         // Do the animation
         StartCoroutine(TransitionSequence());
     }
