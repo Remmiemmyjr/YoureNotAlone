@@ -51,6 +51,7 @@ public class CutsceneTriggerArea : MonoBehaviour
 
                     if (!csm.IsCutscenePlayed(cutsceneName))
                     {
+                        csm.ForceSetIsCurrentlyPlaying(true);
                         StartCoroutine(Load());
                     }
                 }

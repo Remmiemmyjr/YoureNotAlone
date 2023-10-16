@@ -400,6 +400,14 @@ public class CutsceneManager : MonoBehaviour
 
 
     ////////////////////////////////////////////////////////////////////////
+    // FORCE SET IS PLAYING ================================================
+    public void ForceSetIsCurrentlyPlaying(bool isPlaying)
+    {
+        isCurrentlyPlaying = isPlaying;
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
     // DISABLE INPUT =======================================================
     public void DisableInput()
     {
