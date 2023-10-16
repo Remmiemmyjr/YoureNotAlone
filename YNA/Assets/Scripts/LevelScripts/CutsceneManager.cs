@@ -48,7 +48,7 @@ public class CutsceneManager : MonoBehaviour
     private const float skipTheshold = 1f;
     private float skipTimer = 0.0f;
 
-    private const float fadeTime = 2.0f;
+    private const float fadeTime = 1.0f;
     private bool inFade = false;
 
     private bool isStartCutscene = false;
