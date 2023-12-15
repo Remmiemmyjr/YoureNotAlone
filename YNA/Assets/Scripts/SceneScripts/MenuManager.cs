@@ -128,7 +128,6 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-
             playProgress.SetActive(true);
             menu.SetActive(false);
 
@@ -213,6 +212,7 @@ public class MenuManager : MonoBehaviour
     {
         // Update the level progression tracker
         PlayerPrefs.SetInt("currentLevelBuildIndex", SceneManager.GetSceneByName("Tutorial-1").buildIndex);
+        PlayerPrefs.Save();
 
         // Load the first level
         SceneManager.LoadScene("Tutorial-1");
