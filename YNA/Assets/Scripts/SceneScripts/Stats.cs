@@ -103,6 +103,7 @@ public class Stats : MonoBehaviour
         {
             // Reset eye deaths on fresh gameplay
             PlayerPrefs.SetInt("eyeDeathCounter", 0);
+            PlayerPrefs.Save();
         }
     }
 
