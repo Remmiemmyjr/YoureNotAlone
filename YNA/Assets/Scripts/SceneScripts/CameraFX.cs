@@ -168,7 +168,7 @@ public class CameraFX : MonoBehaviour
             }
         }
 
-        if (bloom_toggle)
+        if (bloom_toggle && PlayerPrefs.GetInt("BloomToggle") == 1)
         {
             if (bloom_instant)
             {

@@ -56,13 +56,17 @@ public class SettingsControl : MonoBehaviour
         float gammaVal = PlayerPrefs.GetFloat("Gamma");
         liftGammaGain.gamma.Override(new Vector4(0, 0, 0, gammaVal));
 
-        if (bloomToggle.isOn)
+        int bloomToggleVal = PlayerPrefs.GetInt("BloomToggle");
+
+        if (bloomToggleVal == 1)
         {
             bloom.intensity.value = bloomDefaultIntensity + (gammaVal * 0.1f);
+            bloomToggle.isOn = true;
         }
         else
         {
             bloom.intensity.value = 0;
+            bloomToggle.isOn = false;
         }
         myBloomVal = bloom.intensity.value;
 
@@ -177,6 +181,11 @@ public class SettingsControl : MonoBehaviour
     // Currently used to toggle bloom
     public void ToggleBloom()
     {
+        if (bloomToggle.isOn)
+            PlayerPrefs.SetInt("BloomToggle", 1);
+        else
+            PlayerPrefs.SetInt("BloomToggle", 0);
+
         SetGamma(PlayerPrefs.GetFloat("Gamma"));
     }
 
