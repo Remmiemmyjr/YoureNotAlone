@@ -26,7 +26,7 @@ public class LevelMusicController : MonoBehaviour
     {
         AudioMixer mixerGroup = GetComponent<AudioSource>().outputAudioMixerGroup.audioMixer;
 
-        float f = PlayerPrefs.GetFloat("MasterVolume");
+        float f = PlayerPrefs.GetFloat("MusicVolume");
 
         mixerGroup.SetFloat(mixerGroupExposedParameter, f);
     }

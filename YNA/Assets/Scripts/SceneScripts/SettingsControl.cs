@@ -38,7 +38,8 @@ public class SettingsControl : MonoBehaviour
     [HideInInspector]
     public static float myBloomVal;
 
-    public Slider volumeSlider;
+    public Slider musicVolumeSlider;
+    public Slider sfxVolumeSlider;
     public Slider brightnessSlider;
     public Toggle bloomToggle;
     // *********************************************************************
@@ -71,12 +72,17 @@ public class SettingsControl : MonoBehaviour
         myBloomVal = bloom.intensity.value;
 
         // Update Slider UI
-        float masterVol = 0.0f;
-        audioMixer.GetFloat("MasterVolume", out masterVol);
+        float musicVol = 0.0f;
+        audioMixer.GetFloat("MusicVolume", out musicVol);
 
-        masterVol = Mathf.Pow(10, masterVol / 20);
+        float sfxVol = 0.0f;
+        audioMixer.GetFloat("SFXVolume", out sfxVol);
 
-        volumeSlider.value = masterVol;
+        musicVol = Mathf.Pow(10, musicVol / 20);
+        sfxVol = Mathf.Pow(10, sfxVol / 20);
+
+        musicVolumeSlider.value = musicVol;
+        sfxVolumeSlider.value = sfxVol;
         brightnessSlider.value = gammaVal;
 
         gameObject.SetActive(false);
@@ -135,14 +141,27 @@ public class SettingsControl : MonoBehaviour
 
 
     ////////////////////////////////////////////////////////////////////////
-    // SET VOLUME ==========================================================
-    public void SetVolume(float volume)
+    // SET MUSIC VOLUME ====================================================
+    public void SetMusicVolume(float musicVolume)
     {
-        float sliderToDB = Mathf.Log10(volume) * 20;
+        float sliderToDB = Mathf.Log10(musicVolume) * 20;
 
-        audioMixer.SetFloat("MasterVolume", sliderToDB);
+        audioMixer.SetFloat("MusicVolume", sliderToDB);
 
-        PlayerPrefs.SetFloat("MasterVolume", sliderToDB);
+        PlayerPrefs.SetFloat("MusicVolume", sliderToDB);
+        PlayerPrefs.Save();
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////
+    // SET SFX VOLUME ======================================================
+    public void SetSFXVolume(float sfxVolume)
+    {
+        float sliderToDB = Mathf.Log10(sfxVolume) * 20;
+
+        audioMixer.SetFloat("SFXVolume", sliderToDB);
+
+        PlayerPrefs.SetFloat("SFXVolume", sliderToDB);
         PlayerPrefs.Save();
     }
 
