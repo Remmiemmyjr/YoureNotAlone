@@ -171,4 +171,13 @@ public class SettingsControl : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+
+    ////////////////////////////////////////////////////////////////////////
+    // TOGGLE BLOOM ===========================================================
+    // Currently used to toggle bloom
+    public void ToggleBloom()
+    {
+        SetGamma(PlayerPrefs.GetFloat("Gamma"));
+    }
+
 }
