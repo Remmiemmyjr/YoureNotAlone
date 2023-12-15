@@ -40,6 +40,7 @@ public class SettingsControl : MonoBehaviour
 
     public Slider volumeSlider;
     public Slider brightnessSlider;
+    public Toggle bloomToggle;
     // *********************************************************************
 
 
@@ -54,7 +55,15 @@ public class SettingsControl : MonoBehaviour
 
         float gammaVal = PlayerPrefs.GetFloat("Gamma");
         liftGammaGain.gamma.Override(new Vector4(0, 0, 0, gammaVal));
-        bloom.intensity.value = bloomDefaultIntensity + (gammaVal * 0.1f);
+
+        if (bloomToggle.isOn)
+        {
+            bloom.intensity.value = bloomDefaultIntensity + (gammaVal * 0.1f);
+        }
+        else
+        {
+            bloom.intensity.value = 0;
+        }
         myBloomVal = bloom.intensity.value;
 
         // Update Slider UI
@@ -148,10 +157,18 @@ public class SettingsControl : MonoBehaviour
     public void SetGamma(float gammaVal)
     {
         liftGammaGain.gamma.Override(new Vector4(0, 0, 0, gammaVal));
-        bloom.intensity.value = bloomDefaultIntensity + (gammaVal * 0.1f);
+        if (bloomToggle.isOn)
+        {
+            bloom.intensity.value = bloomDefaultIntensity + (gammaVal * 0.1f);
+        }
+        else
+        {
+            bloom.intensity.value = 0;
+        }
         myBloomVal = bloom.intensity.value;
 
         PlayerPrefs.SetFloat("Gamma", gammaVal);
         PlayerPrefs.Save();
     }
+
 }
