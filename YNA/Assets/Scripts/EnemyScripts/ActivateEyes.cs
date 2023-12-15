@@ -210,6 +210,8 @@ public class ActivateEyes : MonoBehaviour
         timeToHide = false;
 
         currTime -= Time.deltaTime;
+
+        Info.jumpOutCounter = 0;
     }
 
 
@@ -313,6 +315,14 @@ public class ActivateEyes : MonoBehaviour
             // If they've just been spotted...
             if (!playerSpotted)
             {
+                // If while hiding, the player jumps out 3 times, kill them)
+                Info.jumpOutCounter++;
+                if(Info.jumpOutCounter == 3)
+                {
+                    Info.isDead = true;
+                    Info.eyeDeath = true;
+                }
+
                 // Play ifoundyou
                 ifoundyou.Play();
 
@@ -360,7 +370,7 @@ public class ActivateEyes : MonoBehaviour
         else
         {
             // If the player was previously visible...
-            if(playerSpotted)
+            if(playerSpotted && !Info.isDead)
             {
                 status = EyeStates.ACTIVE;
 

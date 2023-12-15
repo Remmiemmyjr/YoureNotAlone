@@ -27,6 +27,8 @@ public class Info : MonoBehaviour
     static public Grapple grapple;
     static public Latch latch;
 
+    public static int jumpOutCounter;
+
     public static bool isDead;
     public static bool isPaused;
     public static bool eyeDeath;
@@ -47,6 +49,8 @@ public class Info : MonoBehaviour
         latch = partner?.GetComponentInChildren<Latch>();
 
         stats = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Stats>();
+
+        jumpOutCounter = 0;
     }
 
 
