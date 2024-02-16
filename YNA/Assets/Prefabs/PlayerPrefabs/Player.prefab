@@ -138,6 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   dustParticles: {fileID: 1955099484795049592}
+  animState: {fileID: 0}
   dir: {x: 0, y: 0}
   groundObject: {fileID: 783348942485166081}
   layer:
@@ -152,6 +153,7 @@ MonoBehaviour:
   randClip: {fileID: 887363957510537369}
   playInterval: 0.3
   resetTime: 0
+  isSmooching: 0
 --- !u!114 &436255601252183364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,6 +619,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  player_smooch:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!198 &8551078830694351680
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -869,7 +874,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.95
+      scalar: 1.25
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -922,7 +927,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.95
+      scalar: 1.25
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -975,7 +980,7 @@ ParticleSystem:
     startSizeZ:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.95
+      scalar: 1.25
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5345,7 +5350,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 900c6f8849cbf9d4cb5a7b817ffefbe2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

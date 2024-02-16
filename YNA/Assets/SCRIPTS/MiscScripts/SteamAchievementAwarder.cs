@@ -17,6 +17,7 @@ public enum SteamAchievementIDs
     ACH_CHAMPION_OF_THE_CRYPT,
     ACH_LEARNING_THE_ROPES,
     ACH_AMONG_THE_DARK,
+    ACH_GOODBYE_KISS
 }
 
 public static class SteamAchievementAwarder
@@ -100,6 +101,15 @@ public static class SteamAchievementAwarder
             return;
 
         SteamUserStats.SetAchievement("AMONG_THE_DARK");
+        SteamUserStats.StoreStats();
+    }
+
+    public static void AwardGoodbyeKiss()
+    {
+        if (!CheckIfAwardValid())
+            return;
+
+        SteamUserStats.SetAchievement("GOODBYE_KISS");
         SteamUserStats.StoreStats();
     }
 

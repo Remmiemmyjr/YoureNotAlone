@@ -31,7 +31,8 @@ public class SetPlayerAnimState : MonoBehaviour
         cFall,
         cHiding,
         cSeen,
-        cDead
+        cDead,
+        cSmooch
     }
 
     private PlayerStates state_curr;
@@ -51,6 +52,8 @@ public class SetPlayerAnimState : MonoBehaviour
     private UnityEvent player_seen;
     [SerializeField]
     private UnityEvent player_dead;
+    [SerializeField]
+    private UnityEvent player_smooch;
     // *********************************************************************
 
 
@@ -117,6 +120,11 @@ public class SetPlayerAnimState : MonoBehaviour
                         do_dead();
                         break;
                     }
+                case PlayerStates.cSmooch:
+                    {
+                        do_dead();
+                        break;
+                    }
             }
         }
 
@@ -151,7 +159,8 @@ public class SetPlayerAnimState : MonoBehaviour
     // IS IDLING ===========================================================
     private void do_idle()
     {
-        player_idle.Invoke();
+        if (!Info.player.GetComponent<PlayerController>().isSmooching)
+            player_idle.Invoke();
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -182,8 +191,8 @@ public class SetPlayerAnimState : MonoBehaviour
         }
         else
         {
-
-            state_next = PlayerStates.cIdle;
+            if(!Info.player.GetComponent<PlayerController>().isSmooching)
+                state_next = PlayerStates.cIdle;
         }
     }
 
@@ -206,6 +215,11 @@ public class SetPlayerAnimState : MonoBehaviour
     private void do_dead()
     {
         player_dead.Invoke();
+    }
+
+    private void do_smooch()
+    {
+        player_smooch.Invoke();
     }
 
     ////////////////////////////////////////////////////////////////////////

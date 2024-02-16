@@ -58,6 +58,10 @@ public class SteamForceAwardAchievement : MonoBehaviour
             case SteamAchievementIDs.ACH_AMONG_THE_DARK:
                 SteamAchievementAwarder.AwardAmongTheDark();
                 break;
+
+            case SteamAchievementIDs.ACH_GOODBYE_KISS:
+                SteamAchievementAwarder.AwardGoodbyeKiss();
+                break;
         }
 
         Debug.Log(m_AchievementToAward);

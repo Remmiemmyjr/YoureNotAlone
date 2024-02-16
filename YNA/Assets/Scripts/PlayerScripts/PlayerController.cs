@@ -29,7 +29,8 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public ParticleSystem dustParticles;
 
-    private SetPlayerAnimState animState;
+    [HideInInspector]
+    public SetPlayerAnimState animState;
 
     [HideInInspector]
     public Vector2 dir;
@@ -52,6 +53,9 @@ public class PlayerController : MonoBehaviour
     public PlayAudio randClip;
     public float playInterval = 0.3f;
     public float resetTime = 0.0f;
+
+    [HideInInspector]
+    public bool isSmooching;
     // *********************************************************************
 
 
@@ -113,14 +117,16 @@ public class PlayerController : MonoBehaviour
 
         if (IsStopped() && IsGrounded() && !(gameObject.GetComponent<Hide>().isHidden))
         {
-            animState.SetNextState(SetPlayerAnimState.PlayerStates.cIdle);
-            StopDustParticles();
+            if (!isSmooching)
+            {
+                animState.SetNextState(SetPlayerAnimState.PlayerStates.cIdle);
+                StopDustParticles();
+            }
         }
 
         else if (!IsStopped() && IsGrounded() && !(gameObject.GetComponent<Hide>().isHidden))
         {
             animState.SetNextState(SetPlayerAnimState.PlayerStates.cWalk);
-
             EmitParticles(dir);
         }
 

@@ -143,5 +143,8 @@ public class AnimationManager : MonoBehaviour
         animator.Play(currChar + "_Dead");
     }
 
-
+    public void SetStateSmooch()
+    {
+        animator.Play(currChar + "_Smooch");
+    }
 }
