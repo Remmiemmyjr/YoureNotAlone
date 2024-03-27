@@ -105,6 +105,7 @@ public class Checkpoint : MonoBehaviour
         // If the checkpoint has been activated and the light is less than intended, grow it
         if (checkReached && CheckpointLight.pointLightOuterRadius < 3)
         {
+            // doesnt work cuz in update lol
             CheckpointLight.pointLightOuterRadius += lightGrowRate * Time.deltaTime;
         }
     }
