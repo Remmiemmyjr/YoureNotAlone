@@ -17,6 +17,10 @@ public class Tutorial2Events : MonoBehaviour
         {
             eyeMan.enabled = true;
         }
+        else
+        {
+            eyeMan.enabled = false;
+        }
     }
 
     public void ActivateEyeSequecence()
