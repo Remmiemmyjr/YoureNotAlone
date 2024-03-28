@@ -1588,11 +1588,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].name
-      value: Eyes
+      value: Prologue
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[1].name
-      value: Prologue
+      value: Eyes
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].timeBetween
@@ -1605,55 +1605,71 @@ PrefabInstance:
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].cutsceneTrack
       value: 
-      objectReference: {fileID: 8300000, guid: 1b55af77d761f7949b36b211b0d6c2d3, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[1].cutsceneTrack
       value: 
       objectReference: {fileID: 8300000, guid: 1b55af77d761f7949b36b211b0d6c2d3, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
-      propertyPath: cutscenes.Array.data[1].playOnSceneStart
+      propertyPath: cutscenes.Array.data[0].playOnSceneStart
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[1].playOnSceneStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].frames.Array.size
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[1].frames.Array.size
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].frames.Array.data[0].frameImage
       value: 
-      objectReference: {fileID: 21300000, guid: e659e95aa3067474586c4ad86cbdb989, type: 3}
+      objectReference: {fileID: 21300000, guid: b590ecc99b22e654e93395f77a0c948a, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].frames.Array.data[1].frameImage
       value: 
-      objectReference: {fileID: 21300000, guid: 827c74079766edd458f8606252101aad, type: 3}
+      objectReference: {fileID: 21300000, guid: 36b00e486e3c96944be35e774b6d17c3, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].frames.Array.data[2].frameImage
       value: 
-      objectReference: {fileID: 21300000, guid: 46889079b4f124f41b0198ad2cc032a4, type: 3}
+      objectReference: {fileID: 21300000, guid: db125be05e75c4949af4206f0cb2d811, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[0].frames.Array.data[3].frameImage
       value: 
-      objectReference: {fileID: 21300000, guid: e2a22f81b75d22543924b81e853e5c9e, type: 3}
+      objectReference: {fileID: 21300000, guid: d784977a6be388e4fbb9429ae18be87f, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[0].frames.Array.data[4].frameImage
+      value: 
+      objectReference: {fileID: 21300000, guid: e6efc331346a8bf41aeb3268dbd31e77, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[0].frames.Array.data[5].frameImage
+      value: 
+      objectReference: {fileID: 21300000, guid: f4bbdb80397b59444a92c72983b135c4, type: 3}
+    - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: cutscenes.Array.data[0].frames.Array.data[6].frameImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 82c33d869eec399468acd3c604e4f8c7, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[1].frames.Array.data[0].frameImage
       value: 
-      objectReference: {fileID: 21300000, guid: b590ecc99b22e654e93395f77a0c948a, type: 3}
+      objectReference: {fileID: 21300000, guid: e659e95aa3067474586c4ad86cbdb989, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[1].frames.Array.data[1].frameImage
       value: 
-      objectReference: {fileID: 21300000, guid: 36b00e486e3c96944be35e774b6d17c3, type: 3}
+      objectReference: {fileID: 21300000, guid: 827c74079766edd458f8606252101aad, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[1].frames.Array.data[2].frameImage
       value: 
-      objectReference: {fileID: 21300000, guid: db125be05e75c4949af4206f0cb2d811, type: 3}
+      objectReference: {fileID: 21300000, guid: 46889079b4f124f41b0198ad2cc032a4, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[1].frames.Array.data[3].frameImage
       value: 
-      objectReference: {fileID: 21300000, guid: d784977a6be388e4fbb9429ae18be87f, type: 3}
+      objectReference: {fileID: 21300000, guid: e2a22f81b75d22543924b81e853e5c9e, type: 3}
     - target: {fileID: 6948772922295166297, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: cutscenes.Array.data[1].frames.Array.data[4].frameImage
       value: 
