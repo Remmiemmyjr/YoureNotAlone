@@ -256,11 +256,11 @@ public class PersistantMusic : MonoBehaviour
             case ("MainMenu"):
                 Start_Stop_Music(MusicFiles.musicMenuLoop);
                 break;
-            case ("Tutorial-1"):
+            case ("Demo_LV1"):
                 Start_Stop_Music(MusicFiles.musicAlone1Loop);
                 break;
-            case ("Tutorial-2"):
-                Start_Stop_Music(MusicFiles.musicAlone1Loop);
+            case ("Demo_LV2"):
+                Start_Stop_Music(MusicFiles.musicBasicLoop);
                 break;
             case ("Tutorial-Transition"):
                 Start_Stop_Music(MusicFiles.musicAlone1Loop);
@@ -278,7 +278,7 @@ public class PersistantMusic : MonoBehaviour
                 Start_Stop_Music(MusicFiles.musicBasicLoop);
                 audioBasic.volume = 0f;
                 break;
-            case ("GameOver"):
+            case ("Demo_End"):
                 Start_Stop_Music(MusicFiles.musicWinLoop);
                 break;
             default:

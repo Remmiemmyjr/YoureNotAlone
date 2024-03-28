@@ -124,7 +124,7 @@ public class MenuManager : MonoBehaviour
 
         if (buildIndex == 0)
         {
-            SceneManager.LoadScene("Tutorial-1");
+            SceneManager.LoadScene("Demo_LV1");
         }
         else
         {
@@ -211,11 +211,11 @@ public class MenuManager : MonoBehaviour
     public void ConfirmNewGameButton()
     {
         // Update the level progression tracker
-        PlayerPrefs.SetInt("currentLevelBuildIndex", SceneManager.GetSceneByName("Tutorial-1").buildIndex);
+        PlayerPrefs.SetInt("currentLevelBuildIndex", SceneManager.GetSceneByName("Demo_LV1").buildIndex);
         PlayerPrefs.Save();
 
         // Load the first level
-        SceneManager.LoadScene("Tutorial-1");
+        SceneManager.LoadScene("Demo_LV1");
     }
 
     public void ContinueGameButton()
