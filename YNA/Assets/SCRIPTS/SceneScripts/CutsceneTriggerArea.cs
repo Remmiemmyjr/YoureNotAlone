@@ -52,7 +52,7 @@ public class CutsceneTriggerArea : MonoBehaviour
                     if (!csm.IsCutscenePlayed(cutsceneName))
                     {
                         csm.ForceSetIsCurrentlyPlaying(true);
-                        StartCoroutine(Load());
+                        StartCoroutine(CutsceneLoad());
                     }
                 }
             }
@@ -77,7 +77,7 @@ public class CutsceneTriggerArea : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////
     // LOAD ================================================================
-    public IEnumerator Load()
+    public IEnumerator CutsceneLoad()
     {
         csm.DisableInput();
         yield return new WaitForSeconds(0.55f);

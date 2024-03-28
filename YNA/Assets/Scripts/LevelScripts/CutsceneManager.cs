@@ -206,6 +206,8 @@ public class CutsceneManager : MonoBehaviour
     // START CUTSCENE ======================================================
     public void StartCutscene()
     {
+        currentFrameIndex = 0;
+
         // Disable any components that are interfering with the cutscene
         for(int i = 0; i < componentsToDisable.Length; i++) 
         {
@@ -262,6 +264,13 @@ public class CutsceneManager : MonoBehaviour
     // FINISH CUTSCENE =====================================================
     public void FinishCutscene()
     {
+        skipTimer = 0f;
+        skipHold = false;
+        if (cutsceneCanvasTimer)
+        {
+            cutsceneCanvasTimer.fillAmount = 0;
+        }
+
         // Fade back in
         FadeBackIn.Invoke();
         // Re-enable player input
