@@ -1,3 +1,16 @@
+// Project: We're Tethered Together
+// File: Retether.cs
+// Author/s: Corbyn LaMar
+//
+// Desc: Retether players at beginning of level
+//
+// Notes:
+//  - Destroys rope in L6 
+//
+// Last Edit: 7/2/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

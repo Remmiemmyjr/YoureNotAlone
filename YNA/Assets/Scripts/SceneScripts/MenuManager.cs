@@ -7,7 +7,7 @@
 // Desc: Manage the states of the main menu.
 //
 // Notes:
-//  + Currently has other button actions. Will
+//  - Currently has other button actions. Will
 //    need to move to a pause manager.
 //
 // Last Edit: 6/28/2023

@@ -4,13 +4,13 @@
 // Author/s: Emmy Berg
 //           Corbyn LaMar
 //
-// Desc: Triggers particles on spike death and
+// Desc: Triggers effects on spike death and
 //       restarts from last checkpoint
 //
 // Notes:
 //  -
 //
-// Last Edit: 5/4/2023
+// Last Edit: 8/19/2024
 //
 //*************************************************
 

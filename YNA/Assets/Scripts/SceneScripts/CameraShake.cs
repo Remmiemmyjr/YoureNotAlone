@@ -5,6 +5,9 @@
 //
 // Desc: Manager for camera shake impulse
 //
+// Notes:
+//  - Called by other scripts to initiate event
+//
 // Last Edit: 5/11/2023
 //
 //*************************************************

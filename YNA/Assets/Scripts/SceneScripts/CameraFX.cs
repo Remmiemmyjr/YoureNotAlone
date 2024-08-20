@@ -1,11 +1,14 @@
 //*************************************************
 // Project: We're Tethered Together
-// File: EyeEffects.cs
+// File: CameraFX.cs
 // Author/s: Cameron Myers
 //           Emmy Berg
 //
 // Desc: Controls post processing / special effects
 //       for the eye states
+//
+// Notes:
+//  -
 //
 // Last Edit: 7/2/2023
 //

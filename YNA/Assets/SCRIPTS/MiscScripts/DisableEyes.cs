@@ -1,3 +1,17 @@
+//*************************************************
+// Project: We're Tethered Together
+// File: DisableEyes.cs
+// Author/s: Emmy Berg
+//
+// Desc: Manage eye deactivation
+//
+// Notes:
+//  - 
+//
+// Last Edit: 7/2/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

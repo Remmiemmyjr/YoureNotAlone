@@ -5,6 +5,10 @@
 //
 // Desc: Background parallaxing effect
 //
+// Notes: 
+//  - Can you believe this used to only apply to
+//    a static brick wall, BACKWARDS??
+//
 // Last Edit: 5/4/2023
 //
 //*************************************************

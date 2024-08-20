@@ -2,10 +2,12 @@
 // Project: We're Tethered Together
 // File: CutsceneTriggerArea.cs
 // Author/s: Corbyn LaMar
-//           Emmy Berg
 //
 // Desc: Play cutscene when player walks through
 //       this trigger area
+//
+// Notes:
+//  -
 //
 // Last Edit: 8/11/2023
 //

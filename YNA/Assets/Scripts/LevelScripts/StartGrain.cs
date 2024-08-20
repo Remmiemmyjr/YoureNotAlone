@@ -1,3 +1,16 @@
+// Project: We're Tethered Together
+// File: SteamAchievementAwarder.cs
+// Author/s: Emmy Berg
+//
+// Desc: Add grain to levels where player is alone
+//
+// Notes:
+//  - 
+//
+// Last Edit: 7/2/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

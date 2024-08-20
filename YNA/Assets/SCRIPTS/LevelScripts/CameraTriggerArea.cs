@@ -1,3 +1,16 @@
+// Project: We're Tethered Together
+// File: CameraTriggerArea.cs
+// Author/s: Corbyn LaMar
+//
+// Desc: Zoom out / in camera near final door
+//
+// Notes:
+//  - 
+//
+// Last Edit: 7/15/2023
+//
+//*************************************************
+
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;

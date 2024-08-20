@@ -8,7 +8,7 @@
 // Desc: Manage player actions
 //
 // Notes:
-// -
+//  -
 //
 // Last Edit: 6/23/2023
 //
@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
 
         animState = GetComponent<SetPlayerAnimState>();
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     // START ===============================================================

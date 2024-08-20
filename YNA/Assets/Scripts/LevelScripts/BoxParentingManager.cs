@@ -1,3 +1,16 @@
+// Project: We're Tethered Together
+// File: BoxParentingManager.cs
+// Author/s: Corbyn LaMar
+//
+// Desc: Child the box to the moving platform
+//
+// Notes:
+//  - 
+//
+// Last Edit: 5/4/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,3 +1,16 @@
+// Project: We're Tethered Together
+// File: Untether.cs
+// Author/s: Emmy Berg
+//
+// Desc: Forcefully untether the partner
+//
+// Notes:
+//  - traumatize everyone
+//
+// Last Edit: 8/19/2024
+//
+//*************************************************
+
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,7 +35,7 @@ public class Untether : MonoBehaviour
         {
             Info.grapple.Tethered(false);
             iamhere.PlayOneShot(eyembiance);
-            CameraShake.manager.Shake(impulse, 0.25f);
+            CameraShake.manager.Shake(impulse, 0.5f);
             GetComponent<SteamForceAwardAchievement>().AwardAchievement();
         }
     }

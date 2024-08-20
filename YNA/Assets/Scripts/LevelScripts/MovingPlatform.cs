@@ -7,7 +7,12 @@
 // Desc: Moving platform that can travel to
 //       mulitple waypoints
 //
-// Last Edit: 8/11/2023
+// Notes:
+//  - LOOPING platforms will now default to waiting a
+//    designated time upon reaching a waypoint before
+//    proceeding (as of 8/19/24)
+//
+// Last Edit: 8/19/2024
 //
 //*************************************************
 
@@ -32,6 +37,9 @@ public class MovingPlatform : MonoBehaviour
 
     private static float width = 0.1f;
     public float speed = 3f;
+    
+    public float timeToPause = 0.5f;
+    private float currentPauseTime = 0f;
 
     private Transform[] wayPointsGizmo;
     private Transform[] wayPoints;
@@ -67,9 +75,10 @@ public class MovingPlatform : MonoBehaviour
 
         // Other stuff
         if (startOnAwake)
-        {
             allowMovement = true;
-        }
+        else
+            allowMovement = false;
+
 
         transform.position = wayPoints[startingPoint].position;
 
@@ -82,7 +91,7 @@ public class MovingPlatform : MonoBehaviour
     void Update()
     {
         // Draw the line
-        for(int i = 0; i < wayPoints.Length; ++i)
+        for (int i = 0; i < wayPoints.Length; ++i)
         {
             lineRend.SetPosition(i, wayPoints[i].position);
         }
@@ -97,13 +106,35 @@ public class MovingPlatform : MonoBehaviour
                 {
                     i = 0;
 
-                    if(!loopPoints)
+                    if (!loopPoints)
                         canLoop = false;
+                }
+
+                // Wait before proceeding 
+                if (loopPoints && currentPauseTime == 0)
+                {
+                    currentPauseTime = timeToPause;
+                    canLoop = false;
                 }
             }
 
+
             transform.position = Vector2.MoveTowards(transform.position, wayPoints[i].position, speed * Time.deltaTime);
         }
+
+        // Wait before proceeding 
+        if (loopPoints && allowMovement)
+        {
+            if(currentPauseTime > 0)
+                currentPauseTime -= Time.deltaTime;
+
+            if(currentPauseTime <= 0)
+            {
+                currentPauseTime = 0;
+                canLoop = true;
+            }
+        }
+        
     }
 
 

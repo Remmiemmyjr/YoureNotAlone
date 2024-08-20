@@ -8,9 +8,10 @@
 //       current scene.
 //
 // Notes:
-// - 
+//  - Reworked the image indexing, bad index caused
+//    levels with multiple cutscenes to crash
 //
-// Last Edit: 7/14/2023
+// Last Edit: 3/10/2024
 //
 //*************************************************
 

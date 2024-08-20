@@ -5,6 +5,10 @@
 //
 // Desc: Store a reference to all important objects
 //
+// Notes:
+//  - Really only to help minimize grabbing data
+//    repeatedly, might not be the best way to do it...
+// 
 // Last Edit: 8/11/2023
 //
 //*************************************************

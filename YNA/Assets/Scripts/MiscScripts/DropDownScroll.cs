@@ -1,3 +1,16 @@
+// Project: We're Tethered Together
+// File: DropDownScroll.cs
+// Author/s: Corbyn LaMar
+//
+// Desc: Scroll bar actions
+//
+// Notes:
+//  - 
+//
+// Last Edit: 7/2/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

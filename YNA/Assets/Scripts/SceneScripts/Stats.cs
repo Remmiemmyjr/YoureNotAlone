@@ -7,7 +7,7 @@
 // Desc: Manage stats for the scene
 //
 // Notes:
-// - 
+// - god help us
 //
 // Last Edit: 7/2/2023
 //
@@ -300,7 +300,7 @@ public class Stats : MonoBehaviour
         if (!dontRepeat)
         {
             dontRepeat = true;
-            CameraShake.manager.Shake(impulse, 0.25f);
+            CameraShake.manager.Shake(impulse, 0.45f);
             audioKillSRC.PlayOneShot(killFX[1]);
 
             if (Info.partner)

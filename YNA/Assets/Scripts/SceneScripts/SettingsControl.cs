@@ -2,12 +2,13 @@
 // Project: We're Tethered Together
 // File: SettingsControl.cs
 // Author/s: Corbyn LaMar
-//           Mike Doeren
+//           Emmy Berg
 //
 // Desc: Manage option modifiers
 //
 // Notes:
-// -
+//  - Please find a way to increase default starting
+//    brightness (set default to ~40-50%?)
 //
 // Last Edit: 7/23/2023
 //

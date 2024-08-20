@@ -1,3 +1,16 @@
+// Project: We're Tethered Together
+// File: Smooch.cs
+// Author/s: Emmy Berg
+//
+// Desc: Smooch particles and SFX on "tether" in L6
+//
+// Notes:
+//  - .3.
+//
+// Last Edit: 2/14/2024
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

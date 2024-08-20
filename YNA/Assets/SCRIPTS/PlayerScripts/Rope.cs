@@ -2,13 +2,12 @@
 // Project: We're Tethered Together
 // File: Rope.cs
 // Author/s: Emmy Berg
-//           Mike Doeren
 //           Corbyn LaMar
 //
 // Desc: Manage player actions
 //
 // Notes:
-// -
+//  -
 //
 // Last Edit: 8/24/2023
 //

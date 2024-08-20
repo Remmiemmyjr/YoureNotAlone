@@ -1,13 +1,15 @@
 //*************************************************
 // Project: We're Tethered Together
-// File: PlayerController.cs
+// File: SetPlayerAnimState.cs
 // Author/s: Cameron Myers
+//           Emmy Berg
 //
-// Desc: Manage player actions
+// Desc: Manage player animation states
 //
 // Notes:
+//  - Now contains Smooch animation for Valentines Update
 //
-// Last Edit: 6/17/2023
+// Last Edit: 2/14/2024
 //
 //*************************************************
 

@@ -1,3 +1,16 @@
+// Project: We're Tethered Together
+// File: DoorCloseTrigger.cs
+// Author/s: Emmy Berg
+//
+// Desc: Close door, deactivate
+//
+// Notes:
+//  - 
+//
+// Last Edit: 7/2/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

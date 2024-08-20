@@ -3,9 +3,11 @@
 // File: Grapple.cs
 // Author/s: Emmy Berg
 //           Corbyn Lamar
-//           Mike Doeren
 //
 // Desc: Tethering controls & actions for player
+//
+// Notes:
+//  - holy crap help somebody make it stop exploding
 //
 // Last Edit: 8/14/2023
 //

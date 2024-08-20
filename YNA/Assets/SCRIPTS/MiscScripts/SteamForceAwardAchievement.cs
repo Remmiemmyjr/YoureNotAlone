@@ -1,3 +1,17 @@
+// Project: We're Tethered Together
+// File: SteamForceAchievement.cs
+// Author/s: Chris Onorati
+//           Emmy Berg
+//
+// Desc: Award achievements
+//
+// Notes:
+//  - 
+//
+// Last Edit: 2/14/2024
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

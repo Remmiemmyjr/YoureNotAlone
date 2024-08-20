@@ -1,3 +1,16 @@
+// Project: We're Tethered Together
+// File: god.cs
+// Author/s: Emmy Berg
+//
+// Desc: Manage player actions
+//
+// Notes:
+//  - :)
+//
+// Last Edit: 8/1/2023
+//
+//*************************************************
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

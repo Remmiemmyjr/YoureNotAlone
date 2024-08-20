@@ -7,7 +7,8 @@
 // Desc: Keeps track of box info
 //
 // Notes:
-// good gamer internet???- 
+//  - good gamer internet???- 
+//  - who wrote that
 //
 // Last Edit: 8/15/2023
 //

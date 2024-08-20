@@ -6,7 +6,7 @@
 // Desc: Restart player and partner from checkpoint
 //
 // Notes:
-// -
+//  - DEPRECIATED
 //
 // Last Edit: 7/16/2023
 //

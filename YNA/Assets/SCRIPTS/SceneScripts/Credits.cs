@@ -5,6 +5,9 @@
 //
 // Desc: Credit scroll up to specific location
 //
+// Note:
+//  - Mainly a manual, in-editor process
+//
 // Last Edit: 8/13/2023
 //
 //*************************************************
