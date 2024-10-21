@@ -170,7 +170,7 @@ public class Grapple : MonoBehaviour
     // ENABLE ROPE =========================================================
     public void EnableRope(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !Info.isDead && Info.partner)
+        if (ctx.performed && !Info.isDead && Info.partner && !Info.isPaused)
         {
             if (currDistFromPartner.magnitude <= (maxTetherDist + 1) && !joint.enabled)
             {
@@ -264,7 +264,7 @@ public class Grapple : MonoBehaviour
     // REEL IN =============================================================
     public void ReelIn(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !Info.isDead)
+        if (ctx.performed && !Info.isDead && Info.partner && !Info.isPaused)
         {
             isReeling = true;
             isExtending = false;
@@ -289,7 +289,7 @@ public class Grapple : MonoBehaviour
     // EXTEND ==============================================================
     public void Extend(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !Info.isDead)
+        if (ctx.performed && !Info.isDead && Info.partner && !Info.isPaused)
         {
             isExtending = true;
             isReeling = false;
