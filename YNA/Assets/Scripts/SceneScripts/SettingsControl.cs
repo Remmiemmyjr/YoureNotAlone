@@ -162,6 +162,10 @@ public class SettingsControl : MonoBehaviour
 
         audioMixer.SetFloat("SFXVolume", sliderToDB);
 
+        // pair the eye audio with SFX mixer
+        //audioMixer.SetFloat("iamwatchingVolume", sliderToDB + 2);
+        //audioMixer.SetFloat("iseeyouVolume", sliderToDB + 2);
+
         PlayerPrefs.SetFloat("SFXVolume", sliderToDB);
         PlayerPrefs.Save();
     }

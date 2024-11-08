@@ -271,6 +271,7 @@ public class Stats : MonoBehaviour
 
                 StartCoroutine(stoneShader.Lerp(1));
                 CameraShake.manager.Shake(impulse, 0.25f);
+                StartCoroutine(ControllerRumble.ControllerRumbleFX(0.15f, 0.325f, 0.2f));
                 audioKillSRC.PlayOneShot(killFX[0]);
             }
 
@@ -288,6 +289,7 @@ public class Stats : MonoBehaviour
 
             // Could change back to using levelname if needed
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            InputSystem.ResetHaptics();
         }
     }
 
@@ -302,8 +304,9 @@ public class Stats : MonoBehaviour
         if (!dontRepeat)
         {
             dontRepeat = true;
-            CameraShake.manager.Shake(impulse, 0.45f);
+            CameraShake.manager.Shake(impulse, 0.85f);
             audioKillSRC.PlayOneShot(killFX[1]);
+            StartCoroutine(ControllerRumble.ControllerRumbleFX(0.155f, 0.325f, 0.15f));
 
             if (Info.partner)
             {
@@ -330,7 +333,7 @@ public class Stats : MonoBehaviour
             Info.player.GetComponent<LineRenderer>().enabled = false;
 
             yield return new WaitForSeconds(1.5f);
-
+           
 
             if (transitionCanvas)
             {
@@ -341,6 +344,8 @@ public class Stats : MonoBehaviour
 
             // Could change back to using levelname if needed
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            InputSystem.ResetHaptics();
+
         }
     }
 }

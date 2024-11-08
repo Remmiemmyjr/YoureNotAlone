@@ -22,6 +22,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEditor.ShaderGraph;
 
 
 public class MenuManager : MonoBehaviour
@@ -117,6 +118,16 @@ public class MenuManager : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(activeButton);
             }
         }
+
+        if (GetInSubMenu() && Input.GetButtonDown("Cancel"))
+        {
+            ReturnMenu();
+        }
+    }
+
+    public bool GetInSubMenu()
+    {
+        return (settings.activeInHierarchy == true || controls.activeInHierarchy == true || confirmationNG.activeInHierarchy == true || confirmationExit.activeInHierarchy == true);
     }
 
 

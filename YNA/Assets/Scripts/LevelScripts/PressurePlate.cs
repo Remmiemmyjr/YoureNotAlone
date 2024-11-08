@@ -83,6 +83,7 @@ public class PressurePlate : MonoBehaviour
             if (!playedClosedAudio)
             {
                 doorAS.PlayOneShot(audioDoorClosed);
+                StartCoroutine(ControllerRumble.ControllerRumbleFX(0.05f, 0.08f, 0.15f));
                 playedOpenAudio = false;
                 playedClosedAudio = true;
             }
@@ -113,6 +114,7 @@ public class PressurePlate : MonoBehaviour
             // Add the object to the list
             TriggerList.Add(collision);
 
+
             if (TriggerList.Count == 1)
             {
                 gemSR.color = activeColor;
@@ -122,6 +124,8 @@ public class PressurePlate : MonoBehaviour
                 if (!playedOpenAudio)
                 {
                     doorAS.PlayOneShot(audioDoorOpened);
+                    StartCoroutine(ControllerRumble.ControllerRumbleFX(0.05f, 0.09f, 0.15f));
+
                     playedClosedAudio = false;
                     playedOpenAudio = true;
                 }

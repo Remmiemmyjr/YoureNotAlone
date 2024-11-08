@@ -29,6 +29,8 @@ public class DisableEyes : MonoBehaviour
     private bool camShake = false;
     [SerializeField]
     private bool killEyes = false;
+    [SerializeField]
+    private bool rumble = false;
 
     [SerializeField]
     private string targetTag = "Player";
@@ -70,6 +72,12 @@ public class DisableEyes : MonoBehaviour
 
             if (camShake && impulse)
                 CameraShake.manager.Shake(impulse, 0.35f);
+
+            if(rumble)
+            {
+                rumble = false;
+                StartCoroutine(ControllerRumble.ControllerRumbleFX(1, 1.5f, 0.35f));
+            }    
         }
     }
 

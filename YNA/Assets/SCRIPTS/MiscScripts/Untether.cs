@@ -20,6 +20,7 @@ public class Untether : MonoBehaviour
 {
     public AudioSource iamhere;
     CinemachineImpulseSource impulse;
+    public GameObject annoyingPlatformToDisable;
 
     [SerializeField]
     private AudioClip eyembiance;
@@ -35,7 +36,9 @@ public class Untether : MonoBehaviour
         {
             Info.grapple.Tethered(false);
             iamhere.PlayOneShot(eyembiance);
-            CameraShake.manager.Shake(impulse, 0.5f);
+            CameraShake.manager.Shake(impulse, 1f);
+            annoyingPlatformToDisable.SetActive(false);
+            StartCoroutine(ControllerRumble.ControllerRumbleFX(1.5f, 2.5f, 3f));
             GetComponent<SteamForceAwardAchievement>().AwardAchievement();
         }
     }

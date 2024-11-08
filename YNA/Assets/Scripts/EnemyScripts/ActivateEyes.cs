@@ -224,6 +224,7 @@ public class ActivateEyes : MonoBehaviour
         {
             // Stop the level music.
             StartCoroutine(musicController.LerpAudioOut(wakingTime));
+            StartCoroutine(ControllerRumble.EyeWakingUpRumble(0.05f, 0.1f, 0.25f));
 
             // Set the iamwatching mixer group level to 1.
             AudioMixer mg = iamwatching.outputAudioMixerGroup.audioMixer;
@@ -258,7 +259,9 @@ public class ActivateEyes : MonoBehaviour
         if (!timeToHide)
         {
             // Pulse
-            CameraShake.manager.Shake(impulse, 0.25f);
+            CameraShake.manager.Shake(impulse, 0.75f);
+            StartCoroutine(ControllerRumble.ControllerRumbleFX(0.35f, 0.425f, 0.25f));
+
 
             // Reset timeInSight timer to the gracePeriod.
             timeInSight = gracePeriod;
@@ -310,7 +313,8 @@ public class ActivateEyes : MonoBehaviour
             status = EyeStates.SEEN;
 
             // Camera shake on seen
-            CameraShake.manager.Shake(impulse, 0.15f);
+            CameraShake.manager.Shake(impulse, 0.75f);
+            StartCoroutine(ControllerRumble.ControllerRumbleFX(0.25f, 0.425f, 3f));
 
             // If they've just been spotted...
             if (!playerSpotted)
@@ -378,6 +382,7 @@ public class ActivateEyes : MonoBehaviour
                 StartCoroutine(FadeMixerGroup.StartFade(iseeyou.outputAudioMixerGroup.audioMixer, iseeyouMGEP, 0.25f, 0.0f));
                 // Fade in iamwatching
                 StartCoroutine(FadeMixerGroup.StartFade(iamwatching.outputAudioMixerGroup.audioMixer, iamwatchingMGEP, 0.25f, 1.0f));
+                StartCoroutine(ControllerRumble.ControllerRumbleFX(0f, 0f, 0f));
 
                 // Go back to active fx
                 rehiddenEvent.Invoke();
