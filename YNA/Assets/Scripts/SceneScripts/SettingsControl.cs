@@ -55,7 +55,7 @@ public class SettingsControl : MonoBehaviour
         volProf.TryGet(out liftGammaGain);
         volProf.TryGet(out bloom);
 
-        float gammaVal = PlayerPrefs.GetFloat("Gamma");
+        float gammaVal = PlayerPrefs.GetFloat("Gamma", 0.4f);
         liftGammaGain.gamma.Override(new Vector4(0, 0, 0, gammaVal));
 
         int bloomToggleVal = PlayerPrefs.GetInt("BloomToggle");

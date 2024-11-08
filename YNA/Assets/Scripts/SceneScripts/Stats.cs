@@ -172,6 +172,8 @@ public class Stats : MonoBehaviour
             {
                 Info.isPaused = true;
 
+                Input.ResetInputAxes();
+
                 if (pauseUI)
                 {
                     // Show Pause UI

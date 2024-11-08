@@ -75,13 +75,17 @@ public class MenuManager : MonoBehaviour
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
             EventSystem.current.SetSelectedGameObject(null);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         // If the player wants to use buttons after using the mouse, reset the active object
-        if (EventSystem.current.currentSelectedGameObject == null && (Input.anyKeyDown || Mathf.Abs(Input.GetAxis("Vertical")) > 0 || Mathf.Abs(Input.GetAxis("Horizontal")) > 0 && !(Input.GetMouseButtonDown(0)
-            || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))))
+        if (EventSystem.current.currentSelectedGameObject == null &&
+            (Input.anyKeyDown || Mathf.Abs(Input.GetAxis("Vertical")) > 0 || Mathf.Abs(Input.GetAxis("Horizontal")) > 0) && !(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)))
         {
             activeButton = null;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
 
             if (confirmationExit.activeSelf)
             {
