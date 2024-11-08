@@ -125,6 +125,12 @@ public class PauseManager : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(activeButton);
             }
         }
+
+        // If submenu is open and player cancels, return to menu
+        if (GetInSubMenu() && Info.isPaused && Input.GetButtonDown("Cancel"))
+        {
+            ReturnMenu();
+        }
     }
 
 

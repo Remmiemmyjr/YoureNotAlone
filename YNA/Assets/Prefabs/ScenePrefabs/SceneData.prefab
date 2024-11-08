@@ -5351,15 +5351,51 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: a07deeaf5a045af49972a710ce93ed0a, type: 3}
     - target: {fileID: 8241769704791665865, guid: a469a3fa46d498349b91ee1720a5390c, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8241769704791665865, guid: a469a3fa46d498349b91ee1720a5390c, type: 3}
       propertyPath: m_ActionEvents.Array.data[11].m_ActionId
       value: d91dce62-585e-4bf3-88de-827cfe491eac
       objectReference: {fileID: 0}
     - target: {fileID: 8241769704791665865, guid: a469a3fa46d498349b91ee1720a5390c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionId
+      value: c53b4ebe-33a1-4e02-8988-97a2785bdb18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241769704791665865, guid: a469a3fa46d498349b91ee1720a5390c, type: 3}
       propertyPath: m_ActionEvents.Array.data[11].m_ActionName
       value: Gameplay/Latch[/Keyboard/e]
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241769704791665865, guid: a469a3fa46d498349b91ee1720a5390c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionName
+      value: UI/Cancel[/XInputControllerWindows/buttonEast,/Keyboard/escape]
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241769704791665865, guid: a469a3fa46d498349b91ee1720a5390c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241769704791665865, guid: a469a3fa46d498349b91ee1720a5390c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241769704791665865, guid: a469a3fa46d498349b91ee1720a5390c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2242918320476681286}
+    - target: {fileID: 8241769704791665865, guid: a469a3fa46d498349b91ee1720a5390c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241769704791665865, guid: a469a3fa46d498349b91ee1720a5390c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Cancel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241769704791665865, guid: a469a3fa46d498349b91ee1720a5390c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241769704791665865, guid: a469a3fa46d498349b91ee1720a5390c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a469a3fa46d498349b91ee1720a5390c, type: 3}
@@ -5725,7 +5761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460425, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: orthographic size
-      value: 5.5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460426, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_Name
@@ -5741,11 +5777,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460430, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.1777792
+      value: -42.905556
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460430, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.3950005
+      value: 5.824999
       objectReference: {fileID: 0}
     - target: {fileID: 5595333242864460430, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5842,6 +5878,17 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5595333243246886908, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
+--- !u!114 &2242918320476681286 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3668726757551369952, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
+  m_PrefabInstance: {fileID: 3299341754706926246}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7500629545088764046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c22b5ba49b35848851057f40cf6cb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6948772921942046760 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5595333242864460430, guid: 8138fbe01aded0f4c93c91f02ed70153, type: 3}
