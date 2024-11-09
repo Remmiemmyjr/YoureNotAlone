@@ -19,6 +19,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
@@ -314,7 +315,11 @@ public class ActivateEyes : MonoBehaviour
 
             // Camera shake on seen
             CameraShake.manager.Shake(impulse, 0.75f);
+
+
             StartCoroutine(ControllerRumble.ControllerRumbleFX(0.25f, 0.425f, 3f));
+       
+               
 
             // If they've just been spotted...
             if (!playerSpotted)

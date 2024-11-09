@@ -146,6 +146,8 @@ public class Stats : MonoBehaviour
             if (Info.isPaused && !pauseMan.GetComponent<PauseManager>().GetInSubMenu())
             {
                 Info.isPaused = false;
+                Gamepad.current.ResumeHaptics();
+
 
                 if (pauseUI)
                 {
@@ -173,6 +175,7 @@ public class Stats : MonoBehaviour
                 Info.isPaused = true;
 
                 Input.ResetInputAxes();
+                Gamepad.current.PauseHaptics();
 
                 if (pauseUI)
                 {
