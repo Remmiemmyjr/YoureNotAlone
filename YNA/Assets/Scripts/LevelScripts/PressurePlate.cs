@@ -83,7 +83,9 @@ public class PressurePlate : MonoBehaviour
             if (!playedClosedAudio)
             {
                 doorAS.PlayOneShot(audioDoorClosed);
-                StartCoroutine(ControllerRumble.ControllerRumbleFX(0.05f, 0.08f, 0.15f));
+                if (!Info.isDead && !Info.isPaused)
+                    StartCoroutine(ControllerRumble.ControllerRumbleFX(0.15f, 0.18f, 0.15f));
+                
                 playedOpenAudio = false;
                 playedClosedAudio = true;
             }
@@ -124,7 +126,8 @@ public class PressurePlate : MonoBehaviour
                 if (!playedOpenAudio)
                 {
                     doorAS.PlayOneShot(audioDoorOpened);
-                    StartCoroutine(ControllerRumble.ControllerRumbleFX(0.05f, 0.09f, 0.15f));
+                    if (!Info.isDead && !Info.isPaused)
+                        StartCoroutine(ControllerRumble.ControllerRumbleFX(0.15f, 0.18f, 0.15f));
 
                     playedClosedAudio = false;
                     playedOpenAudio = true;
