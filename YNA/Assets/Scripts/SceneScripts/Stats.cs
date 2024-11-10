@@ -116,6 +116,11 @@ public class Stats : MonoBehaviour
         {
             StartCoroutine(EyeDeathSequence());
         }
+
+        if (Info.isPaused)
+        {
+            InputSystem.PauseHaptics();
+        }
     }
 
 
