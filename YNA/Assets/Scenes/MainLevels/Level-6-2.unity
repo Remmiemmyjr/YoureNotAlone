@@ -517,6 +517,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1203211736164437378, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1363115727334066392, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
       value: 1
@@ -961,6 +965,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5876257710471246284, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5917178604669796318, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.42
@@ -1171,6 +1179,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8584787495814286284, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8954285837791467453, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
+      propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9076067023762847920, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}
@@ -22778,7 +22790,6 @@ GameObject:
   - component: {fileID: 976251256}
   - component: {fileID: 976251258}
   - component: {fileID: 976251257}
-  - component: {fileID: 976251259}
   m_Layer: 0
   m_Name: PressurePlate (1)
   m_TagString: Untagged
@@ -22880,41 +22891,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &976251259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 976251255}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54487218dd9e290498594b9896d47dc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPlayerPlate: 0
-  doorLightFade: {fileID: 408096377}
-  doorBeamLight: {fileID: 720859600}
-  activeColor: {r: 0.6862745, g: 0.6862745, b: 0.6862745, a: 1}
-  gem: {fileID: 2052218785}
-  gemLight: {fileID: 14300506}
-  partnerGemLight: {fileID: 14300506}
-  audioDoorOpened: {fileID: 8300000, guid: e69fd3cbbdb409d4a975f599389a1d7b, type: 3}
-  FadeToBlack:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1027402880}
-        m_TargetAssemblyTypeName: PostProcessingManager, Assembly-CSharp
-        m_MethodName: InvokeCameraFX
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: FadeToBlack
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1027402880 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3167630802398598619, guid: 2a18f14c22705dd4f9cbb5a76708ad60, type: 3}

@@ -88,7 +88,7 @@ public class FinalDoorPlates : MonoBehaviour
 
             if (TriggerList.Count == 1)
             {
-                gemSR.color = activeColor;
+                if(gemSR) gemSR.color = activeColor;
                 gemLight.SetActive(true);
 
                 if (!dontRepeat && isPlayerPlate)
@@ -113,7 +113,7 @@ public class FinalDoorPlates : MonoBehaviour
 
             if (TriggerList.Count == 0)
             {
-                gemSR.color = ogColor;
+                if(gemSR) gemSR.color = ogColor;
                 gemLight.SetActive(false);
             }
         }
@@ -134,8 +134,8 @@ public class FinalDoorPlates : MonoBehaviour
             StartCoroutine(ControllerRumble.ControllerRumbleFX(0.5f, 1f, 1.75f));
 
             //doorBeamLight.intensity = 0.0f;
-            gemLight.SetActive(false);
-            partnerGemLight.SetActive(false);
+            //gemLight.SetActive(false);
+            //partnerGemLight.SetActive(false);
 
             yield return new WaitForSeconds(3.0f);
 
