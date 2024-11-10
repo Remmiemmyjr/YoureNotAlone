@@ -14,7 +14,12 @@ public class ControllerRumble : MonoBehaviour
 
             InputSystem.ResetHaptics();
         }
+        else
+        {
+            InputSystem.PauseHaptics();
+        }
     }
+    
 
     public static IEnumerator EyeWakingUpRumble(float low, float high, float time)
     {
@@ -40,8 +45,8 @@ public class ControllerRumble : MonoBehaviour
             }
         }
         else
-        { 
-            Gamepad.current.ResumeHaptics();
+        {
+            InputSystem.ResetHaptics();
         }
     }
 }
