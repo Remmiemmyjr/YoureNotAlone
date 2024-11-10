@@ -47,6 +47,7 @@ public class ControllerRumble : MonoBehaviour
         else
         {
             InputSystem.ResetHaptics();
+            InputSystem.PauseHaptics();
         }
     }
 }
