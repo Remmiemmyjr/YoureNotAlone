@@ -140,6 +140,9 @@ public class Stats : MonoBehaviour
             Info.isDead = true;
             Info.eyeDeath = false;
 
+            InputSystem.PauseHaptics();
+            InputSystem.ResetHaptics();
+
             StartCoroutine(ObstacleDeathSequence());
         }
     }
@@ -296,13 +299,15 @@ public class Stats : MonoBehaviour
             if (transitionCanvas)
             {
                 transitionCanvas.SetTrigger("EyeDeath");
-
+                InputSystem.PauseHaptics();
+                InputSystem.ResetHaptics();
                 yield return new WaitForSeconds(transitionCanvas.GetCurrentAnimatorClipInfo(0).Length);
             }
 
             // Could change back to using levelname if needed
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            InputSystem.PauseHaptics();
             InputSystem.ResetHaptics();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -351,14 +356,15 @@ public class Stats : MonoBehaviour
             if (transitionCanvas)
             {
                 transitionCanvas.SetTrigger("EyeDeath");
-
+                InputSystem.PauseHaptics();
+                InputSystem.ResetHaptics();
                 yield return new WaitForSeconds(transitionCanvas.GetCurrentAnimatorClipInfo(0).Length);
             }
 
             // Could change back to using levelname if needed
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            InputSystem.PauseHaptics();
             InputSystem.ResetHaptics();
-
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

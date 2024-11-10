@@ -64,7 +64,10 @@ public class LevelProgression : MonoBehaviour
         {
             if (!requiresPartner || (collision.GetComponent<Grapple>().isTethered))
             {
+                InputSystem.PauseHaptics();
+                InputSystem.ResetHaptics();
                 StartCoroutine(TransitionSequence());
+
             }
             else
             {
@@ -93,9 +96,12 @@ public class LevelProgression : MonoBehaviour
         {
             transitionCanvas.SetTrigger("EyeDeath");
 
+            InputSystem.PauseHaptics();
+            InputSystem.ResetHaptics();
             yield return new WaitForSeconds(transitionCanvas.GetCurrentAnimatorClipInfo(0).Length);
         }
-
+        InputSystem.PauseHaptics();
+        InputSystem.ResetHaptics();
         SceneManager.LoadScene(nextLevel);
     }
 }
