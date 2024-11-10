@@ -121,6 +121,11 @@ public class Stats : MonoBehaviour
         {
             InputSystem.PauseHaptics();
         }
+
+        if(UnityEditor.EditorApplication.isPlaying==false)
+        {
+            InputSystem.ResetHaptics();
+        }
     }
 
 
