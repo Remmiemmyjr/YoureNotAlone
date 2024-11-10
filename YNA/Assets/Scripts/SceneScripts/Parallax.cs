@@ -15,6 +15,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class Parallax : MonoBehaviour
@@ -41,8 +42,12 @@ public class Parallax : MonoBehaviour
     void Start()
     {
         camPos = cam.transform.position.x;
+        for (int i = 0; i < transform.childCount - 1; i++)
+        {
+            length += transform.GetChild(i).GetComponent<SpriteRenderer>().bounds.size.x;
 
-        length = GetComponent<SpriteRenderer>().bounds.size.x;
+        }
+        length += GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
 
