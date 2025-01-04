@@ -10,7 +10,7 @@ public class ControllerRumble : MonoBehaviour
     {
         if (!Info.isPaused && Info.doRumble)
         {
-            Gamepad.current.SetMotorSpeeds(low, high);
+            Gamepad.current.SetMotorSpeeds(low+0.2f, high+0.2f);
             yield return new WaitForSeconds(time);
 
             InputSystem.ResetHaptics();

@@ -166,7 +166,8 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = Vector2.up * jumpHeight;
 
-            animState.SetNextState(SetPlayerAnimState.PlayerStates.cJump);
+            if(!IsGrounded())
+                animState.SetNextState(SetPlayerAnimState.PlayerStates.cJump);
         }
 
 

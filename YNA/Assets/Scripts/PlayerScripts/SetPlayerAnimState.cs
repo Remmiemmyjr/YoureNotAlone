@@ -236,9 +236,9 @@ public class SetPlayerAnimState : MonoBehaviour
             return true;
         }
         //check jumping
-        else if (pc.rb.velocity.y >= 0.02f)
+        else if (pc.rb.velocity.y >= 0.02f && !pc.IsGrounded())
         {
-            state_next = PlayerStates.cJump;
+            state_next = PlayerStates.cJump;  
             return true;
         }
 
