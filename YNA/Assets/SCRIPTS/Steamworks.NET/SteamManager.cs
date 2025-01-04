@@ -98,7 +98,7 @@ public class SteamManager : MonoBehaviour {
             // See the Valve documentation for more information: https://partner.steamgames.com/doc/sdk/api#initialization_and_shutdown
             //  SteamAPI.RestartAppIfNecessary((AppId_t)2578110)
             //  SteamAPI.RestartAppIfNecessary(AppId_t.Invalid)
-            if (SteamAPI.RestartAppIfNecessary(AppId_t.Invalid)) {
+            if (SteamAPI.RestartAppIfNecessary((AppId_t)2578110)) {
 				Debug.Log("[Steamworks.NET] Shutting down because RestartAppIfNecessary returned true. Steam will restart the application.");
 
 				Application.Quit();
