@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class ControllerRumble : MonoBehaviour
 {
     public static IEnumerator ControllerRumbleFX(float low, float high, float time)
     {
-        if (!Info.isPaused)
+        if (!Info.isPaused && Info.doRumble)
         {
             Gamepad.current.SetMotorSpeeds(low, high);
             yield return new WaitForSeconds(time);
@@ -23,7 +24,7 @@ public class ControllerRumble : MonoBehaviour
 
     public static IEnumerator EyeWakingUpRumble(float low, float high, float time)
     {
-        if (!Info.isPaused)
+        if (!Info.isPaused && Info.doRumble)
         {
             int rumbleCount = 4; // Number of times to play the rumble effect
             float pauseTime = 0.65f; // Half a second pause between rumbles

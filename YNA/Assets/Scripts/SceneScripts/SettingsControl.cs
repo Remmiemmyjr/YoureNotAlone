@@ -43,6 +43,7 @@ public class SettingsControl : MonoBehaviour
     public Slider sfxVolumeSlider;
     public Slider brightnessSlider;
     public Toggle bloomToggle;
+    public Toggle rumbleToggle;
     // *********************************************************************
 
 
@@ -59,6 +60,7 @@ public class SettingsControl : MonoBehaviour
         liftGammaGain.gamma.Override(new Vector4(0, 0, 0, gammaVal));
 
         int bloomToggleVal = PlayerPrefs.GetInt("BloomToggle");
+        int rumbleToggle = PlayerPrefs.GetInt("RumbleToggle");
 
         if (bloomToggleVal == 1)
         {
@@ -71,6 +73,15 @@ public class SettingsControl : MonoBehaviour
             bloomToggle.isOn = false;
         }
         myBloomVal = bloom.intensity.value;
+
+        if (rumbleToggle == 1)
+        {
+            Info.doRumble = true;
+        }
+        else
+        {
+            Info.doRumble = false;
+        }
 
         // Update Slider UI
         float musicVol = 0.0f;
@@ -213,4 +224,20 @@ public class SettingsControl : MonoBehaviour
         SetGamma(PlayerPrefs.GetFloat("Gamma"));
     }
 
+    ////////////////////////////////////////////////////////////////////////
+    // TOGGLE RUMBLE ===========================================================
+    // Currently used to toggle rumble for controllers
+    public void ToggleRumble()
+    {
+        if (rumbleToggle.isOn)
+        {
+            PlayerPrefs.SetInt("RumbleToggle", 1);
+            Info.doRumble = true;
+        }
+        else
+        {
+            PlayerPrefs.SetInt("RumbleToggle", 0);
+            Info.doRumble = false;
+        }
+    }
 }

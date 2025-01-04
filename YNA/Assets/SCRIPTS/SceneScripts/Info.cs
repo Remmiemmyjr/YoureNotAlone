@@ -37,6 +37,8 @@ public class Info : MonoBehaviour
     public static bool isPaused;
     public static bool eyeDeath;
 
+    public static bool doRumble;
+
     // *********************************************************************
 
 
