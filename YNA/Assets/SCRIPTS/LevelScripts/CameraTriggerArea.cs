@@ -60,7 +60,7 @@ public class CameraTriggerArea : MonoBehaviour
     }
 
     ////////////////////////////////////////////////////////////////////////
-    // ZOOM IN =============================================================
+    // ZOOM ================================================================
     public IEnumerator Zoom(float time, float current, float target)
     {
         float timeElapsed = 0;
