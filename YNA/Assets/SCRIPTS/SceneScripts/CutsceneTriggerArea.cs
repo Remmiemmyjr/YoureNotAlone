@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class CutsceneTriggerArea : MonoBehaviour
 {
@@ -43,6 +44,8 @@ public class CutsceneTriggerArea : MonoBehaviour
     // TRIGGER ENTER =======================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        InputSystem.PauseHaptics();
+        InputSystem.ResetHaptics();
         if (collision.tag == "Player")
         {
             if (!requiresPartner || (collision.GetComponent<Grapple>().isTethered))
@@ -87,5 +90,7 @@ public class CutsceneTriggerArea : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
         csm.FadeBackIn.Invoke();
         csm.TriggerCutscene(cutsceneName);
+        InputSystem.PauseHaptics();
+        InputSystem.ResetHaptics();
     }
 }
