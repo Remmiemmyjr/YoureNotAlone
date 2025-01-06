@@ -285,9 +285,9 @@ public class Stats : MonoBehaviour
                     Info.partner.GetComponentInChildren<Latch>().ReleaseObject();
                 }
 
+                StartCoroutine(ControllerRumble.ControllerRumbleFX(0.5f, 0.525f, 0.195f));
                 StartCoroutine(stoneShader.Lerp(1));
                 CameraShake.manager.Shake(impulse, 0.25f);
-                StartCoroutine(ControllerRumble.ControllerRumbleFX(0.15f, 0.325f, 0.2f));
                 audioKillSRC.PlayOneShot(killFX[0]);
             }
 
@@ -324,7 +324,7 @@ public class Stats : MonoBehaviour
             dontRepeat = true;
             CameraShake.manager.Shake(impulse, 0.85f);
             audioKillSRC.PlayOneShot(killFX[1]);
-            StartCoroutine(ControllerRumble.ControllerRumbleFX(0.155f, 0.325f, 0.15f));
+            StartCoroutine(ControllerRumble.ControllerRumbleFX(0.5f, 0.65f, 0.2f));
 
             if (Info.partner)
             {

@@ -131,7 +131,7 @@ public class FinalDoorPlates : MonoBehaviour
         {
             // Play the trigger for the animation and wait to go to next scene
             doorAnimator.SetTrigger("PlateReached");
-            StartCoroutine(ControllerRumble.ControllerRumbleFX(0.5f, 1f, 1.75f));
+            StartCoroutine(ControllerRumble.ControllerRumbleFX(0.8f, 1f, 1.75f));
 
             //doorBeamLight.intensity = 0.0f;
             //gemLight.SetActive(false);

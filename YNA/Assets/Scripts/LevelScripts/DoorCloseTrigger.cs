@@ -72,6 +72,13 @@ public class DoorCloseTrigger : MonoBehaviour
             doorAS.PlayOneShot(audioDoorClosed);
 
             doorProfile.EnableGem(activeColor);
+
+            Invoke("DoorSlam", 0.35f);
         }
+    }
+
+    void DoorSlam()
+    {
+        StartCoroutine(ControllerRumble.ControllerRumbleFX(3f, 3f, 0.175f));
     }
 }

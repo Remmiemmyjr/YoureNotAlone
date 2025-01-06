@@ -225,7 +225,9 @@ public class ActivateEyes : MonoBehaviour
         {
             // Stop the level music.
             StartCoroutine(musicController.LerpAudioOut(wakingTime));
-            StartCoroutine(ControllerRumble.EyeWakingUpRumble(0.05f, 0.1f, 0.25f));
+
+            // Pulsing Rumble
+            StartCoroutine(ControllerRumble.EyeWakingUpRumble(0.155f, 0.155f, 0.225f));
 
             // Set the iamwatching mixer group level to 1.
             AudioMixer mg = iamwatching.outputAudioMixerGroup.audioMixer;
@@ -259,9 +261,9 @@ public class ActivateEyes : MonoBehaviour
         // If the eyes just opened...
         if (!timeToHide)
         {
-            // Pulse
-            CameraShake.manager.Shake(impulse, 0.75f);
-            StartCoroutine(ControllerRumble.ControllerRumbleFX(0.35f, 0.425f, 0.25f));
+            // Jolt Awake
+            CameraShake.manager.Shake(impulse, 1f);
+            StartCoroutine(ControllerRumble.ControllerRumbleFX(2.55f, 2.65f, 0.25f));
 
 
             // Reset timeInSight timer to the gracePeriod.
@@ -317,7 +319,7 @@ public class ActivateEyes : MonoBehaviour
             CameraShake.manager.Shake(impulse, 0.75f);
 
 
-            StartCoroutine(ControllerRumble.ControllerRumbleFX(0.25f, 0.425f, 3f));
+            StartCoroutine(ControllerRumble.ControllerRumbleFX(0.45f, 0.525f, 3f));
        
                
 
