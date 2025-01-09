@@ -337,6 +337,10 @@ public class PauseManager : MonoBehaviour
 
     private void InputConnectionChangeCallback(object obj, InputDeviceChange change)
     {
+        // select first thing if not already selected
+        // else, do all this/
+        // do with main menu
+
         bool controllerDC = false;
         switch (change)
         {
