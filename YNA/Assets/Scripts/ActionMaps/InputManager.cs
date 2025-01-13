@@ -43,7 +43,7 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        input = new Input();
     }
 
     // Update is called once per frame

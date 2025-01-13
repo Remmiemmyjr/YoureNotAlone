@@ -38,8 +38,9 @@ public class Untether : MonoBehaviour
             iamhere.PlayOneShot(eyembiance);
             CameraShake.manager.Shake(impulse, 1f);
             annoyingPlatformToDisable.SetActive(false);
-            StartCoroutine(ControllerRumble.ControllerRumbleFX(1.5f, 2.5f, 5f));
+            StartCoroutine(ControllerRumble.ControllerRumbleFX(1.5f, 2.5f, 4));
             GetComponent<SteamForceAwardAchievement>().AwardAchievement();
         }
     }
 }
+

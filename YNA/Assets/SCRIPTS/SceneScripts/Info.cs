@@ -66,6 +66,7 @@ public class Info : MonoBehaviour
     {
         isDead = false;
         isPaused = false;
+        doRumble = true;
 
         if (SceneManager.GetActiveScene().name != "MainMenu")
         {
