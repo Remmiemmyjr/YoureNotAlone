@@ -36,7 +36,8 @@ public class InstructionsManager : MonoBehaviour
         // Add input callback
         InputSystem.onDeviceChange += InputConnectionChangeCallback;
 
-        // Check if any gamepads are connected
+        // Check if any
+        // s are connected
         if (Gamepad.all.Count > 0)
             keyboardMouseUsed = false;
 
