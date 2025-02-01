@@ -22,6 +22,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 //using UnityEditor.ShaderGraph;
 
 
@@ -42,6 +43,8 @@ public class MenuManager : MonoBehaviour
 
     private AudioSource sfxManagerUI;
     // *********************************************************************
+
+    static bool HasSetDefaultRumble = false;
 
 
     ////////////////////////////////////////////////////////////////////////
@@ -65,6 +68,13 @@ public class MenuManager : MonoBehaviour
         confirmationExit.SetActive(false);
         playProgress.SetActive(false);
         confirmationNG.SetActive(false);
+
+        //Hackhack 
+        if(!HasSetDefaultRumble)
+        {
+            Info.doRumble = true;
+            HasSetDefaultRumble = true;
+        }
     }
 
 
@@ -79,6 +89,10 @@ public class MenuManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+
+        Gamepad bestgamepad = InputSystem.GetDevice<Gamepad>();
+
+        Debug.Log(bestgamepad);
 
         // If the player wants to use buttons after using the mouse, reset the active object
         if (EventSystem.current.currentSelectedGameObject == null &&

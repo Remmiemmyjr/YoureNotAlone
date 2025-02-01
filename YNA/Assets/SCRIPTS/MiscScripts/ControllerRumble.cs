@@ -10,6 +10,7 @@ public class ControllerRumble : MonoBehaviour
     {
         if (!Info.isPaused && Info.doRumble)
         {
+            Debug.Log("Rumble");
             Gamepad.current.SetMotorSpeeds(low + 0.35f, high + 0.35f);
             yield return new WaitForSeconds(time);
 
@@ -20,7 +21,6 @@ public class ControllerRumble : MonoBehaviour
             InputSystem.PauseHaptics();
         }
     }
-    
 
     public static IEnumerator EyeWakingUpRumble(float low, float high, float time)
     {

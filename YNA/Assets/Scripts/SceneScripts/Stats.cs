@@ -324,6 +324,7 @@ public class Stats : MonoBehaviour
             dontRepeat = true;
             CameraShake.manager.Shake(impulse, 0.85f);
             audioKillSRC.PlayOneShot(killFX[1]);
+            Debug.Log("DEATH");
             StartCoroutine(ControllerRumble.ControllerRumbleFX(0.5f, 0.65f, 0.2f));
 
             if (Info.partner)

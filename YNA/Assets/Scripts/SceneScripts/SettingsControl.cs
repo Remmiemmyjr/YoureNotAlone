@@ -60,7 +60,7 @@ public class SettingsControl : MonoBehaviour
         liftGammaGain.gamma.Override(new Vector4(0, 0, 0, gammaVal));
 
         int bloomToggleVal = PlayerPrefs.GetInt("BloomToggle");
-        int rumbleToggle = PlayerPrefs.GetInt("RumbleToggle");
+        int rumbleToggleVal = PlayerPrefs.GetInt("RumbleToggle");
 
         if (bloomToggleVal == 1)
         {
@@ -74,13 +74,15 @@ public class SettingsControl : MonoBehaviour
         }
         myBloomVal = bloom.intensity.value;
 
-        if (rumbleToggle == 1)
+        if (rumbleToggleVal == 1)
         {
             Info.doRumble = true;
+            rumbleToggle.isOn = true;
         }
         else
         {
             Info.doRumble = false;
+            rumbleToggle.isOn = false;
         }
 
         // Update Slider UI

@@ -74,7 +74,10 @@ public class CheckpointController : MonoBehaviour
 
         // Make sure there is a partner in this level
         if (partner && startWithPartner)
-            SetPos(partner, new Vector3(-0.5f, 0, 0));
+        {
+            partner.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            SetPos(partner, new Vector3(0f, 0, 0));
+        }
     }
 
 
@@ -91,6 +94,7 @@ public class CheckpointController : MonoBehaviour
     public void ResetCheckpoints()
     {
         lastCheckpointPos = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+
     }
 
 }
