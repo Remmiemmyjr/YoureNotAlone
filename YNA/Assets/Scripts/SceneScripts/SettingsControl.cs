@@ -51,6 +51,16 @@ public class SettingsControl : MonoBehaviour
     // AWAKE ===============================================================
     private void Awake()
     {
+        if (!PlayerPrefs.HasKey("BloomToggle"))
+        {
+            PlayerPrefs.SetInt("BloomToggle", 1); // Default ON
+        }
+        if (!PlayerPrefs.HasKey("RumbleToggle"))
+        {
+            PlayerPrefs.SetInt("RumbleToggle", 1); // Default ON
+        }
+        PlayerPrefs.Save();
+
         // Update volume and brightness for scene
         volProf = GameObject.FindWithTag("GlobalVolume").GetComponent<Volume>().profile;
         volProf.TryGet(out liftGammaGain);
