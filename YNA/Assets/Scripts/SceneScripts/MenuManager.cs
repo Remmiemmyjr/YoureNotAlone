@@ -149,22 +149,22 @@ public class MenuManager : MonoBehaviour
     // START BUTTON ========================================================
     public void StartButton()
     {
-        int buildIndex = PlayerPrefs.GetInt("currentLevelBuildIndex");
+        //int buildIndex = PlayerPrefs.GetInt("currentLevelBuildIndex");
+        SceneManager.LoadScene("Tutorial-2");
 
-        if (buildIndex == 0)
-        {
-            SceneManager.LoadScene("Tutorial-1");
-        }
-        else
-        {
-            playProgress.SetActive(true);
-            menu.SetActive(false);
+        //if (buildIndex == 0)
+        //{
+        //}
+        //else
+        //{
+        //    playProgress.SetActive(true);
+        //    menu.SetActive(false);
 
-            activeButton = playProgress.transform.Find("ContinueButton").gameObject;
+        //    activeButton = playProgress.transform.Find("ContinueButton").gameObject;
 
-            if (activeButton)
-                EventSystem.current.SetSelectedGameObject(activeButton);
-        }
+        //    if (activeButton)
+        //        EventSystem.current.SetSelectedGameObject(activeButton);
+        //}
     }
 
 
@@ -244,7 +244,7 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.Save();
 
         // Load the first level
-        SceneManager.LoadScene("Tutorial-1");
+        SceneManager.LoadScene("Tutorial-2");
     }
 
     public void ContinueGameButton()
